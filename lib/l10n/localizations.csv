@@ -1,0 +1,60 @@
+key,vi,en
+appName,DIVA Partner,DIVA Partner
+inform,Thông Báo,Inform
+ok,Ok,Ok
+cancel,Hủy,Cancel
+delete,Xóa,Xóa
+error,Lỗi,Error
+warning,Chú Ý,Warning
+confirm,Xác Nhận,Confirm
+ignore,Bỏ Qua,Ignore
+noInternet,"Kết nối thất bại.
+Vui lòng kiểm tra lại kết nối và thử lại","Connection errors.
+Please check your network connection and try again"
+technicalIssues,"Oops! .Đã có sự cố xảy ra.
+Vui lòng kiểm tra lại kết nối hoặc thử lại sau","Oops! .There seems to be a technical problem.
+Please check your connection or try again later"
+serverMaintenance,Server đang bảo trì. Vui lòng thử lại sau.,Server is unavailable at this time. Please try again later.
+connectionTimeout,Kết nối quá hạn.,Connection timmed out.
+loading,Đang tải,Loading
+requiredLoginMsg,Vui lòng đang nhập để sử dụng tính năng này,Please login to use this feature
+sessionExpired,Phiên bản quá hạn. Vui lòng đăng nhập lại!,Your session is expired. Please log in again!
+skip,Bỏ Qua,Skip
+fullName,Họ và tên,Fullname
+enterFullName,Nhập họ và tên,Enter fullname
+email,Email,Email
+enterEmail,Nhập địa chỉ email,Nhập địa chỉ email
+pleaseEnterEmail,Vui lòng nhập email,Vui lòng nhập email
+finish,Hoàn thành,Finish
+verificationCodeHasBeenSent,Mã xác thực đã được gửi đến số điện thoại ,Mã xác thực đã được gửi đến số điện thoại 
+enterOtpToContinue,Nhập mã OTP để tiếp tục,Nhập mã OTP để tiếp tục
+codeNotReceived,Không nhận được mã?,Không nhận được mã?
+resent,Gửi lại,Gửi lại
+invalidOtp,"Bạn đã nhập sai mã xác thực, vui lòng kiểm tra lại","You entered the wrong OTP code, please check again or re-enter the code"
+unknownError,"Đã xảy ra lỗi.
+Vui lòng thử lại sau","Something went wrong.
+Please try again later"
+pleaseEnterFullName,Vui lòng nhập họ và tên,Please enter fullname
+pleaseEnterValidEmail,"Địa chỉ email không hợp lệ","Invalid email, please try again"
+pleaseEnterValidFacebookAddress,"Địa chỉ Facebook không hợp lệ, vui lòng thử lại","Địa chỉ Facebook không hợp lệ, vui lòng thử lại"
+invalidPhoneNumber,Số điện thoại không hợp lệ,Số điện thoại không hợp lệ
+pleaseEnterPhoneNumber,Vui lòng nhập số điện thoại,Vui lòng nhập số điện thoại
+camera,Máy ảnh,Camera
+gallery,Thư Viện,Gallery
+choosePhoto,Chọn hình ảnh,Choose a photo
+chooseVideo,Chọn video,Choose a video
+choosePhotoOrVideo,Chọn hình ảnh hoặc video,Choose a photo or video
+history,Lịch Sử,History
+noData,Không có dữ liệu,No data
+failed,Thất bại,Failed
+search,Tìm kiếm,Search
+openInExternalBrowser,Mở trong trình duyệt bên ngoài,Open in external browser
+copyLink,Sao chép đường dẫn,Copy link
+copied,Đã sao chép,Copied
+loginRequired,Yêu cầu đăng nhập,Login required
+login,Đăng nhập,Login
+dismiss,Hủy,Dismiss
+processing,Đang xử lý,Processing
+male,Nam,Male
+female,Nữ,Female
+otherGender,Giới tính khác,Other gender

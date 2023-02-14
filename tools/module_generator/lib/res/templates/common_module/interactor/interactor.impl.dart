@@ -1,4 +1,4 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const commonModuleInteractorImpl =
     '''part of '${moduleNameKey}_interactor.dart';

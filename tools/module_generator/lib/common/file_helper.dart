@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'utils.dart';
-
 class FilesHelper {
   FilesHelper._();
   static Future<bool> createFolder(String folder) async {
     final folderDir = Directory(folder);
     final checkExist = await folderDir.exists();
     if (checkExist) {
-      printLog('[Warning] Folder $folder is exist!');
       return true;
     }
 
@@ -27,7 +24,7 @@ class FilesHelper {
 
     if (!runBashExists) {
       runBash.createSync();
-    } else if (isCreateNew) {
+    } else if (!isCreateNew) {
       runBash.deleteSync();
       runBash.createSync();
     }

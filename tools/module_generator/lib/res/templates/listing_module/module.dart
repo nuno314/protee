@@ -1,4 +1,4 @@
-import '../../../common/definitions.dart';
+import '../../../common/definations.dart';
 
 const listingModule = '''export '${moduleNameKey}_route.dart';
 export 'bloc/${moduleNameKey}_bloc.dart';

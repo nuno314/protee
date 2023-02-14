@@ -1,20 +1,18 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const listingModuleState = '''part of '${moduleNameKey}_bloc.dart';
 
 class _ViewModel {
-  //TODO: Update to your model
-  final List<Model> data;
-  final bool? canLoadMore;
+  final List<$modelNameKey> data;
+  final bool canLoadMore;
 
   const _ViewModel({
-    this.canLoadMore,
+    this.canLoadMore = false,
     this.data = const [],
   });
 
   _ViewModel copyWith({
-    //TODO: Update to your model
-    List<Model>? data,
+    List<$modelNameKey>? data,
     bool? canLoadMore,
   }) {
     return _ViewModel(
@@ -36,6 +34,9 @@ abstract class ${classNameKey}State {
       viewModel ?? this.viewModel,
     );
   }
+
+  List<$modelNameKey> get data => viewModel.data;
+  bool get canLoadMore => viewModel.canLoadMore;
 }
 
 class ${classNameKey}Initial extends ${classNameKey}State {

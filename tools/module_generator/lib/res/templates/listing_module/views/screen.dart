@@ -1,12 +1,11 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
-const listingModuleScreen = '''import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+const listingModuleScreen = '''import 'package:core/core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../base/base.dart';
-import '../../../common_widget/smart_refresher_wrapper.dart';
-import '../../../extentions/extention.dart';
+import '${importPartKey}base/base.dart';
+import '${importPartKey}extentions/extention.dart';
 import '../bloc/${moduleNameKey}_bloc.dart';
 
 part '$moduleNameKey.action.dart';
@@ -28,11 +27,20 @@ class _${classNameKey}ScreenState extends StateBase<${classNameKey}Screen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
+  @override
   late AppLocalizations trans;
 
   @override
+  void hideLoading() {
+    _refreshController
+      ..refreshCompleted()
+      ..loadComplete();
+    super.hideLoading();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _themeData = Theme.of(context);
+    _themeData = context.theme;
     trans = translate(context);
     return BlocConsumer<${classNameKey}Bloc, ${classNameKey}State>(
       listener: _blocListener,
@@ -45,7 +53,7 @@ class _${classNameKey}ScreenState extends StateBase<${classNameKey}Screen> {
   Widget _buildListing(${classNameKey}State state) {
     return SmartRefresherWrapper.build(
       enablePullDown: true,
-      enablePullUp: state.viewModel.canLoadMore ?? false,
+      enablePullUp: state.canLoadMore,
       onLoading: loadMore,
       onRefresh: onRefresh,
       controller: _refreshController,
@@ -56,7 +64,7 @@ class _${classNameKey}ScreenState extends StateBase<${classNameKey}Screen> {
         separatorBuilder: (context, index) {
           return const SizedBox(height: 16);
         },
-        itemCount: state.viewModel.data.length,
+        itemCount: state.data.length,
       ),
     );
   }

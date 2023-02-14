@@ -1,10 +1,9 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const listingModuleEvent = '''part of '${moduleNameKey}_bloc.dart';
 
-@immutable
 abstract class ${classNameKey}Event {}
 
-class GetDataEvent extends ${classNameKey}Event {}
+class Get${modelNameKey}sEvent extends ${classNameKey}Event {}
 
-class LoadMoreDataEvent extends ${classNameKey}Event {}''';
+class LoadMore${modelNameKey}sEvent extends ${classNameKey}Event {}''';

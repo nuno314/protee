@@ -1,4 +1,4 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const commonModuleRepositoryImpl =
     '''part of '${moduleNameKey}_repository.dart';

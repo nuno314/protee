@@ -1,11 +1,10 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const commonModuleBloc = '''import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
-import '../../../base/base.dart';
+import '${importPartKey}base/base.dart';
 import '../interactor/${moduleNameKey}_interactor.dart';
 import '../repository/${moduleNameKey}_repository.dart';
 

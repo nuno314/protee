@@ -10,18 +10,20 @@ Future<void> generateModuleWithTemplateSource({
     final className = formatClassName(inputModuleName);
     final moduleName = formatModuleName(inputModuleName);
     inputModuleDir += '/$moduleName';
-
+    final partCount = '/'.allMatches(inputModuleDir).length;
     // #BLOC
     await FilesHelper.createFolder('$inputModuleDir/bloc/');
     final blocFileName = '${moduleName}_bloc.dart';
     final eventFileName = '${moduleName}_event.dart';
     final stateFileName = '${moduleName}_state.dart';
-
+    final modelName = moduleName.split('_').first.capitalize();
     await FilesHelper.writeFile(
       pathFile: '$inputModuleDir/bloc/$blocFileName',
       content: (source['bloc']['bloc'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
     await FilesHelper.writeFile(
@@ -29,6 +31,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['bloc']['state'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
     await FilesHelper.writeFile(
@@ -36,6 +40,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['bloc']['event'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
 
@@ -48,6 +54,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['interactor']['interactor'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
     await FilesHelper.writeFile(
@@ -56,6 +64,8 @@ Future<void> generateModuleWithTemplateSource({
           (source['interactor']['interactor.impl'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
 
@@ -68,6 +78,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['repository']['repository'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
     await FilesHelper.writeFile(
@@ -76,6 +88,8 @@ Future<void> generateModuleWithTemplateSource({
           (source['repository']['repository.impl'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
 
@@ -88,6 +102,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['views']['screen'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
     await FilesHelper.writeFile(
@@ -95,6 +111,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['views']['action'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
 
@@ -105,6 +123,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['route'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
 
@@ -115,6 +135,8 @@ Future<void> generateModuleWithTemplateSource({
       content: (source['module'] as String).replaceContent(
         className: className,
         moduleName: moduleName,
+        modelName: modelName,
+        partCount: partCount,
       ),
     );
   }

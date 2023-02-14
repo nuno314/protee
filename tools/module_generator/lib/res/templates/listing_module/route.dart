@@ -1,4 +1,4 @@
-import '../../../common/definitions.dart';
+import '../../../common/definations.dart';
 
 const listingModuleRoute = '''import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

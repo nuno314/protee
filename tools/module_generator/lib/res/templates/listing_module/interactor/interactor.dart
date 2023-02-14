@@ -1,7 +1,7 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
-const listingModuleInteractor =
-    '''import '../../../../../../domain/entities/pagination.entity.dart';
+const listingModuleInteractor = '''import 'package:core/core.dart';
+
 import '../repository/${moduleNameKey}_repository.dart';
 
 part '${moduleNameKey}_interactor.impl.dart';
@@ -9,10 +9,8 @@ part '${moduleNameKey}_interactor.impl.dart';
 abstract class ${classNameKey}Interactor {
   Pagination get pagination;
 
-  //TODO: Update to your model
-  Future<List<Model>> getData();
+  Future<List<$modelNameKey>> getData();
 
-  //TODO: Update to your model
-  Future<List<Model>> loadMoreData();
+  Future<List<$modelNameKey>> loadMoreData();
 }
 ''';

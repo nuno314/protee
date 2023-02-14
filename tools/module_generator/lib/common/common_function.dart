@@ -1,4 +1,7 @@
-import 'definitions.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'definations.dart';
 import 'utils.dart';
 
 extension StringExtension on String {
@@ -9,9 +12,19 @@ extension StringExtension on String {
   String replaceContent({
     required String className,
     required String moduleName,
+    int? partCount,
+    String? modelName,
   }) {
-    return replaceAll(classNameKey, className)
-        .replaceAll(moduleNameKey, moduleName);
+    final c1 = replaceAll(classNameKey, className)
+        .replaceAll(moduleNameKey, moduleName)
+        .replaceAll(modelNameKey, modelName ?? '');
+    if (partCount != null) {
+      return c1.replaceAll(
+        importPartKey,
+        List.generate(partCount, (index) => '../').join(''),
+      );
+    }
+    return c1;
   }
 }
 
@@ -71,3 +84,16 @@ String camelCase(String inputName) {
 //       .replaceAll(classNameKey, className)
 //       .replaceAll(moduleNameKey, moduleName);
 // }
+
+String prettyJsonStr(Map<dynamic, dynamic> json) {
+  final encoder = JsonEncoder.withIndent('  ', (data) => data.toString());
+  return encoder.convert(json);
+}
+
+extension ObjectExt<T> on T {
+  R let<R>(R Function(T that) op) => op(this);
+}
+
+extension FileEx on File {
+  String get name => path.split(Platform.pathSeparator).last;
+}

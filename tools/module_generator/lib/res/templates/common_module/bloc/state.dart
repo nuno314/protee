@@ -1,4 +1,4 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const commonModuleState = '''part of '${moduleNameKey}_bloc.dart';
 

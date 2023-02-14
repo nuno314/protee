@@ -17,13 +17,13 @@ class ReCase {
   }
 
   List<String> _groupIntoWords(String text) {
-    StringBuffer sb = StringBuffer();
-    List<String> words = [];
-    bool isAllCaps = text.toUpperCase() == text;
+    var sb = StringBuffer();
+    var words = <String>[];
+    var isAllCaps = text.toUpperCase() == text;
 
-    for (int i = 0; i < text.length; i++) {
-      String char = text[i];
-      String? nextChar = i + 1 == text.length ? null : text[i + 1];
+    for (var i = 0; i < text.length; i++) {
+      var char = text[i];
+      var nextChar = i + 1 == text.length ? null : text[i + 1];
 
       if (symbolSet.contains(char)) {
         continue;
@@ -31,7 +31,7 @@ class ReCase {
 
       sb.write(char);
 
-      bool isEndOfWord = nextChar == null ||
+      var isEndOfWord = nextChar == null ||
           (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) ||
           symbolSet.contains(nextChar);
 
@@ -75,7 +75,7 @@ class ReCase {
   String get titleCase => _getPascalCase(separator: ' ');
 
   String _getCamelCase({String separator = ''}) {
-    List<String> words = _words.map(_upperCaseFirstLetter).toList();
+    var words = _words.map(_upperCaseFirstLetter).toList();
     if (_words.isNotEmpty) {
       words[0] = words[0].toLowerCase();
     }
@@ -84,19 +84,19 @@ class ReCase {
   }
 
   String _getConstantCase({String separator = '_'}) {
-    List<String> words = _words.map((word) => word.toUpperCase()).toList();
+    var words = _words.map((word) => word.toUpperCase()).toList();
 
     return words.join(separator);
   }
 
   String _getPascalCase({String separator = ''}) {
-    List<String> words = _words.map(_upperCaseFirstLetter).toList();
+    var words = _words.map(_upperCaseFirstLetter).toList();
 
     return words.join(separator);
   }
 
   String _getSentenceCase({String separator = ' '}) {
-    List<String> words = _words.map((word) => word.toLowerCase()).toList();
+    var words = _words.map((word) => word.toLowerCase()).toList();
     if (_words.isNotEmpty) {
       words[0] = _upperCaseFirstLetter(words[0]);
     }
@@ -105,7 +105,7 @@ class ReCase {
   }
 
   String _getSnakeCase({String separator = '_'}) {
-    List<String> words = _words.map((word) => word.toLowerCase()).toList();
+    var words = _words.map((word) => word.toLowerCase()).toList();
 
     return words.join(separator);
   }

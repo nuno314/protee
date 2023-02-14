@@ -57,7 +57,7 @@ extension StateBaseErrorHandlerExt on StateBase {
           break;
         }
         errorTypeShowing = ErrorType.unknown;
-        showErrorDialog(trans.unknowError);
+        showErrorDialog(trans.unknownError);
         break;
       case ErrorType.grapQLUnknown:
         if (errorTypeShowing == ErrorType.grapQLUnknown) {

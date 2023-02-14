@@ -1,9 +1,10 @@
-import '../../../common/definitions.dart';
+import '../../../common/definations.dart';
 
 const repository = '''import 'dart:async';
 
 import 'package:injectable/injectable.dart';
-import '../../../data_repository.dart';
+
+import 'package:core/data/data_source/remote/data_repository.dart';
 
 part '${moduleNameKey}_repository.impl.dart';
 

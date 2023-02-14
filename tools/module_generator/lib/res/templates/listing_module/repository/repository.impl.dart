@@ -1,15 +1,14 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const listingModuleRepositoryImpl =
     '''part of '${moduleNameKey}_repository.dart';
 
 class ${classNameKey}RepositoryImpl extends ${classNameKey}Repository {
   @override
-  //TODO: Update to your model
-  Future<List<Model>> getData(
+  Future<List<$modelNameKey>> getData(
     int offset,
     int limit,
   ) {
-    return Future.value(<Model>[]);
+    return Future.value(<$modelNameKey>[]);
   }
 }''';

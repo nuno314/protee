@@ -1,11 +1,10 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
 const listingModuleBloc = '''import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:core/core.dart';
 
-import '../../../base/base.dart';
+import '${importPartKey}base/base.dart';
 import '../interactor/${moduleNameKey}_interactor.dart';
 import '../repository/${moduleNameKey}_repository.dart';
 
@@ -18,17 +17,17 @@ class ${classNameKey}Bloc extends AppBlocBase<${classNameKey}Event, ${classNameK
   );
   
   ${classNameKey}Bloc() : super(${classNameKey}Initial(viewModel: const _ViewModel())) {
-    on<GetDataEvent>(_onGetDataEvent);
-    on<LoadMoreDataEvent>(_onLoadMoreDataEvent);
+    on<Get${modelNameKey}sEvent>(_onGet${modelNameKey}sEvent);
+    on<LoadMore${modelNameKey}sEvent>(_onLoadMore${modelNameKey}sEvent);
   }
 
-  Future<void> _onGetDataEvent(
-    GetDataEvent event,
+  Future<void> _onGet${modelNameKey}sEvent(
+    Get${modelNameKey}sEvent event,
     Emitter<${classNameKey}State> emit,
   ) async {
     final data = await _interactor.getData();
     emit(
-      state.copyWith(
+      state.copyWith<${classNameKey}Initial>(
         viewModel: state.viewModel.copyWith(
           data: data,
           canLoadMore: _interactor.pagination.canNext,
@@ -37,13 +36,13 @@ class ${classNameKey}Bloc extends AppBlocBase<${classNameKey}Event, ${classNameK
     );
   }
 
-  Future<void> _onLoadMoreDataEvent(
-    LoadMoreDataEvent event,
+  Future<void> _onLoadMore${modelNameKey}sEvent(
+    LoadMore${modelNameKey}sEvent event,
     Emitter<${classNameKey}State> emit,
   ) async {
     final moreData = await _interactor.loadMoreData();
     emit(
-      state.copyWith(
+      state.copyWith<${classNameKey}Initial>(
         viewModel: state.viewModel.copyWith(
           data: [...state.viewModel.data, ...moreData],
           canLoadMore: _interactor.pagination.canNext,

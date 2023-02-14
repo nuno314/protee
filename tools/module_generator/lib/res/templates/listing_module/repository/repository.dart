@@ -1,10 +1,11 @@
-import '../../../../common/definitions.dart';
+import '../../../../common/definations.dart';
 
-const listingModuleRepository = '''part '${moduleNameKey}_repository.impl.dart';
+const listingModuleRepository = '''import 'package:core/data/data.dart';
+
+part '${moduleNameKey}_repository.impl.dart';
 
 abstract class ${classNameKey}Repository {
-  //TODO: Update to your model
-  Future<List<Model>> getData(
+  Future<List<$modelNameKey>> getData(
     int offset,
     int limit,
   );

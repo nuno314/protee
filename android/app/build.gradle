@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply from: 'signing.gradle'
@@ -64,14 +65,6 @@ android {
     flavorDimensions "app"
 
     productFlavors {
-        dev {
-            applicationId "com.example.protee.dev"
-            resValue "string", "app_name", "Protee"
-        }
-        staging {
-            applicationId "com.example.protee.stag"
-            resValue "string", "app_name", "Protee"
-        }
         prod {
             applicationId "com.example.protee"
             resValue "string", "app_name", "Protee"
@@ -84,5 +77,7 @@ flutter {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:31.4.0')
+    implementation 'com.google.firebase:firebase-analytics'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

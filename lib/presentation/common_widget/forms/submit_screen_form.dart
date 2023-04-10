@@ -34,7 +34,7 @@ class SubmitScreenForm extends StatelessWidget {
           ? AppBar(
               title: Text(
                 title!,
-                style: _themeData.textTheme.headline5,
+                style: _themeData.textTheme.headlineSmall,
               ),
               leading: isBackButtonVisible
                   ? IconButton(

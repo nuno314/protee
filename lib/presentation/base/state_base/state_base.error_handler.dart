@@ -3,7 +3,8 @@ part of '../base.dart';
 extension StateBaseErrorHandlerExt on StateBase {
   void _onError(ErrorData error) {
     LogUtils.w(
-        '''[$runtimeType] error ${error.type} message ${error.message}''');
+      '''[$runtimeType] error ${error.type} message ${error.message}''',
+    );
     if (!mounted) {
       LogUtils.w('[$runtimeType] error when state disposed!');
       return;

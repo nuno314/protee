@@ -1,12 +1,20 @@
 import 'package:phone_numbers_parser/phone_numbers_parser.dart' as lib;
 
+// Ref: https://www.itu.int/oth/T02020000E4/en
 class PhoneNumberUtils {
   PhoneNumberUtils._();
 
   static PhoneNumber? parse(String phoneNumber) {
+    final validCharacter = RegExp(r'^[+0-9]+$');
+    if (!validCharacter.hasMatch(phoneNumber)) {
+      return null;
+    }
     try {
-      final parsedPhone = lib.PhoneNumber.fromIsoCode('VN', phoneNumber);
-      if (parsedPhone.validate()) {
+      final parsedPhone = lib.PhoneNumber.parse(
+        phoneNumber,
+        callerCountry: lib.IsoCode.VN,
+      );
+      if (parsedPhone.isValid()) {
         return PhoneNumber(parsedPhone);
       }
     } catch (e) {
@@ -32,4 +40,8 @@ class PhoneNumber {
 
   /// 942003360
   String get nationalNumber => _phoneNumber.nsn;
+
+  /// xxxxxxx360
+  String get hiddenNational =>
+      'xxxxxxx${national.substring(national.length - 3)}';
 }

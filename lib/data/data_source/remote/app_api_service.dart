@@ -3,17 +3,14 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' as dio_p;
 import 'package:flutter/foundation.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
 
 import '../../../common/client_info.dart';
-import '../../../common/components/graphql/graphql.dart';
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
 import '../../../common/utils.dart';
 import '../../../di/di.dart';
-import '../../models/graphql_error.dart';
 import '../local/local_data_manager.dart';
 import 'interceptor/auth_interceptor.dart';
 import 'interceptor/header_interceptor.dart';
@@ -26,7 +23,6 @@ part 'api_service_error.dart';
 class AppApiService {
   late dio_p.Dio dio;
   late RestApiRepository client;
-  late GraphQLClient graphQLClient;
 
   AppApiService() {
     _config();
@@ -35,8 +31,6 @@ class AppApiService {
   LocalDataManager get localDataManager => injector.get();
 
   void _config() {
-    _createGraphQLClient();
-
     _setupDioClient();
 
     _createRestClient();
@@ -59,29 +53,14 @@ class AppApiService {
     return defaultHeader;
   }
 
-  void _createGraphQLClient() {
-    graphQLClient = createGraphQLClient(
-      baseUri: Config.instance.appConfig.baseGraphQLUrl,
-      getToken: () async {
-        // return localDataManager.getToken();
-        return '';
-      },
-
-      /// Remove old `authorization` bcs of GraphQl will get new from `getToken`
-      headers: _getDefaultHeader()..remove(HttpConstants.authorization),
-      customHeaderFnc: () {
-        return {..._getDefaultHeader()}..remove(HttpConstants.authorization);
-      },
-      onRefreshToken: refreshToken,
-    );
-  }
-
   void _setupDioClient() {
-    dio = dio_p.Dio(dio_p.BaseOptions(
-      followRedirects: false,
-      receiveTimeout: 30000, // 30s
-      sendTimeout: 30000, // 30s
-    ));
+    dio = dio_p.Dio(
+      dio_p.BaseOptions(
+        followRedirects: false,
+        receiveTimeout: 30000, // 30s
+        sendTimeout: 30000, // 30s
+      ),
+    );
 
     dio.options.headers.clear();
 
@@ -106,9 +85,11 @@ class AppApiService {
     }
 
     /// Dio InterceptorsWrapper
-    dio.interceptors.add(HeaderInterceptor(
-      getHeader: _getDefaultHeader,
-    ));
+    dio.interceptors.add(
+      HeaderInterceptor(
+        getHeader: _getDefaultHeader,
+      ),
+    );
     dio.interceptors.add(
       AuthInterceptor(
         // TODO : implement get token if needed

@@ -22,6 +22,19 @@ class FilePicked {
     );
   }
 
+  factory FilePicked.fromXFile(XFile file) {
+    ///  On web `path` is always `null`,
+    ///  You should access `bytes` property instead,
+    ///  Read more about it [here](https://github.com/miguelpruivo/flutter_file_picker/wiki/FAQ)
+    final _file = File(file.path);
+    return FilePicked(
+      path: kIsWeb ? null : file.path,
+      name: file.name,
+      size: _file.lengthSync(),
+      bytes: _file.readAsBytesSync(),
+    );
+  }
+
   /// The absolute path for a cached copy of this file.
   /// It can be used to create a file instance with a
   /// descriptor for the given path.

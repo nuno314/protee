@@ -5,37 +5,20 @@ class Env {
   static const developmentMode = 'developmentMode';
   static const appName = 'appname';
   static const baseApiLayer = 'baseApiLayer';
-  static const baseGraphQLUrl = 'baseGraphQLUrl';
+  static const app = 'platform';
   static const onesignalAppID = 'onesignalAppID';
 
   static const devEnvName = 'Development';
-  static const stagingEnvName = 'Staging';
   static const prodEnvName = 'Production';
+}
 
-  static final Map<String, dynamic> devEnv = {
-    environment: devEnvName,
-    developmentMode: kDebugMode,
-    appName: 'FBS_Dev',
-    baseApiLayer: '',
-    baseGraphQLUrl: '',
-    onesignalAppID: '',
-  };
-
-  static final Map<String, dynamic> stagingEnv = {
-    environment: stagingEnvName,
-    developmentMode: kDebugMode,
-    appName: 'FBS_Staging',
-    baseApiLayer: '',
-    baseGraphQLUrl: '',
-    onesignalAppID: '',
-  };
-
-  static final Map<String, dynamic> prodEnv = {
-    environment: prodEnvName,
-    developmentMode: kDebugMode,
-    appName: 'FBS',
-    baseApiLayer: '',
-    baseGraphQLUrl: '',
-    onesignalAppID: '',
+class ProteeEnv extends Env {
+  static final Map<String, dynamic> env = {
+    Env.environment: Env.prodEnvName,
+    Env.developmentMode: kDebugMode,
+    Env.appName: 'Protee Production',
+    Env.baseApiLayer: '',
+    Env.app: 'protee',
+    Env.onesignalAppID: ''
   };
 }

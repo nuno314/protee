@@ -50,7 +50,7 @@ class CheckboxWithTitle extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 1),
                   child: Text(
                     title,
-                    style: textTheme.bodyText1?.copyWith(height: 1.4),
+                    style: textTheme.bodyLarge?.copyWith(height: 1.4),
                   ),
                 ),
               ),

@@ -79,48 +79,50 @@ class _CircleImageOutlineState extends State<CircleImageOutline> {
         color: widget.backgroundColor,
       ),
       child: CircleImage(
-        child: Builder(builder: (context) {
-          if (widget.image.isEmpty) {
-            return Icon(
-              Icons.person,
-              size: widget.diameter,
-            );
-          }
-          if (widget.image.isLocalUrl) {
-            return StreamBuilder<Uint8List>(
-              stream: _searchController.stream,
-              initialData: _searchController.valueOrNull,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Icon(
-                    Icons.person,
-                    size: widget.diameter,
+        child: Builder(
+          builder: (context) {
+            if (widget.image.isEmpty) {
+              return Icon(
+                Icons.person,
+                size: widget.diameter,
+              );
+            }
+            if (widget.image.isLocalUrl) {
+              return StreamBuilder<Uint8List>(
+                stream: _searchController.stream,
+                initialData: _searchController.valueOrNull,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Icon(
+                      Icons.person,
+                      size: widget.diameter,
+                    );
+                  }
+                  return Image(
+                    image: MemoryImage(snapshot.data!),
+                    width: widget.diameter,
+                    height: widget.diameter,
+                    fit: BoxFit.cover,
                   );
-                }
-                return Image(
-                  image: MemoryImage(snapshot.data!),
-                  width: widget.diameter,
-                  height: widget.diameter,
-                  fit: BoxFit.cover,
-                );
-              },
-            );
-          }
-          if (widget.image.isUrl) {
-            return CachedNetworkImageWrapper.avatar(
-              url: widget.image,
+                },
+              );
+            }
+            if (widget.image.isUrl) {
+              return CachedNetworkImageWrapper.avatar(
+                url: widget.image,
+                width: widget.diameter,
+                height: widget.diameter,
+                fit: BoxFit.cover,
+              );
+            }
+            return Image.asset(
+              widget.image,
               width: widget.diameter,
               height: widget.diameter,
               fit: BoxFit.cover,
             );
-          }
-          return Image.asset(
-            widget.image,
-            width: widget.diameter,
-            height: widget.diameter,
-            fit: BoxFit.cover,
-          );
-        }),
+          },
+        ),
       ),
     );
   }

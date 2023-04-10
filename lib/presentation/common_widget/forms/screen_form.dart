@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/constants.dart';
 import '../../../common/utils.dart';
+import '../../../generated/assets.dart';
 import '../../theme/theme_color.dart';
 import '../export.dart';
 
@@ -42,9 +42,9 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
   @override
   void afterFirstLayout(BuildContext context) {
     if (widget.showHeaderImage) {
-      AppColor.setDarkStatusBar();
+      themeColor.setDarkStatusBar();
     } else {
-      AppColor.setLightStatusBar();
+      themeColor.setLightStatusBar();
     }
   }
 
@@ -76,7 +76,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
             ? Stack(
                 children: [
                   Image.asset(
-                    ImageConstant.imgBGHeader,
+                    Assets.image.bgHeader,
                     fit: BoxFit.cover,
                     width: mediaQueryData.size.width,
                   ),
@@ -124,7 +124,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                     const SizedBox(height: 8),
                     Text(
                       widget.title ?? '',
-                      style: _theme.textTheme.headline3?.copyWith(
+                      style: _theme.textTheme.displaySmall?.copyWith(
                         color: textColor,
                         fontSize: 24,
                       ),
@@ -134,7 +134,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                     if (widget.des?.isNotEmpty == true)
                       Text(
                         widget.des ?? '',
-                        style: _theme.textTheme.subtitle2?.copyWith(
+                        style: _theme.textTheme.titleSmall?.copyWith(
                           color: desTextColor,
                         ),
                       ),

@@ -1,12 +1,12 @@
-import '../../../common/components/graphql/graphql_provider.dart';
 import '../../../di/di.dart';
-import 'local/local_data_manager.dart';
 import 'remote/app_api_service.dart';
+import 'remote/rest_api_repository/rest_api_repository.dart';
 
 mixin DataRepository {
-  late final graphqlProvider = GraphqlProvider(
-    injector.get<AppApiService>().graphQLClient,
-  );
+  AppApiService appApiService = injector.get<AppApiService>();
+  RestApiRepository get restApi => appApiService.client;
 
-  late final localDataManager = injector.get<LocalDataManager>();
+  void resetClient() {
+    appApiService = injector.get<AppApiService>();
+  }
 }

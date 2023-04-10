@@ -9,10 +9,12 @@ extension DiacriticsAwareString on String {
   static const nonDiacritics =
       'aaaaeeeeiioooouuadiuouaaaaaaaaaaaaaeeeeeeeeiioooooooooooouuuuuuuyyyy';
 
-  String get removeDiacritics => splitMapJoin('',
-      onNonMatch: (char) => char.isNotEmpty && diacritics.contains(char)
-          ? nonDiacritics[diacritics.indexOf(char)]
-          : char);
+  String get removeDiacritics => splitMapJoin(
+        '',
+        onNonMatch: (char) => char.isNotEmpty && diacritics.contains(char)
+            ? nonDiacritics[diacritics.indexOf(char)]
+            : char,
+      );
 }
 
 Future<void> preIm(String path, BuildContext ctx) =>

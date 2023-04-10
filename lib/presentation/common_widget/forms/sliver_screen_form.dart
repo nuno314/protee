@@ -105,7 +105,7 @@ class _SliverScreenFormState extends State<SliverScreenForm> {
             opacity: scale > 0.2 ? 0 : 1 - scale,
             child: Text(
               widget.title ?? '',
-              style: textTheme.bodyText1?.copyWith(
+              style: textTheme.bodyLarge?.copyWith(
                 fontSize: 16,
               ),
               textAlign: TextAlign.center,
@@ -136,7 +136,7 @@ class _SliverScreenFormState extends State<SliverScreenForm> {
                 opacity: scale > 0.2 ? scale : 0,
                 child: Text(
                   widget.title ?? '',
-                  style: textTheme.bodyText1?.copyWith(
+                  style: textTheme.bodyLarge?.copyWith(
                     fontSize: 16 - (16 * 0.5 * scale / 1.5),
                   ),
                   textAlign: TextAlign.center,

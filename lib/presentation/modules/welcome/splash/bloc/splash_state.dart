@@ -12,5 +12,7 @@ class SplashInitialState extends SplashState {
 }
 
 class SplashFinishState extends SplashState {
-  SplashFinishState(String route) : super(route);
+  @override
+  final String nextScreen;
+  SplashFinishState(this.nextScreen) : super(nextScreen);
 }

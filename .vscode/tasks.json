@@ -1,0 +1,24 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+			"label": "generate: generate_app_localizations",
+            "options": {
+                "cwd": "./"
+            },
+			"command": "sh gen_localization.sh",
+            "windows": {
+                "command": "./gen_localization.bat"
+            },   
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
+		}
+    ]
+}

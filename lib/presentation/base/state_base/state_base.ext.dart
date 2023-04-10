@@ -11,7 +11,7 @@ extension StateBaseExtention on StateBase {
 
   void backToHome() {
     Navigator.of(context).popUntil(
-      ModalRoute.withName(RouteList.dashBoardRoute),
+      ModalRoute.withName(RouteList.dashboard),
     );
   }
 
@@ -23,9 +23,7 @@ extension StateBaseExtention on StateBase {
     if (text == trans.female) {
       return ServerGender.female;
     }
-    if (text == trans.otherGender) {
-      return ServerGender.other;
-    }
+
     return null;
   }
 
@@ -36,8 +34,6 @@ extension StateBaseExtention on StateBase {
         return trans.male;
       case ServerGender.female:
         return trans.female;
-      case ServerGender.other:
-        return trans.otherGender;
       default:
         return null;
     }

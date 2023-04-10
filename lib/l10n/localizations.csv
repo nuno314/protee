@@ -1,5 +1,5 @@
 key,vi,en
-appName,DIVA Partner,DIVA Partner
+appName,Protee,Protee
 inform,Thông Báo,Inform
 ok,Ok,Ok
 cancel,Hủy,Cancel
@@ -58,3 +58,14 @@ processing,Đang xử lý,Processing
 male,Nam,Male
 female,Nữ,Female
 otherGender,Giới tính khác,Other gender
+avatar,Hình đại diện,Avatar
+close,Đóng,Close
+takePhoto,Chụp hình,Take photo
+haveNoPermission,Không có quyền truy cập. Vui lòng vào cài đặt và cấp quyền cho ứng dụng để tiếp tục,Access denied. Please go to settings and grant the app permission to continue
+openSettings,Mở cài đặt,Open settings
+selectPhoto,Chọn ảnh,Select photo
+homepage,Trang chủ,Homepage
+childSafetyProtectionSystem,Hệ thống bảo vệ an toàn trẻ em,Safety for the children
+appleLogin,Đăng nhập bằng ID Apple,Log in with Apple ID
+googleLogin,Đăng nhập bằng Google,Log in with Google
+facebookLogin,Đăng nhập bằng Facebook,Log in with Facebook

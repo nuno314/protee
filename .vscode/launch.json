@@ -5,10 +5,10 @@
             "name": "Dev Debug",
             "request": "launch",
             "type": "dart",
-            "program": "${workspaceRoot}/lib/main_dev.dart",
+            "program": "${workspaceRoot}/lib/main.dart",
             "args": [
                 "--flavor",
-                "dev",
+                "prod",
             ],
         },
         {

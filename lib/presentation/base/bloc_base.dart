@@ -7,6 +7,8 @@ abstract class AppBlocBase<E, S> extends Bloc<E, S> {
 
   AppBlocBase(S s) : super(s);
 
+  bool get isLoggedIn => injector.get<AuthService>().isSignedIn;
+
   EventTransformer<T> debounceSequential<T>(Duration duration) {
     return (events, mapper) =>
         events.debounceTime(duration).asyncExpand(mapper);
@@ -14,25 +16,8 @@ abstract class AppBlocBase<E, S> extends Bloc<E, S> {
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    if (error is OperationException) {
-      final glError = error.graphqlErrors.firstOrNull;
-      errorHandler?.call(
-        ErrorData.fromGraplQL(
-          error: GraphQLException.fromJson({
-            'message': glError?.message,
-            'locations': glError?.locations,
-            'path': glError?.path,
-            'extensions': glError?.extensions,
-          }),
-        ),
-      );
-    } else if (error is Exception) {
-      errorHandler?.call(
-        ErrorData.fromGraplQL(exception: error),
-      );
-    } else {
-      LogUtils.e('onError', error, stackTrace);
-    }
+
+    // TODO(nuno314): rest apis 
     super.onError(error, stackTrace);
   }
 }

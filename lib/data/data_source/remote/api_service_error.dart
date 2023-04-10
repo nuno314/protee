@@ -66,26 +66,6 @@ class ErrorData {
     }
   }
 
-  ErrorData.fromGraplQL({GraphQLException? error, Exception? exception}) {
-    if (error?.isUnexpected == true || exception is RefreshTokenException) {
-      type = ErrorType.grapQLInvalidToken;
-    } else if (exception is SocketException || exception is NetworkException) {
-      type = ErrorType.noInternet;
-    } else if (exception is HttpException) {
-      statusCode = 500;
-      type = ErrorType.httpException;
-    } else if (exception is ServerException) {
-      type = ErrorType.httpException;
-      message = error?.message;
-    } else if (error?.isUnknowError == true) {
-      //server exception like crash or something
-      type = ErrorType.grapQLUnknown;
-    } else {
-      type = ErrorType.grapQLUnknown;
-      message = error?.message;
-    }
-  }
-
   String getErrorMessage(Map<String, dynamic> dataRes) {
     LogUtils.e('getErrorMessage $dataRes');
     try {

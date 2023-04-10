@@ -1,5 +1,5 @@
 {
-  "appName": "DIVA Partner",
+  "appName": "Protee",
   "inform": "Inform",
   "ok": "Ok",
   "cancel": "Cancel",
@@ -51,5 +51,16 @@
   "processing": "Processing",
   "male": "Male",
   "female": "Female",
-  "otherGender": "Other gender"
+  "otherGender": "Other gender",
+  "avatar": "Avatar",
+  "close": "Close",
+  "takePhoto": "Take photo",
+  "haveNoPermission": "Access denied. Please go to settings and grant the app permission to continue",
+  "openSettings": "Open settings",
+  "selectPhoto": "Select photo",
+  "homepage": "Homepage",
+  "childSafetyProtectionSystem": "Safety for the children",
+  "appleLogin": "Log in with Apple ID",
+  "googleLogin": "Log in with Google",
+  "facebookLogin": "Log in with Facebook"
 }

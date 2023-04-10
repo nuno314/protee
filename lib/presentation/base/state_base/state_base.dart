@@ -5,6 +5,8 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
   ErrorType? errorTypeShowing;
   var _isLoadingShowing = false;
 
+  AppLocalizations get trans => translate(context);
+
   bool get isLoading => _isLoadingShowing;
 
   AppBlocBase? get bloc;
@@ -101,11 +103,10 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
       context: context,
       message: trans.loginRequired,
       title: trans.inform,
-      titleBtnDone: trans.login,
-      titleBtnCancel: trans.dismiss,
-      onCanceled: onSkip,
+      rightBtn: trans.login,
+      leftBtn: trans.skip,
       onConfirmed: () {
-        _showLoginScreen(onSuccess, onSkip);
+        backToAuth(onSuccess: onSuccess, onSkip: onSkip);
       },
     );
   }
@@ -133,4 +134,38 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
 
   String get languageCode =>
       context.read<AppDataBloc>().state.locale.languageCode;
+
+  void showLoginNoticeDialog({
+    required Function() onSuccess,
+    Function()? onSkip,
+  }) {
+    showNoticeConfirmDialog(
+      context: context,
+      message: trans.loginRequired,
+      title: trans.inform,
+      rightBtn: trans.login,
+      leftBtn: trans.skip,
+      onConfirmed: () {
+        backToAuth(onSuccess: onSuccess, onSkip: onSkip);
+      },
+    );
+  }
+
+  void backToAuth({
+    Function()? onSuccess,
+    Function()? onSkip,
+  }) {
+    Navigator.pushNamed(context, RouteList.signIn).then((value) {
+      if (value is bool && value) {
+        syncData();
+        onSuccess?.call();
+      } else {
+        onSkip?.call();
+      }
+    });
+  }
+
+  void syncData() {
+    print('==========logOut');
+  }
 }

@@ -63,7 +63,7 @@ class InfoItem extends StatelessWidget {
                   title ?? '--',
                   style: Theme.of(context)
                       .textTheme
-                      .subtitle2!
+                      .titleSmall!
                       .copyWith(color: Colors.black),
                 ),
               ),
@@ -73,7 +73,7 @@ class InfoItem extends StatelessWidget {
                     flex: valueFlex,
                     child: Text(
                       value ?? '--',
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: valueColor,
                           ),
                       textAlign: TextAlign.end,

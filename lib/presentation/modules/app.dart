@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../common/components/navigation/navigation_observer.dart';
-import '../../common/constants/app_locale.dart';
+import '../../common/constants/locale/app_locale.dart';
 import '../../di/di.dart';
 import '../../domain/entities/app_data.dart';
 import '../common_bloc/app_data_bloc.dart';

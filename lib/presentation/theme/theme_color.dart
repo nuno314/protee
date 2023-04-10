@@ -1,41 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:injectable/injectable.dart';
 
-class AppColor {
-  static const Color white = Colors.white;
-  static const Color primaryColor = Color(0xFF03a1e4);
-  static const Color primaryColorLight = Color(0xFF43c8f5);
-  static const Color cardBackground = Color(0xFFf7f8f8);
-  static const Color iconSelected = primaryColor;
-  static const Color iconUnselected = Colors.grey;
-  static const Color lightGrey = Color(0xFFbebebe);
-  static const Color greyDC = Color(0xFFdcdcdc);
-  static const Color scaffoldBackgroundColor = Color(0xFFF1F3F7);
+import '../../di/di.dart';
 
-  static const Color inactiveColor = Color(0xFF111111);
-  static const Color activeColor = primaryColor;
+ThemeColor get themeColor => injector.get<ThemeColor>();
 
-  static const Color titleMenu = Colors.grey;
-  static const Color primaryIcon = Colors.grey;
-  static const Color green = Color(0xFF4d9e53);
-  static const Color red = Color(0xFFfb4b53);
-  static const Color orange = Color(0xFFff9b1a);
-  static const Color darkBlue = Color(0xFF002d41);
+@Singleton()
+class ThemeColor {
+  final Color white = Colors.white;
+  final Color black = Colors.black;
+  final Color primaryColor = const Color(0xFF62A6BB);
+  final Color primaryColorLight = const Color(0xFF0CC0DF);
+  final Color cardBackground = const Color(0xFFf7f8f8);
+  final Color iconUnselected = Colors.grey;
+  final Color lightGrey = const Color(0xFFbebebe);
+  final Color greyDC = const Color(0xFFdcdcdc);
+  final Color gray8C = const Color(0xFF8C8C8C);
+  final Color scaffoldBackgroundColor = const Color(0xFFF1F3F7);
+
+  final Color inactiveColor = const Color(0xFF111111);
+
+  final Color titleMenu = Colors.grey;
+  final Color primaryIcon = Colors.grey;
+  final Color green = const Color(0xFF4d9e53);
+  final Color red = const Color(0xFFfb4b53);
+  final Color orange = const Color(0xFFff9b1a);
+  final Color darkBlue = const Color(0xFF002d41);
+  final Color color3b5998 = const Color(0xFF3b5998);
 
   //light
-  static const Color primaryText = Colors.black;
-  static const Color subText = Color(0xFF767676);
+  final Color primaryText = Colors.black;
+  final Color subText = const Color(0xFF767676);
 
   //dart
-  static const Color primaryDarkText = Colors.black;
-  static const Color subDarkText = Colors.grey;
+  final Color primaryDarkText = Colors.black;
+  final Color subDarkText = Colors.grey;
 
-  static void setLightStatusBar() {
+  void setLightStatusBar() {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }
 
-  static void setDarkStatusBar() {
+  void setDarkStatusBar() {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }

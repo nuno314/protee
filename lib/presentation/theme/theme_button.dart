@@ -4,7 +4,7 @@ import 'theme_color.dart';
 
 class ThemeButton {
   static TextStyle? getTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.button;
+    return Theme.of(context).textTheme.labelLarge;
   }
 
   static Widget primary({
@@ -83,7 +83,7 @@ class ThemeButton {
   }) =>
       RawMaterialButton(
         fillColor: enable
-            ? AppColor.greyDC
+            ? themeColor.greyDC
             : Theme.of(context).colorScheme.primary.withAlpha(55),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
@@ -121,7 +121,7 @@ class ThemeButton {
         child: Text(
           title,
           style: getTextStyle(context)!.copyWith(
-            color: reverseColor == true ? AppColor.white : Colors.red,
+            color: reverseColor == true ? themeColor.white : Colors.red,
           ),
           textAlign: TextAlign.center,
         ),

@@ -42,9 +42,9 @@ class MenuItemView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 border: divider == ItemDivider.line
-                    ? const Border(
+                    ?  Border(
                         bottom: BorderSide(
-                          color: AppColor.lightGrey,
+                          color: themeColor.lightGrey,
                           width: 1,
                         ),
                       )
@@ -59,7 +59,7 @@ class MenuItemView extends StatelessWidget {
                       title,
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle2
+                          .titleSmall
                           ?.copyWith(color: Colors.black),
                     ),
                   ),

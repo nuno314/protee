@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../common/client_info.dart';
-import '../../common/constants/app_locale.dart';
+import '../../common/constants/locale/app_locale.dart';
 import '../../common/utils.dart';
 import '../../data/data_source/local/local_data_manager.dart';
 import '../../di/di.dart';
@@ -32,15 +32,19 @@ class AppDataBloc extends Cubit<AppData> {
 
   /// --------------------- Theme ---------------------//
   void changeLightTheme() {
-    emit(state.copyWith(
-      currentTheme: SupportedTheme.light,
-    ));
+    emit(
+      state.copyWith(
+        currentTheme: SupportedTheme.light,
+      ),
+    );
   }
 
   void changeDarkTheme() {
-    emit(state.copyWith(
-      currentTheme: SupportedTheme.dark,
-    ));
+    emit(
+      state.copyWith(
+        currentTheme: SupportedTheme.dark,
+      ),
+    );
   }
 
   /// ------------------- End Theme -------------------//

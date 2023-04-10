@@ -1,4 +1,6 @@
-part of '../utils.dart';
+import 'package:logger/logger.dart';
+
+import '../config.dart';
 
 class MyFilter extends LogFilter {
   @override
@@ -28,11 +30,18 @@ class AppLog {
 
 class LogUtils {
   static final LogPrinter printer = PrettyPrinter(
-    printTime: true,
+    printTime: false,
     errorMethodCount: 16,
+    printEmojis: false,
+    colors: false,
   );
 
-  static final LogPrinter noStackPrinter = PrettyPrinter(methodCount: 0);
+  static final LogPrinter noStackPrinter = PrettyPrinter(
+    printTime: false,
+    methodCount: 0,
+    printEmojis: false,
+    colors: false,
+  );
 
   static final logs = <AppLog>[];
 

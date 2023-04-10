@@ -53,6 +53,7 @@ class _WebviewScreenState extends StateBase<WebviewScreen> {
     super.didUpdateWidget(oldWidget);
   }
 
+  @override
   late AppLocalizations trans;
 
   @override
@@ -64,7 +65,7 @@ class _WebviewScreenState extends StateBase<WebviewScreen> {
         if (url != null) _rightButton(),
       ],
       child: Container(
-        color: AppColor.white,
+        color: themeColor.white,
         child: Stack(
           children: [
             AnimatedOpacity(
@@ -137,9 +138,9 @@ class _WebviewScreenState extends StateBase<WebviewScreen> {
   }
 
   Widget _rightButton() => PopupMenuButton<MenuItemView>(
-        icon: const Icon(
+        icon: Icon(
           Icons.more_vert_outlined,
-          color: AppColor.white,
+          color: themeColor.white,
         ),
         onSelected: (item) => item.onTap?.call(),
         itemBuilder: (_) => _dropdownItems

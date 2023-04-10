@@ -1,4 +1,5 @@
 import '../../../di/di.dart';
+import '../../../domain/entities/token.dart';
 import '../../../presentation/theme/theme_data.dart';
 import 'preferences_helper/preferences_helper.dart';
 
@@ -11,15 +12,6 @@ class LocalDataManager implements AppPreferenceData {
       );
 
   static Future<LocalDataManager> init() async {
-    // Hive.registerAdapter(ProvinceAdapter());
-
-    // return Future.value(
-    //   LocalDataManager(
-    //     await Hive.openBox<Province>(
-    //       'administrative_hive_box',
-    //     ),
-    //   ),
-    // );
     return Future.value(LocalDataManager());
   }
 
@@ -50,4 +42,27 @@ class LocalDataManager implements AppPreferenceData {
   Future<bool?> clearData() {
     return _preferencesHelper.clearData();
   }
+
+    @override
+  Future<bool?> markLaunched() {
+    return _preferencesHelper.markLaunched();
+  }
+
+  @override
+  Future<bool?> unMarkLaunched() {
+    return _preferencesHelper.unMarkLaunched();
+  }
+
+  @override
+  bool isFirstLaunch() {
+    return _preferencesHelper.isFirstLaunch();
+  }
+
+  @override
+  Future<bool?> setToken(Token? value) {
+    return _preferencesHelper.setToken(value);
+  }
+
+  @override
+  Token? get token => _preferencesHelper.token;
 }

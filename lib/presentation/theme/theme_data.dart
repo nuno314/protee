@@ -18,14 +18,13 @@ AppTheme buildLightTheme() {
     'light',
     theme.copyWith(
       brightness: Brightness.light,
-      primaryColorLight: AppColor.primaryColorLight,
+      primaryColorLight: themeColor.primaryColorLight,
       primaryColor: Colors.white,
-      backgroundColor: Colors.white,
-      scaffoldBackgroundColor: AppColor.scaffoldBackgroundColor,
-      cardColor: AppColor.cardBackground,
+      scaffoldBackgroundColor: themeColor.scaffoldBackgroundColor,
+      cardColor: themeColor.cardBackground,
       textTheme: AppTextTheme.getDefaultTextTheme(),
       colorScheme: theme.colorScheme.copyWith(
-        secondary: AppColor.primaryColor,
+        secondary: themeColor.primaryColor,
       ),
       appBarTheme: theme.appBarTheme.copyWith(
         backgroundColor: Colors.white,
@@ -41,9 +40,9 @@ AppTheme buildDarkTheme() {
     theme.copyWith(
       brightness: Brightness.dark,
       colorScheme: theme.colorScheme.copyWith(
-        secondary: AppColor.primaryColor,
+        secondary: themeColor.primaryColor,
       ),
-      primaryColorLight: AppColor.primaryColorLight,
+      primaryColorLight: themeColor.primaryColorLight,
       primaryColor: ThemeData.dark().primaryColor,
       scaffoldBackgroundColor: ThemeData.dark().primaryColor,
       cardColor: const Color(0xFF3e3c43),

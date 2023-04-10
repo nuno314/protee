@@ -2,5 +2,5 @@ import 'app_delegate.dart';
 import 'envs.dart';
 
 void main() {
-  AppDelegate.run(Env.prodEnv);
+  AppDelegate.run(ProteeEnv.env);
 }

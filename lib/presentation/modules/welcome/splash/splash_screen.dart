@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:package_info/package_info.dart';
 
 import '../../../../common/client_info.dart';
-import '../../../../common/constants.dart';
+import '../../../../generated/assets.dart';
 import '../../../base/base.dart';
-import '../../../common_widget/after_layout.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
 import 'bloc/splash_bloc.dart';
@@ -20,10 +20,11 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
+class _SplashScreenState extends StateBase<SplashScreen> {
   @override
-  void afterFirstLayout(BuildContext context) {
-    getClientInfo();
+  void initState() {
+    initial();
+    super.initState();
   }
 
   @override
@@ -37,30 +38,24 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     return Scaffold(
+      backgroundColor: themeColor.white,
       body: BlocListener<SplashBloc, SplashState>(
-        listener: (context, state) {
-          final nextScreen = state.nextScreen;
-          if (nextScreen == null) {
-            return;
-          }
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            nextScreen,
-            (route) => false,
-          );
-        },
+        listener: _blocListener,
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(ImageConstant.logoImage),
+                  Image.asset(
+                    Assets.image.logo,
+                    width: device.width - 36,
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     translate(context).appName.toUpperCase(),
-                    style: textTheme.bodyText1!.copyWith(
-                      color: AppColor.subText,
+                    style: textTheme.bodyLarge!.copyWith(
+                      color: themeColor.subText,
                       fontWeight: FontWeight.normal,
                       fontSize: 18,
                     ),
@@ -74,8 +69,8 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
               right: 0,
               child: Text(
                 'Powered By Flutter Base Tructure',
-                style: textTheme.bodyText2!.copyWith(
-                  color: AppColor.subText,
+                style: textTheme.bodyMedium!.copyWith(
+                  color: themeColor.subText,
                   fontSize: 12,
                 ),
                 textAlign: TextAlign.center,

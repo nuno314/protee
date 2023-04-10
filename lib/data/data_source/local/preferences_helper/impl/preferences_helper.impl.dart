@@ -48,4 +48,27 @@ class PreferencesHelperImpl extends PreferencesHelper {
 
     return result.any((e) => e == false) == false;
   }
+
+  @override
+  Future<bool?> markLaunched() async {
+    return _prefs.setString(PreferencesKey.isLaunched, 'yes');
+  }
+
+  @override
+  Future<bool?> unMarkLaunched() {
+    return _prefs.remove(PreferencesKey.isLaunched);
+  }
+
+  @override
+  bool isFirstLaunch() {
+    return _prefs.getString(PreferencesKey.isLaunched)?.isNullOrEmpty == true;
+  }
+
+  @override
+  Future<bool?> setToken(Token? value) {
+    return Future.value();
+  }
+
+  @override
+  Token? get token => Token();
 }

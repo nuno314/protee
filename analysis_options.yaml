@@ -50,7 +50,6 @@ linter:
     - unnecessary_getters_setters
     - file_names
     - implementation_imports
-    - invariant_booleans
     - library_names
     - library_prefixes
     - literal_only_boolean_expressions
@@ -104,14 +103,16 @@ linter:
     - use_setters_to_change_properties
     - use_string_buffers
     - prefer_relative_imports
+    - require_trailing_commas
 
     # nice to have
     - avoid_double_and_int_checks
     - avoid_bool_literals_in_conditional_expressions
     - avoid_function_literals_in_foreach_calls
     - unnecessary_lambdas
+    - flutter_style_todos
     - join_return_with_assignment
     - lines_longer_than_80_chars
     - prefer_foreach
     - use_to_and_as_if_applicable
-    - flutter_style_todos
+

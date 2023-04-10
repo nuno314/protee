@@ -1,5 +1,5 @@
 {
-  "appName": "DIVA Partner",
+  "appName": "Protee",
   "inform": "Thông Báo",
   "ok": "Ok",
   "cancel": "Hủy",
@@ -51,5 +51,16 @@
   "processing": "Đang xử lý",
   "male": "Nam",
   "female": "Nữ",
-  "otherGender": "Giới tính khác"
+  "otherGender": "Giới tính khác",
+  "avatar": "Hình đại diện",
+  "close": "Đóng",
+  "takePhoto": "Chụp hình",
+  "haveNoPermission": "Không có quyền truy cập. Vui lòng vào cài đặt và cấp quyền cho ứng dụng để tiếp tục",
+  "openSettings": "Mở cài đặt",
+  "selectPhoto": "Chọn ảnh",
+  "homepage": "Trang chủ",
+  "childSafetyProtectionSystem": "Hệ thống bảo vệ an toàn trẻ em",
+  "appleLogin": "Đăng nhập bằng ID Apple",
+  "googleLogin": "Đăng nhập bằng Google",
+  "facebookLogin": "Đăng nhập bằng Facebook"
 }

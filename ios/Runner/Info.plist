@@ -58,10 +58,22 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb542676418049537</string>
 				<string>com.googleusercontent.apps.836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969</string>
 			</array>
 		</dict>
 	</array>	
+	<key>FacebookAppID</key>
+	<string>542676418049537</string>
+	<key>FacebookClientToken</key>
+	<string>EAAHtj7MgNgEBADI5FlZB5mle1m1eG2jDsx77AZBgrF6PfNxb3eAjSka6RLUt6Ec8qnZCKpPlue2Qfn7zPV2BxrMZA8ag1nQiXoZAeUXZAYpdZAjnNB1VQUFrSyCpQpLzxo3ENy4kyZAZAjb2Bud8EBN90BNkc65VxaxUy9Em1yodqMizmZALRYz7J5LV1RNVZAZBKBHpqJjTg3QDsteGJb0lRztTU6uUY6pIgySLBiyKJxU7NbMplcaZBDUmBGuiYqGz5Gx0ZD</string>
+	<key>FacebookDisplayName</key>
+	<string>Protee Dev</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>fbapi</string>
+	<string>fb-messenger-share-api</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
         <dict>
             <key>NSAllowsArbitraryLoads</key>
@@ -79,5 +91,7 @@
                 </dict>
             </dict>
         </dict>
+	<key>com.apple.security.network.server</key>
+		<true/>
 </dict>
 </plist>

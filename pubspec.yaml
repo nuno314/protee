@@ -82,6 +82,9 @@ dependencies:
   flutter_multi_formatter: ^2.5.1
   expandable: ^5.0.1
 
+  # The easiest way to add facebook login to your flutter app.
+  flutter_facebook_auth: ^5.0.8
+
   #Hive
   hive: ^2.0.4
   hive_flutter: ^1.1.0

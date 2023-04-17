@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -104,6 +105,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             icon: Assets.svg.icFacebook,
             title: trans.facebookLogin,
             color: themeColor.color3b5998,
+            onTap: onLoginWithFacebook,
           ),
         ],
       ),

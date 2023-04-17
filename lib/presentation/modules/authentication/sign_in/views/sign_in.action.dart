@@ -13,4 +13,10 @@ extension SignInAction on _SignInScreenState {
       print(error);
     }
   }
+
+  Future<void> onLoginWithFacebook() async {
+    await FacebookAuth.instance.login().then((value) => print(
+          value.accessToken?.token,
+        ));
+  }
 }

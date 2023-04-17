@@ -65,7 +65,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 32),
+          const SizedBox(height: 64),
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
@@ -87,7 +87,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 64,
           ),
           _buildLoginButton(
             icon: Assets.svg.icApple,

@@ -10,15 +10,22 @@ class Env {
 
   static const devEnvName = 'Development';
   static const prodEnvName = 'Production';
-}
 
-class ProteeEnv extends Env {
-  static final Map<String, dynamic> env = {
+  static final Map<String, dynamic> devEnv = {
+    Env.environment: Env.devEnvName,
+    Env.developmentMode: kDebugMode,
+    Env.appName: 'Protee Dev',
+    Env.baseApiLayer: '',
+    Env.onesignalAppID: '',
+    Env.app: 'protee',
+  };
+
+  static final Map<String, dynamic> prodEnv = {
     Env.environment: Env.prodEnvName,
     Env.developmentMode: kDebugMode,
-    Env.appName: 'Protee Production',
+    Env.appName: 'Protee',
     Env.baseApiLayer: '',
+    Env.onesignalAppID: '',
     Env.app: 'protee',
-    Env.onesignalAppID: ''
   };
 }

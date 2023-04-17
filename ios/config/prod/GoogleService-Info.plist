@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>930700400354-m51e18dvug3dah2img6244p5oap75oab.apps.googleusercontent.com</string>
+	<string>930700400354-inhn7fjino1vurosmou99h0gfst3vrpl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.930700400354-m51e18dvug3dah2img6244p5oap75oab</string>
+	<string>com.googleusercontent.apps.930700400354-inhn7fjino1vurosmou99h0gfst3vrpl</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>930700400354-55j9mujtmu23v9hedvsmh6hu3gq2jnea.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.protee</string>
+	<string>com.protee</string>
 	<key>PROJECT_ID</key>
 	<string>protee-140c5</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:930700400354:ios:6abfbdb7e504fa359630bb</string>
+	<string>1:930700400354:ios:6ed7d6fbc6fb99f69630bb</string>
 </dict>
 </plist>

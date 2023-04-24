@@ -28,6 +28,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply from: 'signing.gradle'
 
 android {
+    ndkVersion "25.1.8937393"
     compileSdkVersion 33
 
     compileOptions { 
@@ -49,7 +50,6 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.protee"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
@@ -66,12 +66,14 @@ android {
 
     productFlavors {
         dev {
-            applicationId "com.example.proteeDev"
-            resValue "string", "app_name", "Protee"
+            applicationId "com.proteeDev"
+            resValue "string", "app_name", "Protee Dev"
+            signingConfig signingConfigs.dev
         }
         prod {
-            applicationId "com.example.protee"
+            applicationId "com.protee"
             resValue "string", "app_name", "Protee"
+            signingConfig signingConfigs.prod
         }
     }
 }

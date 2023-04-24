@@ -1,4 +1,4 @@
-package com.example.protee
+package com.protee
 
 import io.flutter.embedding.android.FlutterActivity
 

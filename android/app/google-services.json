@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "930700400354",
-    "project_id": "protee-140c5",
-    "storage_bucket": "protee-140c5.appspot.com"
+    "project_number": "836852153204",
+    "project_id": "protee-dev-76f5a",
+    "storage_bucket": "protee-dev-76f5a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930700400354:android:648a6ae2a0ff1f5d9630bb",
+        "mobilesdk_app_id": "1:836852153204:android:84a4206bd8f531384b0a21",
         "android_client_info": {
-          "package_name": "com.example.protee"
+          "package_name": "com.proteeDev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930700400354-0lc01coapnlbl1e81p2o2eaodnn9nbl4.apps.googleusercontent.com",
+          "client_id": "836852153204-nf0g52pqctpnptr3ier5vac9np2358gk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDtPjxFRXcXP7geJ-GVZVp9ScAP9UKREWA"
+          "current_key": "AIzaSyA9-7CnsVfdSrZTmXGPAcnnn435HrsF7TI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930700400354-0lc01coapnlbl1e81p2o2eaodnn9nbl4.apps.googleusercontent.com",
+              "client_id": "836852153204-525ikqnaccd31nfcl5hho422icel590e.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.proteeDev"
+              }
             }
           ]
         }

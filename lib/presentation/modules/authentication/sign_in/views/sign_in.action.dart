@@ -6,7 +6,6 @@ extension SignInAction on _SignInScreenState {
   Future<void> onLoginWithGoogle() async {
     try {
       await _googleSignIn.signIn().then((value) {
-        print(value);
         hideLoading();
       });
     } catch (error) {
@@ -15,8 +14,10 @@ extension SignInAction on _SignInScreenState {
   }
 
   Future<void> onLoginWithFacebook() async {
-    await FacebookAuth.instance.login().then((value) => print(
-          value.accessToken?.token,
-        ));
+    await FacebookAuth.instance.login().then(
+          (value) => print(
+            value.accessToken?.token,
+          ),
+        );
   }
 }

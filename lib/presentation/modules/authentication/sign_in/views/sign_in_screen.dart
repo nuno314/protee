@@ -84,7 +84,8 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             trans.childSafetyProtectionSystem,
             style: TextStyle(
               fontSize: 14,
-              color: themeColor.gray8C,
+              color: themeColor.primaryColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(

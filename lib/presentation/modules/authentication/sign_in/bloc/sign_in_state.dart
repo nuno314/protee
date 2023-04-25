@@ -28,12 +28,21 @@ class SignInInitial extends SignInState {
   }) : super(viewModel);
 }
 
+class LoginSuccess extends SignInState {
+  LoginSuccess({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   SignInInitial: (viewModel) => SignInInitial(
+        viewModel: viewModel,
+      ),
+  LoginSuccess: (viewModel) => LoginSuccess(
         viewModel: viewModel,
       ),
 };

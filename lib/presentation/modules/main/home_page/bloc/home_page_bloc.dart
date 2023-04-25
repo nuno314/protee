@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 
+import '../../../../../data/models/user.dart';
 import '../../../../base/base.dart';
 import '../interactor/home_page_interactor.dart';
 import '../repository/home_page_repository.dart';

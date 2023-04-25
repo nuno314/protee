@@ -3,10 +3,6 @@ part of 'dashboard_cubit.dart';
 abstract class DashboardState {
   final int index;
 
-  // True => status bar color is white
-  // False => status bar color is black
-  bool get lighStatusBar;
-
   String get route;
 
   DashboardState(this.index);
@@ -16,45 +12,32 @@ class DashboardHome extends DashboardState {
   DashboardHome() : super(DashboardPage.home.index);
 
   @override
-  bool get lighStatusBar => false;
-
-  @override
   String get route => 'home';
 }
 
-class DashboardProduct extends DashboardState {
-  DashboardProduct() : super(DashboardPage.product.index);
+class DashboardMessage extends DashboardState {
+  DashboardMessage() : super(DashboardPage.message.index);
 
   @override
-  bool get lighStatusBar => false;
-
-  @override
-  String get route => 'cosmetic_list';
+  String get route => 'message_list';
 }
 
-class DashboardAppointment extends DashboardState {
-  DashboardAppointment() : super(DashboardPage.appointment.index);
+class DashboardLocation extends DashboardState {
+  DashboardLocation() : super(DashboardPage.location.index);
 
   @override
-  bool get lighStatusBar => false;
-
-  @override
-  String get route => 'appointment_list';
+  String get route => 'location';
 }
 
-class DashboardPromotion extends DashboardState {
-  DashboardPromotion() : super(DashboardPage.promotion.index);
-  @override
-  bool get lighStatusBar => false;
+class DashboardNotification extends DashboardState {
+  DashboardNotification() : super(DashboardPage.notification.index);
 
   @override
-  String get route => 'promo_list';
+  String get route => 'notification';
 }
 
 class DashboardAccount extends DashboardState {
   DashboardAccount() : super(DashboardPage.account.index);
-  @override
-  bool get lighStatusBar => false;
 
   @override
   String get route => 'account';

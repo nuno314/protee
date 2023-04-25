@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -5,12 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../../common/components/navigation/navigation_observer.dart';
 import '../../../../../common/utils.dart';
 import '../../../../../di/di.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/box_color.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/sign_in_bloc.dart';
 import 'widget/sign_in_background.dart';
@@ -27,8 +30,6 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends StateBase<SignInScreen> {
   @override
   SignInBloc get bloc => BlocProvider.of(context);
-
-  final _googleSignIn = injector.get<GoogleSignIn>();
 
   late ThemeData _themeData;
 

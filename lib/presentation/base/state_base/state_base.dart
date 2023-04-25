@@ -168,4 +168,10 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
   void syncData() {
     print('==========logOut');
   }
+
+  Future<void> doLogout() async {
+    showLoading();
+    await injector.get<AuthService>().signOut();
+    await injector.get<GoogleSignIn>().signOut();
+  }
 }

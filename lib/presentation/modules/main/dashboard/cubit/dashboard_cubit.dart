@@ -16,12 +16,12 @@ class DashboardCubit extends Cubit<DashboardState> {
   void navigateTo(int idx) {
     if (idx == DashboardPage.home.index) {
       emit(DashboardHome());
-    } else if (idx == DashboardPage.product.index) {
-      emit(DashboardProduct());
-    } else if (idx == DashboardPage.appointment.index) {
-      emit(DashboardAppointment());
-    } else if (idx == DashboardPage.promotion.index) {
-      emit(DashboardPromotion());
+    } else if (idx == DashboardPage.message.index) {
+      emit(DashboardMessage());
+    } else if (idx == DashboardPage.location.index) {
+      emit(DashboardLocation());
+    } else if (idx == DashboardPage.notification.index) {
+      emit(DashboardNotification());
     } else if (idx == DashboardPage.account.index) {
       emit(DashboardAccount());
     } else {
@@ -35,9 +35,9 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   List<DashboardState> get dashboardStates => [
         DashboardHome(),
-        DashboardProduct(),
-        DashboardAppointment(),
-        DashboardPromotion(),
+        DashboardMessage(),
+        DashboardLocation(),
+        DashboardNotification(),
         DashboardAccount(),
       ];
 
@@ -49,8 +49,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     if (state == null) {
       return -1;
     }
-    final guestCanView = DashboardPageExt.guestCanView(state.index);
-    if (isLoggedIn || guestCanView) {
+    if (isLoggedIn) {
       navigateTo(state.index);
       return 1;
     } else {

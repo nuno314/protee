@@ -43,8 +43,13 @@ class _AccountScreenState extends StateBase<AccountScreen> {
             child: BoxColor(
               color: themeColor.primaryColor,
               borderRadius: BorderRadius.circular(16),
-              child: const Text(
+              padding: const EdgeInsets.all(8),
+              child: Text(
                 'Đăng xuất',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: themeColor.white,
+                ),
               ),
             ),
           ),

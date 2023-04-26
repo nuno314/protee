@@ -2,37 +2,46 @@ part of '../home_page_screen.dart';
 
 extension HomeHeaderUI on _HomePageScreenState {
   Widget _buildHeader(HomePageState state) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 61, 16, 0),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child:
-                CachedNetworkImageWrapper.avatar(url: state.user?.avatar ?? ''),
-          ),
-          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Chào mừng',
-                style: TextStyle(
-                  fontSize: 14,
-                ),
+              SvgPicture.asset(
+                Assets.svg.icLogo,
+                color: themeColor.white,
+                height: 40,
               ),
               const SizedBox(
                 height: 2,
               ),
               Text(
-                state.user?.name ?? '--',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                'Xin chào, ${state.user?.name ?? '--'}',
+                style: TextStyle(
+                  color: themeColor.color005880,
                 ),
               ),
             ],
-          )
+          ),
+          const Spacer(),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(
+                width: 1,
+                color: themeColor.white,
+              ),
+            ),
+            child: CachedNetworkImageWrapper.avatar(
+              url: state.user?.avatar ?? '',
+              fit: BoxFit.contain,
+              width: 50,
+              height: 50,
+            ),
+          ),
+          const SizedBox(width: 8),
         ],
       ),
     );

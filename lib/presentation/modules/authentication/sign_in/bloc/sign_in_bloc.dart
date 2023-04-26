@@ -41,6 +41,7 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
         final userCredential = await auth.signInWithCredential(credential);
 
         user = userCredential.user;
+        await user?.getIdToken().then(print);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           // ...

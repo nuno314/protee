@@ -18,6 +18,8 @@ import '../../../theme/theme_color.dart';
 import '../account/bloc/account_bloc.dart';
 import '../account/views/account_screen.dart';
 import '../home_page/home_page.dart';
+import '../location/bloc/location_bloc.dart';
+import '../location/views/location_screen.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'dashboard_constants.dart';
 
@@ -112,7 +114,12 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                     ),
                   ),
                   Container(),
-                  Container(),
+                  KeepAliveWidget(
+                    child: BlocProvider(
+                      create: (context) => LocationBloc(),
+                      child: const LocationScreen(),
+                    ),
+                  ),
                   Container(),
                   KeepAliveWidget(
                     child: BlocProvider(

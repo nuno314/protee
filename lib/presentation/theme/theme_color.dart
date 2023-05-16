@@ -32,6 +32,9 @@ class ThemeColor {
   final Color color3b5998 = const Color(0xFF3b5998);
   final Color color005880 = const Color(0xff005880);
   final Color colorFA3D0C = const Color(0xFFFA3D0C);
+  final Color colorFF960C = const Color(0xFFFF960C);
+  final linkText = const Color(0xFF3680D8);
+  final Color transaprent = Colors.transparent;
 
   //light
   final Color primaryText = Colors.black;

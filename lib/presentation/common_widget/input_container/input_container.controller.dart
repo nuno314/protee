@@ -1,20 +1,18 @@
 part of 'input_container.dart';
 
 class InputContainerProperties {
-  late TextEditingController tdController;
+  TextEditingController tdController;
   String? validation;
   bool isShowPassword;
-  late FocusNode focusNode;
+  FocusNode focusNode;
 
   InputContainerProperties({
     TextEditingController? tdController,
     this.validation,
     this.isShowPassword = false,
     FocusNode? focusNode,
-  }) {
-    this.focusNode = focusNode ?? FocusNode();
-    this.tdController = tdController ?? TextEditingController();
-  }
+  })  : tdController = tdController ?? TextEditingController(),
+        focusNode = focusNode ?? FocusNode();
 
   void withValue({
     TextEditingController? tdController,
@@ -31,21 +29,45 @@ class InputContainerController extends ValueNotifier<InputContainerProperties> {
 
   String get text => value.tdController.text;
 
+  set text(String? v) {
+    value.tdController.let((ctrl) {
+      ctrl.value = ctrl.value.copyWith(
+        text: v,
+        selection: TextSelection.collapsed(offset: v?.length ?? 0),
+      );
+    });
+    resetValidation();
+  }
+
   void resetValidation() {
     value.validation = null;
     notifyListeners();
   }
 
-  void setError(String? message, {bool focusOn = true}) {
-    if (focusOn) {
-      value.focusNode.requestFocus();
-    }
+  void setError(String message) {
+    value.focusNode.requestFocus();
     value.validation = message;
     notifyListeners();
   }
 
+  void clearError() {
+    value.validation = null;
+    notifyListeners();
+  }
+
+  void requestFocus() {
+    value.focusNode.requestFocus();
+  }
+
+  void unfocus() {
+    value.focusNode.unfocus();
+  }
+
   void reset() {
-    value = InputContainerProperties();
+    value = InputContainerProperties(
+      tdController: value.tdController,
+      focusNode: value.focusNode,
+    );
     notifyListeners();
   }
 
@@ -56,15 +78,12 @@ class InputContainerController extends ValueNotifier<InputContainerProperties> {
     notifyListeners();
   }
 
-  set setText(String v) {
-    value.tdController.text = v;
-    resetValidation();
+  set selection(TextSelection selection) {
+    value.tdController.selection = selection;
   }
 
-  @override
-  void dispose() {
-    value.focusNode.dispose();
-    value.tdController.dispose();
-    super.dispose();
+  void clear() {
+    value.tdController.clear();
+    resetValidation();
   }
 }

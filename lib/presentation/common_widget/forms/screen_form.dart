@@ -11,6 +11,7 @@ class ScreenForm extends StatefulWidget {
   final List<Widget> actions;
   final void Function()? onBack;
   final bool? resizeToAvoidBottomInset;
+  final Color? titleColor;
   final Widget? extentions;
   final bool showBackButton;
 
@@ -26,6 +27,7 @@ class ScreenForm extends StatefulWidget {
     this.resizeToAvoidBottomInset,
     this.extentions,
     this.showBackButton = true,
+    this.titleColor,
   }) : super(key: key);
 
   @override
@@ -75,12 +77,13 @@ class _ScreenFormState extends State<ScreenForm> {
             SizedBox(width: widget.showBackButton ? 4 : 16),
             if (widget.showBackButton)
               Padding(
-                padding: const EdgeInsets.only(top: 2),
+                padding: const EdgeInsets.only(top: 6),
                 child: IconButton(
                   onPressed: widget.onBack ?? () => Navigator.pop(context),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.chevron_left_outlined,
-                    size: 18,
+                    color: widget.titleColor,
+                    size: 24,
                   ),
                 ),
               ),
@@ -98,7 +101,7 @@ class _ScreenFormState extends State<ScreenForm> {
                     Text(
                       widget.title ?? '',
                       style: _theme.textTheme.displaySmall?.copyWith(
-                        color: textColor,
+                        color: widget.titleColor ?? textColor,
                         fontSize: 24,
                       ),
                     ),
@@ -112,7 +115,6 @@ class _ScreenFormState extends State<ScreenForm> {
           ],
         ),
         if (widget.extentions != null) widget.extentions!,
-        const SizedBox(height: 16),
       ],
     );
   }

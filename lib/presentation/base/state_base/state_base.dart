@@ -174,4 +174,36 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
     await injector.get<AuthService>().signOut();
     await injector.get<GoogleSignIn>().signOut();
   }
+
+  Future<bool> checkLocationPermission() async {
+    final granted = await PermissionService().checkPermission(
+      Permission.location,
+      context,
+    );
+    if (!granted) {
+      final status = await PermissionService().requestPermission(
+        Permission.location,
+        context,
+      );
+
+      if (status) {
+        if (await Geolocator.isLocationServiceEnabled()) {
+          await context.read<LocationCubit>().refreshLocation();
+          return true;
+        } else {
+          unawaited(
+            showNoticeDialog(
+              context: context,
+              message: trans.pleaseEnableGPS,
+            ),
+          );
+          return false;
+        }
+      }
+      return status;
+    } else {
+      context.read<LocationCubit>().getLastKnownLocation();
+    }
+    return granted;
+  }
 }

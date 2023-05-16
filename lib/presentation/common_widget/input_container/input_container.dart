@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../theme/theme_color.dart';
+import '../../../common/utils.dart';
+import '../../theme/app_text_theme.dart';
 
 part 'input_container.controller.dart';
 
@@ -13,22 +14,35 @@ class InputContainer extends StatefulWidget {
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final TextCapitalization textCapitalization;
-  final Function()? onTap;
-  final Function(String)? onTextChanged;
-  final Function(String)? onSubmitted;
+  final void Function()? onTap;
+  final void Function(String)? onTextChanged;
+  final void Function(String)? onSubmitted;
   final int? maxLines;
   final List<TextInputFormatter>? inputFormatters;
   final bool enable;
   final String? title;
-  final bool isRequired;
+  final TextStyle? titleStyle;
+  final bool required;
   final Color? fillColor;
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
   final BorderSide? borderSide;
+  final BorderSide? focusedBorderSide;
   final TextAlign textAlign;
   final int? maxLength;
   final bool showBorder;
+  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry prefixIconPadding;
+  final EdgeInsetsGeometry suffixIconPadding;
+  final TextInputAction? textInputAction;
+  final void Function()? onEditingComplete;
+  final double prefixIconSize;
+  final double suffixIconSize;
+  final BorderRadius borderRadius;
+  final bool justShowPrefixIconWhenEmpty;
+  final bool withClearButton;
+  final void Function()? onClear;
 
   const InputContainer({
     Key? key,
@@ -44,17 +58,30 @@ class InputContainer extends StatefulWidget {
     this.maxLines = 1,
     this.inputFormatters,
     this.onSubmitted,
+    this.onClear,
     this.enable = true,
     this.title,
-    this.isRequired = false,
+    this.titleStyle,
+    this.required = false,
     this.fillColor,
     this.prefixIcon,
     this.hintStyle,
     this.textStyle,
     this.borderSide,
+    this.focusedBorderSide,
     this.textAlign = TextAlign.start,
     this.maxLength,
     this.showBorder = true,
+    this.contentPadding,
+    this.suffixIconPadding = const EdgeInsets.symmetric(horizontal: 8),
+    this.prefixIconPadding = const EdgeInsets.symmetric(horizontal: 8),
+    this.onEditingComplete,
+    this.textInputAction,
+    this.prefixIconSize = 16.0,
+    this.suffixIconSize = 16.0,
+    this.borderRadius = const BorderRadius.all(Radius.circular(6.0)),
+    this.justShowPrefixIconWhenEmpty = false,
+    this.withClearButton = true,
   }) : super(key: key);
 
   @override
@@ -62,15 +89,9 @@ class InputContainer extends StatefulWidget {
 }
 
 class _InputContainerState extends State<InputContainer> {
+  bool showPrefixIcon = true;
+
   InputContainerController? _controller;
-
-  bool get hasSuffixIcon => widget.isPassword || widget.suffixIcon != null;
-
-  double get suffixIconSize => hasSuffixIcon ? 16 : 0;
-
-  bool get hasPrefixIcon => widget.prefixIcon != null;
-
-  double get prefixIconSize => hasPrefixIcon ? 16 : 0;
 
   @override
   void initState() {
@@ -100,7 +121,10 @@ class _InputContainerState extends State<InputContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
+    final themeData = context.theme;
+    if (widget.justShowPrefixIconWhenEmpty) {
+      showPrefixIcon = _controller!.text.isEmpty;
+    }
     return ValueListenableBuilder<InputContainerProperties>(
       valueListenable: _controller!,
       builder: (ctx, value, w) {
@@ -113,102 +137,123 @@ class _InputContainerState extends State<InputContainer> {
           maxLength: widget.maxLength,
           decoration: InputDecoration(
             filled: !widget.enable || widget.fillColor != null,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 6,
-            ),
             hintText: widget.hint,
-            hintStyle: widget.hintStyle ?? themeData.textTheme.titleSmall,
+            hintStyle: widget.hintStyle ?? themeData.textTheme.inputHint,
             errorText: value.validation,
-            errorStyle: themeData.textTheme.titleMedium?.copyWith(
-              color: Colors.red,
+            errorStyle: themeData.textTheme.inputError?.copyWith(
               fontSize: value.validation?.isNotEmpty == true ? null : 1,
             ),
             errorMaxLines: 2,
-            suffixIcon: Padding(
-              padding: EdgeInsets.symmetric(horizontal: suffixIconSize),
-              child: _getSuffixIcon(),
-            ),
+            suffixIcon: _getSuffixIcon(),
             suffixIconConstraints: BoxConstraints(
-              minHeight: suffixIconSize,
-              minWidth: suffixIconSize,
+              minHeight: widget.suffixIconSize,
+              minWidth: widget.suffixIconSize,
             ),
-            prefixIcon: hasPrefixIcon
-                ? Padding(
-                    padding: EdgeInsets.symmetric(horizontal: prefixIconSize),
-                    child: widget.prefixIcon,
-                  )
-                : null,
-            prefixIconConstraints: hasPrefixIcon
-                ? BoxConstraints(
-                    minHeight: suffixIconSize,
-                    minWidth: suffixIconSize,
-                  )
-                : null,
+            prefixIcon: _getPrefixIcon(),
+            prefixIconConstraints: BoxConstraints(
+              minHeight: widget.prefixIconSize,
+              minWidth: widget.prefixIconSize,
+            ),
             fillColor: widget.enable ? widget.fillColor : null,
-            counterStyle: themeData.textTheme.titleMedium,
+            counterStyle: themeData.textTheme.titleMedium?.copyWith(
+              color: Colors.grey,
+            ),
           ),
           keyboardType: widget.keyboardType,
           textCapitalization: widget.textCapitalization,
-          style: widget.textStyle ?? themeData.textTheme.bodyMedium,
+          style: widget.textStyle ??
+              (widget.enable
+                  ? themeData.textTheme.textInput
+                  : themeData.textTheme.inputHint),
           obscureText:
               widget.isPassword && widget.controller?.isShowPass != true,
           onChanged: (text) {
+            _showPrefixFilterFn(text);
+
             if (value.validation != null) {
               widget.controller?.resetValidation();
             }
             widget.onTextChanged?.call(text);
           },
+          onEditingComplete: widget.onEditingComplete,
           maxLines: widget.maxLines,
           inputFormatters: widget.inputFormatters,
           onTap: widget.onTap,
           onSubmitted: widget.onSubmitted,
+          textInputAction: widget.textInputAction,
         );
         if (widget.title?.isNotEmpty == true) {
           body = Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: RichText(
-                  text: TextSpan(
-                    text: widget.title!.toUpperCase(),
-                    style: themeData.textTheme.titleLarge,
-                    children: [
-                      if (widget.isRequired == true)
-                        TextSpan(
-                          text: ' *',
-                          style: themeData.textTheme.titleLarge,
-                        ),
-                    ],
-                  ),
+              RichText(
+                text: TextSpan(
+                  text: widget.title,
+                  style: widget.titleStyle ?? themeData.textTheme.inputTitle,
+                  children: [
+                    if (widget.required == true)
+                      TextSpan(
+                        text: ' *',
+                        style: themeData.textTheme.inputRequired,
+                      ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               textField,
             ],
           );
         } else {
           body = textField;
         }
+        final inputDecorationTheme = themeData.inputDecorationTheme;
         return Theme(
           data: themeData.copyWith(
             primaryColor: themeData.colorScheme.secondary,
             primaryColorDark: themeData.colorScheme.secondary,
             inputDecorationTheme: InputDecorationTheme(
-              border: widget.showBorder
-                  ? OutlineInputBorder(
-                      borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(6.0),
-                    )
-                  : InputBorder.none,
-              enabledBorder: widget.showBorder
-                  ? OutlineInputBorder(
-                      borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(6.0),
-                    )
-                  : InputBorder.none,
+              border: !widget.showBorder
+                  ? InputBorder.none
+                  : inputDecorationTheme.border.let((it) {
+                      if (it is OutlineInputBorder) {
+                        return it.copyWith(
+                          borderSide: widget.borderSide,
+                          borderRadius: widget.borderRadius,
+                        );
+                      }
+                      return it?.copyWith(
+                        borderSide: widget.borderSide,
+                      );
+                    }),
+              enabledBorder: !widget.showBorder
+                  ? InputBorder.none
+                  : inputDecorationTheme.enabledBorder.let((it) {
+                      if (it is OutlineInputBorder) {
+                        return it.copyWith(
+                          borderSide: widget.borderSide,
+                          borderRadius: widget.borderRadius,
+                        );
+                      }
+                      return it?.copyWith(
+                        borderSide: widget.borderSide,
+                      );
+                    }),
+              focusedBorder: !widget.showBorder
+                  ? InputBorder.none
+                  : inputDecorationTheme.focusedBorder.let((it) {
+                      if (it is OutlineInputBorder) {
+                        return it.copyWith(
+                          borderSide: widget.borderSide,
+                          borderRadius: widget.borderRadius,
+                        );
+                      }
+                      return it?.copyWith(
+                        borderSide: widget.borderSide,
+                      );
+                    }),
+              contentPadding: widget.contentPadding ??
+                  themeData.inputDecorationTheme.contentPadding,
             ),
           ),
           child: body,
@@ -218,23 +263,98 @@ class _InputContainerState extends State<InputContainer> {
   }
 
   Widget? _getSuffixIcon() {
+    final padding = widget.suffixIconPadding;
     if (widget.isPassword) {
-      final icon = widget.suffixIcon ?? _getPasswordIcon();
+      final icon = _getPasswordIcon();
       return InkWell(
         onTap: widget.controller!.showOrHidePass,
-        child: icon,
+        child: Padding(
+          padding: padding,
+          child: icon,
+        ),
       );
     }
-    return widget.suffixIcon;
+    if (widget.withClearButton && widget.maxLines == 1) {
+      return ValueListenableBuilder<TextEditingValue>(
+        valueListenable: _controller!.value.tdController,
+        builder: (context, value, child) {
+          if (value.text.isEmpty && widget.suffixIcon != null) {
+            return Padding(
+              padding: padding,
+              child: widget.suffixIcon,
+            );
+          }
+          if (!widget.enable || widget.readOnly) {
+            return const SizedBox();
+          }
+          if (value.text.isNotEmpty != true) {
+            if (widget.suffixIcon != null) {
+              return Padding(
+                padding: padding,
+                child: widget.suffixIcon,
+              );
+            }
+            return const SizedBox();
+          }
+          return InkWell(
+            onTap: () {
+              _controller!.clear();
+              _showPrefixFilterFn(_controller!.text);
+              widget.onTextChanged?.call(_controller!.text);
+              widget.onClear?.call();
+            },
+            child: Padding(
+              padding: padding,
+              child: Icon(
+                Icons.clear,
+                size: widget.suffixIconSize,
+              ),
+            ),
+          );
+        },
+      );
+    }
+    if (widget.suffixIcon != null) {
+      return Padding(
+        padding: padding,
+        child: widget.suffixIcon,
+      );
+    }
+    return null;
   }
 
   Widget _getPasswordIcon() {
-    return Icon(
-      Icons.remove_red_eye,
-      size: suffixIconSize,
-      color: _controller?.isShowPass == true
-          ? themeColor.primaryColor
-          : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Icon(
+        widget.controller?.isShowPass == true
+            ? Icons.visibility_outlined
+            : Icons.visibility_off_outlined,
+        size: widget.suffixIconSize,
+        color: Colors.grey,
+      ),
     );
+  }
+
+  Widget? _getPrefixIcon() {
+    final padding = widget.prefixIconPadding;
+    if (!showPrefixIcon || widget.prefixIcon == null) {
+      return null;
+    }
+    return Padding(
+      padding: padding,
+      child: widget.prefixIcon,
+    );
+  }
+
+  void _showPrefixFilterFn(String text) {
+    final isEmpty = text.isEmpty;
+    if (widget.justShowPrefixIconWhenEmpty &&
+        showPrefixIcon != isEmpty &&
+        mounted) {
+      setState(() {
+        showPrefixIcon = isEmpty;
+      });
+    }
   }
 }

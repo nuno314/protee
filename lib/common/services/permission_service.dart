@@ -9,9 +9,7 @@ import '../../presentation/extentions/extention.dart';
 export 'package:permission_handler/permission_handler.dart';
 
 class PermissionService {
-  PermissionService._();
-
-  static Future<bool> _requestPermission(
+   Future<bool> _requestPermission(
     Permission ps,
     BuildContext context,
   ) async {
@@ -34,7 +32,7 @@ class PermissionService {
   ///                         Publish api                        ///
   //////////////////////////////////////////////////////////////////
 
-  static Future<bool> checkPermission(
+  Future<bool> checkPermission(
     Permission ps,
     BuildContext context,
   ) async {
@@ -44,7 +42,7 @@ class PermissionService {
         !status.isRestricted;
   }
 
-  static Future<bool> requestPermission(
+   Future<bool> requestPermission(
     Permission ps,
     BuildContext context,
   ) async {
@@ -55,7 +53,7 @@ class PermissionService {
     return isGranted;
   }
 
-  static Future<List<bool>> requestPermissions(
+   Future<List<bool>> requestPermissions(
     List<Permission> pss,
     BuildContext context,
   ) async {

@@ -8,7 +8,7 @@ import '../../../data/models/location.dart';
 import '../../../di/di.dart';
 import '../location_service.dart';
 
-@Injectable(as: LocationService)
+@Singleton(as: LocationService)
 class LocationServiceImpl with DataRepository implements LocationService {
   late final localDataManager = injector.get<AppPreferenceData>();
 

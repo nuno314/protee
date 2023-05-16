@@ -8,12 +8,12 @@ extension FeaturesUI on _HomePageScreenState {
       HighlightFeatureItem(
         icon: Assets.svg.icAddPeople,
         title: 'Mời thành viên',
-        onTap: () {},
+        onTap: onTapAddMember,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icJoinFamily,
         title: 'Gia nhập gia đình',
-        onTap: () {},
+        onTap: onTapJoinFamily,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icFamilyInfo,
@@ -23,7 +23,7 @@ extension FeaturesUI on _HomePageScreenState {
       HighlightFeatureItem(
         icon: Assets.svg.icAddLocation,
         title: 'Thêm địa điểm',
-        onTap: () {},
+        onTap: onTapAddLocation,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icLocationList,
@@ -69,6 +69,7 @@ extension FeaturesUI on _HomePageScreenState {
     required void Function() onTap,
   }) {
     return InkWell(
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -77,16 +78,10 @@ extension FeaturesUI on _HomePageScreenState {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                  icon,
-                  width: 36,
-                  height: 36,
-                ),
-              ],
+            SvgPicture.asset(
+              icon,
+              width: 36,
+              height: 36,
             ),
             const SizedBox(
               height: 8,
@@ -96,6 +91,8 @@ extension FeaturesUI on _HomePageScreenState {
               style: textTheme.bodyMedium?.copyWith(
                 fontSize: 12,
               ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.fade,
             ),
           ],
         ),

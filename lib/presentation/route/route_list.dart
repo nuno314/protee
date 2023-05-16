@@ -5,4 +5,7 @@ class RouteList {
   static const String webview = '/webview';
   static const String signIn = '/sign_in';
   static const String homePage = '/home_page';
+  static const String addMember = '/add_member';
+  static const String joinFamily = '/join_family';
+  static const String addLocation = '/add_location';
 }

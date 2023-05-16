@@ -2,38 +2,42 @@ part of '../home_page_screen.dart';
 
 extension HomeFamilyStatisticUI on _HomePageScreenState {
   Widget _buildFamilyStatistic(HomePageState state) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 32, 16, 24),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(
-            child: _buildStatisticItem(
-              title: 'Thành viên',
-              number: 3,
-              color: themeColor.color33B64F,
-              isSelected: idx == 0,
+    return ValueListenableBuilder<int>(
+      valueListenable: _idxNotifier,
+      builder: (context, value, child) => Container(
+        height: 163,
+        padding: const EdgeInsets.fromLTRB(16, 32, 16, 24),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: _buildStatisticItem(
+                title: 'Thành viên',
+                number: 3,
+                color: themeColor.color33B64F,
+                isSelected: value == 0,
+              ),
             ),
-          ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: _buildStatisticItem(
-              title: 'Địa điểm',
-              number: 420,
-              color: themeColor.color34C5D0,
-              isSelected: idx == 1,
+            const SizedBox(width: 15),
+            Expanded(
+              child: _buildStatisticItem(
+                title: 'Địa điểm',
+                number: 420,
+                color: themeColor.colorFF960C,
+                isSelected: value == 1,
+              ),
             ),
-          ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: _buildStatisticItem(
-              title: 'Cảnh báo',
-              number: 12,
-              color: themeColor.colorFA3D0C,
-              isSelected: idx == 2,
+            const SizedBox(width: 15),
+            Expanded(
+              child: _buildStatisticItem(
+                title: 'Cảnh báo',
+                number: 12,
+                color: themeColor.colorFA3D0C,
+                isSelected: value == 2,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -44,17 +48,28 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
     bool isSelected = false,
     Color? color,
   }) {
-    final selectedColor = isSelected ? color! : themeColor.white;
+    final selectedColor =
+        isSelected ? themeColor.color34C5D0 : themeColor.white;
     final defaultColor = isSelected ? themeColor.white : color!;
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 1000),
-      curve: Curves.fastOutSlowIn,
+      height: isSelected ? 140 : 87,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOutQuad,
       decoration: BoxDecoration(
+        boxShadow: isSelected
+            ? [
+                const BoxShadow(
+                  color: Color.fromRGBO(0, 150, 178, 0.4),
+                  offset: Offset(0, 4),
+                  blurRadius: 16,
+                )
+              ]
+            : boxShadowlightest,
         color: selectedColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      padding: EdgeInsets.fromLTRB(8, isSelected ? 28 : 8, 8, 18),
+      padding: EdgeInsets.fromLTRB(12, isSelected ? 28 : 8, 8, 18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -63,7 +78,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             style: TextStyle(
               color: defaultColor,
               fontSize: 24,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w800,
             ),
           ),
           const SizedBox(height: 12),

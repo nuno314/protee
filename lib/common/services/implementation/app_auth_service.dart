@@ -71,6 +71,6 @@ class AppAuthService implements AuthService {
 
   @override
   Future<void> signOut() {
-    return Future.value();
+    return _firebaseAuth.signOut();
   }
 }

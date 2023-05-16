@@ -81,12 +81,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color(0xffffffff),
-                        Color(0xffffffff),
-                      ],
-                    ),
+                    color: themeColor.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 4),
@@ -102,33 +97,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         width: itemWidth,
                         child: BottomItem(
                           item: item,
-                          onPressed: () async {
-                            if (idx != value &&
-                                await widget.onItemSelection?.call(idx) ==
-                                    true) {
-                              idxNotifier.value = idx;
-                            }
-                          },
-                          selected: idx == value,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).padding.bottom,
-                  ),
-                  child: Row(
-                    children: widget.items!.mapIndex<Widget>((item, idx) {
-                      if (item.isOver != true) {
-                        return SizedBox(width: itemWidth);
-                      }
-                      return SizedBox(
-                        width: itemWidth,
-                        child: BottomItem(
-                          item: item,
-                          iconSize: itemWidth * 0.9,
                           onPressed: () async {
                             if (idx != value &&
                                 await widget.onItemSelection?.call(idx) ==

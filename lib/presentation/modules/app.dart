@@ -9,6 +9,7 @@ import '../../common/constants/locale/app_locale.dart';
 import '../../di/di.dart';
 import '../../domain/entities/app_data.dart';
 import '../common_bloc/app_data_bloc.dart';
+import '../common_bloc/cubit/location_cubit.dart';
 import '../common_widget/text_scale_fixed.dart';
 import '../route/route.dart';
 import '../theme/theme_data.dart';
@@ -30,8 +31,9 @@ class _MyAppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiBlocProvider(  
       providers: [
+        BlocProvider(create: (_) => LocationCubit()),
         BlocProvider(create: (_) => injector.get<AppDataBloc>()),
       ],
       child: BlocBuilder<AppDataBloc, AppData?>(

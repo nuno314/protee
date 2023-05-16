@@ -14,13 +14,11 @@ extension HomeHeaderUI on _HomePageScreenState {
                 color: themeColor.white,
                 height: 40,
               ),
-              const SizedBox(
-                height: 2,
-              ),
               Text(
                 'Xin chào, ${state.user?.name ?? '--'}',
                 style: TextStyle(
                   color: themeColor.color005880,
+                  fontSize: 20,
                 ),
               ),
             ],

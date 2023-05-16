@@ -4,9 +4,13 @@ extension MapViewUI on _HomePageScreenState {
   Widget _buildMapView(HomePageState state) {
     return Container(
       height: 300,
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: const GoogleMap(
-        initialCameraPosition: CameraPosition(target: LatLng(1, 1)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: GoogleMap(
+        mapType: MapType.terrain,
+        initialCameraPosition: _kGooglePlex!,
+        onMapCreated: _controller.complete,
+        myLocationEnabled: true,
       ),
     );
   }

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'theme_color.dart';
 
 class AppTextTheme {
-  static TextStyle textLinkStyle = TextStyle(
-    decoration: TextDecoration.underline,
-    color: themeColor.primaryColorLight,
-    fontSize: 14,
-  );
-
-  static TextTheme getDefaultTextTheme() => TextTheme(
+  TextTheme light() => TextTheme(
         displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: themeColor.primaryColor,
+          color: themeColor.primaryText,
         ),
         headlineMedium: TextStyle(
           fontSize: 22,
@@ -41,7 +36,7 @@ class AppTextTheme {
         ),
         bodyLarge: TextStyle(
           fontSize: 14,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           color: themeColor.primaryText,
         ),
         bodyMedium: TextStyle(
@@ -50,9 +45,9 @@ class AppTextTheme {
           color: themeColor.primaryText,
         ),
         bodySmall: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: themeColor.primaryText,
+          fontSize: 10,
+          fontWeight: FontWeight.normal,
+          color: themeColor.subText,
         ),
         labelLarge: const TextStyle(
           color: Colors.white,
@@ -60,56 +55,81 @@ class AppTextTheme {
           fontWeight: FontWeight.bold,
         ),
       );
-  static TextTheme getDefaultTextThemeDark() => TextTheme(
+
+   TextTheme dark() => TextTheme(
         displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: themeColor.primaryColor,
+          color: themeColor.primaryText,
         ),
         headlineMedium: TextStyle(
           fontSize: 22,
-          fontWeight: FontWeight.w500,
-          color: themeColor.primaryDarkText,
+          fontWeight: FontWeight.bold,
+          color: themeColor.primaryText,
         ),
         headlineSmall: TextStyle(
           fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: themeColor.primaryDarkText,
+          fontWeight: FontWeight.bold,
+          color: themeColor.primaryText,
         ),
         titleLarge: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: themeColor.primaryDarkText,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: themeColor.subText,
         ),
         titleMedium: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          color: themeColor.subDarkText,
-        ),
-        titleSmall: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: themeColor.subDarkText,
+          color: themeColor.subText,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+          color: themeColor.subText,
         ),
         bodyLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: themeColor.primaryDarkText,
+          color: themeColor.primaryText,
         ),
         bodyMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
-          color: themeColor.primaryDarkText,
+          color: themeColor.primaryText,
         ),
         bodySmall: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.normal,
+          color: themeColor.subText,
+        ),
+        labelLarge: const TextStyle(
+          color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: themeColor.primaryDarkText,
         ),
-        labelLarge: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-          color: themeColor.primaryDarkText,
-        ),
+      );
+}
+
+extension TextThemExt on TextTheme {
+  TextStyle? get textInput => bodyLarge?.copyWith(
+        fontWeight: FontWeight.w400,
+      );
+  TextStyle? get inputTitle => titleMedium?.copyWith(
+        color: const Color(0xFF8D8D94),
+        fontWeight: FontWeight.w600,
+      );
+  TextStyle? get inputRequired => titleLarge!.copyWith(
+        color: Colors.red,
+      );
+  TextStyle? get inputHint => titleSmall;
+
+  TextStyle? get inputError => titleMedium?.copyWith(
+        color: Colors.red,
+      );
+
+  TextStyle? get textLinkStyle => titleSmall?.copyWith(
+        decoration: TextDecoration.underline,
+        color: themeColor.linkText,
+        fontSize: 14,
       );
 }

@@ -15,6 +15,8 @@ import '../../../base/base.dart';
 import '../../../common_widget/export.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
+import '../account/bloc/account_bloc.dart';
+import '../account/views/account_screen.dart';
 import '../home_page/home_page.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'dashboard_constants.dart';
@@ -91,14 +93,12 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
     _themeData = context.theme;
     trans = translate(context);
     return Scaffold(
-      body: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 16 + 65,
-            ),
-            child: PageView(
+      body: Container(
+        color: themeColor.transaprent,
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               children: [
@@ -111,56 +111,85 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                 Container(),
                 Container(),
                 Container(),
-                Container(),
-              ],
-            ),
-          ),
-          BlocConsumer<DashboardCubit, DashboardState>(
-            listener: _cubitListener,
-            bloc: _cubit,
-            builder: (context, state) => CustomBottomNavigationBar(
-              items: [
-                BottomBarItemData(
-                  icon: _buildBottomBarIcon(
-                    Assets.svg.icHome,
-                  ),
-                ),
-                BottomBarItemData(
-                  icon: _buildBottomBarIcon(
-                    Assets.svg.icHome,
-                  ),
-                ),
-                BottomBarItemData(
-                  icon: _buildBottomBarIcon(
-                    Assets.svg.icHome,
-                  ),
-                ),
-                BottomBarItemData(
-                  icon: _buildBottomBarIcon(
-                    Assets.svg.icHome,
-                  ),
-                ),
-                BottomBarItemData(
-                  icon: _buildBottomBarIcon(
-                    Assets.svg.icHome,
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => AccountBloc(),
+                    child: const AccountScreen(),
                   ),
                 ),
               ],
-              selectedIdx: state.index,
-              onItemSelection: onNavigationPressed,
             ),
-          ),
-        ],
+            BlocConsumer<DashboardCubit, DashboardState>(
+              listener: _cubitListener,
+              bloc: _cubit,
+              builder: (context, state) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: CustomBottomNavigationBar(
+                  items: [
+                    BottomBarItemData(
+                      icon: _buildBottomBarIcon(
+                        asset: Assets.svg.icHome,
+                      ),
+                      selectedIcon: _buildBottomBarIcon(
+                        asset: Assets.svg.icHomeFilled,
+                      ),
+                    ),
+                    BottomBarItemData(
+                      icon: _buildBottomBarIcon(
+                        asset: Assets.svg.icMess,
+                      ),
+                      selectedIcon: _buildBottomBarIcon(
+                        asset: Assets.svg.icMessFilled,
+                      ),
+                    ),
+                    BottomBarItemData(
+                      icon: _buildBottomBarIcon(
+                        asset: Assets.svg.icMarker,
+                      ),
+                      selectedIcon: _buildBottomBarIcon(
+                        asset: Assets.svg.icMarkerFilled,
+                      ),
+                    ),
+                    BottomBarItemData(
+                      icon: _buildBottomBarIcon(
+                        asset: Assets.svg.icNoti,
+                      ),
+                      selectedIcon: _buildBottomBarIcon(
+                        asset: Assets.svg.icNotiFilled,
+                      ),
+                    ),
+                    BottomBarItemData(
+                      icon: _buildBottomBarIcon(
+                        asset: Assets.svg.icAccount,
+                      ),
+                      selectedIcon: _buildBottomBarIcon(
+                        asset: Assets.svg.icAccountFilled,
+                      ),
+                    ),
+                  ],
+                  selectedIdx: state.index,
+                  onItemSelection: onNavigationPressed,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildBottomBarIcon(String asset) {
+  Widget _buildBottomBarIcon({
+    required String asset,
+    void Function()? ontap,
+  }) {
     return InkWell(
-      onTap: () {},
-      child: SvgPicture.asset(
-        asset,
-        color: themeColor.white,
+      onTap: ontap,
+      child: Container(
+        child: SvgPicture.asset(
+          asset,
+          width: 24,
+          height: 24,
+        ),
       ),
     );
   }

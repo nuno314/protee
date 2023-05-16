@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/utils.dart';
-import '../../../generated/assets.dart';
-import '../../theme/theme_color.dart';
-import '../export.dart';
 
 class ScreenForm extends StatefulWidget {
   final String? title;
@@ -11,10 +8,10 @@ class ScreenForm extends StatefulWidget {
   final Widget? child;
   final Color? bgColor;
   final Color? headerColor;
-  final bool showHeaderImage;
   final List<Widget> actions;
   final void Function()? onBack;
   final bool? resizeToAvoidBottomInset;
+  final Color? titleColor;
   final Widget? extentions;
   final bool showBackButton;
 
@@ -24,29 +21,21 @@ class ScreenForm extends StatefulWidget {
     this.des,
     this.child,
     this.bgColor,
-    this.showHeaderImage = true,
     this.actions = const <Widget>[],
     this.headerColor,
     this.onBack,
     this.resizeToAvoidBottomInset,
     this.extentions,
     this.showBackButton = true,
+    this.titleColor,
   }) : super(key: key);
 
   @override
   _ScreenFormState createState() => _ScreenFormState();
 }
 
-class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
+class _ScreenFormState extends State<ScreenForm> {
   late ThemeData _theme;
-  @override
-  void afterFirstLayout(BuildContext context) {
-    if (widget.showHeaderImage) {
-      themeColor.setDarkStatusBar();
-    } else {
-      themeColor.setLightStatusBar();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,28 +61,14 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       body: GestureDetector(
         onTap: () => CommonFunction.hideKeyBoard(context),
-        child: widget.showHeaderImage == true
-            ? Stack(
-                children: [
-                  Image.asset(
-                    Assets.image.bgHeader,
-                    fit: BoxFit.cover,
-                    width: mediaQueryData.size.width,
-                  ),
-                  main,
-                ],
-              )
-            : main,
+        child: main,
       ),
     );
   }
 
   Widget _buildAppBar() {
-    final textColor =
-        widget.showHeaderImage == true ? Colors.white : Colors.black;
+    const textColor = Colors.black;
 
-    final desTextColor =
-        widget.showHeaderImage == true ? Colors.white.withOpacity(0.7) : null;
     return Column(
       children: [
         Row(
@@ -102,12 +77,13 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
             SizedBox(width: widget.showBackButton ? 4 : 16),
             if (widget.showBackButton)
               Padding(
-                padding: const EdgeInsets.only(top: 2),
+                padding: const EdgeInsets.only(top: 6),
                 child: IconButton(
                   onPressed: widget.onBack ?? () => Navigator.pop(context),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.chevron_left_outlined,
-                    size: 18,
+                    color: widget.titleColor,
+                    size: 24,
                   ),
                 ),
               ),
@@ -125,19 +101,12 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                     Text(
                       widget.title ?? '',
                       style: _theme.textTheme.displaySmall?.copyWith(
-                        color: textColor,
+                        color: widget.titleColor ?? textColor,
                         fontSize: 24,
                       ),
                     ),
                     if (widget.des?.isNotEmpty == true)
                       const SizedBox(height: 4),
-                    if (widget.des?.isNotEmpty == true)
-                      Text(
-                        widget.des ?? '',
-                        style: _theme.textTheme.titleSmall?.copyWith(
-                          color: desTextColor,
-                        ),
-                      ),
                   ],
                 ),
               ),
@@ -146,7 +115,6 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
           ],
         ),
         if (widget.extentions != null) widget.extentions!,
-        const SizedBox(height: 16),
       ],
     );
   }

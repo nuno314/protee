@@ -1,4 +1,4 @@
-name: flutterbasestructure
+name: protee
 description: A new Flutter application.
 
 publish_to: none
@@ -91,6 +91,11 @@ dependencies:
 
   # Sign in
   google_sign_in: ^6.1.0
+  google_maps_flutter: 2.2.5
+
+  google_fonts: ^4.0.3
+
+
 
   
 dev_dependencies:
@@ -127,56 +132,48 @@ flutter:
     - assets/images/svg/
     - assets/images/png/
     - assets/images/
+    - assets/map/
   fonts:
-    - family: SF-Pro
+    - family: Nunito
       fonts:
         # Light
-        - asset: assets/fonts/SFProText-Light.ttf
+        - asset: assets/fonts/Nunito-Light.ttf
           style: normal
           weight: 300
-        - asset: assets/fonts/SFProText-LightItalic.ttf
+        - asset: assets/fonts/Nunito-LightItalic.ttf
           style: italic
           weight: 300
         
         # Regular
-        - asset: assets/fonts/SFProText-Regular.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf
           style: normal
-          weight: 400
-        - asset: assets/fonts/SFProText-RegularItalic.ttf
-          style: italic
           weight: 400
 
         # MediumBold
-        - asset: assets/fonts/SFProText-Medium.ttf
+        - asset: assets/fonts/Nunito-Medium.ttf
           style: normal
           weight: 500
-        - asset: assets/fonts/SFProText-MediumItalic.ttf
+        - asset: assets/fonts/Nunito-MediumItalic.ttf
           style: italic
           weight: 500
 
         # SemiBold
-        - asset: assets/fonts/SFProText-Semibold.ttf
+        - asset: assets/fonts/Nunito-Semibold.ttf
           style: normal
           weight: 600
-        - asset: assets/fonts/SFProText-SemiboldItalic.ttf
+        - asset: assets/fonts/Nunito-SemiboldItalic.ttf
           style: italic
           weight: 600
 
         # Bold
-        - asset: assets/fonts/SFProText-Bold.ttf
+        - asset: assets/fonts/Nunito-Bold.ttf
           style: normal
           weight: 700
-        - asset: assets/fonts/SFProText-BoldItalic.ttf
+        - asset: assets/fonts/Nunito-BoldItalic.ttf
           style: italic
           weight: 700
 
-        # Heavy
-        - asset: assets/fonts/SFProText-Heavy.ttf
-          style: normal
-          weight: 800
-        - asset: assets/fonts/SFProText-HeavyItalic.ttf
-          style: italic
-          weight: 800
+      
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

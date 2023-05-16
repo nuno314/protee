@@ -11,6 +11,7 @@ class AppData {
       : themeData = getTheme(currentTheme).data;
 
   static AppTheme getTheme(SupportedTheme supportedTheme) {
+    print('getThêmmeeeeeeeeeeeeeeeeeeeeeeeee');
     if (supportedTheme == SupportedTheme.light) {
       return buildLightTheme();
     }
@@ -18,7 +19,6 @@ class AppData {
     if (supportedTheme == SupportedTheme.dark) {
       return buildDarkTheme();
     }
-
     return buildLightTheme();
   }
 

@@ -12,6 +12,7 @@ class ThemeColor {
   final Color black = Colors.black;
   final Color primaryColor = const Color(0xFF62A6BB);
   final Color primaryColorLight = const Color(0xFF0CC0DF);
+  final Color color34C5D0 = const Color(0xFF34C5D0);
   final Color cardBackground = const Color(0xFFf7f8f8);
   final Color iconUnselected = Colors.grey;
   final Color lightGrey = const Color(0xFFbebebe);
@@ -24,10 +25,16 @@ class ThemeColor {
   final Color titleMenu = Colors.grey;
   final Color primaryIcon = Colors.grey;
   final Color green = const Color(0xFF4d9e53);
+  final Color color33B64F = const Color(0xFF33B64F);
   final Color red = const Color(0xFFfb4b53);
   final Color orange = const Color(0xFFff9b1a);
   final Color darkBlue = const Color(0xFF002d41);
   final Color color3b5998 = const Color(0xFF3b5998);
+  final Color color005880 = const Color(0xff005880);
+  final Color colorFA3D0C = const Color(0xFFFA3D0C);
+  final Color colorFF960C = const Color(0xFFFF960C);
+  final linkText = const Color(0xFF3680D8);
+  final Color transaprent = Colors.transparent;
 
   //light
   final Color primaryText = Colors.black;

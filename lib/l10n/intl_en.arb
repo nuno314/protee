@@ -62,5 +62,6 @@
   "childSafetyProtectionSystem": "Safety for the children",
   "appleLogin": "Log in with Apple ID",
   "googleLogin": "Log in with Google",
-  "facebookLogin": "Log in with Facebook"
+  "facebookLogin": "Log in with Facebook",
+  "pleaseEnableGPS": "Vui lòng bật định vị để tiếp tục trải nghiệm"
 }

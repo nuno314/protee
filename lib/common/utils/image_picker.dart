@@ -38,7 +38,7 @@ class ImagePicker {
   }
 
   Future<File?> _openCamera() async {
-    if (await PermissionService.requestPermission(Permission.camera, context)) {
+    if (await PermissionService().requestPermission(Permission.camera, context)) {
       final pickedFile = await PickFileHelper.takePicture();
       return _openImageCropper(pickedFile);
     }
@@ -46,7 +46,7 @@ class ImagePicker {
   }
 
   Future<File?> _openGallery() async {
-    final checks = await PermissionService.requestPermissions(
+    final checks = await PermissionService().requestPermissions(
       [Permission.photos, Permission.storage],
       context,
     );

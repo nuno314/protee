@@ -4,7 +4,6 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 import '../../common/utils.dart';
-import '../theme/shadow.dart';
 import '../theme/theme_color.dart';
 import 'smart_image.dart';
 
@@ -82,8 +81,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    boxShadow: boxShadowlight,
-                    color: themeColor.primaryColor,
+                    color: themeColor.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 4),
@@ -112,37 +110,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     }).toList(),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).padding.bottom,
-                  ),
-                  child: Row(
-                    children: widget.items!.mapIndex<Widget>((item, idx) {
-                      if (item.isOver != true) {
-                        return SizedBox(width: itemWidth);
-                      }
-                      return SizedBox(
-                        width: itemWidth,
-                        child: BottomItem(
-                          item: item,
-                          iconSize: itemWidth * 0.9,
-                          onPressed: () async {
-                            if (idx != value &&
-                                await widget.onItemSelection?.call(idx) ==
-                                    true) {
-                              idxNotifier.value = idx;
-                            }
-                          },
-                          selected: idx == value,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CurvedShape(),
-                )
               ],
             );
           },
@@ -238,114 +205,5 @@ class BottomItem extends StatelessWidget {
       height: iconSize,
       fit: BoxFit.cover,
     );
-  }
-}
-
-class HalfCircleClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path()
-      ..lineTo(0, size.height / 2)
-      ..arcToPoint(
-        Offset(size.width, size.height / 2),
-        radius: Radius.circular(size.width / 2),
-        clockwise: false,
-      )
-      ..lineTo(size.width, 0)
-      ..close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}
-
-class CurvedShape extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: CURVE_HEIGHT,
-      child: CustomPaint(
-        painter: _MyPainter(),
-      ),
-    );
-  }
-}
-
-const CURVE_HEIGHT = 160.0;
-const AVATAR_RADIUS = CURVE_HEIGHT * 0.1;
-const AVATAR_DIAMETER = AVATAR_RADIUS * 0.1;
-
-class _MyPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..style = PaintingStyle.fill
-      ..isAntiAlias = true
-      ..color = themeColor.primaryColor;
-
-    final circleCenter = Offset(size.width / 2, size.height - AVATAR_RADIUS);
-
-    const topLeft = Offset(0, 0);
-    final bottomLeft = Offset(0, size.height * 0.5);
-    final topRight = Offset(size.width, 0);
-    final bottomRight = Offset(size.width, size.height * 0.5);
-
-    final leftCurveControlPoint =
-        Offset(circleCenter.dx * 0.5, size.height - AVATAR_RADIUS * 1.5);
-    final rightCurveControlPoint =
-        Offset(circleCenter.dx * 1.6, size.height - AVATAR_RADIUS);
-
-    const arcStartAngle = 200 / 180 * pi;
-    final avatarLeftPointX =
-        circleCenter.dx + AVATAR_RADIUS * cos(arcStartAngle);
-    final avatarLeftPointY =
-        circleCenter.dy + AVATAR_RADIUS * sin(arcStartAngle);
-    final avatarLeftPoint =
-        Offset(avatarLeftPointX, avatarLeftPointY); // the left point of the arc
-
-    const arcEndAngle = -5 / 180 * pi;
-    final avatarRightPointX =
-        circleCenter.dx + AVATAR_RADIUS * cos(arcEndAngle);
-    final avatarRightPointY =
-        circleCenter.dy + AVATAR_RADIUS * sin(arcEndAngle);
-    final avatarRightPoint = Offset(
-      avatarRightPointX,
-      avatarRightPointY,
-    ); // the right point of the arc
-
-    final path = Path()
-      ..moveTo(
-        topLeft.dx,
-        topLeft.dy,
-      ) // this move isn't required since the start point is (0,0)
-      ..lineTo(bottomLeft.dx, bottomLeft.dy)
-      ..lineTo(
-        leftCurveControlPoint.dx,
-        leftCurveControlPoint.dy,
-      )
-      ..arcToPoint(
-        avatarRightPoint,
-        radius: const Radius.circular(AVATAR_RADIUS),
-      )
-      // ..quadraticBezierTo(
-      //   rightCurveControlPoint.dx,
-      //   rightCurveControlPoint.dy,
-      //   bottomRight.dx,
-      //   bottomRight.dy,
-      // )
-      ..lineTo(bottomRight.dx, bottomRight.dy)
-      ..lineTo(topRight.dx, topRight.dy)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }

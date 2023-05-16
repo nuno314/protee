@@ -46,7 +46,7 @@ class CachedNetworkImageWrapper extends CachedNetworkImage {
             radius: 10,
           ),
           errorWidget: (context, url, error) => SmartImage(
-            image: Assets.image.logo,
+            image: Assets.image.shortLogo,
             width: width ?? 40,
             height: height ?? 40,
           ),

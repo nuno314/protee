@@ -2,7 +2,7 @@ part of 'dashboard_screen.dart';
 
 extension DashboardAction on _DashboardScreenState {
   Future<bool> onNavigationPressed(int idx) async {
-    if (!DashboardPageExt.guestCanView(idx) && !_cubit.isLoggedIn) {
+    if (!_cubit.isLoggedIn) {
       showLoginNoticeDialog(onSuccess: () => onNavigationPressed(idx));
       return false;
     }
@@ -18,11 +18,6 @@ extension DashboardAction on _DashboardScreenState {
   }
 
   void _cubitListener(BuildContext context, DashboardState state) {
-    if (state.lighStatusBar) {
-      themeColor.setLightStatusBar();
-    } else {
-      themeColor.setDarkStatusBar();
-    }
     _pageController.jumpToPage(
       state.index,
     );

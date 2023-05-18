@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
-import '../../../../common_widget/box_color.dart';
+import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
 import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
@@ -37,21 +39,17 @@ class _AccountScreenState extends StateBase<AccountScreen> {
     return BlocConsumer<AccountBloc, AccountState>(
       listener: _blocListener,
       builder: (context, state) {
-        return Center(
-          child: InkWell(
-            onTap: _onTapLogOut,
-            child: BoxColor(
-              color: themeColor.primaryColor,
-              borderRadius: BorderRadius.circular(16),
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                'Đăng xuất',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: themeColor.white,
-                ),
-              ),
-            ),
+        return ScreenForm(
+          title: 'Tài khoản',
+          headerColor: themeColor.primaryColor,
+          titleColor: themeColor.white,
+          showBackButton: false,
+          child: Column(
+            children: [
+              _buildUserInfo(state),
+              const SizedBox(height: 15),
+              _buildMenuItems(state),
+            ],
           ),
         );
       },
@@ -73,5 +71,88 @@ class _AccountScreenState extends StateBase<AccountScreen> {
         );
       });
     });
+  }
+
+  Widget _buildUserInfo(AccountState state) {
+    return Column(
+      children: [
+        ClipRRect(
+          child: CachedNetworkImageWrapper.avatar(
+            url: '',
+            width: 84,
+            height: 84,
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          'Nguyễn Thị Linh',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          '0361717651',
+          style: TextStyle(
+            fontSize: 12,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMenuItems(AccountState state) {
+    return Column(
+      children: [
+        _settingItem(
+          iconPath: Assets.svg.icAddPeople,
+          title: 'Tài khoản',
+          itemBorder: ItemBorder.top,
+          divider: ItemDivider.line,
+        ),
+        _settingItem(
+          iconPath: Assets.svg.icAddPeople,
+          title: 'Cài đặt',
+          divider: ItemDivider.line,
+        ),
+        _settingItem(
+          iconPath: Assets.svg.icAddPeople,
+          title: 'Đăng xuất',
+          itemBorder: ItemBorder.bottom,
+          callback: _onTapLogOut,
+        ),
+      ],
+    );
+  }
+
+  Widget _settingItem({
+    required String iconPath,
+    required String title,
+    final Widget? description,
+    final ItemDivider? divider = ItemDivider.none,
+    final ItemBorder itemBorder = ItemBorder.none,
+    final void Function()? callback,
+  }) {
+    return MenuItemWidget(
+      description: description,
+      onTap: () {
+        callback?.call();
+      },
+      divider: divider,
+      itemBorder: itemBorder,
+      title: title,
+      tailIcon: Icon(
+        Icons.arrow_forward_ios_rounded,
+        color: themeColor.gray8C,
+        size: 16,
+      ),
+      icon: SvgPicture.asset(
+        iconPath,
+        width: 24,
+        height: 24,
+        color: themeColor.primaryColor,
+      ),
+    );
   }
 }

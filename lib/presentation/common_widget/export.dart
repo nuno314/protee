@@ -19,6 +19,7 @@ export 'loadding_button/loading_button.controller.dart';
 export 'loadding_button/loading_button.dart';
 export 'loading.dart';
 export 'menu_item_view.dart';
+export 'menu_item_widget.dart';
 export 'selection_dialog.dart';
 export 'selection_item.dart';
 export 'smart_image.dart';

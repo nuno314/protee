@@ -1,10 +1,13 @@
 part of 'sign_in_bloc.dart';
 
 class _ViewModel {
-  const _ViewModel();
+  final String? token;
+  const _ViewModel({
+    this.token,
+  });
 
-  _ViewModel copyWith() {
-    return const _ViewModel();
+  _ViewModel copyWith({String? token}) {
+    return _ViewModel(token: token ?? this.token);
   }
 }
 
@@ -20,6 +23,8 @@ abstract class SignInState {
       viewModel ?? this.viewModel,
     );
   }
+
+  String? get token => viewModel.token;
 }
 
 class SignInInitial extends SignInState {
@@ -34,6 +39,12 @@ class LoginSuccess extends SignInState {
   }) : super(viewModel);
 }
 
+class LoginFailed extends SignInState {
+  LoginFailed({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -43,6 +54,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   LoginSuccess: (viewModel) => LoginSuccess(
+        viewModel: viewModel,
+      ),
+  LoginFailed: (viewModel) => LoginFailed(
         viewModel: viewModel,
       ),
 };

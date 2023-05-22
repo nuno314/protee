@@ -29,35 +29,41 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
   ) async {
     final auth = FirebaseAuth.instance;
     User? user;
-
+    print('start Sign in');
+    await _googleSignIn.signOut();
     final googleSignInAccount = await _googleSignIn.signIn();
-    if (googleSignInAccount != null) {
-      final authentication = await googleSignInAccount.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: authentication.accessToken,
-        idToken: authentication.idToken,
-      );
-      try {
-        final userCredential = await auth.signInWithCredential(credential);
+    print('résutl:\n' '  $googleSignInAccount');
+    if (googleSignInAccount == null) {
+      emit(state.copyWith<LoginFailed>());
+      return;
+    }
 
-        user = userCredential.user;
-        var token = await user?.getIdToken() ?? '';
-        while (token.isNotEmpty) {
-          final initLength = token.length >= 500 ? 500 : token.length;
-          print(token.substring(0, initLength));
-          final endLength = token.length;
-          token = token.substring(initLength, endLength);
-        }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'account-exists-with-different-credential') {
-          // ...
-        } else if (e.code == 'invalid-credential') {
-          // ...
-        }
-      } catch (e) {
+    final authentication = await googleSignInAccount.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: authentication.accessToken,
+      idToken: authentication.idToken,
+    );
+    try {
+      final userCredential = await auth.signInWithCredential(credential);
+
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        // ...
+      } else if (e.code == 'invalid-credential') {
         // ...
       }
+    } catch (e) {
+      // ...
     }
-    emit(state.copyWith<LoginSuccess>());
+    final token = await user?.getIdToken() ?? '';
+
+    emit(
+      state.copyWith<LoginSuccess>().copyWith(
+            viewModel: state.viewModel.copyWith(
+              token: token,
+            ),
+          ),
+    );
   }
 }

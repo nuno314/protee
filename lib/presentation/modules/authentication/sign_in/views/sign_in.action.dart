@@ -1,10 +1,24 @@
 part of 'sign_in_screen.dart';
 
 extension SignInAction on _SignInScreenState {
-  void _blocListener(BuildContext context, SignInState state) {
+  Future<void> _blocListener(BuildContext context, SignInState state) async {
     hideLoading();
     if (state is LoginSuccess) {
+      await showNoticeDialog(
+        context: context,
+        message: state.token!,
+        titleBtn: 'Sao chép',
+        onClose: () async {
+          await Clipboard.setData(
+            ClipboardData(text: state.token!),
+          );
+          showToast('Sao chép thành công');
+        },
+      );
       gotoDashboardOrCallbackSuccess();
+    } else if (state is LoginFailed) {
+      hideLoading();
+      await showNoticeDialog(context: context, message: 'Đăng nhập thât bại');
     }
   }
 

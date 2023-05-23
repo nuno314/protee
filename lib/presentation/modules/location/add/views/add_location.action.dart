@@ -1,7 +1,11 @@
 part of 'add_location_screen.dart';
 
 extension AddLocationAction on _AddLocationScreenState {
-  void _blocListener(BuildContext context, AddLocationState state) {}
+  void _blocListener(BuildContext context, AddLocationState state) {
+    if (state.places.isNotEmpty) {
+      showPredictions = true;
+    }
+  }
 
   Future<void> _locateMe() async {
     showLoading();
@@ -30,5 +34,9 @@ extension AddLocationAction on _AddLocationScreenState {
         ),
       );
     });
+  }
+
+  void search(String? value) {
+    bloc.add(SearchLocationEvent(value ?? ''));
   }
 }

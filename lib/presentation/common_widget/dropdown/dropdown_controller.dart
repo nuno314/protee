@@ -7,8 +7,9 @@ class DropdownData<T> {
   DropdownData({this.value, this.validation});
 }
 
-class DropdownContoller<V, T extends DropdownData<V>> extends ValueNotifier<T> {
-  DropdownContoller({required T value}) : super(value);
+class DropdownController<V, T extends DropdownData<V>>
+    extends ValueNotifier<T> {
+  DropdownController({required T value}) : super(value);
 
   void setError(String validation) {
     value.validation = validation;
@@ -21,8 +22,10 @@ class DropdownContoller<V, T extends DropdownData<V>> extends ValueNotifier<T> {
   }
 
   void setData(V? data) {
-    value.value = data;
-    resetValidaiton();
+    if (data != value.value) {
+      value.value = data;
+      resetValidaiton();
+    }
   }
 
   V? get data => value.value;

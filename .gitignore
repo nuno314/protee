@@ -41,3 +41,6 @@ lib/generated_plugin_registrant.dart
 #fastlane report
 android/fastlane/report.xml
 ios/fastlane/report.xml
+
+# Flutter generator
+*.g.dart

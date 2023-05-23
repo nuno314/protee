@@ -7,7 +7,7 @@ class DropdownWidget<T> extends StatelessWidget {
   final Function(T?)? onChanged;
   final String? hint;
   final Widget Function(T) itemBuilder;
-  final DropdownContoller<T, DropdownData<T>> controller;
+  final DropdownController<T, DropdownData<T>> controller;
 
   DropdownWidget({
     required this.controller,

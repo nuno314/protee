@@ -1,10 +1,17 @@
 part of 'add_location_bloc.dart';
 
 class _ViewModel {
-  const _ViewModel();
+  final List<PlacePrediction> predictions;
+  const _ViewModel({
+    this.predictions = const [],
+  });
 
-  _ViewModel copyWith() {
-    return const _ViewModel();
+  _ViewModel copyWith({
+    List<PlacePrediction>? predictions,
+  }) {
+    return _ViewModel(
+      predictions: predictions ?? this.predictions,
+    );
   }
 }
 
@@ -20,6 +27,13 @@ abstract class AddLocationState {
       viewModel ?? this.viewModel,
     );
   }
+
+  List<PlacePrediction> get predictions => viewModel.predictions;
+
+  List<String> get places => predictions
+      .where((place) => place.description != null)
+      .map((place) => place.description!)
+      .toList();
 }
 
 class AddLocationInitial extends AddLocationState {

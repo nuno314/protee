@@ -26,6 +26,10 @@ class AddLocationScreen extends StatefulWidget {
 class _AddLocationScreenState extends StateBase<AddLocationScreen>
     with AfterLayoutMixin {
   final _nameController = InputContainerController();
+  final _addressController = InputContainerController();
+  late Debouncer _debouncer;
+
+  bool showPredictions = false;
 
   late ThemeData _themeData;
 
@@ -52,9 +56,12 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   @override
   void initState() {
     super.initState();
+
     rootBundle.loadString('assets/map/style.txt').then((string) {
       _mapStyle = string;
     });
+
+    _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
   }
 
   @override
@@ -68,46 +75,59 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
           title: 'Thêm địa điểm',
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                height: 220,
-                child: GoogleMap(
-                  initialCameraPosition: _kGooglePlex,
-                  myLocationEnabled: true,
-                  onMapCreated: (controller) {
-                    controller.setMapStyle(_mapStyle);
-                    _controller.complete(controller);
-                  },
-                  mapType: MapType.hybrid,
-                  myLocationButtonEnabled: true,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Container(
+                //   padding: const EdgeInsets.all(16),
+                //   height: 220,
+                //   child: GoogleMap(
+                //     initialCameraPosition: _kGooglePlex,
+                //     myLocationEnabled: true,
+                //     onMapCreated: (controller) {
+                //       controller.setMapStyle(_mapStyle);
+                //       _controller.complete(controller);
+                //     },
+                //     mapType: MapType.hybrid,
+                //     myLocationButtonEnabled: true,
+                //   ),
+                // ),
+                Divider(
+                  height: 32,
+                  thickness: 16,
+                  color: themeColor.primaryColorLight.withOpacity(0.2),
                 ),
-              ),
-              Divider(
-                height: 32,
-                thickness: 16,
-                color: themeColor.primaryColorLight.withOpacity(0.2),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: InputContainer(
-                  title: 'Tên địa điểm',
-                  controller: _nameController,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  suffixIconPadding: const EdgeInsets.symmetric(horizontal: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: InputContainer(
+                    title: 'Tên địa điểm',
+                    controller: _nameController,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                    suffixIconPadding:
+                        const EdgeInsets.symmetric(horizontal: 16),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: InputContainer(
-                  title: 'Địa chỉ',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                  suffixIconPadding: EdgeInsets.symmetric(horizontal: 16),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: InputContainer(
+                    controller: _addressController,
+                    title: 'Địa chỉ',
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                    suffixIconPadding:
+                        const EdgeInsets.symmetric(horizontal: 16),
+                    onTextChanged: (p0) => _debouncer.value = p0,
+                  ),
                 ),
-              )
-            ],
+                const SizedBox(height: 16),
+                if (showPredictions)
+                  ...state.places
+                      .map(
+                        Text.new,
+                      )
+                      .toList(),
+              ],
+            ),
           ),
         );
       },

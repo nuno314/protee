@@ -12,9 +12,11 @@ import '../../../common/constants.dart';
 import '../../../common/utils.dart';
 import '../../../di/di.dart';
 import '../local/local_data_manager.dart';
+import 'interceptor/api_key_interceptor.dart';
 import 'interceptor/auth_interceptor.dart';
 import 'interceptor/header_interceptor.dart';
 import 'interceptor/logger_interceptor.dart';
+import 'location/location_repository.dart';
 import 'rest_api_repository/rest_api_repository.dart';
 
 part 'api_service_error.dart';
@@ -22,7 +24,11 @@ part 'api_service_error.dart';
 @Injectable()
 class AppApiService {
   late dio_p.Dio dio;
+  late dio_p.Dio locationRepositoryDio;
   late RestApiRepository client;
+  late LocationRepository locationRepository;
+
+  final baseGoogleMapUrl = 'https://maps.googleapis.com/maps/api/';
 
   AppApiService() {
     _config();
@@ -34,6 +40,10 @@ class AppApiService {
     _setupDioClient();
 
     _createRestClient();
+
+    _setupDioLocationRepository();
+
+    _createLocationRepository();
   }
 
   Map<String, String> _getDefaultHeader() {
@@ -113,10 +123,41 @@ class AppApiService {
     );
   }
 
+  void _setupDioLocationRepository() {
+    locationRepositoryDio = dio_p.Dio(
+      dio_p.BaseOptions(
+        followRedirects: false,
+        receiveTimeout: 30000, // 30s
+        sendTimeout: 30000, // 30s
+      ),
+    );
+
+    locationRepositoryDio.interceptors.add(
+      ApiKeyInterceptor('AIzaSyA9-7CnsVfdSrZTmXGPAcnnn435HrsF7TI'),
+    );
+ 
+    locationRepositoryDio.interceptors.add(
+      LoggerInterceptor(
+        // implement ignore large logs if needed
+        ignoreReponseDataLog: (response) {
+          // return response.requestOptions.path == ApiContract.administrative;
+          return false;
+        },
+      ),
+    );
+  }
+
   void _createRestClient() {
     client = RestApiRepository(
       dio,
       baseUrl: Config.instance.appConfig.baseApiLayer,
+    );
+  }
+
+  void _createLocationRepository() {
+    locationRepository = LocationRepository(
+      locationRepositoryDio,
+      baseUrl: baseGoogleMapUrl,
     );
   }
 

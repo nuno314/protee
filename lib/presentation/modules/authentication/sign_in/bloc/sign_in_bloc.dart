@@ -57,6 +57,7 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
       // ...
     }
     final token = await user?.getIdToken() ?? '';
+    print(token);
 
     emit(
       state.copyWith<LoginSuccess>().copyWith(

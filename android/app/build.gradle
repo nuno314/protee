@@ -21,6 +21,17 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keysProperties = new Properties()
+def keysPropertiesFile = rootProject.file("keys.properties")
+if (keysPropertiesFile.exists()) {
+    keysProperties.load(new FileInputStream(keysPropertiesFile))
+}
+
+def googleMapAPIKey = keysProperties.getProperty('GOOGLE_MAP_API_KEY')
+if (googleMapAPIKey == null) {
+    googleMapAPIKey = ''
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
@@ -68,11 +79,13 @@ android {
         dev {
             applicationId "com.proteeDev"
             resValue "string", "app_name", "Protee Dev"
+            resValue "string", "api_key", googleMapAPIKey
             signingConfig signingConfigs.dev
         }
         prod {
             applicationId "com.protee"
             resValue "string", "app_name", "Protee"
+            resValue "string", "api_key", googleMapAPIKey
             signingConfig signingConfigs.prod
         }
     }
@@ -87,4 +100,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

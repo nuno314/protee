@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "836852153204-4sbb80r0lc5qqdlcd49p6i630bc0668q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proteeDev",
+            "certificate_hash": "6624f4f4a15752f9c6bbde1807a5159c02c05c00"
+          }
+        },
+        {
+          "client_id": "836852153204-laqh2orv6ukdaf5bpsninvnv48ekr09k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proteeDev",
+            "certificate_hash": "0f69d13f4fc527f2c09e0bc9e6fdac81b9bb22fd"
+          }
+        },
+        {
           "client_id": "836852153204-nf0g52pqctpnptr3ier5vac9np2358gk.apps.googleusercontent.com",
           "client_type": 3
         }

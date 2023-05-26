@@ -19,6 +19,7 @@ class SvgAssets {
   final String icLocationFilled = 'assets/images/svg/ic_location_filled.svg';
   final String icLocationList = 'assets/images/svg/ic_location_list.svg';
   final String icLogo = 'assets/images/svg/ic_logo.svg';
+  final String icLogout = 'assets/images/svg/ic_logout.svg';
   final String icMap = 'assets/images/svg/ic_map.svg';
   final String icMarker = 'assets/images/svg/ic_marker.svg';
   final String icMarkerFilled = 'assets/images/svg/ic_marker_filled.svg';
@@ -26,5 +27,7 @@ class SvgAssets {
   final String icMessFilled = 'assets/images/svg/ic_mess_filled.svg';
   final String icNoti = 'assets/images/svg/ic_noti.svg';
   final String icNotiFilled = 'assets/images/svg/ic_noti_filled.svg';
+  final String icPerson = 'assets/images/svg/ic_person.svg';
+  final String icSettings = 'assets/images/svg/ic_settings.svg';
   final String icWallet = 'assets/images/svg/ic_wallet.svg';
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rive/rive.dart';
 
-import '../../generated/assets.dart';
 import '../constants/locale/app_locale.dart';
 import '../constants/locale/date_locale.dart';
 import '../constants/locale/datetime/en.dart';
@@ -335,12 +334,4 @@ class RiveAssets {
   set setInput(SMIBool status) {
     input = status;
   }
-}
-
-extension RiveAssetsExt on RiveAssets {
-  static RiveAssets icLocationRive = RiveAssets(
-    src: Assets.other.icLocation,
-    artboard: 'New Artboard',
-    
-  );
 }

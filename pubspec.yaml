@@ -95,8 +95,8 @@ dependencies:
 
   google_fonts: ^4.0.3
 
-
-
+  # Flutter plugin for discovering the state of the soft-keyboard visibility on Android and iOS.
+  flutter_keyboard_visibility: ^5.4.1
   
 dev_dependencies:
   flutter_test:

@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../data/models/location.dart';
+import '../../../../../data/models/place_prediction.dart';
+import '../../../../../data/models/response.dart';
 import '../../../../base/base.dart';
 import '../../../../common_bloc/cubit/location_cubit.dart';
 import '../../../../common_widget/export.dart';
@@ -28,7 +32,8 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   final _nameController = InputContainerController();
   final _addressController = InputContainerController();
   late Debouncer _debouncer;
-
+  KeyboardVisibilityController keyboardVisibilityController =
+      KeyboardVisibilityController();
   bool showPredictions = false;
 
   late ThemeData _themeData;
@@ -52,6 +57,8 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   @override
   AddLocationBloc get bloc => BlocProvider.of(context);
 
+  bool get isKeyboardVisibility => keyboardVisibilityController.isVisible;
+
   late String _mapStyle = '';
   @override
   void initState() {
@@ -64,6 +71,8 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
   }
 
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
   @override
   Widget build(BuildContext context) {
     _themeData = context.theme;
@@ -71,66 +80,137 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
     return BlocConsumer<AddLocationBloc, AddLocationState>(
       listener: _blocListener,
       builder: (context, state) {
-        return ScreenForm(
-          title: 'Thêm địa điểm',
-          headerColor: themeColor.primaryColor,
-          titleColor: themeColor.white,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // Container(
-                //   padding: const EdgeInsets.all(16),
-                //   height: 220,
-                //   child: GoogleMap(
-                //     initialCameraPosition: _kGooglePlex,
-                //     myLocationEnabled: true,
-                //     onMapCreated: (controller) {
-                //       controller.setMapStyle(_mapStyle);
-                //       _controller.complete(controller);
-                //     },
-                //     mapType: MapType.hybrid,
-                //     myLocationButtonEnabled: true,
-                //   ),
-                // ),
-                Divider(
-                  height: 32,
-                  thickness: 16,
-                  color: themeColor.primaryColorLight.withOpacity(0.2),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: InputContainer(
-                    title: 'Tên địa điểm',
-                    controller: _nameController,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                    suffixIconPadding:
-                        const EdgeInsets.symmetric(horizontal: 16),
+        return Scaffold(
+          resizeToAvoidBottomInset: true,
+          body: LayoutBuilder(
+            builder: (ctx, constaints) => Container(
+              color: themeColor.scaffoldBackgroundColor,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: GoogleMap(
+                      initialCameraPosition: _kGooglePlex,
+                      myLocationEnabled: true,
+                      onMapCreated: _controller.complete,
+                      mapType: MapType.satellite,
+                      myLocationButtonEnabled: true,
+                      markers: markers.values.toSet(),
+                      zoomControlsEnabled: false,
+                      mapToolbarEnabled: false,
+                      compassEnabled: false,
+                      tiltGesturesEnabled: false,
+                      rotateGesturesEnabled: false,
+                      onTap: _onTapLocation,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: InputContainer(
-                    controller: _addressController,
-                    title: 'Địa chỉ',
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                    suffixIconPadding:
-                        const EdgeInsets.symmetric(horizontal: 16),
-                    onTextChanged: (p0) => _debouncer.value = p0,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                if (showPredictions)
-                  ...state.places
-                      .map(
-                        Text.new,
-                      )
-                      .toList(),
-              ],
+                  _buildLocationSearch(state, constaints),
+                ],
+              ),
             ),
           ),
         );
       },
     );
+  }
+
+  Widget _buildLocationSearch(
+    AddLocationState state,
+    BoxConstraints constaints,
+  ) {
+    return KeyboardVisibilityBuilder(
+      controller: keyboardVisibilityController,
+      builder: (ctx, isKeyboardVisible) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: themeColor.scaffoldBackgroundColor,
+          ),
+          height: isKeyboardVisibility
+              ? device.height / 2
+              : device.height / 2 + state.predictions.length * 10,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Center(
+                    child: Text(
+                      'Thêm Địa Điểm',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: themeColor.primaryColor,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: -14,
+                    left: -16,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.navigate_before_outlined,
+                      ),
+                      onPressed: _onBack,
+                    ),
+                  ),
+                  Positioned(
+                    top: -14,
+                    right: -14,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.done,
+                      ),
+                      onPressed: _onAddLocation,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              InputContainer(
+                controller: _nameController,
+                title: 'Tên địa điểm',
+                fillColor: themeColor.white,
+                required: true,
+              ),
+              const SizedBox(height: 16),
+              InputContainer(
+                controller: _addressController,
+                title: 'Vị trí',
+                fillColor: themeColor.white,
+                required: true,
+                onTextChanged: (value) => _debouncer.value = value,
+              ),
+              Expanded(
+                child: ListView.separated(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: state.predictions.length,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () =>
+                        _onTapPlace(state.predictions.elementAt(index)),
+                    child:
+                        Text(state.predictions.elementAt(index).description!),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _onAddLocation() {
+    if (_nameController.text.isEmpty) {
+      _nameController.setError('Vui lòng nhập tên địa điểm');
+      return;
+    }
+
+    if (_addressController.text.isEmpty) {
+      _addressController.setError('Vui lòng nhập vị trí');
+      return;
+    }
   }
 }

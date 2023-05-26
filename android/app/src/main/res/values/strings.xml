@@ -3,4 +3,6 @@
     <string name="facebook_client_token">EAAHtj7MgNgEBAAIRwowb6paFLzrPmdy38ZAUvT4rre4xRDRKsZCRN3dDSlCVGsSzm6S8bgbrmjspxB1Qx4IOLZCOQP7QKhU0tvQwjxx25w10ftQz8uYZBLEtZAyEEgX5j5RUTw5MZBVZBQPgnQZAczOr4ZBWHZC27mshQSm1hyDRptYxPXNOhwZCuQmFZAW8BFLrPDD4Mn9ROWWYYVHEtugTR3GZAdPOVZA3QHTzMZD</string>
     <string name="facebook_app_id">542676418049537</string>
     <string name="fb_login_protocol_scheme">fb542676418049537</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -16,12 +16,15 @@ class GoogleMapAPIReponse {
   final String? status;
   @JsonKey(name: 'predictions')
   final List<PlacePrediction>? predictions;
+  @JsonKey(name: 'result')
+  final GoogleMapPlace? result;
 
   GoogleMapAPIReponse({
     this.nextPageToken,
     this.results,
     this.status,
     this.predictions,
+    this.result,
   });
 
   factory GoogleMapAPIReponse.fromJson(Map<String, dynamic> json) =>

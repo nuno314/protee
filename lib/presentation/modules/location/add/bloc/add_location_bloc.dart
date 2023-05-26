@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 
+import '../../../../../data/models/location.dart';
 import '../../../../../data/models/place_prediction.dart';
+import '../../../../../data/models/response.dart';
 import '../../../../base/base.dart';
 import '../interactor/add_location_interactor.dart';
 import '../repository/add_location_repository.dart';
@@ -17,6 +19,8 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
 
   AddLocationBloc() : super(AddLocationInitial(viewModel: const _ViewModel())) {
     on<SearchLocationEvent>(_onSearchLocationEvent);
+    on<GetLocationByPlaceIdEvent>(_onGetLocationByPlaceIdEvent);
+    on<GetPLaceByLocation>(_onGetPLaceByLocation);
   }
 
   Future<void> _onSearchLocationEvent(
@@ -29,6 +33,35 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
       state.copyWith<AddLocationInitial>(
         viewModel: state.viewModel.copyWith(
           predictions: predictions,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onGetLocationByPlaceIdEvent(
+    GetLocationByPlaceIdEvent event,
+    Emitter<AddLocationState> emit,
+  ) async {
+    final place = await _interactor.getLocationByPlaceId(event.place.placeId!);
+
+    emit(
+      state.copyWith<LocationChangedState>(
+        viewModel: state.viewModel.copyWith(
+          place: place,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onGetPLaceByLocation(
+    GetPLaceByLocation event,
+    Emitter<AddLocationState> emit,
+  ) async {
+    final place = await _interactor.getNearbyLocation(event.location);
+    emit(
+      state.copyWith<LocationChangedState>(
+        viewModel: state.viewModel.copyWith(
+          place: place,
         ),
       ),
     );

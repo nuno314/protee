@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
@@ -70,5 +71,16 @@ class Location {
       other!.lat!,
       other.lng!,
     );
+  }
+
+  factory Location.from({required LatLng latLng}) {
+    return Location(
+      lat: latLng.latitude,
+      lng: latLng.longitude,
+    );
+  }
+
+  String get encode {
+    return Uri.encodeComponent('$lat,$lng');
   }
 }

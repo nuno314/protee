@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../models/place_prediction.dart';
 import '../../../models/response.dart';
 import 'api_contract.dart';
 
@@ -21,6 +20,17 @@ abstract class LocationRepository {
   Future<GoogleMapAPIReponse> getAutoComplete({
     @Query('input') String input = '',
     @Query('language') String language = 'vi_VN',
-    @Query('types') String types= 'geocode',
+    @Query('types') String types = 'geocode',
+  });
+
+  @GET(GoogleMapApiContract.placeDetail)
+  Future<GoogleMapAPIReponse> getPlaceDetail({
+    @Query('place_id') required String placeId,
+  });
+
+  @GET(GoogleMapApiContract.placeNearBySearch)
+  Future<GoogleMapAPIReponse> getPlaceNearBySearch({
+    @Query('location') required String location,
+    @Query('radius') int radius = 1500,
   });
 }

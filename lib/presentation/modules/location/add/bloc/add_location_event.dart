@@ -7,3 +7,15 @@ class SearchLocationEvent extends AddLocationEvent {
 
   SearchLocationEvent(this.input);
 }
+
+class GetLocationByPlaceIdEvent extends AddLocationEvent {
+  final PlacePrediction place;
+
+  GetLocationByPlaceIdEvent(this.place);
+}
+
+class GetPLaceByLocation extends AddLocationEvent {
+  final Location location;
+
+  GetPLaceByLocation(this.location);
+}

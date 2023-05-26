@@ -15,6 +15,8 @@ import '../../../base/base.dart';
 import '../../../common_widget/export.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
+import '../../notification/bloc/notification_bloc.dart';
+import '../../notification/views/notification_screen.dart';
 import '../account/bloc/account_bloc.dart';
 import '../account/views/account_screen.dart';
 import '../home_page/home_page.dart';
@@ -110,7 +112,12 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                 ),
                 Container(),
                 Container(),
-                Container(),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => NotificationBloc(),
+                    child: const NotificationScreen(),
+                  ),
+                ),
                 KeepAliveWidget(
                   child: BlocProvider(
                     create: (context) => AccountBloc(),

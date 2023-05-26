@@ -9,4 +9,18 @@ class AddLocationRepositoryImpl extends AddLocationRepository {
         .getAutoComplete(input: input)
         .then((value) => value.predictions ?? []);
   }
+
+  @override
+  Future<GoogleMapPlace> getPlaceLocation(String id) {
+    return _locationRepo
+        .getPlaceDetail(placeId: id)
+        .then((value) => value.result!);
+  }
+
+  @override
+  Future<GoogleMapPlace?> getNearbyPlaceByLocation(String location) {
+    return _locationRepo.getPlaceNearBySearch(location: location).then(
+          (value) => value.results.firstOrNull,
+        );
+  }
 }

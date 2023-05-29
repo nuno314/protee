@@ -18,4 +18,8 @@ extension HomePageAction on _HomePageScreenState {
   void onTapLocationList() {
     Navigator.pushNamed(context, RouteList.locationListing);
   }
+
+  void onTapFamilyProfile() {
+    Navigator.pushNamed(context, RouteList.familyProfile);
+  }
 }

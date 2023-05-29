@@ -18,7 +18,7 @@ extension FeaturesUI on _HomePageScreenState {
       HighlightFeatureItem(
         icon: Assets.svg.icFamilyInfo,
         title: 'Hồ sơ gia đình',
-        onTap: () {},
+        onTap: onTapFamilyProfile,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icAddLocation,

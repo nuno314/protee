@@ -98,6 +98,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
             fontSize: 12,
           ),
         ),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -106,18 +107,18 @@ class _AccountScreenState extends StateBase<AccountScreen> {
     return Column(
       children: [
         _settingItem(
-          iconPath: Assets.svg.icAddPeople,
+          iconPath: Assets.svg.icPerson,
           title: 'Tài khoản',
           itemBorder: ItemBorder.top,
           divider: ItemDivider.line,
         ),
         _settingItem(
-          iconPath: Assets.svg.icAddPeople,
+          iconPath: Assets.svg.icSettings,
           title: 'Cài đặt',
           divider: ItemDivider.line,
         ),
         _settingItem(
-          iconPath: Assets.svg.icAddPeople,
+          iconPath: Assets.svg.icLogout,
           title: 'Đăng xuất',
           itemBorder: ItemBorder.bottom,
           callback: _onTapLogOut,

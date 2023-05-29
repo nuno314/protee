@@ -124,7 +124,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
           duration: const Duration(milliseconds: 100),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: themeColor.scaffoldBackgroundColor,
+            color: themeColor.white,
           ),
           height: isKeyboardVisibility
               ? device.height / 2

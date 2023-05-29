@@ -1,15 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../common/components/navigation/navigation_observer.dart';
 import '../../../../../common/utils.dart';
-import '../../../../../di/di.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/box_color.dart';
@@ -93,11 +92,12 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           const SizedBox(
             height: 64,
           ),
-          _buildLoginButton(
-            icon: Assets.svg.icApple,
-            title: trans.appleLogin,
-            color: themeColor.black,
-          ),
+          if (Platform.isIOS)
+            _buildLoginButton(
+              icon: Assets.svg.icApple,
+              title: trans.appleLogin,
+              color: themeColor.black,
+            ),
           _buildLoginButton(
             icon: Assets.svg.icGoogle,
             title: trans.googleLogin,

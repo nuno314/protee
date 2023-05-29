@@ -35,6 +35,9 @@ Future<dynamic> configureDependencies() async {
           'email',
           'https://www.googleapis.com/auth/contacts.readonly',
         ],
+        // serverClientId: Platform.isAndroid
+        //     ? '836852153204-4sbb80r0lc5qqdlcd49p6i630bc0668q.apps.googleusercontent.com'
+        //     : '836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969.apps.googleusercontent.com',
       ),
     );
 

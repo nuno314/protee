@@ -5,5 +5,4 @@ part of 'assets.dart';
 
 class OtherAssets {
   OtherAssets();
-  final String icLocation = 'assets/images/ic_location.riv';
 }

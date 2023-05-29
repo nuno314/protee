@@ -11,7 +11,17 @@ class Pagination {
     this.total = 0,
   });
 
-  bool get canNext => offset + limit == total;
+  int get nextOffset {
+    if (total == 0) {
+      // Incase haven't loaded yet
+      return offset;
+    }
+    return offset + limit;
+  }
+
+  bool get canNext {
+    return nextOffset == total && total != 0;
+  }
 
   int get currentPage => total ~/ limit;
 

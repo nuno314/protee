@@ -91,8 +91,8 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
                     child: GoogleMap(
                       initialCameraPosition: _kGooglePlex,
                       myLocationEnabled: true,
-                      onMapCreated: _controller.complete,
-                      mapType: MapType.satellite,
+                      onMapCreated: _onMapCreated,
+                      mapType: MapType.normal,
                       myLocationButtonEnabled: true,
                       markers: markers.values.toSet(),
                       zoomControlsEnabled: false,
@@ -212,5 +212,10 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
       _addressController.setError('Vui lòng nhập vị trí');
       return;
     }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    controller.setMapStyle('');
+    _controller.complete(controller);
   }
 }

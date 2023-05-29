@@ -18,5 +18,11 @@ class FamilyRoute {
             child: const JoinFamilyScreen(),
           );
         },
+         RouteList.familyProfile: (context) {
+          return BlocProvider(
+            create: (context) => FamilyProfileBloc(),
+            child: const FamilyProfileScreen(),
+          );
+        },
       };
 }

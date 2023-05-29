@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -63,10 +62,6 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   @override
   void initState() {
     super.initState();
-
-    rootBundle.loadString('assets/map/style.txt').then((string) {
-      _mapStyle = string;
-    });
 
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
   }

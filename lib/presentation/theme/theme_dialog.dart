@@ -5,24 +5,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../common/components/navigation/navigation_observer.dart';
 import '../../common/utils.dart';
 import '../common_widget/export.dart';
+import '../extentions/extention.dart';
 import 'shadow.dart';
 import 'theme_color.dart';
 
 @Injectable()
 class ThemeDialog {
-  String cancel;
-  String confirm;
-  String ok;
-  String inform;
-  ThemeDialog({
-    required this.cancel,
-    required this.confirm,
-    required this.ok,
-    required this.inform,
-  });
+  AppLocalizations get trans => translate(navigatorKey.currentState!.context);
+
+  String get cancel => trans.cancel;
+  String get confirm => trans.confirm;
+  String get ok => trans.ok;
+  String get inform => trans.inform;
 
   Widget buildConfirmDialog({
     required BuildContext context,

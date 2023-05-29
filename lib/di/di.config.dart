@@ -46,12 +46,7 @@ _i1.GetIt $initGetIt(
       () => _i9.OneSignalNotificationService.create());
   gh.factory<_i10.PreferencesHelper>(() => _i10.PreferencesHelperImpl());
   gh.singleton<_i11.ThemeColor>(_i11.ThemeColor());
-  gh.factory<_i12.ThemeDialog>(() => _i12.ThemeDialog(
-        cancel: gh<String>(),
-        confirm: gh<String>(),
-        ok: gh<String>(),
-        inform: gh<String>(),
-      ));
+  gh.factory<_i12.ThemeDialog>(() => _i12.ThemeDialog());
   gh.factory<_i13.UploadService>(() => _i14.FirebaseUploadService());
   return getIt;
 }

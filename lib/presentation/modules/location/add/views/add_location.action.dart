@@ -21,10 +21,13 @@ extension AddLocationAction on _AddLocationScreenState {
     await context.read<LocationCubit>().let((cubit) async {
       final granted = await checkLocationPermission();
       if (granted == false) {
+        hideLoading();
+        print('not granted');
         await showNoticeDialog(
           context: context,
           message: trans.pleaseEnableGPS,
         );
+        return;
       }
       if (cubit.isValidPlace != true) {
         await cubit.refreshLocation();

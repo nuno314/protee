@@ -20,12 +20,52 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb542676418049537</string>
+				<string>com.googleusercontent.apps.836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>542676418049537</string>
+	<key>FacebookClientToken</key>
+	<string>EAAHtj7MgNgEBADI5FlZB5mle1m1eG2jDsx77AZBgrF6PfNxb3eAjSka6RLUt6Ec8qnZCKpPlue2Qfn7zPV2BxrMZA8ag1nQiXoZAeUXZAYpdZAjnNB1VQUFrSyCpQpLzxo3ENy4kyZAZAjb2Bud8EBN90BNkc65VxaxUy9Em1yodqMizmZALRYz7J5LV1RNVZAZBKBHpqJjTg3QDsteGJb0lRztTU6uUY6pIgySLBiyKJxU7NbMplcaZBDUmBGuiYqGz5Gx0ZD</string>
+	<key>FacebookDisplayName</key>
+	<string>Protee Dev</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_dartobservatory._tcp</string>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -49,51 +89,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSBonjourServices</key>
-	<array>
-    <string>_dartobservatory._tcp</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb542676418049537</string>
-				<string>com.googleusercontent.apps.836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969</string>
-			</array>
-		</dict>
-	</array>	
-	<key>FacebookAppID</key>
-	<string>542676418049537</string>
-	<key>FacebookClientToken</key>
-	<string>EAAHtj7MgNgEBADI5FlZB5mle1m1eG2jDsx77AZBgrF6PfNxb3eAjSka6RLUt6Ec8qnZCKpPlue2Qfn7zPV2BxrMZA8ag1nQiXoZAeUXZAYpdZAjnNB1VQUFrSyCpQpLzxo3ENy4kyZAZAjb2Bud8EBN90BNkc65VxaxUy9Em1yodqMizmZALRYz7J5LV1RNVZAZBKBHpqJjTg3QDsteGJb0lRztTU6uUY6pIgySLBiyKJxU7NbMplcaZBDUmBGuiYqGz5Gx0ZD</string>
-	<key>FacebookDisplayName</key>
-	<string>Protee Dev</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-	<string>fbapi</string>
-	<string>fb-messenger-share-api</string>
-	</array>
-	<key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSAllowsArbitraryLoads</key>
-            <true/>
-            <key>NSAllowsArbitraryLoadsInWebContent</key>
-            <true/>
-            <key>NSExceptionDomains</key>
-            <dict>
-                <key>url.com.br</key>
-                <dict>
-                    <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                    <true/>
-                    <key>NSIncludesSubdomains</key>
-                    <true/>
-                </dict>
-            </dict>
-        </dict>
 	<key>com.apple.security.network.server</key>
-		<true/>
+	<true/>
 </dict>
 </plist>

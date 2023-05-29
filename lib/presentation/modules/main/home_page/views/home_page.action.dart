@@ -14,4 +14,8 @@ extension HomePageAction on _HomePageScreenState {
   void onTapAddLocation() {
     Navigator.pushNamed(context, RouteList.addLocation);
   }
+
+  void onTapLocationList() {
+    Navigator.pushNamed(context, RouteList.locationListing);
+  }
 }

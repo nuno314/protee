@@ -28,7 +28,7 @@ extension FeaturesUI on _HomePageScreenState {
       HighlightFeatureItem(
         icon: Assets.svg.icLocationList,
         title: 'Danh sách địa điểm',
-        onTap: () {},
+        onTap: onTapLocationList,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icWallet,

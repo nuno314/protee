@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../theme/theme_color.dart';
 import 'loading.dart';
 
 export 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -20,6 +21,9 @@ class SmartRefresherWrapper {
       physics: const BouncingScrollPhysics(),
       enablePullDown: enablePullDown,
       enablePullUp: enablePullUp,
+      header: MaterialClassicHeader(
+        backgroundColor: themeColor.primaryColor,
+      ),
       controller: controller,
       onRefresh: onRefresh,
       onLoading: onLoading,

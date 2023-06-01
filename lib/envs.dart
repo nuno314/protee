@@ -15,7 +15,7 @@ class Env {
     Env.environment: Env.devEnvName,
     Env.developmentMode: kDebugMode,
     Env.appName: 'Protee Dev',
-    Env.baseApiLayer: '',
+    Env.baseApiLayer: 'https://protee-be.vercel.app/api/v1/',
     Env.onesignalAppID: '',
     Env.app: 'protee',
   };
@@ -24,7 +24,7 @@ class Env {
     Env.environment: Env.prodEnvName,
     Env.developmentMode: kDebugMode,
     Env.appName: 'Protee',
-    Env.baseApiLayer: '',
+    Env.baseApiLayer: 'https://protee-be.vercel.app/api/v1/',
     Env.onesignalAppID: '',
     Env.app: 'protee',
   };

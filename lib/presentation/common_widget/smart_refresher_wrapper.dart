@@ -1,32 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../theme/theme_color.dart';
 import 'loading.dart';
 
-export 'package:pull_to_refresh/pull_to_refresh.dart';
+export 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+export 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart'
+    show RefreshController;
 
-class SmartRefresherWrapper {
-  SmartRefresherWrapper._();
+class SmartRefresherWrapper extends StatelessWidget {
+  const SmartRefresherWrapper({
+    super.key,
+    required this.controller,
+    this.onRefresh,
+    this.onLoading,
+    this.child,
+    this.scrollController,
+    this.enablePullDown = true,
+    this.enablePullUp = false,
+    this.color,
+  });
 
-  static SmartRefresher build({
-    required RefreshController controller,
-    bool enablePullDown = true,
-    bool enablePullUp = false,
-    VoidCallback? onRefresh,
-    VoidCallback? onLoading,
-    required Widget child,
-  }) {
+  final RefreshController controller;
+  final bool enablePullDown;
+  final bool enablePullUp;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onLoading;
+  final Widget? child;
+  final ScrollController? scrollController;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
     return SmartRefresher(
       physics: const BouncingScrollPhysics(),
+      header: MaterialClassicHeader(
+        backgroundColor: color ?? themeColor.primaryColor,
+      ),
       enablePullDown: enablePullDown,
       enablePullUp: enablePullUp,
-      header: MaterialClassicHeader(
-        backgroundColor: themeColor.primaryColor,
-      ),
       controller: controller,
       onRefresh: onRefresh,
       onLoading: onLoading,
+      scrollController: scrollController,
       footer: CustomFooter(
         builder: (BuildContext context, LoadStatus? mode) {
           return const Align(

@@ -10,6 +10,8 @@ class SvgAssets {
   final String icAddLocation = 'assets/images/svg/ic_add_location.svg';
   final String icAddPeople = 'assets/images/svg/ic_add_people.svg';
   final String icApple = 'assets/images/svg/ic_apple.svg';
+  final String icCalendar = 'assets/images/svg/ic_calendar.svg';
+  final String icChevronLeft = 'assets/images/svg/ic_chevron_left.svg';
   final String icFacebook = 'assets/images/svg/ic_facebook.svg';
   final String icFamilyInfo = 'assets/images/svg/ic_family_info.svg';
   final String icGoogle = 'assets/images/svg/ic_google.svg';

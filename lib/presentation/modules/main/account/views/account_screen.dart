@@ -57,26 +57,29 @@ class _AccountScreenState extends StateBase<AccountScreen> {
   }
 
   void _onTapLogOut() {
-    showNoticeDialog(
+    showNoticeConfirmDialog(
       context: context,
-      message: 'mún đăng xuất hok',
+      message: trans.confirmLogout,
       title: trans.inform,
-    ).then((value) {
-      doLogout().then((value) {
-        hideLoading();
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RouteList.signIn,
-          (_) => false,
-        );
-      });
-    });
+      onConfirmed: () {
+        doLogout().then((value) {
+          hideLoading();
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RouteList.signIn,
+            (_) => false,
+          );
+        });
+      },
+    );
   }
 
   Widget _buildUserInfo(AccountState state) {
     return Column(
       children: [
+        const SizedBox(height: 32),
         ClipRRect(
+          borderRadius: BorderRadius.circular(100),
           child: CachedNetworkImageWrapper.avatar(
             url: '',
             width: 84,
@@ -84,17 +87,17 @@ class _AccountScreenState extends StateBase<AccountScreen> {
           ),
         ),
         const SizedBox(height: 4),
-        const Text(
-          'Nguyễn Thị Linh',
-          style: TextStyle(
+        Text(
+          state.user?.name ?? '--',
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
-        ),
+      ),
         const SizedBox(height: 4),
-        const Text(
-          '0361717651',
-          style: TextStyle(
+        Text(
+          state.user?.phoneNumber ?? '--',
+          style: const TextStyle(
             fontSize: 12,
           ),
         ),
@@ -111,11 +114,13 @@ class _AccountScreenState extends StateBase<AccountScreen> {
           title: 'Tài khoản',
           itemBorder: ItemBorder.top,
           divider: ItemDivider.line,
+          callback: _onTapProfile,
         ),
         _settingItem(
           iconPath: Assets.svg.icSettings,
           title: 'Cài đặt',
           divider: ItemDivider.line,
+          callback: _onTapSettings,
         ),
         _settingItem(
           iconPath: Assets.svg.icLogout,
@@ -156,4 +161,6 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       ),
     );
   }
+
+  
 }

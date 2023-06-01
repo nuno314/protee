@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../common/services/onesignal_notification_service.dart';
 import '../../../../common/utils.dart';
+import '../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../di/di.dart';
 import '../../../../generated/assets.dart';
 import '../../../base/base.dart';
@@ -94,6 +95,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
   Widget build(BuildContext context) {
     _themeData = context.theme;
     trans = translate(context);
+    final _user = injector.get<AppApiService>().localDataManager.currentUser;
     return Scaffold(
       body: Container(
         color: themeColor.transaprent,
@@ -106,7 +108,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
               children: [
                 KeepAliveWidget(
                   child: BlocProvider(
-                    create: (context) => HomePageBloc(),
+                    create: (context) => HomePageBloc(user: _user),
                     child: const HomePageScreen(),
                   ),
                 ),
@@ -120,7 +122,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                 ),
                 KeepAliveWidget(
                   child: BlocProvider(
-                    create: (context) => AccountBloc(),
+                    create: (context) => AccountBloc(user: _user),
                     child: const AccountScreen(),
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../common/utils/data_checker.dart';
 import 'location.dart';
 import 'place_prediction.dart';
+import 'user.dart';
 
 part 'response.g.dart';
 
@@ -156,4 +157,25 @@ class Photo {
   factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhotoToJson(this);
+}
+
+
+@JsonSerializable()
+class AuthResponse {
+  @JsonKey(name: 'user')
+  final User? user;
+  @JsonKey(name: 'accessToken', fromJson: asOrNull)
+  final String? accessToken;
+  @JsonKey(name: 'refreshToken', fromJson: asOrNull)
+  final String? refreshToken;
+  AuthResponse({
+    this.user,
+    this.accessToken,
+    this.refreshToken,
+  });
+
+  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }

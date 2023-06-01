@@ -6,6 +6,7 @@ import '../modules/family/family_route.dart';
 import '../modules/location/location_route.dart';
 import '../modules/log_viewer/log_viewer_route.dart';
 import '../modules/main/main_route.dart';
+import '../modules/profile/profile_route.dart';
 import '../modules/webview/webview_route.dart';
 import '../modules/welcome/welcome_route.dart';
 
@@ -18,6 +19,7 @@ class RouteGenerator {
         ...AuthenticationRoute.getAll(settings),
         ...FamilyRoute.getAll(settings),
         ...LocationRoute.getAll(settings),
+        ...ProfileRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

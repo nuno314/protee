@@ -65,10 +65,48 @@ class PreferencesHelperImpl extends PreferencesHelper {
   }
 
   @override
-  Future<bool?> setToken(Token? value) {
-    return Future.value();
+  String? get accessToken {
+    final token = _prefs.getString(PreferencesKey.accessToken);
+
+    if (token.isNullOrEmpty) {
+      return null;
+    }
+
+    return token;
   }
 
   @override
-  Token? get token => Token();
+  String? get refreshToken {
+    final token = _prefs.getString(PreferencesKey.refreshToken);
+
+    if (token.isNullOrEmpty) {
+      return null;
+    }
+
+    return token;
+  }
+
+  @override
+  Future<bool?> setAccessToken(String? value) {
+    LogUtils.i('setAccessToken', value);
+    if (value == null) {
+      return _prefs.remove(PreferencesKey.accessToken);
+    }
+    return _prefs.setString(
+      PreferencesKey.accessToken,
+      value,
+    );
+  }
+
+  @override
+  Future<bool?> setRefreshToken(String? value) {
+    LogUtils.i('setRefreshToken', value);
+    if (value == null) {
+      return _prefs.remove(PreferencesKey.refreshToken);
+    }
+    return _prefs.setString(
+      PreferencesKey.refreshToken,
+      value,
+    );
+  }
 }

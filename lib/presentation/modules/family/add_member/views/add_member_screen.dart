@@ -19,7 +19,8 @@ class AddMemberScreen extends StatefulWidget {
   State<AddMemberScreen> createState() => _AddMemberScreenState();
 }
 
-class _AddMemberScreenState extends StateBase<AddMemberScreen> {
+class _AddMemberScreenState extends StateBase<AddMemberScreen>
+    with AfterLayoutMixin {
   @override
   AddMemberBloc get bloc => BlocProvider.of(context);
 
@@ -67,11 +68,11 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen> {
             borderRadius: BorderRadius.circular(16),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'AUIOWHDAA123',
+                    state.invitationCode ?? '--',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
                     ),
@@ -90,5 +91,12 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    showLoading();
+
+    bloc.add(GetInvitationCodeEvent());
   }
 }

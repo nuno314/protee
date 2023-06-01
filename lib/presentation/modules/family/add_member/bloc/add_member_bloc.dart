@@ -15,11 +15,20 @@ class AddMemberBloc extends AppBlocBase<AddMemberEvent, AddMemberState> {
   );
 
   AddMemberBloc() : super(AddMemberInitial(viewModel: const _ViewModel())) {
-    on<AddMemberEvent>(_onAddMemberEvent);
+    on<GetInvitationCodeEvent>(_onGetInvitationCodeEvent);
   }
 
-  Future<void> _onAddMemberEvent(
-    AddMemberEvent event,
+  Future<void> _onGetInvitationCodeEvent(
+    GetInvitationCodeEvent event,
     Emitter<AddMemberState> emit,
-  ) async {}
+  ) async {
+    final code = await _interactor.getInvitationCode();
+    emit(
+      state.copyWith<AddMemberInitial>(
+        viewModel: state.viewModel.copyWith(
+          invitationCode: code,
+        ),
+      ),
+    );
+  }
 }

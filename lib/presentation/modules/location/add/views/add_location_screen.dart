@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/location.dart';
 import '../../../../../data/models/place_prediction.dart';
 import '../../../../../data/models/response.dart';
+import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_bloc/cubit/location_cubit.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../theme/shadow.dart';
+import '../../../../theme/theme_button.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/add_location_bloc.dart';
 
@@ -30,6 +34,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
     with AfterLayoutMixin {
   final _nameController = InputContainerController();
   final _addressController = InputContainerController();
+  late var _scrollController = ScrollController();
   late Debouncer _debouncer;
   KeyboardVisibilityController keyboardVisibilityController =
       KeyboardVisibilityController();
@@ -58,7 +63,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
 
   bool get isKeyboardVisibility => keyboardVisibilityController.isVisible;
 
-  late String _mapStyle = '';
+  late final String _mapStyle = '';
   @override
   void initState() {
     super.initState();
@@ -77,30 +82,101 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
-          body: LayoutBuilder(
-            builder: (ctx, constaints) => Container(
-              color: themeColor.scaffoldBackgroundColor,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: GoogleMap(
-                      initialCameraPosition: _kGooglePlex,
-                      myLocationEnabled: true,
-                      onMapCreated: _onMapCreated,
-                      mapType: MapType.normal,
-                      myLocationButtonEnabled: true,
-                      markers: markers.values.toSet(),
-                      zoomControlsEnabled: false,
-                      mapToolbarEnabled: false,
-                      compassEnabled: false,
-                      tiltGesturesEnabled: false,
-                      rotateGesturesEnabled: false,
-                      onTap: _onTapLocation,
+          body: Container(
+            color: themeColor.scaffoldBackgroundColor,
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                Expanded(
+                  child: GoogleMap(
+                    initialCameraPosition: _kGooglePlex,
+                    myLocationEnabled: true,
+                    onMapCreated: _onMapCreated,
+                    mapType: MapType.normal,
+                    myLocationButtonEnabled: true,
+                    markers: markers.values.toSet(),
+                    zoomControlsEnabled: false,
+                    mapToolbarEnabled: false,
+                    compassEnabled: false,
+                    tiltGesturesEnabled: false,
+                    rotateGesturesEnabled: false,
+                    liteModeEnabled: false,
+                    onTap: _onTapLocation,
+                    padding: EdgeInsets.only(bottom: device.height * 0.2),
+                  ),
+                ),
+                Expanded(
+                  child: DraggableScrollableSheet(
+                    maxChildSize: 0.85,
+                    minChildSize: 0.28,
+                    builder: (context, scrollController) {
+                      _scrollController = scrollController;
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: themeColor.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(
+                            parent: NeverScrollableScrollPhysics(),
+                          ),
+                          controller: scrollController,
+                          child: Column(
+                            children: [
+                              _buildLocationSearch(
+                                state,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  width: device.width,
+                  child: Container(
+                    color: themeColor.white,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 16),
+                        ThemeButton.primary(
+                          context: context,
+                          title: 'Thêm địa điểm',
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
-                  _buildLocationSearch(state, constaints),
-                ],
-              ),
+                ),
+                Positioned(
+                  left: 20,
+                  top: 40,
+                  child: InkWell(
+                    onTap: _onBack,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        boxShadow: boxShadowlight,
+                        color: themeColor.white,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: SvgPicture.asset(
+                        Assets.svg.icChevronLeft,
+                        color: themeColor.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
@@ -110,7 +186,6 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
 
   Widget _buildLocationSearch(
     AddLocationState state,
-    BoxConstraints constaints,
   ) {
     return KeyboardVisibilityBuilder(
       controller: keyboardVisibilityController,
@@ -127,40 +202,6 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
-              Stack(
-                children: [
-                  Center(
-                    child: Text(
-                      'Thêm Địa Điểm',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: themeColor.primaryColor,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: -14,
-                    left: -16,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.navigate_before_outlined,
-                      ),
-                      onPressed: _onBack,
-                    ),
-                  ),
-                  Positioned(
-                    top: -14,
-                    right: -14,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.done,
-                      ),
-                      onPressed: _onAddLocation,
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 16),
               InputContainer(
                 controller: _nameController,

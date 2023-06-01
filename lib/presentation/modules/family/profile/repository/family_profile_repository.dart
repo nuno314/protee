@@ -1,3 +1,12 @@
+import '../../../../../data/data_source/remote/app_api_service.dart';
+import '../../../../../data/models/family.dart';
+import '../../../../../data/models/user.dart';
+import '../../../../../di/di.dart';
+
 part 'family_profile_repository.impl.dart';
 
-abstract class FamilyProfileRepository {}
+abstract class FamilyProfileRepository {
+  Future<Family?> getFamilyProfile();
+
+  Future<List<User>> getFamilyMembers();
+}

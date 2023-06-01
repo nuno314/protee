@@ -63,5 +63,9 @@
   "appleLogin": "Đăng nhập bằng ID Apple",
   "googleLogin": "Đăng nhập bằng Google",
   "facebookLogin": "Đăng nhập bằng Facebook",
-  "pleaseEnableGPS": "Vui lòng bật định vị để tiếp tục trải nghiệm"
+  "pleaseEnableGPS": "Vui lòng bật định vị để tiếp tục trải nghiệm",
+  "confirmLogout": "Bạn có muốn đăng xuất không?",
+  "phoneNumber": "Số điện thoại",
+  "dob": "Ngày sinh",
+  "pleaseSelectDOB": "Vui lòng chọn ngày sinh"
 }

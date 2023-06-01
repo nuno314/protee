@@ -29,10 +29,8 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
   ) async {
     final auth = FirebaseAuth.instance;
     User? user;
-    print('start Sign in');
     await _googleSignIn.signOut();
     final googleSignInAccount = await _googleSignIn.signIn();
-    print('résutl:\n' '  $googleSignInAccount');
     if (googleSignInAccount == null) {
       emit(state.copyWith<LoginFailed>());
       return;
@@ -57,8 +55,9 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
       // ...
     }
     final token = await user?.getIdToken() ?? '';
-    print(token);
-
+    final res = await _interactor.logInByGoogle(
+      token,
+    );
     emit(
       state.copyWith<LoginSuccess>().copyWith(
             viewModel: state.viewModel.copyWith(

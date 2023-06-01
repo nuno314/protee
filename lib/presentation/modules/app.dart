@@ -31,7 +31,7 @@ class _MyAppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(  
+    return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => LocationCubit()),
         BlocProvider(create: (_) => injector.get<AppDataBloc>()),
@@ -55,6 +55,7 @@ class _MyAppState extends State<App> {
               child: SplashScreen(),
             ),
             navigatorObservers: [myNavigatorObserver],
+            navigatorKey: navigatorKey,
             builder: EasyLoading.init(
               builder: (_, child) {
                 return TextScaleFixed(

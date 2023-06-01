@@ -1,23 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../data/data_source/local/preferences_helper/preferences_helper.dart';
+import '../../../data/data_source/local/local_data_manager.dart';
+import '../../../data/data_source/remote/app_api_service.dart';
 import '../../../data/models/authentication.dart';
 import '../../../di/di.dart';
-import '../../../domain/entities/token.dart';
 import '../../utils/log_utils.dart';
 import '../auth_service.dart';
 
 @Singleton(as: AuthService)
 class AppAuthService implements AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
-  final _localDataManager = injector.get<AppPreferenceData>();
+  final _localDataManager = injector.get<LocalDataManager>();
+  final _authRepo = injector.get<AppApiService>();
 
   @override
   bool get isSignedIn => _firebaseAuth.currentUser != null;
 
   @override
-  String? get token => _localDataManager.token?.accessToken;
+  String? get token => _localDataManager.accessToken;
 
   @override
   String? get userId =>
@@ -25,14 +26,22 @@ class AppAuthService implements AuthService {
 
   @override
   Future<String?> refreshToken() async {
-    final _token = Token(
-      token: await _firebaseAuth.currentUser?.getIdToken(true),
-      type: 'firebase',
-    );
+    // final res =
+    //     await _authRepo.client.refreshToken(_localDataManager.refreshToken!);
 
-    await _localDataManager.setToken(_token);
+    // final _token = _authRepo.client.refreshToken(
+    //   token: await _firebaseAuth.currentUser?.getIdToken(true),
+    //   type: 'firebase',
+    // );
 
-    return _token.accessToken;
+    // //  _localDataManager.notifyUserChanged(result?.user);
+
+    // _localDataManager.setAccessToken(_token.accessToken);
+
+    // _localDataManager.setRefreshToken(_token.refreshToken);
+
+    // return _token.accessToken;
+    return '';
   }
 
   @override
@@ -52,11 +61,17 @@ class AppAuthService implements AuthService {
   }
 
   @override
-  Future<bool> loginFirebase(String token) async {
-    if (_firebaseAuth.currentUser == null) {
-      final firebaseUser = await _firebaseAuth.signInWithCustomToken(token);
-      LogUtils.d('loginFirebase', firebaseUser.toString());
-    }
+  Future<bool> loginSocial(String token) async {
+    final result = await _authRepo.client.registerByEmail(
+      token: token,
+    );
+
+    _localDataManager.notifyUserChanged(result?.user);
+
+    await _localDataManager.setAccessToken(result?.accessToken);
+
+    await _localDataManager.setRefreshToken(result?.refreshToken);
+
     return true;
   }
 
@@ -70,7 +85,9 @@ class AppAuthService implements AuthService {
   }
 
   @override
-  Future<void> signOut() {
+  Future<void> signOut() async {
+    LogUtils.i('$runtimeType signOut');
+    await _localDataManager.setAccessToken(null);
     return _firebaseAuth.signOut();
   }
 }

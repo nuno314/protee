@@ -31,8 +31,8 @@
   "pleaseEnterFullName": "Please enter fullname",
   "pleaseEnterValidEmail": "Invalid email, please try again",
   "pleaseEnterValidFacebookAddress": "Địa chỉ Facebook không hợp lệ, vui lòng thử lại",
-  "invalidPhoneNumber": "Số điện thoại không hợp lệ",
-  "pleaseEnterPhoneNumber": "Vui lòng nhập số điện thoại",
+  "invalidPhoneNumber": "Invalid phone number",
+  "pleaseEnterPhoneNumber": "Please enter the phone number",
   "camera": "Camera",
   "gallery": "Gallery",
   "choosePhoto": "Choose a photo",
@@ -63,5 +63,9 @@
   "appleLogin": "Log in with Apple ID",
   "googleLogin": "Log in with Google",
   "facebookLogin": "Log in with Facebook",
-  "pleaseEnableGPS": "Vui lòng bật định vị để tiếp tục trải nghiệm"
+  "pleaseEnableGPS": "Please enable geolocation to continue the experience",
+  "confirmLogout": "Do you want to log out?",
+  "phoneNumber": "Phone number",
+  "dob": "Date of birth",
+  "pleaseSelectDOB": "Please select date of birth"
 }

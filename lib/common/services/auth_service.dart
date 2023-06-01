@@ -7,7 +7,6 @@ abstract class AuthService {
 
   String? get token;
 
-
   Future<String?> refreshToken();
 
   Future<void> signOut();
@@ -17,5 +16,5 @@ abstract class AuthService {
   //   String password,
   // );
 
-  Future<bool> loginFirebase(String token);
+  Future<bool> loginSocial(String token);
 }

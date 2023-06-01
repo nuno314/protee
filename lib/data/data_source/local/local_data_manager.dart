@@ -1,23 +1,37 @@
+import 'dart:async';
+
+import '../../../common/utils/log_utils.dart';
 import '../../../di/di.dart';
-import '../../../domain/entities/token.dart';
 import '../../../presentation/theme/theme_data.dart';
+import '../../models/user.dart';
 import 'preferences_helper/preferences_helper.dart';
 
-class LocalDataManager implements AppPreferenceData {
+class LocalDataManager extends AppPreferenceData {
   late final PreferencesHelper _preferencesHelper = injector.get();
-  // final Box<Province>? _administrativeHiveBox;
 
-  LocalDataManager(
-      // this._administrativeHiveBox,
-      );
+  LocalDataManager();
 
   static Future<LocalDataManager> init() async {
     return Future.value(LocalDataManager());
   }
 
-  ////////////////////////////////////////////////////////
-  ///             Preferences helper
-  ///
+  final _userChangedController = StreamController<User?>.broadcast();
+  User? _currentUser;
+
+Stream<User?> get onUserChanged {
+    return _userChangedController.stream;
+  }
+
+  User? get currentUser {
+    return _currentUser;
+  }
+
+  void notifyUserChanged(User? user) {
+    LogUtils.d('_notifyUserChanged: ${user?.name}');
+    _userChangedController.add(user);
+    _currentUser = user;
+  }
+
   @override
   SupportedTheme getTheme() {
     return _preferencesHelper.getTheme();
@@ -43,7 +57,7 @@ class LocalDataManager implements AppPreferenceData {
     return _preferencesHelper.clearData();
   }
 
-    @override
+  @override
   Future<bool?> markLaunched() {
     return _preferencesHelper.markLaunched();
   }
@@ -58,11 +72,20 @@ class LocalDataManager implements AppPreferenceData {
     return _preferencesHelper.isFirstLaunch();
   }
 
+   @override
+  String? get accessToken => _preferencesHelper.accessToken;
+
   @override
-  Future<bool?> setToken(Token? value) {
-    return _preferencesHelper.setToken(value);
+  String? get refreshToken => _preferencesHelper.refreshToken;
+
+  @override
+  Future<bool?> setAccessToken(String? value) {
+    return _preferencesHelper.setAccessToken(value);
   }
 
   @override
-  Token? get token => _preferencesHelper.token;
+  Future<bool?> setRefreshToken(String? value) {
+    return _preferencesHelper.setRefreshToken(value);
+  }
+
 }

@@ -10,5 +10,5 @@ class RouteList {
   static const String addLocation = '/add_location';
   static const String locationListing = '/location_listing';
   static const String familyProfile = '/family_profile';
-
+  static const String profile = '/profile';
 }

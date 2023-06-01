@@ -1,10 +1,21 @@
 part of 'family_profile_bloc.dart';
 
 class _ViewModel {
-  const _ViewModel();
+  final Family? family;
+  final List<User> members;
+  const _ViewModel({
+    this.family,
+    this.members = const [],
+  });
 
-  _ViewModel copyWith() {
-    return const _ViewModel();
+  _ViewModel copyWith({
+    Family? family,
+    List<User>? members,
+  }) {
+    return _ViewModel(
+      family: family ?? this.family,
+      members: members ?? this.members,
+    );
   }
 }
 
@@ -20,6 +31,9 @@ abstract class FamilyProfileState {
       viewModel ?? this.viewModel,
     );
   }
+
+  Family? get family => viewModel.family;
+  List<User> get members => viewModel.members;
 }
 
 class FamilyProfileInitial extends FamilyProfileState {

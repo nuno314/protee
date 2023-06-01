@@ -14,8 +14,9 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
   late final _interactor = HomePageInteractorImpl(
     HomePageRepositoryImpl(),
   );
-  
-  HomePageBloc() : super(HomePageInitial(viewModel: const _ViewModel())) {
+
+  HomePageBloc({User? user})
+      : super(HomePageInitial(viewModel: _ViewModel(user: user))) {
     on<HomePageEvent>(_onHomePageEvent);
   }
 

@@ -37,8 +37,8 @@ Please try again later"
 pleaseEnterFullName,Vui lòng nhập họ và tên,Please enter fullname
 pleaseEnterValidEmail,"Địa chỉ email không hợp lệ","Invalid email, please try again"
 pleaseEnterValidFacebookAddress,"Địa chỉ Facebook không hợp lệ, vui lòng thử lại","Địa chỉ Facebook không hợp lệ, vui lòng thử lại"
-invalidPhoneNumber,Số điện thoại không hợp lệ,Số điện thoại không hợp lệ
-pleaseEnterPhoneNumber,Vui lòng nhập số điện thoại,Vui lòng nhập số điện thoại
+invalidPhoneNumber,Số điện thoại không hợp lệ,Invalid phone number
+pleaseEnterPhoneNumber,Vui lòng nhập số điện thoại,Please enter the phone number
 camera,Máy ảnh,Camera
 gallery,Thư Viện,Gallery
 choosePhoto,Chọn hình ảnh,Choose a photo
@@ -69,4 +69,8 @@ childSafetyProtectionSystem,Hệ thống bảo vệ an toàn trẻ em,Safety for
 appleLogin,Đăng nhập bằng ID Apple,Log in with Apple ID
 googleLogin,Đăng nhập bằng Google,Log in with Google
 facebookLogin,Đăng nhập bằng Facebook,Log in with Facebook
-pleaseEnableGPS,Vui lòng bật định vị để tiếp tục trải nghiệm,Vui lòng bật định vị để tiếp tục trải nghiệm
+pleaseEnableGPS,Vui lòng bật định vị để tiếp tục trải nghiệm,Please enable geolocation to continue the experience
+confirmLogout,Bạn có muốn đăng xuất không?,Do you want to log out?
+phoneNumber,Số điện thoại,Phone number
+dob,Ngày sinh,Date of birth
+pleaseSelectDOB,Vui lòng chọn ngày sinh,Please select date of birth

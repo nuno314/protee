@@ -34,12 +34,12 @@ class LoginBgPainter extends CustomPainter {
         ],
       );
     final path = Path()
-      ..moveTo(0, size.height * 0.4)
+      ..moveTo(0, size.height * 0.5)
       ..quadraticBezierTo(
         size.width * 0.5,
-        size.height * 0.6,
+        size.height * 0.2,
         size.width,
-        size.height * 0.25,
+        size.height * 0.3,
       )
       ..lineTo(size.width, 0)
       ..lineTo(0, 0);

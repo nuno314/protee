@@ -9,7 +9,7 @@ import '../../presentation/extentions/extention.dart';
 export 'package:permission_handler/permission_handler.dart';
 
 class PermissionService {
-   Future<bool> _requestPermission(
+  Future<bool> _requestPermission(
     Permission ps,
     BuildContext context,
   ) async {
@@ -37,12 +37,10 @@ class PermissionService {
     BuildContext context,
   ) async {
     final status = await ps.status;
-    return !status.isDenied &&
-        !status.isPermanentlyDenied &&
-        !status.isRestricted;
+    return !status.isDenied && !status.isPermanentlyDenied;
   }
 
-   Future<bool> requestPermission(
+  Future<bool> requestPermission(
     Permission ps,
     BuildContext context,
   ) async {
@@ -53,7 +51,7 @@ class PermissionService {
     return isGranted;
   }
 
-   Future<List<bool>> requestPermissions(
+  Future<List<bool>> requestPermissions(
     List<Permission> pss,
     BuildContext context,
   ) async {

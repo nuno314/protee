@@ -19,3 +19,15 @@ class GetPLaceByLocation extends AddLocationEvent {
 
   GetPLaceByLocation(this.location);
 }
+
+class AddUserLocationEvent extends AddLocationEvent {
+  final String name;
+  final String description;
+  final Location location;
+
+  AddUserLocationEvent({
+    required this.name,
+    required this.description,
+    required this.location,
+  });
+}

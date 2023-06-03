@@ -1,14 +1,13 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../common/utils.dart';
+import '../../../../generated/assets.dart';
 import '../../../base/base.dart';
+import '../../../common_widget/export.dart';
 import '../../../extentions/extention.dart';
+import '../../../theme/theme_color.dart';
 import '../bloc/notification_bloc.dart';
 
 part 'notification.action.dart';
@@ -33,38 +32,23 @@ class _NotificationScreenState extends StateBase<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const viewType = '<platform-view-type>';
     _themeData = context.theme;
     trans = translate(context);
-    const creationParams = <String, dynamic>{};
-
     return BlocConsumer<NotificationBloc, NotificationState>(
       listener: _blocListener,
       builder: (context, state) {
-        return PlatformViewLink(
-          viewType: viewType,
-          surfaceFactory: (context, controller) {
-            return AndroidViewSurface(
-              controller: controller as AndroidViewController,
-              gestureRecognizers: const <
-                  Factory<OneSequenceGestureRecognizer>>{},
-              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-            );
-          },
-          onCreatePlatformView: (params) {
-            return PlatformViewsService.initSurfaceAndroidView(
-              id: params.id,
-              viewType: viewType,
-              layoutDirection: TextDirection.ltr,
-              creationParams: creationParams,
-              creationParamsCodec: const StandardMessageCodec(),
-              onFocus: () {
-                params.onFocusChanged(true);
-              },
-            )
-              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-              ..create();
-          },
+        return ScreenForm(
+          title: trans.notification,
+          headerColor: themeColor.primaryColor,
+          titleColor: themeColor.white,
+          showBackButton: false,
+          // child: Column(children: [
+
+          // ]),c
+          child: EmptyData(
+            icon: Assets.svg.icEmptyNotification,
+            emptyMessage: trans.noNotification,
+          ),
         );
       },
     );

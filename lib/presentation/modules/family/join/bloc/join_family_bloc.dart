@@ -13,13 +13,19 @@ class JoinFamilyBloc extends AppBlocBase<JoinFamilyEvent, JoinFamilyState> {
   late final _interactor = JoinFamilyInteractorImpl(
     JoinFamilyRepositoryImpl(),
   );
-  
+
   JoinFamilyBloc() : super(JoinFamilyInitial(viewModel: const _ViewModel())) {
-    on<JoinFamilyEvent>(_onJoinFamilyEvent);
+    on<JoinFamilyByCodeEvent>(_onJoinFamilyByCodeEvent);
   }
 
-  Future<void> _onJoinFamilyEvent(
-    JoinFamilyEvent event,
+  Future<void> _onJoinFamilyByCodeEvent(
+    JoinFamilyByCodeEvent event,
     Emitter<JoinFamilyState> emit,
-  ) async {}
+  ) async {
+    final res = await _interactor.joinFamily(event.code);
+
+    if (res) {
+      emit(state.copyWith<JoinFamilySuccessfullyState>());
+    }
+  }
 }

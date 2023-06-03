@@ -32,11 +32,14 @@ extension HomeHeaderUI on _HomePageScreenState {
                 color: themeColor.white,
               ),
             ),
-            child: CachedNetworkImageWrapper.avatar(
-              url: state.user?.avatar ?? '',
-              fit: BoxFit.contain,
-              width: 50,
-              height: 50,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: CachedNetworkImageWrapper.avatar(
+                url: state.user?.avatar ?? '',
+                fit: BoxFit.contain,
+                width: 50,
+                height: 50,
+              ),
             ),
           ),
           const SizedBox(width: 8),

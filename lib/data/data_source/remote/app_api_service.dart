@@ -9,6 +9,7 @@ import 'package:pedantic/pedantic.dart';
 import '../../../common/client_info.dart';
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
+import '../../../common/services/auth_service.dart';
 import '../../../common/utils.dart';
 import '../../../di/di.dart';
 import '../local/local_data_manager.dart';
@@ -27,6 +28,8 @@ class AppApiService {
   late dio_p.Dio locationRepositoryDio;
   late RestApiRepository client;
   late LocationRepository locationRepository;
+
+  ApiServiceDelegate? apiServiceDelegate;
 
   final baseGoogleMapUrl = 'https://maps.googleapis.com/maps/api/';
 
@@ -102,8 +105,10 @@ class AppApiService {
     );
     dio.interceptors.add(
       AuthInterceptor(
-        // TODO : implement get token if needed
-        getToken: null /*localDataManager.getToken*/,
+        getToken: () {
+          final token = injector.get<AuthService>().token;
+          return token.isNotNullOrEmpty ? '$token' : null;
+        },
         refreshToken: (token, options) async {
           return refreshToken(token);
         },
@@ -114,9 +119,7 @@ class AppApiService {
     );
     dio.interceptors.add(
       LoggerInterceptor(
-        // implement ignore large logs if needed
         ignoreReponseDataLog: (response) {
-          // return response.requestOptions.path == ApiContract.administrative;
           return false;
         },
       ),
@@ -135,7 +138,7 @@ class AppApiService {
     locationRepositoryDio.interceptors.add(
       ApiKeyInterceptor('AIzaSyA9-7CnsVfdSrZTmXGPAcnnn435HrsF7TI'),
     );
- 
+
     locationRepositoryDio.interceptors.add(
       LoggerInterceptor(
         // implement ignore large logs if needed
@@ -162,15 +165,11 @@ class AppApiService {
   }
 
   Future<String?> refreshToken(String token, {bool saveToken = true}) async {
-    // TODO : implement refresh token if needed
-    // final res = await client.refreshToken({
-    //   'token': token,
-    //   'refreshToken': LocalDataManager.getUser().refreshToken,
-    // });
-    // if (res != null && saveToken) {
-    //   await LocalDataManager.saveNewToken(res?.token);
-    // }
-    // return res?.token?.token;
-    return token;
+    final token = await injector.get<AuthService>().refreshToken();
+    return token.isNotNullOrEmpty ? '$token' : null;
   }
+}
+
+mixin ApiServiceDelegate {
+  void onError(ErrorData onError);
 }

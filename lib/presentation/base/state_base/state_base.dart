@@ -1,6 +1,7 @@
 part of '../base.dart';
 
-abstract class StateBase<T extends StatefulWidget> extends State<T> {
+abstract class StateBase<T extends StatefulWidget> extends State<T>
+    implements ApiServiceDelegate {
   //prevent show the same error dialog when call multiple api at the same time
   ErrorType? errorTypeShowing;
   var _isLoadingShowing = false;
@@ -54,6 +55,7 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
     }
   }
 
+  @override
   void onError(ErrorData error) {
     hideLoading();
     _onError(error);

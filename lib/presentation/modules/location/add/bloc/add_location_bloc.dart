@@ -21,6 +21,7 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
     on<SearchLocationEvent>(_onSearchLocationEvent);
     on<GetLocationByPlaceIdEvent>(_onGetLocationByPlaceIdEvent);
     on<GetPLaceByLocation>(_onGetPLaceByLocation);
+    on<AddUserLocationEvent>(_onAddUserLocationEvent);
   }
 
   Future<void> _onSearchLocationEvent(
@@ -65,5 +66,22 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
         ),
       ),
     );
+  }
+
+  Future<void> _onAddUserLocationEvent(
+    AddUserLocationEvent event,
+    Emitter<AddLocationState> emit,
+  ) async {
+    final res = await _interactor.addLocation(
+      event.name,
+      event.description,
+      event.location,
+    );
+
+    if (res == true) {
+      emit(
+        state.copyWith<AddLocationSuccessfullyState>(),
+      );
+    }
   }
 }

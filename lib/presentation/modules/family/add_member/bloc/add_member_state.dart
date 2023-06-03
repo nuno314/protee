@@ -1,10 +1,15 @@
 part of 'add_member_bloc.dart';
 
 class _ViewModel {
-  const _ViewModel();
+  final String? invitationCode;
+  const _ViewModel({
+    this.invitationCode,
+  });
 
-  _ViewModel copyWith() {
-    return const _ViewModel();
+  _ViewModel copyWith({String? invitationCode}) {
+    return _ViewModel(
+      invitationCode: invitationCode ?? this.invitationCode,
+    );
   }
 }
 
@@ -20,6 +25,8 @@ abstract class AddMemberState {
       viewModel ?? this.viewModel,
     );
   }
+
+  String? get invitationCode => viewModel.invitationCode;
 }
 
 class AddMemberInitial extends AddMemberState {

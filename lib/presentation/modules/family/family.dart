@@ -14,3 +14,9 @@ export 'profile/bloc/family_profile_bloc.dart';
 export 'profile/interactor/family_profile_interactor.dart';
 export 'profile/repository/family_profile_repository.dart';
 export 'profile/views/family_profile_screen.dart';
+
+// Settings
+export 'settings/bloc/family_settings_bloc.dart';
+export 'settings/interactor/family_settings_interactor.dart';
+export 'settings/repository/family_settings_repository.dart';
+export 'settings/views/family_settings_screen.dart';

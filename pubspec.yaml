@@ -75,6 +75,8 @@ dependencies:
   webview_flutter: ^3.0.4
   pull_to_refresh: ^2.0.0
   rive: ^0.10.3
+  modal_bottom_sheet: ^2.1.2
+  pull_to_refresh_flutter3: ^2.0.1
   
   #JSON
   json_annotation: ^4.8.0
@@ -97,6 +99,9 @@ dependencies:
 
   # Flutter plugin for discovering the state of the soft-keyboard visibility on Android and iOS.
   flutter_keyboard_visibility: ^5.4.1
+
+  # An awesome UI package incluing iOS style cell swipe action effect.You can use this package to implement iOS style tableView cell swipe action
+  flutter_swipe_action_cell: ^3.1.1
   
 dev_dependencies:
   flutter_test:

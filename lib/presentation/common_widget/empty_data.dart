@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../extentions/extention.dart';
+import '../theme/theme_color.dart';
 
 class EmptyData extends StatelessWidget {
   final Function()? onTap;
+  final String icon;
+  final String? emptyMessage;
 
-  const EmptyData({Key? key, this.onTap}) : super(key: key);
+  const EmptyData({
+    Key? key,
+    this.onTap,
+    required this.icon,
+    this.emptyMessage,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,13 +24,15 @@ class EmptyData extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              Icons.hourglass_empty_rounded,
-              size: MediaQuery.of(context).size.width / 3,
+            SvgPicture.asset(
+              icon,
+              width: 120,
+              height: 120,
+              color: themeColor.primaryColor,
             ),
             const SizedBox(height: 8),
             Text(
-              translate(context).noData,
+              emptyMessage ?? translate(context).noData,
               style: Theme.of(context).textTheme.titleSmall,
             )
           ],

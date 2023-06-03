@@ -43,19 +43,23 @@ class LoggerInterceptor extends Interceptor {
 
   @override
   void onError(DioError error, ErrorInterceptorHandler handler) {
-    LogUtils.e({
-      'from': 'onError',
-      'Time': DateTime.now().toString(),
-      'baseUrl': error.requestOptions.baseUrl,
-      'header': error.requestOptions.headers,
-      'path': error.requestOptions.path,
-      'type': error.type.toString(),
-      'message': error.message,
-      'statusCode': error.response?.statusCode,
-      'error': error.error.toString(),
-      'responseData': error.response?.data
-    }, error);
+    LogUtils.e(
+      {
+        'from': 'onError',
+        'Time': DateTime.now().toString(),
+        'baseUrl': error.requestOptions.baseUrl,
+        'header': error.requestOptions.headers,
+        'path': error.requestOptions.path,
+        'type': error.type.toString(),
+        'message': error.message,
+        'statusCode': error.response?.statusCode,
+        'error': error.error.toString(),
+        'responseData': error.response?.data
+      },
+      error,
+    );
     onRequestError?.call(error);
+
     super.onError(error, handler);
   }
 }

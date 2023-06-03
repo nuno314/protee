@@ -1,15 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../common/components/navigation/navigation_observer.dart';
 import '../../common/utils.dart';
-import '../common_widget/export.dart';
+import '../common_widget/input_container/input_container.dart';
 import '../extentions/extention.dart';
 import 'shadow.dart';
 import 'theme_color.dart';
@@ -68,6 +67,7 @@ class ThemeDialog {
               ),
             ),
             TextButton(
+              key: const ValueKey('ConfirmDialog_confirm_btn'),
               onPressed: () {
                 dismissFunc.call();
                 onConfirmed?.call();
@@ -125,6 +125,7 @@ class ThemeDialog {
           Row(
             children: [
               Expanded(
+                key: const ValueKey('ConfirmDialog_cancel_btn'),
                 child: _buildAction(
                   onTap: onCanceled,
                   title: leftBtn ?? cancel,
@@ -133,6 +134,7 @@ class ThemeDialog {
               ),
               Container(width: 0.5, height: 44, color: Colors.grey),
               Expanded(
+                key: const ValueKey('ConfirmDialog_confirm_btn'),
                 child: _buildAction(
                   onTap: onConfirmed,
                   title: rightBtn ?? confirm,
@@ -184,6 +186,7 @@ class ThemeDialog {
           ),
           actions: [
             TextButton(
+              key: const ValueKey('ConfirmWithReasonDialog_cancel_btn'),
               onPressed: () {
                 dismissFunc.call();
                 onCanceled?.call(_icReason.text);
@@ -197,6 +200,7 @@ class ThemeDialog {
               ),
             ),
             TextButton(
+              key: const ValueKey('ConfirmWithReasonDialog_confirm_btn'),
               onPressed: () {
                 dismissFunc.call();
                 onConfirmed?.call(_icReason.text);
@@ -259,6 +263,7 @@ class ThemeDialog {
           Row(
             children: [
               Expanded(
+                key: const ValueKey('ConfirmWithReasonDialog_cancel_btn'),
                 child: _buildAction(
                   onTap: () => onCanceled?.call(_icReason.text),
                   title: leftBtn ?? cancel,
@@ -267,6 +272,7 @@ class ThemeDialog {
               ),
               Container(width: 0.5, height: 44, color: Colors.grey),
               Expanded(
+                key: const ValueKey('ConfirmWithReasonDialog_confirm_btn'),
                 child: _buildAction(
                   onTap: () => onConfirmed?.call(_icReason.text),
                   title: rightBtn ?? confirm,
@@ -283,6 +289,7 @@ class ThemeDialog {
   Widget buildNoticeDialog({
     required BuildContext context,
     required String message,
+    Widget? content,
     String? title,
     String? titleBtn,
     Function()? onClose,
@@ -300,13 +307,15 @@ class ThemeDialog {
             title ?? inform,
             style: theme.textTheme.headlineSmall,
           ),
-          content: Text(
-            message,
-            style: theme.textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
+          content: content ??
+              Text(
+                message,
+                style: theme.textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
           actions: [
             TextButton(
+              key: const ValueKey('NoticeDialog_close_btn'),
               onPressed: () {
                 dismissFunc.call();
                 onClose?.call();
@@ -330,6 +339,7 @@ class ThemeDialog {
         ),
         actions: <Widget>[
           CupertinoDialogAction(
+            key: const ValueKey('NoticeDialog_close_btn'),
             onPressed: () {
               dismissFunc.call();
               onClose?.call();
@@ -377,6 +387,7 @@ class ThemeDialog {
           ...actions.entries
               .map<TextButton>(
                 (e) => TextButton(
+                  key: ValueKey('ActionDialog_${e.key}'),
                   onPressed: () {
                     if (dimissWhenSelect) {
                       Navigator.of(
@@ -396,6 +407,7 @@ class ThemeDialog {
               )
               .toList(),
           TextButton(
+            key: const ValueKey('ActionDialog_close_btn'),
             onPressed: () {
               Navigator.of(context, rootNavigator: useRootNavigator).pop();
             },
@@ -413,6 +425,7 @@ class ThemeDialog {
         actions: [
           ...actions.entries.map(
             (e) => CupertinoActionSheetAction(
+              key: ValueKey('ActionDialog_${e.key}'),
               onPressed: () {
                 if (dimissWhenSelect) {
                   if (dimissWhenSelect) {
@@ -450,6 +463,7 @@ class ThemeDialog {
               )
             : null,
         cancelButton: CupertinoActionSheetAction(
+          key: const ValueKey('ActionDialog_close_btn'),
           onPressed: () {
             Navigator.of(
               context,
@@ -517,6 +531,7 @@ class ThemeDialog {
                       ),
                     ),
                     IconButton(
+                      key: const ValueKey('ModalBottomSheet_close_btn'),
                       onPressed: onClose ??
                           () => Navigator.of(
                                 context,

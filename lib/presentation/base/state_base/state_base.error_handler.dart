@@ -21,6 +21,7 @@ extension StateBaseErrorHandlerExt on StateBase {
         requireLogin(onSuccess: () {});
         break;
       case ErrorType.httpException:
+
         if (errorTypeShowing == ErrorType.httpException) {
           break;
         }

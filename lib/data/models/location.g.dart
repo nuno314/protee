@@ -31,3 +31,20 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'lng': instance.lng,
       'lat': instance.lat,
     };
+
+UserLocation _$UserLocationFromJson(Map<String, dynamic> json) => UserLocation(
+      long: asOrNull(json['long']),
+      lat: asOrNull(json['lat']),
+      name: asOrNull(json['name']),
+      description: asOrNull(json['description']),
+      id: asOrNull(json['id']),
+    );
+
+Map<String, dynamic> _$UserLocationToJson(UserLocation instance) =>
+    <String, dynamic>{
+      'long': instance.long,
+      'lat': instance.lat,
+      'name': instance.name,
+      'description': instance.description,
+      'id': instance.id,
+    };

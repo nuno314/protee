@@ -28,12 +28,21 @@ class JoinFamilyInitial extends JoinFamilyState {
   }) : super(viewModel);
 }
 
+class JoinFamilySuccessfullyState extends JoinFamilyState {
+  JoinFamilySuccessfullyState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   JoinFamilyInitial: (viewModel) => JoinFamilyInitial(
+        viewModel: viewModel,
+      ),
+  JoinFamilySuccessfullyState: (viewModel) => JoinFamilySuccessfullyState(
         viewModel: viewModel,
       ),
 };

@@ -57,6 +57,12 @@ class LocationChangedState extends AddLocationState {
   }) : super(viewModel);
 }
 
+class AddLocationSuccessfullyState extends AddLocationState {
+  AddLocationSuccessfullyState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -66,6 +72,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   LocationChangedState: (viewModel) => LocationChangedState(
+        viewModel: viewModel,
+      ),
+  AddLocationSuccessfullyState: (viewModel) => AddLocationSuccessfullyState(
         viewModel: viewModel,
       ),
 };

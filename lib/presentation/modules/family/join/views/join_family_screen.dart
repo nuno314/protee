@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../route/route_list.dart';
+import '../../../../theme/theme_button.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/join_family_bloc.dart';
 
@@ -29,6 +32,16 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
 
   @override
   late AppLocalizations trans;
+
+  @override
+  void onError(ErrorData error) {
+    hideLoading();
+    if (error.message?.toLowerCase().contains('invalid') == true) {
+      showErrorDialog(trans.invalidInvitationCode);
+    } else if (error.message?.toLowerCase().contains('current') == true) {
+      showErrorDialog(trans.waitingJoinFamily);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +76,12 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
             textStyle: textTheme.bodyLarge?.copyWith(
               fontSize: 16,
             ),
+          ),
+          const Spacer(),
+          ThemeButton.primary(
+            context: context,
+            title: trans.joinFamily,
+            onPressed: _onTapJoinFamily,
           ),
         ],
       ),

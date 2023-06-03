@@ -1,3 +1,5 @@
+import '../../data/models/user.dart';
+
 abstract class AuthService {
   Future<void> init();
 
@@ -7,15 +9,11 @@ abstract class AuthService {
 
   String? get token;
 
-
   Future<String?> refreshToken();
 
   Future<void> signOut();
 
-  // Future<LoginResult?> signInWithEmailAndPassword(
-  //   String email,
-  //   String password,
-  // );
+  Future<bool> loginSocial(String token);
 
-  Future<bool> loginFirebase(String token);
+  Future<bool> updateProfile(User user);
 }

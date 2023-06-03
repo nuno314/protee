@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../../data/models/user.dart';
 import '../../../../../di/di.dart';
+import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../common_widget/smart_refresher_wrapper.dart';
@@ -36,6 +38,12 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
 
   @override
   late AppLocalizations trans;
+
+  @override
+  void onError(ErrorData error) {
+    _controller.refreshCompleted();
+    super.onError(error);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +116,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
             ),
           ),
           IconButton(
-            onPressed: _onBack,
+            onPressed: _onTapSettings,
             icon: Icon(
               Icons.settings_outlined,
               size: 24,
@@ -127,13 +135,35 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     ];
 
     final children = [
-      Text(
-        state.family?.name ?? '--',
-        style: TextStyle(
-          fontSize: 30,
-          color: themeColor.white,
-          fontWeight: FontWeight.w800,
-        ),
+      Row(
+        children: [
+          Text(
+            state.family?.name ?? '--',
+            style: TextStyle(
+              fontSize: 30,
+              color: themeColor.white,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const Spacer(),
+          // if (state.requests.isNotEmpty)
+          InkWell(
+            onTap: _onTapRequests,
+            child: BoxColor(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+              color: const Color(0xff92fc92),
+              borderRadius: BorderRadius.circular(16),
+              child: Text(
+                '${state.requests.length} ${trans.joinRequest.toLowerCase()}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: themeColor.black,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       const SizedBox(
         height: 16,
@@ -157,41 +187,58 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
   }
 
   Widget _buildMember(User member) {
-    return BoxColor(
-      color: themeColor.white,
-      borderRadius: BorderRadius.circular(16),
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: CachedNetworkImageWrapper.avatar(
-              url: member.avatar ?? '',
-              width: 80,
-              height: 80,
+    return SwipeActionCell(
+      backgroundColor: themeColor.transaprent,
+      trailingActions: <SwipeAction>[
+        SwipeAction(
+          icon: SmartImage(
+            image: Assets.svg.icTrash,
+          ),
+          backgroundRadius: 16,
+          widthSpace: 48,
+          onTap: (CompletionHandler handler) async {
+            await removeMember(handler, member);
+          },
+          color: const Color(0xffFDE8E6),
+        ),
+      ],
+      key: GlobalKey(),
+      child: BoxColor(
+        color: themeColor.white,
+        borderRadius: BorderRadius.circular(16),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: CachedNetworkImageWrapper.avatar(
+                url: member.avatar ?? '',
+                width: 80,
+                height: 80,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Column(
-            children: [
-              Text(
-                member.name ?? '--',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+            const SizedBox(width: 8),
+            Column(
+              children: [
+                Text(
+                  member.name ?? '--',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                member.dob ?? '--',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                const SizedBox(height: 4),
+                Text(
+                  member.dob?.toLocalDddmmyyyy(context) ?? '--',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -207,6 +254,4 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
       ),
     );
   }
-
-  
 }

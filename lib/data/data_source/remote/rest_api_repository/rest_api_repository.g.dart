@@ -158,21 +158,23 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<AuthResponse> addLocation(
-    name,
-    lat,
-    lng,
-  ) async {
+  Future<UserLocation> addLocation({
+    required name,
+    required description,
+    required lat,
+    required lng,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
       'name': name,
+      'description': description,
       'lat': lat,
       'long': lng,
     };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AuthResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<UserLocation>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -184,7 +186,32 @@ class _RestApiRepository implements RestApiRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthResponse.fromJson(_result.data!);
+    final value = UserLocation.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<UserLocation>> getLocation() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<UserLocation>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'location',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => UserLocation.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -202,7 +229,68 @@ class _RestApiRepository implements RestApiRepository {
     )
             .compose(
               _dio.options,
-              'system-user/profile',
+              'users/profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data == null ? null : User.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<JoinFamilyRequest>> getJoinFamilyRequests() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<JoinFamilyRequest>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/join-requests',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            JoinFamilyRequest.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<User?> updateProfile({
+    name,
+    phoneNumber,
+    email,
+    dob,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'name': name,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'dob': dob,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result =
+        await _dio.fetch<Map<String, dynamic>?>(_setStreamType<User>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'users/profile',
               queryParameters: queryParameters,
               data: _data,
             )

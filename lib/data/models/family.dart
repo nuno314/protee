@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
+import 'user.dart';
 
 part 'family.g.dart';
 
@@ -21,4 +22,22 @@ class Family {
   factory Family.fromJson(Map<String, dynamic> json) => _$FamilyFromJson(json);
 
   Map<String, dynamic> toJson() => _$FamilyToJson(this);
+}
+
+@JsonSerializable()
+class JoinFamilyRequest {
+  @JsonKey(name: 'createdBy', fromJson: asOrNull)
+  String? createdBy;
+  @JsonKey(name: 'user')
+  User? user;
+
+  JoinFamilyRequest({
+    this.createdBy,
+    this.user,
+  });
+
+  factory JoinFamilyRequest.fromJson(Map<String, dynamic> json) =>
+      _$JoinFamilyRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$JoinFamilyRequestToJson(this);
 }

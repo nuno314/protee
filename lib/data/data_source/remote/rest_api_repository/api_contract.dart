@@ -5,7 +5,7 @@ class ApiContract {
   static const String logout = 'logout';
 
   // Profile
-  static const String profile = 'system-user/profile';
+  static const String profile = 'users/profile';
 
   // Location API
   static const String location = 'location';
@@ -15,6 +15,9 @@ class ApiContract {
   static const String getFamilyMembers = 'family/members';
   static const String getInviteCode = 'family/invite-code';
   static const String joinFamily = 'family/join';
+  static const String joinFamilyRequests = 'family/join-requests';
+  static const String removeMember = 'family/remove';
+
   static const String approveJoinFamily = 'family/approve';
   static const String leaveFamily = 'family/leave';
 }

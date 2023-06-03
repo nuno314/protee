@@ -1,7 +1,7 @@
 part of 'location_listing_bloc.dart';
 
 class _ViewModel {
-  final List<Location> data;
+  final List<UserLocation> data;
   final bool canLoadMore;
 
   const _ViewModel({
@@ -10,7 +10,7 @@ class _ViewModel {
   });
 
   _ViewModel copyWith({
-    List<Location>? data,
+    List<UserLocation>? data,
     bool? canLoadMore,
   }) {
     return _ViewModel(
@@ -33,7 +33,7 @@ abstract class LocationListingState {
     );
   }
 
-  List<Location> get data => viewModel.data;
+  List<UserLocation> get data => viewModel.data;
   bool get canLoadMore => viewModel.canLoadMore;
 }
 

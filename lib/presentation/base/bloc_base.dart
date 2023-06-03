@@ -16,8 +16,10 @@ abstract class AppBlocBase<E, S> extends Bloc<E, S> {
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-
-    // TODO(nuno314): rest apis 
+    LogUtils.e('onError', error, stackTrace);
+    errorHandler?.call(
+      ErrorData.fromDio(error as DioError),
+    );
     super.onError(error, stackTrace);
   }
 }

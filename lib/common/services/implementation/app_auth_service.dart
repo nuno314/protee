@@ -3,8 +3,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../data/data_source/local/local_data_manager.dart';
 import '../../../data/data_source/remote/app_api_service.dart';
-import '../../../data/models/authentication.dart';
+import '../../../data/models/user.dart' as user;
 import '../../../di/di.dart';
+import '../../utils.dart';
 import '../../utils/log_utils.dart';
 import '../auth_service.dart';
 
@@ -26,38 +27,16 @@ class AppAuthService implements AuthService {
 
   @override
   Future<String?> refreshToken() async {
-    // final res =
-    //     await _authRepo.client.refreshToken(_localDataManager.refreshToken!);
+    final result =
+        await _authRepo.client.refreshToken(_localDataManager.refreshToken!);
 
-    // final _token = _authRepo.client.refreshToken(
-    //   token: await _firebaseAuth.currentUser?.getIdToken(true),
-    //   type: 'firebase',
-    // );
+    _localDataManager.notifyUserChanged(result.user);
 
-    // //  _localDataManager.notifyUserChanged(result?.user);
+    await _localDataManager.setAccessToken(result.accessToken);
 
-    // _localDataManager.setAccessToken(_token.accessToken);
+    await _localDataManager.setRefreshToken(result.refreshToken);
 
-    // _localDataManager.setRefreshToken(_token.refreshToken);
-
-    // return _token.accessToken;
-    return '';
-  }
-
-  @override
-  Future<LoginResult?> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    LogUtils.d({'email': email, 'password': password});
-    await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return LoginResult(
-      accessToken: await refreshToken(),
-      tokenType: 'firebase',
-    );
+    return result.accessToken;
   }
 
   @override
@@ -89,5 +68,19 @@ class AppAuthService implements AuthService {
     LogUtils.i('$runtimeType signOut');
     await _localDataManager.setAccessToken(null);
     return _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<bool> updateProfile(user.User user) async {
+    final res = await _authRepo.client.updateProfile(
+      name: user.name,
+      phoneNumber: user.phoneNumber,
+      dob: user.dob,
+      email: user.email,
+    );
+
+    _localDataManager.notifyUserChanged(res);
+
+    return res != null;
   }
 }

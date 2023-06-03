@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../di/di.dart';
@@ -21,6 +22,7 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
 
   SignInBloc() : super(SignInInitial(viewModel: const _ViewModel())) {
     on<GoogleSignInEvent>(_onGoogleSignInEvent);
+    on<FacebookSignInEvent>(_onFacebookSignInEvent);
   }
 
   Future<void> _onGoogleSignInEvent(
@@ -64,6 +66,22 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
               token: token,
             ),
           ),
+    );
+  }
+
+  FutureOr<void> _onFacebookSignInEvent(
+    FacebookSignInEvent event,
+    Emitter<SignInState> emit,
+  ) async {
+    final res = await FacebookAuth.instance.login();
+    if (res.accessToken == null) {
+      emit(state.copyWith<LoginFailed>());
+      return;
+    }
+
+    await _interactor.logInByFacebook(res.accessToken!.token);
+    emit(
+      state.copyWith<LoginSuccess>(),
     );
   }
 }

@@ -19,4 +19,14 @@ class AddLocationInteractorImpl extends AddLocationInteractor {
   Future<GoogleMapPlace?> getNearbyLocation(Location location) {
     return _repository.getNearbyPlaceByLocation(location.encode);
   }
+
+  @override
+  Future<bool> addLocation(String name, String description, Location location) {
+    return _repository.addLocation(
+      name: name,
+      description: description,
+      lat: location.lat!,
+      lng: location.lng!,
+    );
+  }
 }

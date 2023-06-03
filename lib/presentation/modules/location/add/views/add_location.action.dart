@@ -2,6 +2,7 @@ part of 'add_location_screen.dart';
 
 extension AddLocationAction on _AddLocationScreenState {
   void _blocListener(BuildContext context, AddLocationState state) {
+    hideLoading();
     if (state.places.isNotEmpty) {
       showPredictions = true;
     }
@@ -9,7 +10,33 @@ extension AddLocationAction on _AddLocationScreenState {
     if (state is LocationChangedState) {
       _animateCamera(state.location!);
       _addMarker(place: state.place!);
+    } else if (state is AddLocationSuccessfullyState) {
+      showNoticeDialog(
+        context: context,
+        message: trans.addLocationSuccessfully,
+      );
     }
+  }
+
+  void _onAddLocation() {
+    if (_nameController.text.isEmpty) {
+      _nameController.setError('Vui lòng nhập tên địa điểm');
+      return;
+    }
+
+    if (_addressController.text.isEmpty) {
+      _addressController.setError('Vui lòng nhập vị trí');
+      return;
+    }
+
+    showLoading();
+    bloc.add(
+      AddUserLocationEvent(
+        name: _nameController.text,
+        description: _addressController.text,
+        location: bloc.state.location!,
+      ),
+    );
   }
 
   void _onTapLocation(LatLng latLng) {
@@ -22,7 +49,6 @@ extension AddLocationAction on _AddLocationScreenState {
       final granted = await checkLocationPermission();
       if (granted == false) {
         hideLoading();
-        print('not granted');
         await showNoticeDialog(
           context: context,
           message: trans.pleaseEnableGPS,

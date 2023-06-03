@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../models/family.dart';
+import '../../../models/location.dart';
 import '../../../models/response.dart';
 import '../../../models/user.dart';
 import 'api_contract.dart';
@@ -43,12 +44,31 @@ abstract class RestApiRepository {
   );
 
   @POST(ApiContract.location)
-  Future<AuthResponse> addLocation(
-    @Field('name') String name,
-    @Field('lat') String lat,
-    @Field('long') String lng,
-  );
+  Future<UserLocation> addLocation({
+    @Field('name') required String name,
+    @Field('description') required String description,
+    @Field('lat') required double lat,
+    @Field('long') required double lng,
+  });
+
+  @GET(ApiContract.location)
+  Future<List<UserLocation>> getLocation();
 
   @GET(ApiContract.profile)
   Future<User?> getUserProfile();
+
+  @GET(ApiContract.joinFamilyRequests)
+  Future<List<JoinFamilyRequest>> getJoinFamilyRequests();
+
+  @PUT(ApiContract.profile)
+  Future<User?> updateProfile({
+    @Field('name') String? name,
+    @Field('phoneNumber') String? phoneNumber,
+    @Field('email') String? email,
+    @Field('dob') DateTime? dob,
+  });
+
+  // @POST(ApiContract.removeMember)
+  // Future<List<JoinFamilyRequest>> getJoinFamilyRequests();
+
 }

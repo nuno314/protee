@@ -14,13 +14,19 @@ class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
   late final _interactor = ProfileInteractorImpl(
     ProfileRepositoryImpl(),
   );
-  
+
   ProfileBloc() : super(ProfileInitial(viewModel: const _ViewModel())) {
-    on<ProfileEvent>(_onProfileEvent);
+    on<UpdateProfileEvent>(_onUpdateProfileEvent);
   }
 
-  Future<void> _onProfileEvent(
-    ProfileEvent event,
+  Future<void> _onUpdateProfileEvent(
+    UpdateProfileEvent event,
     Emitter<ProfileState> emit,
-  ) async {}
+  ) async {
+    final res = await _interactor.updateProfile(event.user);
+
+    if (res) {
+      emit(state.copyWith<ProfileUpdated>());
+    }
+  }
 }

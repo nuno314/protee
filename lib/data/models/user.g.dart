@@ -9,18 +9,27 @@ part of 'user.dart';
 User _$UserFromJson(Map<String, dynamic> json) => User(
       id: asOrNull(json['id']),
       name: asOrNull(json['name']),
-      avatar: asOrNull(json['avatar']),
+      email: asOrNull(json['email']),
+      avatar: asOrNull(json['avt']),
       dob: asOrNull(json['dob']),
       phoneNumber: asOrNull(json['phoneNumber']),
-    );
+      familyId: asOrNull(json['familyId']),
+    )..role = $enumDecodeNullable(_$FamilyRoleEnumMap, json['familyRole']);
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'avatar': instance.avatar,
-      'dob': instance.dob,
+      'email': instance.email,
+      'avt': instance.avatar,
+      'dob': instance.dob?.toIso8601String(),
       'phoneNumber': instance.phoneNumber,
+      'familyId': instance.familyId,
+      'familyRole': _$FamilyRoleEnumMap[instance.role],
     };
+
+const _$FamilyRoleEnumMap = {
+  FamilyRole.parent: 'parent',
+};
 
 UserStatistic _$UserStatisticFromJson(Map<String, dynamic> json) =>
     UserStatistic(

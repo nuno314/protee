@@ -99,6 +99,9 @@ dependencies:
 
   # Flutter plugin for discovering the state of the soft-keyboard visibility on Android and iOS.
   flutter_keyboard_visibility: ^5.4.1
+
+  # An awesome UI package incluing iOS style cell swipe action effect.You can use this package to implement iOS style tableView cell swipe action
+  flutter_swipe_action_cell: ^3.1.1
   
 dev_dependencies:
   flutter_test:

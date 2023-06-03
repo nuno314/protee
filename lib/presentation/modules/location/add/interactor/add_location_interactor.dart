@@ -11,4 +11,6 @@ abstract class AddLocationInteractor {
   Future<GoogleMapPlace> getLocationByPlaceId(String id);
 
   Future<GoogleMapPlace?> getNearbyLocation(Location location);
+
+  Future<bool> addLocation(String name, String description, Location location);
 }

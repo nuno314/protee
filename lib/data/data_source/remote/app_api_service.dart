@@ -119,9 +119,6 @@ class AppApiService {
     );
     dio.interceptors.add(
       LoggerInterceptor(
-        onRequestError: (error) => apiServiceDelegate?.onError(
-          ErrorData.fromDio(error),
-        ),
         ignoreReponseDataLog: (response) {
           return false;
         },

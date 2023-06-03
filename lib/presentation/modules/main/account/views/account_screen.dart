@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../data/models/user.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
@@ -56,24 +57,6 @@ class _AccountScreenState extends StateBase<AccountScreen> {
     );
   }
 
-  void _onTapLogOut() {
-    showNoticeConfirmDialog(
-      context: context,
-      message: trans.confirmLogout,
-      title: trans.inform,
-      onConfirmed: () {
-        doLogout().then((value) {
-          hideLoading();
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            RouteList.signIn,
-            (_) => false,
-          );
-        });
-      },
-    );
-  }
-
   Widget _buildUserInfo(AccountState state) {
     return Column(
       children: [
@@ -81,7 +64,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
         ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: CachedNetworkImageWrapper.avatar(
-            url: '',
+            url: state.user?.avatar ?? '',
             width: 84,
             height: 84,
           ),
@@ -93,7 +76,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
-      ),
+        ),
         const SizedBox(height: 4),
         Text(
           state.user?.phoneNumber ?? '--',
@@ -161,6 +144,4 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       ),
     );
   }
-
-  
 }

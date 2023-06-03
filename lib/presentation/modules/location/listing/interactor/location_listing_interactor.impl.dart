@@ -5,7 +5,7 @@ class LocationListingInteractorImpl extends LocationListingInteractor {
 
   LocationListingInteractorImpl(this._repository);
 
-  late final _listingUsecase = ListingUseCase<Location, dynamic>(
+  late final _listingUsecase = ListingUseCase<UserLocation, dynamic>(
     (offset, limit, [param]) => _repository.getData(offset, limit),
   );
 
@@ -13,12 +13,12 @@ class LocationListingInteractorImpl extends LocationListingInteractor {
   Pagination get pagination => _listingUsecase.pagination;
 
   @override
-  Future<List<Location>> getData() {
+  Future<List<UserLocation>> getData() {
     return _listingUsecase.getData();
   }
 
   @override
-  Future<List<Location>> loadMoreData() {
+  Future<List<UserLocation>> loadMoreData() {
     return _listingUsecase.loadMoreData();
   }
 }

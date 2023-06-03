@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../data/models/user.dart';
 import '../../route/route_list.dart';
 import 'bloc/profile_bloc.dart';
 import 'views/profile_screen.dart';
@@ -10,7 +11,9 @@ class ProfileRoute {
         RouteList.profile: (context) {
           return BlocProvider(
             create: (context) => ProfileBloc(),
-            child: const ProfileScreen(),
+            child: ProfileScreen(
+              user: settings.arguments as User?,
+            ),
           );
         },
       };

@@ -61,7 +61,11 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen> {
       child: BlocConsumer<LocationListingBloc, LocationListingState>(
         listener: _blocListener,
         builder: (context, state) {
-          return _buildListing(state);
+          return SmartRefresherWrapper(
+            controller: _refreshController,
+            onRefresh: onRefresh,
+            child: _buildListing(state),
+          );
         },
       ),
     );

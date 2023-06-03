@@ -59,6 +59,7 @@ class LoggerInterceptor extends Interceptor {
       error,
     );
     onRequestError?.call(error);
+
     super.onError(error, handler);
   }
 }

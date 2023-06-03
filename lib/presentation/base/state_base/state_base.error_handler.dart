@@ -2,7 +2,6 @@ part of '../base.dart';
 
 extension StateBaseErrorHandlerExt on StateBase {
   void _onError(ErrorData error) {
-    print('========_onError');
     LogUtils.w(
       '''[$runtimeType] error ${error.type} message ${error.message}''',
     );
@@ -22,7 +21,6 @@ extension StateBaseErrorHandlerExt on StateBase {
         requireLogin(onSuccess: () {});
         break;
       case ErrorType.httpException:
-        print('Error 500');
 
         if (errorTypeShowing == ErrorType.httpException) {
           break;

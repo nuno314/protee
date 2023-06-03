@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../../data/models/location.dart';
 import '../../../../../data/models/place_prediction.dart';
 import '../../../../../data/models/response.dart';
@@ -43,6 +44,14 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   late ThemeData _themeData;
 
   TextTheme get textTheme => _themeData.textTheme;
+
+  @override
+  void onError(ErrorData error) {
+    hideLoading();
+    if (error.message?.toLowerCase().contains('exist') == true) {
+      showErrorDialog(trans.locationDoesExist);
+    }
+  }
 
   @override
   late AppLocalizations trans;
@@ -87,54 +96,50 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               children: [
-                Expanded(
-                  child: GoogleMap(
-                    initialCameraPosition: _kGooglePlex,
-                    myLocationEnabled: true,
-                    onMapCreated: _onMapCreated,
-                    mapType: MapType.normal,
-                    myLocationButtonEnabled: true,
-                    markers: markers.values.toSet(),
-                    zoomControlsEnabled: false,
-                    mapToolbarEnabled: false,
-                    compassEnabled: false,
-                    tiltGesturesEnabled: false,
-                    rotateGesturesEnabled: false,
-                    liteModeEnabled: false,
-                    onTap: _onTapLocation,
-                    padding: EdgeInsets.only(bottom: device.height * 0.2),
-                  ),
+                GoogleMap(
+                  initialCameraPosition: _kGooglePlex,
+                  myLocationEnabled: true,
+                  onMapCreated: _onMapCreated,
+                  mapType: MapType.normal,
+                  myLocationButtonEnabled: true,
+                  markers: markers.values.toSet(),
+                  zoomControlsEnabled: false,
+                  mapToolbarEnabled: false,
+                  compassEnabled: false,
+                  tiltGesturesEnabled: false,
+                  rotateGesturesEnabled: false,
+                  liteModeEnabled: false,
+                  onTap: _onTapLocation,
+                  padding: EdgeInsets.only(bottom: device.height * 0.2),
                 ),
-                Expanded(
-                  child: DraggableScrollableSheet(
-                    maxChildSize: 0.85,
-                    minChildSize: 0.28,
-                    builder: (context, scrollController) {
-                      _scrollController = scrollController;
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: themeColor.white,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
+                DraggableScrollableSheet(
+                  maxChildSize: 0.85,
+                  minChildSize: 0.28,
+                  builder: (context, scrollController) {
+                    _scrollController = scrollController;
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: themeColor.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
-                        child: SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(
-                            parent: NeverScrollableScrollPhysics(),
-                          ),
-                          controller: scrollController,
-                          child: Column(
-                            children: [
-                              _buildLocationSearch(
-                                state,
-                              )
-                            ],
-                          ),
+                      ),
+                      child: SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(
+                          parent: NeverScrollableScrollPhysics(),
                         ),
-                      );
-                    },
-                  ),
+                        controller: scrollController,
+                        child: Column(
+                          children: [
+                            _buildLocationSearch(
+                              state,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 Positioned(
                   bottom: 0,
@@ -151,6 +156,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
                         ThemeButton.primary(
                           context: context,
                           title: 'Thêm địa điểm',
+                          onPressed: _onAddLocation,
                         ),
                         const SizedBox(height: 16),
                       ],
@@ -236,18 +242,6 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
         );
       },
     );
-  }
-
-  void _onAddLocation() {
-    if (_nameController.text.isEmpty) {
-      _nameController.setError('Vui lòng nhập tên địa điểm');
-      return;
-    }
-
-    if (_addressController.text.isEmpty) {
-      _addressController.setError('Vui lòng nhập vị trí');
-      return;
-    }
   }
 
   void _onMapCreated(GoogleMapController controller) {

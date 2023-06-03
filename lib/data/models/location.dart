@@ -1,3 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -83,4 +87,31 @@ class Location {
   String get encode {
     return Uri.encodeComponent('$lat,$lng');
   }
+}
+
+@JsonSerializable()
+class UserLocation {
+  @JsonKey(name: 'long', fromJson: asOrNull)
+  final double? long;
+  @JsonKey(name: 'lat', fromJson: asOrNull)
+  final double? lat;
+  @JsonKey(name: 'name', fromJson: asOrNull)
+  final String? name;
+  @JsonKey(name: 'description', fromJson: asOrNull)
+  final String? description;
+  @JsonKey(name: 'id', fromJson: asOrNull)
+  final String? id;
+  UserLocation({
+    this.long,
+    this.lat,
+    this.name,
+    this.description,
+    this.id,
+  });
+
+ 
+  factory UserLocation.fromJson(Map<String, dynamic> json) =>
+      _$UserLocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserLocationToJson(this);
 }

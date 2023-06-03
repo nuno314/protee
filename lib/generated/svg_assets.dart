@@ -12,6 +12,8 @@ class SvgAssets {
   final String icApple = 'assets/images/svg/ic_apple.svg';
   final String icCalendar = 'assets/images/svg/ic_calendar.svg';
   final String icChevronLeft = 'assets/images/svg/ic_chevron_left.svg';
+  final String icEmptyNotification =
+      'assets/images/svg/ic_empty_notification.svg';
   final String icFacebook = 'assets/images/svg/ic_facebook.svg';
   final String icFamilyInfo = 'assets/images/svg/ic_family_info.svg';
   final String icGoogle = 'assets/images/svg/ic_google.svg';
@@ -30,6 +32,8 @@ class SvgAssets {
   final String icNoti = 'assets/images/svg/ic_noti.svg';
   final String icNotiFilled = 'assets/images/svg/ic_noti_filled.svg';
   final String icPerson = 'assets/images/svg/ic_person.svg';
+  final String icSend = 'assets/images/svg/ic_send.svg';
   final String icSettings = 'assets/images/svg/ic_settings.svg';
+  final String icTrash = 'assets/images/svg/ic_trash.svg';
   final String icWallet = 'assets/images/svg/ic_wallet.svg';
 }

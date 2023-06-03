@@ -20,6 +20,7 @@ class FamilyProfileBloc
   FamilyProfileBloc()
       : super(FamilyProfileInitial(viewModel: const _ViewModel())) {
     on<GetFamilyProfileEvent>(_onGetFamilyProfileEvent);
+    on<RemoveMemberEvent>(_onRemoveMemberEvent);
   }
 
   Future<void> _onGetFamilyProfileEvent(
@@ -28,13 +29,22 @@ class FamilyProfileBloc
   ) async {
     final family = await _interactor.getFamilyProfile();
     final members = await _interactor.getFamilyMembers();
+    final requests = await _interactor.getRequests();
     emit(
       state.copyWith<FamilyProfileInitial>(
         viewModel: state.viewModel.copyWith(
           family: family,
           members: members,
+          requests: requests,
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onRemoveMemberEvent(
+    RemoveMemberEvent event,
+    Emitter<FamilyProfileState> emit,
+  ) async {
+    final res = await _interactor.removeMember(event.member);
   }
 }

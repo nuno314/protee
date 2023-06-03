@@ -74,3 +74,17 @@ confirmLogout,Bạn có muốn đăng xuất không?,Do you want to log out?
 phoneNumber,Số điện thoại,Phone number
 dob,Ngày sinh,Date of birth
 pleaseSelectDOB,Vui lòng chọn ngày sinh,Please select date of birth
+locationDoesExist,Địa điểm đã tồn tại,Location does exist
+addLocationSuccessfully,Thêm địa điểm thành công,Add location successfully
+joinFamily,Gia nhập gia đình,Join family
+joinFamilySuccessfully,Gia nhập gia đình thành công,Join family successfully
+pleaseEnterInvitationCode,Vui lòng nhập mã mời,Please enter invitation code
+enterInvitationCode,Nhập mã mời,Enter invitation code
+invalidInvitationCode,Mã mời không hợp lệ,Invalid invitation code
+waitingJoinFamily,Gia đình hiện tại đang chờ cho phép gia nhập,Family is currently waiting for permission to join
+joinRequest,Yêu cầu tham gia,Join request
+confirmRemoveMember,Bạn có muốn xóa thành viên?,Do you want to remove member?
+updateProfileSuccessfully,Cập nhật thông tin thành công,Update profile successfully
+notification,Thông báo,Notification
+noNotification,Không có thông báo,No notification
+loginFailed,Đăng nhập thất bại,Login failed

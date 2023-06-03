@@ -67,5 +67,19 @@
   "confirmLogout": "Do you want to log out?",
   "phoneNumber": "Phone number",
   "dob": "Date of birth",
-  "pleaseSelectDOB": "Please select date of birth"
+  "pleaseSelectDOB": "Please select date of birth",
+  "locationDoesExist": "Location does exist",
+  "addLocationSuccessfully": "Add location successfully",
+  "joinFamily": "Join family",
+  "joinFamilySuccessfully": "Join family successfully",
+  "pleaseEnterInvitationCode": "Please enter invitation code",
+  "enterInvitationCode": "Enter invitation code",
+  "invalidInvitationCode": "Invalid invitation code",
+  "waitingJoinFamily": "Family is currently waiting for permission to join",
+  "joinRequest": "Join request",
+  "confirmRemoveMember": "Do you want to remove member?",
+  "updateProfileSuccessfully": "Update profile successfully",
+  "notification": "Notification",
+  "noNotification": "No notification",
+  "loginFailed": "Login failed"
 }

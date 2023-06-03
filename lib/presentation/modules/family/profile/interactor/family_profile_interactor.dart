@@ -8,4 +8,8 @@ abstract class FamilyProfileInteractor {
   Future<Family?> getFamilyProfile();
 
   Future<List<User>> getFamilyMembers();
+
+  Future<List<JoinFamilyRequest>> getRequests();
+
+  Future<bool> removeMember(User member);
 }

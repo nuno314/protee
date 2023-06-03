@@ -67,5 +67,19 @@
   "confirmLogout": "Bạn có muốn đăng xuất không?",
   "phoneNumber": "Số điện thoại",
   "dob": "Ngày sinh",
-  "pleaseSelectDOB": "Vui lòng chọn ngày sinh"
+  "pleaseSelectDOB": "Vui lòng chọn ngày sinh",
+  "locationDoesExist": "Địa điểm đã tồn tại",
+  "addLocationSuccessfully": "Thêm địa điểm thành công",
+  "joinFamily": "Gia nhập gia đình",
+  "joinFamilySuccessfully": "Gia nhập gia đình thành công",
+  "pleaseEnterInvitationCode": "Vui lòng nhập mã mời",
+  "enterInvitationCode": "Nhập mã mời",
+  "invalidInvitationCode": "Mã mời không hợp lệ",
+  "waitingJoinFamily": "Gia đình hiện tại đang chờ cho phép gia nhập",
+  "joinRequest": "Yêu cầu tham gia",
+  "confirmRemoveMember": "Bạn có muốn xóa thành viên?",
+  "updateProfileSuccessfully": "Cập nhật thông tin thành công",
+  "notification": "Thông báo",
+  "noNotification": "Không có thông báo",
+  "loginFailed": "Đăng nhập thất bại"
 }

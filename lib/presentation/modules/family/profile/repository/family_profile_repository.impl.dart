@@ -12,4 +12,15 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   Future<List<User>> getFamilyMembers() {
     return _restApi.getFamilyMembers().then((value) => value ?? []);
   }
+
+  @override
+  Future<List<JoinFamilyRequest>> getRequests() {
+    return _restApi.getJoinFamilyRequests();
+  }
+
+  @override
+  Future<bool> removeMember(User member) {
+    // return _restApi.removeMember();
+    return Future.value(true);
+  }
 }

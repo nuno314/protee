@@ -12,4 +12,11 @@ abstract class AddLocationRepository {
   Future<GoogleMapPlace> getPlaceLocation(String id);
 
   Future<GoogleMapPlace?> getNearbyPlaceByLocation(String location);
+
+  Future<bool> addLocation({
+    required String name,
+    required String description,
+    required double lat,
+    required double lng,
+  });
 }

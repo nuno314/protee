@@ -18,7 +18,7 @@ class LocalDataManager extends AppPreferenceData {
   final _userChangedController = StreamController<User?>.broadcast();
   User? _currentUser;
 
-Stream<User?> get onUserChanged {
+  Stream<User?> get onUserChanged {
     return _userChangedController.stream;
   }
 
@@ -72,7 +72,7 @@ Stream<User?> get onUserChanged {
     return _preferencesHelper.isFirstLaunch();
   }
 
-   @override
+  @override
   String? get accessToken => _preferencesHelper.accessToken;
 
   @override
@@ -87,5 +87,4 @@ Stream<User?> get onUserChanged {
   Future<bool?> setRefreshToken(String? value) {
     return _preferencesHelper.setRefreshToken(value);
   }
-
 }

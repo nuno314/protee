@@ -136,7 +136,7 @@ class AppApiService {
     );
 
     locationRepositoryDio.interceptors.add(
-      ApiKeyInterceptor('AIzaSyA9-7CnsVfdSrZTmXGPAcnnn435HrsF7TI'),
+      ApiKeyInterceptor('AIzaSyBJYFtYFzYcONJyHknTCoZQPp9ts7VgEns'),
     );
 
     locationRepositoryDio.interceptors.add(

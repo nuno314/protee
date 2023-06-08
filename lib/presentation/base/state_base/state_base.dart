@@ -113,16 +113,6 @@ abstract class StateBase<T extends StatefulWidget> extends State<T>
     );
   }
 
-  void _showLoginScreen(Function() onSuccess, Function()? onSkip) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return const SizedBox();
-      },
-    );
-  }
-
   Future<void> openWeb({String? title, String? url, String? html}) async {
     await Navigator.of(context).pushNamed(
       RouteList.webview,
@@ -168,7 +158,7 @@ abstract class StateBase<T extends StatefulWidget> extends State<T>
   }
 
   void syncData() {
-    print('==========logOut');
+    if (injector.get<AuthService>().isSignedIn) {}
   }
 
   Future<void> doLogout() async {

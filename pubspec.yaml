@@ -102,6 +102,12 @@ dependencies:
 
   # An awesome UI package incluing iOS style cell swipe action effect.You can use this package to implement iOS style tableView cell swipe action
   flutter_swipe_action_cell: ^3.1.1
+
+  # A Flutter plugin to easily handle realtime location in iOS and Android. Provides settings for optimizing performance or battery.
+  location: ^4.4.0
+
+  # Marker Geo-Animation solution for Google Maps.
+  flutter_animarker: ^3.2.0
   
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ extension AccountAction on _AccountScreenState {
   void _blocListener(BuildContext context, AccountState state) {}
 
   void _onTapProfile() {
+    print(bloc.state.user);
     Navigator.pushNamed(
       context,
       RouteList.profile,

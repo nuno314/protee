@@ -6,9 +6,5 @@ import '../repository/location_listing_repository.dart';
 part 'location_listing_interactor.impl.dart';
 
 abstract class LocationListingInteractor {
-  Pagination get pagination;
-
   Future<List<UserLocation>> getData();
-
-  Future<List<UserLocation>> loadMoreData();
 }

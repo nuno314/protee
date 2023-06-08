@@ -26,6 +26,13 @@ class AddLocationRepositoryImpl extends AddLocationRepository {
   }
 
   @override
+  Future<List<GoogleMapPlace>> findPlaceFromText(String input) {
+    return _locationRepo
+        .findPlaceFromText(input: input)
+        .then((value) => value.places ?? []);
+  }
+
+  @override
   Future<bool> addLocation({
     required String name,
     required String description,

@@ -11,4 +11,3 @@ class AppLocale {
     return supportedLocales.any((e) => e.languageCode == locale.languageCode);
   }
 }
-

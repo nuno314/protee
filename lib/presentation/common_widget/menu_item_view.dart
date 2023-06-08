@@ -42,7 +42,7 @@ class MenuItemView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 border: divider == ItemDivider.line
-                    ?  Border(
+                    ? Border(
                         bottom: BorderSide(
                           color: themeColor.lightGrey,
                           width: 1,

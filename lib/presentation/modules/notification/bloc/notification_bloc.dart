@@ -9,12 +9,14 @@ import '../repository/notification_repository.dart';
 part 'notification_event.dart';
 part 'notification_state.dart';
 
-class NotificationBloc extends AppBlocBase<NotificationEvent, NotificationState> {
+class NotificationBloc
+    extends AppBlocBase<NotificationEvent, NotificationState> {
   late final _interactor = NotificationInteractorImpl(
     NotificationRepositoryImpl(),
   );
-  
-  NotificationBloc() : super(NotificationInitial(viewModel: const _ViewModel())) {
+
+  NotificationBloc()
+      : super(NotificationInitial(viewModel: const _ViewModel())) {
     on<NotificationEvent>(_onNotificationEvent);
   }
 

@@ -49,8 +49,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     super.initState();
     _user = widget.user;
     _nameController.text = _user?.name;
-    _phoneNumberController.text = _user?.phoneNumber;
-    _dobController.text = _user?.dob?.toLocalDddmmyyyy(context);
+    _dobController.text = _user?.dob?.toLocalddmmyyyy();
   }
 
   @override
@@ -179,7 +178,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
         ),
         const SizedBox(height: 16),
         _buildBirthdayInput(
-          trans.dob.toUpperCase(),
+          trans.dob,
           _dobController,
           hint: trans.pleaseSelectDOB,
           onPressed: _showBirthdayPicker,
@@ -205,7 +204,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     Function()? onPressed,
   }) {
     return InputContainer(
-      title: trans.dob.toUpperCase(),
+      title: title,
       titleStyle: textTheme.bodyLarge?.copyWith(
         fontSize: 12,
         color: const Color(0xff8D8D94),
@@ -224,6 +223,4 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
       withClearButton: withClearButton,
     );
   }
-
-
 }

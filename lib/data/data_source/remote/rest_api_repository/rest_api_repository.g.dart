@@ -204,7 +204,7 @@ class _RestApiRepository implements RestApiRepository {
     )
             .compose(
               _dio.options,
-              'location',
+              'location/user',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -296,6 +296,37 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data == null ? null : User.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<UserLocation>> getLocationNearby({
+    required lat,
+    required lng,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'lat': lat,
+      'long': lng,
+    };
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<UserLocation>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'location/get-nearly',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => UserLocation.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

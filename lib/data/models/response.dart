@@ -19,6 +19,8 @@ class GoogleMapAPIReponse {
   final List<PlacePrediction>? predictions;
   @JsonKey(name: 'result')
   final GoogleMapPlace? result;
+  @JsonKey(name: 'candidates')
+  final List<GoogleMapPlace>? places;
 
   GoogleMapAPIReponse({
     this.nextPageToken,
@@ -26,6 +28,7 @@ class GoogleMapAPIReponse {
     this.status,
     this.predictions,
     this.result,
+    this.places,
   });
 
   factory GoogleMapAPIReponse.fromJson(Map<String, dynamic> json) =>
@@ -158,7 +161,6 @@ class Photo {
 
   Map<String, dynamic> toJson() => _$PhotoToJson(this);
 }
-
 
 @JsonSerializable()
 class AuthResponse {

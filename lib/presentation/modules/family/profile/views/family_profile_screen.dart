@@ -136,16 +136,19 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
 
     final children = [
       Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            state.family?.name ?? '--',
-            style: TextStyle(
-              fontSize: 30,
-              color: themeColor.white,
-              fontWeight: FontWeight.w800,
+          Expanded(
+            child: Text(
+              state.family?.name ?? '--',
+              style: TextStyle(
+                fontSize: 30,
+                color: themeColor.white,
+                fontWeight: FontWeight.w800,
+              ),
             ),
           ),
-          const Spacer(),
+          const SizedBox(width: 6),
           // if (state.requests.isNotEmpty)
           InkWell(
             onTap: _onTapRequests,

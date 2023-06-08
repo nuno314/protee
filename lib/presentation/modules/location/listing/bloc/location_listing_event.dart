@@ -2,6 +2,12 @@ part of 'location_listing_bloc.dart';
 
 abstract class LocationListingEvent {}
 
+class UpdateCurrentEvent extends LocationListingEvent {
+  final Location location;
+
+  UpdateCurrentEvent(this.location);
+}
+
 class GetLocationsEvent extends LocationListingEvent {}
 
 class LoadMoreLocationsEvent extends LocationListingEvent {}

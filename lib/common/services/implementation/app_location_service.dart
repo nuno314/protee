@@ -2,16 +2,11 @@ import 'package:geolocator/geolocator.dart' as locator;
 import 'package:injectable/injectable.dart';
 
 import '../../../common/utils.dart';
-import '../../../data/data_source/data_repository.dart';
-import '../../../data/data_source/local/preferences_helper/preferences_helper.dart';
 import '../../../data/models/location.dart';
-import '../../../di/di.dart';
 import '../location_service.dart';
 
 @Singleton(as: LocationService)
-class LocationServiceImpl with DataRepository implements LocationService {
-  late final localDataManager = injector.get<AppPreferenceData>();
-
+class LocationServiceImpl implements LocationService {
   @override
   Future<Location?> getLastKnownLocation() async {
     final position = await _determinePosition();

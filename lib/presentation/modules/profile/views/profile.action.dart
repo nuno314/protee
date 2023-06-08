@@ -36,6 +36,16 @@ extension ProfileAction on _ProfileScreenState {
       return;
     }
     showLoading();
-    bloc.add(UpdateProfileEvent(_user!));
+    bloc.add(
+      UpdateProfileEvent(
+        _user!.copyWith(
+          name: _nameController.text,
+          dob: _pickBirthday,
+          phoneNumber: _phoneNumberController.text.isNotNullOrEmpty
+              ? _phoneNumberController.text
+              : null,
+        ),
+      ),
+    );
   }
 }

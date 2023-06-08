@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils.dart';
-import '../../common/utils/data_checker.dart';
 import 'location.dart';
 
 part 'address.g.dart';

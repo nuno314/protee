@@ -13,6 +13,8 @@ abstract class AddLocationRepository {
 
   Future<GoogleMapPlace?> getNearbyPlaceByLocation(String location);
 
+  Future<List<GoogleMapPlace>> findPlaceFromText(String input);
+
   Future<bool> addLocation({
     required String name,
     required String description,

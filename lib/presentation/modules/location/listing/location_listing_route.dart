@@ -7,6 +7,5 @@ import 'views/location_listing_screen.dart';
 class LocationListingRoute {
   static Map<String, WidgetBuilder> getAll(RouteSettings settings) => {
         //TODO: Update route name
-       
       };
 }

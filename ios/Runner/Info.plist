@@ -53,6 +53,8 @@
 	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<string>location</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
 	<key>NSAppTransportSecurity</key>

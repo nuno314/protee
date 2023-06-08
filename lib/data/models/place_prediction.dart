@@ -25,4 +25,3 @@ class PlacePrediction {
       _$PlacePredictionFromJson(json);
   Map<String, dynamic> toJson() => _$PlacePredictionToJson(this);
 }
-

@@ -43,7 +43,7 @@ class AccountBloc extends AppBlocBase<AccountEvent, AccountState> {
     Emitter<AccountState> emit,
   ) async {
     emit(
-      state.copyWith(
+      state.copyWith<AccountInitial>(
         viewModel: state.viewModel.copyWith(user: event.user),
       ),
     );

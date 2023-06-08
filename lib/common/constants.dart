@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 part 'constants/http_constants.dart';
 part 'constants/message_constants.dart';
 part 'constants/pagination_constants.dart';

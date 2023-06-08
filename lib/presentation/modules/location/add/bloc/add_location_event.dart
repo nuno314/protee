@@ -31,3 +31,9 @@ class AddUserLocationEvent extends AddLocationEvent {
     required this.location,
   });
 }
+
+class UpdatePlaceEvent extends AddLocationEvent {
+  final GoogleMapPlace place;
+
+  UpdatePlaceEvent(this.place);
+}

@@ -5,8 +5,5 @@ import '../../../../../di/di.dart';
 part 'location_listing_repository.impl.dart';
 
 abstract class LocationListingRepository {
-  Future<List<UserLocation>> getData(
-    int offset,
-    int limit,
-  );
+  Future<List<UserLocation>> getData();
 }

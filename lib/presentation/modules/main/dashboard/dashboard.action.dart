@@ -43,4 +43,6 @@ extension DashboardAction on _DashboardScreenState {
       onesignal.removeUserId();
     }
   }
+
+  void _emitCurrentLocation() {}
 }

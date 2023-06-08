@@ -21,6 +21,7 @@ import '../../notification/views/notification_screen.dart';
 import '../account/bloc/account_bloc.dart';
 import '../account/views/account_screen.dart';
 import '../home_page/home_page.dart';
+import '../location_tracking/location_tracking.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'dashboard_constants.dart';
 
@@ -113,7 +114,12 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                   ),
                 ),
                 Container(),
-                Container(),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => LocationTrackingBloc(),
+                    child: const LocationTrackingScreen(),
+                  ),
+                ),
                 KeepAliveWidget(
                   child: BlocProvider(
                     create: (context) => NotificationBloc(),

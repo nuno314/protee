@@ -12,7 +12,7 @@ class LocationRoute {
             child: const AddLocationScreen(),
           );
         },
-         RouteList.locationListing :(context) {
+        RouteList.locationListing: (context) {
           return BlocProvider(
             create: (context) => LocationListingBloc(),
             child: const LocationListingScreen(),

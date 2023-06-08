@@ -2,20 +2,21 @@ part of 'location_listing_bloc.dart';
 
 class _ViewModel {
   final List<UserLocation> data;
-  final bool canLoadMore;
+  final Location? currentLocation;
 
   const _ViewModel({
-    this.canLoadMore = false,
     this.data = const [],
+    this.currentLocation,
   });
 
   _ViewModel copyWith({
     List<UserLocation>? data,
     bool? canLoadMore,
+    Location? currentLocation,
   }) {
     return _ViewModel(
       data: data ?? this.data,
-      canLoadMore: canLoadMore ?? this.canLoadMore,
+      currentLocation: currentLocation ?? this.currentLocation,
     );
   }
 }
@@ -34,11 +35,17 @@ abstract class LocationListingState {
   }
 
   List<UserLocation> get data => viewModel.data;
-  bool get canLoadMore => viewModel.canLoadMore;
+  Location? get currentLocation => viewModel.currentLocation;
 }
 
 class LocationListingInitial extends LocationListingState {
   LocationListingInitial({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class LocattionUpdatedState extends LocationListingState {
+  LocattionUpdatedState({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -49,6 +56,9 @@ final _factories = <
   _ViewModel viewModel,
 )>{
   LocationListingInitial: (viewModel) => LocationListingInitial(
+        viewModel: viewModel,
+      ),
+  LocattionUpdatedState: (viewModel) => LocattionUpdatedState(
         viewModel: viewModel,
       ),
 };

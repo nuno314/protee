@@ -33,4 +33,10 @@ abstract class LocationRepository {
     @Query('location') required String location,
     @Query('radius') int radius = 1500,
   });
+  @GET(GoogleMapApiContract.placeFindFromText)
+  Future<GoogleMapAPIReponse> findPlaceFromText({
+    @Query('input') required String input,
+    @Query('inputtype') String inputtype = 'textquery',
+    @Query('fields') String fields = 'all',
+  });
 }

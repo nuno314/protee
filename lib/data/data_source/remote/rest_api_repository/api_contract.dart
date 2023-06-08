@@ -8,7 +8,9 @@ class ApiContract {
   static const String profile = 'users/profile';
 
   // Location API
+  static const String locationUser = 'location/user';
   static const String location = 'location';
+  static const String locationNearby = 'location/get-nearly';
 
   // Family API
   static const String getFamilyProfile = 'family/profile';

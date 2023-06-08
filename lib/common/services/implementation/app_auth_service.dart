@@ -6,7 +6,6 @@ import '../../../data/data_source/remote/app_api_service.dart';
 import '../../../data/models/user.dart' as user;
 import '../../../di/di.dart';
 import '../../utils.dart';
-import '../../utils/log_utils.dart';
 import '../auth_service.dart';
 
 @Singleton(as: AuthService)
@@ -16,7 +15,9 @@ class AppAuthService implements AuthService {
   final _authRepo = injector.get<AppApiService>();
 
   @override
-  bool get isSignedIn => _firebaseAuth.currentUser != null;
+  bool get isSignedIn =>
+      _firebaseAuth.currentUser != null &&
+      _localDataManager.refreshToken.isNotNullOrEmpty;
 
   @override
   String? get token => _localDataManager.accessToken;
@@ -67,6 +68,7 @@ class AppAuthService implements AuthService {
   Future<void> signOut() async {
     LogUtils.i('$runtimeType signOut');
     await _localDataManager.setAccessToken(null);
+    await _localDataManager.setRefreshToken(null);
     return _firebaseAuth.signOut();
   }
 
@@ -75,7 +77,7 @@ class AppAuthService implements AuthService {
     final res = await _authRepo.client.updateProfile(
       name: user.name,
       phoneNumber: user.phoneNumber,
-      dob: user.dob,
+      dob: user.dob?.toIso8601String(),
       email: user.email,
     );
 

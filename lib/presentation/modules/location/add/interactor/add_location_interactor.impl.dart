@@ -21,6 +21,11 @@ class AddLocationInteractorImpl extends AddLocationInteractor {
   }
 
   @override
+  Future<List<GoogleMapPlace>> findPlaceFromText(String input) {
+    return _repository.findPlaceFromText(input);
+  }
+
+  @override
   Future<bool> addLocation(String name, String description, Location location) {
     return _repository.addLocation(
       name: name,

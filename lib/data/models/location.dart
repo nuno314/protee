@@ -1,7 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -109,7 +105,20 @@ class UserLocation {
     this.id,
   });
 
- 
+  double? distanceFrom(Location? other) {
+    if (!isValid || !(other?.isValid == true)) {
+      return null;
+    }
+    return Geolocator.distanceBetween(
+      lat!,
+      long!,
+      other!.lat!,
+      other.lng!,
+    );
+  }
+
+  bool get isValid => lat != null && long != null;
+
   factory UserLocation.fromJson(Map<String, dynamic> json) =>
       _$UserLocationFromJson(json);
 

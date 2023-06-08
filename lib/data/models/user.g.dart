@@ -14,7 +14,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       dob: asOrNull(json['dob']),
       phoneNumber: asOrNull(json['phoneNumber']),
       familyId: asOrNull(json['familyId']),
-    )..role = $enumDecodeNullable(_$FamilyRoleEnumMap, json['familyRole']);
+      role: $enumDecodeNullable(_$FamilyRoleEnumMap, json['familyRole']),
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,

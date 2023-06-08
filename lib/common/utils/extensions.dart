@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:rive/rive.dart';
 
@@ -333,5 +335,20 @@ class RiveAssets {
 
   set setInput(SMIBool status) {
     input = status;
+  }
+}
+
+extension LatLngUtils on LatLng? {
+  double? distanceFrom(LatLng? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+
+    return Geolocator.distanceBetween(
+      this!.latitude,
+      this!.longitude,
+      other.latitude,
+      other.longitude,
+    );
   }
 }

@@ -3,9 +3,6 @@ part of 'add_location_screen.dart';
 extension AddLocationAction on _AddLocationScreenState {
   void _blocListener(BuildContext context, AddLocationState state) {
     hideLoading();
-    if (state.places.isNotEmpty) {
-      showPredictions = true;
-    }
 
     if (state is LocationChangedState) {
       _animateCamera(state.location!);
@@ -37,10 +34,6 @@ extension AddLocationAction on _AddLocationScreenState {
         location: bloc.state.location!,
       ),
     );
-  }
-
-  void _onTapLocation(LatLng latLng) {
-    bloc.add(GetPLaceByLocation(Location.from(latLng: latLng)));
   }
 
   Future<void> _locateMe() async {
@@ -80,7 +73,7 @@ extension AddLocationAction on _AddLocationScreenState {
 
   void _addMarker({GoogleMapPlace? place, LatLng? latLng}) {
     final marker = Marker(
-      markerId: const MarkerId('current_location'),
+      markerId: MarkerId(place?.placeId ?? latLng.toString()),
       position: place != null
           ? LatLng(place.geometry!.location.lat!, place.geometry!.location.lng!)
           : latLng!,
@@ -91,7 +84,7 @@ extension AddLocationAction on _AddLocationScreenState {
 
     // ignore: invalid_use_of_protected_member
     setState(() {
-      markers[const MarkerId('current_location')] = marker;
+      markers[MarkerId(place?.placeId ?? latLng.toString())] = marker;
     });
   }
 
@@ -99,10 +92,18 @@ extension AddLocationAction on _AddLocationScreenState {
     bloc.add(SearchLocationEvent(value ?? ''));
   }
 
-  void _onTapPlace(PlacePrediction place) {
-    _addressController.text = place.description!;
+  void _onTapPlace(GoogleMapPlace place) {
     search('');
-    bloc.add(GetLocationByPlaceIdEvent(place));
+    print(place.name!);
+
+    _addressController.text = 'GooglePxxxlex';
+    bloc.add(UpdatePlaceEvent(place));
+  }
+
+  void _onTapPrediction(PlacePrediction prediction) {
+    search('');
+    _addressController.text = prediction.description!;
+    bloc.add(GetLocationByPlaceIdEvent(prediction));
   }
 
   void _onBack() {

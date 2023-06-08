@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -35,11 +36,9 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
     with AfterLayoutMixin {
   final _nameController = InputContainerController();
   final _addressController = InputContainerController();
-  late var _scrollController = ScrollController();
   late Debouncer _debouncer;
   KeyboardVisibilityController keyboardVisibilityController =
       KeyboardVisibilityController();
-  bool showPredictions = false;
 
   late ThemeData _themeData;
 
@@ -72,11 +71,13 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
 
   bool get isKeyboardVisibility => keyboardVisibilityController.isVisible;
 
-  late final String _mapStyle = '';
+  String? _mapStyle;
   @override
   void initState() {
     super.initState();
-
+    rootBundle.loadString('assets/map/style.json').then((string) {
+      _mapStyle = string;
+    });
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
   }
 
@@ -94,6 +95,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
           body: Container(
             color: themeColor.scaffoldBackgroundColor,
             child: Stack(
+              fit: StackFit.expand,
               alignment: AlignmentDirectional.topCenter,
               children: [
                 GoogleMap(
@@ -109,14 +111,12 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
                   tiltGesturesEnabled: false,
                   rotateGesturesEnabled: false,
                   liteModeEnabled: false,
-                  onTap: _onTapLocation,
                   padding: EdgeInsets.only(bottom: device.height * 0.2),
                 ),
                 DraggableScrollableSheet(
                   maxChildSize: 0.85,
                   minChildSize: 0.28,
                   builder: (context, scrollController) {
-                    _scrollController = scrollController;
                     return Container(
                       decoration: BoxDecoration(
                         color: themeColor.white,
@@ -223,20 +223,42 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
                 required: true,
                 onTextChanged: (value) => _debouncer.value = value,
               ),
-              Expanded(
-                child: ListView.separated(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemCount: state.predictions.length,
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () =>
-                        _onTapPlace(state.predictions.elementAt(index)),
-                    child:
-                        Text(state.predictions.elementAt(index).description!),
-                  ),
-                ),
-              ),
+              state.predictions.length > state.places.length
+                  ? Expanded(
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 12,
+                        ),
+                        separatorBuilder: (context, index) => const Divider(),
+                        itemCount: state.predictions.length,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () => _onTapPrediction(
+                            state.predictions.elementAt(index),
+                          ),
+                          child: Text(
+                            state.predictions.elementAt(index).description!,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Expanded(
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 12,
+                        ),
+                        separatorBuilder: (context, index) => const Divider(),
+                        itemCount: state.places.length,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () =>
+                              _onTapPlace(state.places.elementAt(index)),
+                          child: Text(
+                            '''${state.places.elementAt(index).name!}, ${state.places.elementAt(index).formattedAddress!}''',
+                          ),
+                        ),
+                      ),
+                    ),
             ],
           ),
         );
@@ -245,7 +267,7 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle('');
+    controller.setMapStyle(_mapStyle);
     _controller.complete(controller);
   }
 }

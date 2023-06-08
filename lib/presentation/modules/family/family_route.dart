@@ -29,7 +29,9 @@ class FamilyRoute {
           final family = settings.arguments as Family;
           return BlocProvider(
             create: (context) => FamilySettingsBloc(family: family),
-            child: FamilySettingsScreen(family: family,),
+            child: FamilySettingsScreen(
+              family: family,
+            ),
           );
         },
       };

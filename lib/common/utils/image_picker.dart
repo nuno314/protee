@@ -18,7 +18,7 @@ class ImagePicker {
 
   Future<File?> show() {
     final completer = Completer<File?>();
-    final trans =translate(context);
+    final trans = translate(context);
     showActionDialog(
       context,
       title: title,
@@ -38,7 +38,8 @@ class ImagePicker {
   }
 
   Future<File?> _openCamera() async {
-    if (await PermissionService().requestPermission(Permission.camera, context)) {
+    if (await PermissionService()
+        .requestPermission(Permission.camera, context)) {
       final pickedFile = await PickFileHelper.takePicture();
       return _openImageCropper(pickedFile);
     }

@@ -22,6 +22,7 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
     on<GetLocationByPlaceIdEvent>(_onGetLocationByPlaceIdEvent);
     on<GetPLaceByLocation>(_onGetPLaceByLocation);
     on<AddUserLocationEvent>(_onAddUserLocationEvent);
+    on<UpdatePlaceEvent>(_onUpdatePlaceEvent);
   }
 
   Future<void> _onSearchLocationEvent(
@@ -29,10 +30,12 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
     Emitter<AddLocationState> emit,
   ) async {
     final predictions = await _interactor.searchPlace(event.input);
+    final places = await _interactor.findPlaceFromText(event.input);
 
     emit(
       state.copyWith<AddLocationInitial>(
         viewModel: state.viewModel.copyWith(
+          places: places,
           predictions: predictions,
         ),
       ),
@@ -83,5 +86,18 @@ class AddLocationBloc extends AppBlocBase<AddLocationEvent, AddLocationState> {
         state.copyWith<AddLocationSuccessfullyState>(),
       );
     }
+  }
+
+  FutureOr<void> _onUpdatePlaceEvent(
+    UpdatePlaceEvent event,
+    Emitter<AddLocationState> emit,
+  ) {
+    emit(
+      state.copyWith<LocationChangedState>(
+        viewModel: state.viewModel.copyWith(
+          place: event.place,
+        ),
+      ),
+    );
   }
 }

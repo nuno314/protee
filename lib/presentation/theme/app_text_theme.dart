@@ -56,7 +56,7 @@ class AppTextTheme {
         ),
       );
 
-   TextTheme dark() => TextTheme(
+  TextTheme dark() => TextTheme(
         displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,

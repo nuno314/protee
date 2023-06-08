@@ -32,7 +32,7 @@ class User {
   String? familyId;
   @JsonKey(name: 'familyRole', unknownEnumValue: null)
   FamilyRole? role;
-  
+
   User({
     this.id,
     this.name,
@@ -41,11 +41,34 @@ class User {
     this.dob,
     this.phoneNumber,
     this.familyId,
+    this.role,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? avatar,
+    DateTime? dob,
+    String? phoneNumber,
+    String? familyId,
+    FamilyRole? role,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      avatar: avatar ?? this.avatar,
+      dob: dob ?? this.dob,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      familyId: familyId ?? this.familyId,
+      role: role ?? this.role,
+    );
+  }
 }
 
 @JsonSerializable()

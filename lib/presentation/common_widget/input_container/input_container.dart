@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 
 import '../../../common/utils.dart';
 import '../../theme/app_text_theme.dart';
+import '../availability_widget.dart';
+import '../box_color.dart';
+import '../title_widget.dart';
 
 part 'input_container.controller.dart';
 
@@ -43,6 +46,7 @@ class InputContainer extends StatefulWidget {
   final bool justShowPrefixIconWhenEmpty;
   final bool withClearButton;
   final void Function()? onClear;
+  final bool? isDense;
 
   const InputContainer({
     Key? key,
@@ -82,6 +86,7 @@ class InputContainer extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(6.0)),
     this.justShowPrefixIconWhenEmpty = false,
     this.withClearButton = true,
+    this.isDense,
   }) : super(key: key);
 
   @override
@@ -144,7 +149,12 @@ class _InputContainerState extends State<InputContainer> {
               fontSize: value.validation?.isNotEmpty == true ? null : 1,
             ),
             errorMaxLines: 2,
-            suffixIcon: _getSuffixIcon(),
+            suffixIcon: _getSuffixIcon()?.let(
+              (it) => AvailabilityWidget(
+                enable: widget.enable,
+                child: it,
+              ),
+            ),
             suffixIconConstraints: BoxConstraints(
               minHeight: widget.suffixIconSize,
               minWidth: widget.suffixIconSize,
@@ -154,6 +164,7 @@ class _InputContainerState extends State<InputContainer> {
               minHeight: widget.prefixIconSize,
               minWidth: widget.prefixIconSize,
             ),
+            isDense: widget.isDense,
             fillColor: widget.enable ? widget.fillColor : null,
             counterStyle: themeData.textTheme.titleMedium?.copyWith(
               color: Colors.grey,
@@ -187,18 +198,10 @@ class _InputContainerState extends State<InputContainer> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RichText(
-                text: TextSpan(
-                  text: widget.title,
-                  style: widget.titleStyle ?? themeData.textTheme.inputTitle,
-                  children: [
-                    if (widget.required == true)
-                      TextSpan(
-                        text: ' *',
-                        style: themeData.textTheme.inputRequired,
-                      ),
-                  ],
-                ),
+              InputTitleWidget(
+                title: widget.title ?? '',
+                required: widget.required,
+                style: widget.titleStyle,
               ),
               const SizedBox(height: 8),
               textField,
@@ -341,9 +344,12 @@ class _InputContainerState extends State<InputContainer> {
     if (!showPrefixIcon || widget.prefixIcon == null) {
       return null;
     }
-    return Padding(
-      padding: padding,
-      child: widget.prefixIcon,
+    return AvailabilityWidget(
+      enable: widget.enable,
+      child: Padding(
+        padding: padding,
+        child: widget.prefixIcon,
+      ),
     );
   }
 
@@ -356,5 +362,89 @@ class _InputContainerState extends State<InputContainer> {
         showPrefixIcon = isEmpty;
       });
     }
+  }
+}
+
+class FakeInputField extends StatelessWidget {
+  const FakeInputField({
+    super.key,
+    this.text,
+    this.title,
+    this.required = true,
+    this.enable = true,
+    this.prefixIcon,
+    this.surfixIcon,
+    this.hint,
+    this.onTap,
+  });
+
+  final String? text;
+  final String? title;
+  final bool required;
+  final bool enable;
+  final Widget? prefixIcon;
+  final Widget? surfixIcon;
+  final String? hint;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+    final inputDecor = context.theme.inputDecorationTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (title.isNotNullOrEmpty) ...[
+          InputTitleWidget(
+            title: title!,
+            required: required,
+          ),
+          const SizedBox(height: 8),
+        ],
+        AvailabilityWidget(
+          enable: enable,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: onTap,
+            child: HighlightBoxColor(
+              constraints: const BoxConstraints(minHeight: 46),
+              padding: inputDecor.contentPadding!,
+              borderColor: asOrNull<OutlineInputBorder>(inputDecor.border)
+                  ?.borderSide
+                  .color,
+              borderRadius:
+                  asOrNull<OutlineInputBorder>(inputDecor.border)?.borderRadius,
+              alignment: Alignment.centerLeft,
+              bgColor: enable
+                  ? Colors.transparent
+                  : (inputDecor.fillColor ?? Colors.grey[100]!),
+              child: Row(
+                children: [
+                  if (prefixIcon != null) ...[
+                    prefixIcon!,
+                    const SizedBox(width: 8),
+                  ],
+                  Expanded(
+                    child: Text(
+                      text.isNotNullOrEmpty ? text! : (hint ?? '--'),
+                      style: enable && text.isNotNullOrEmpty
+                          ? textTheme.textInput
+                          : textTheme.inputHint,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (surfixIcon != null) ...[
+                    const SizedBox(width: 8),
+                    surfixIcon!,
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

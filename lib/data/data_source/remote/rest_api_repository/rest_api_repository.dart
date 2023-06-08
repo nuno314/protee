@@ -51,7 +51,7 @@ abstract class RestApiRepository {
     @Field('long') required double lng,
   });
 
-  @GET(ApiContract.location)
+  @GET(ApiContract.locationUser)
   Future<List<UserLocation>> getLocation();
 
   @GET(ApiContract.profile)
@@ -65,10 +65,15 @@ abstract class RestApiRepository {
     @Field('name') String? name,
     @Field('phoneNumber') String? phoneNumber,
     @Field('email') String? email,
-    @Field('dob') DateTime? dob,
+    @Field('dob') String? dob,
+  });
+
+  @POST(ApiContract.locationNearby)
+  Future<List<UserLocation>> getLocationNearby({
+    @Field('lat') required double lat,
+    @Field('long') required double lng,
   });
 
   // @POST(ApiContract.removeMember)
   // Future<List<JoinFamilyRequest>> getJoinFamilyRequests();
-
 }

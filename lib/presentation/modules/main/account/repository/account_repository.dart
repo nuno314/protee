@@ -4,5 +4,4 @@ import '../../../../../di/di.dart';
 
 part 'account_repository.impl.dart';
 
-abstract class AccountRepository {
-}
+abstract class AccountRepository {}

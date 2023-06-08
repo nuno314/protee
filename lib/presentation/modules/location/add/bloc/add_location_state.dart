@@ -3,18 +3,21 @@ part of 'add_location_bloc.dart';
 class _ViewModel {
   final List<PlacePrediction> predictions;
   final GoogleMapPlace? place;
+  final List<GoogleMapPlace> places;
   const _ViewModel({
     this.predictions = const [],
     this.place,
+    this.places = const [],
   });
 
   _ViewModel copyWith({
     List<PlacePrediction>? predictions,
-    String? placeId,
     GoogleMapPlace? place,
+    List<GoogleMapPlace>? places,
   }) {
     return _ViewModel(
       predictions: predictions ?? this.predictions,
+      places: places ?? this.places,
       place: place ?? this.place,
     );
   }
@@ -35,10 +38,7 @@ abstract class AddLocationState {
 
   List<PlacePrediction> get predictions => viewModel.predictions;
 
-  List<String> get places => predictions
-      .where((place) => place.description != null)
-      .map((place) => place.description!)
-      .toList();
+  List<GoogleMapPlace> get places => viewModel.places;
 
   GoogleMapPlace? get place => viewModel.place;
   Location? get location => place?.geometry?.location;

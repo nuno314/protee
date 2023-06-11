@@ -28,7 +28,7 @@ abstract class RestApiRepository {
   Future<String?> getInviteCode();
 
   @POST(ApiContract.joinFamily)
-  Future<bool?> joinFamily({
+  Future<BooleanResponse?> joinFamily({
     @Field('code') required String code,
   });
 
@@ -66,6 +66,7 @@ abstract class RestApiRepository {
     @Field('phoneNumber') String? phoneNumber,
     @Field('email') String? email,
     @Field('dob') String? dob,
+    @Field('avt') String? avatar,
   });
 
   @POST(ApiContract.locationNearby)
@@ -74,6 +75,20 @@ abstract class RestApiRepository {
     @Field('long') required double lng,
   });
 
-  // @POST(ApiContract.removeMember)
-  // Future<List<JoinFamilyRequest>> getJoinFamilyRequests();
+  @POST(ApiContract.removeMember)
+  Future<BooleanResponse?> removeMember({
+    @Field('userId') required String id,
+  });
+
+  @POST(ApiContract.leaveFamily)
+  Future<BooleanResponse?> leaveFamily();
+
+  @POST(ApiContract.approveJoinRequest)
+  Future<BooleanResponse?> approveJoinRequest({
+    @Field('requestId') required String id,
+  });
+  @POST(ApiContract.removeLocation)
+  Future<BooleanResponse?> removeLocation({
+    @Field('locationId') required String id,
+  });
 }

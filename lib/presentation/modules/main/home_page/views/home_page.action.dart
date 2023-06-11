@@ -20,6 +20,10 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapFamilyProfile() {
-    Navigator.pushNamed(context, RouteList.familyProfile);
+    Navigator.pushNamed(
+      context,
+      RouteList.familyProfile,
+      arguments: injector.get<AppApiService>().localDataManager.currentUser,
+    );
   }
 }

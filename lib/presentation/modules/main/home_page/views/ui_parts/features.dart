@@ -7,32 +7,32 @@ extension FeaturesUI on _HomePageScreenState {
     final items = [
       HighlightFeatureItem(
         icon: Assets.svg.icAddPeople,
-        title: 'Mời thành viên',
+        title: trans.inviteMember,
         onTap: onTapAddMember,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icJoinFamily,
-        title: 'Gia nhập gia đình',
+        title: trans.joinFamily,
         onTap: onTapJoinFamily,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icFamilyInfo,
-        title: 'Hồ sơ gia đình',
+        title: trans.familyProfile,
         onTap: onTapFamilyProfile,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icAddLocation,
-        title: 'Thêm địa điểm',
+        title: trans.addLocation,
         onTap: onTapAddLocation,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icLocationList,
-        title: 'Danh sách địa điểm',
+        title: trans.locationList,
         onTap: onTapLocationList,
       ),
       HighlightFeatureItem(
         icon: Assets.svg.icWallet,
-        title: 'Ví của bạn',
+        title: trans.yourWallet,
         onTap: () {},
       ),
     ];
@@ -42,7 +42,7 @@ extension FeaturesUI on _HomePageScreenState {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Danh Mục',
+            trans.category,
             style: textTheme.bodyLarge,
           ),
           GridView.builder(

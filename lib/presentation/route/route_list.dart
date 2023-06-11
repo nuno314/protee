@@ -1,6 +1,7 @@
 class RouteList {
   static const String initial = '/';
   static const String dashboard = '/dashboard';
+  static const String settings = '/settings';
   static const String logViewer = '/logViewer';
   static const String webview = '/webview';
   static const String signIn = '/sign_in';
@@ -12,4 +13,6 @@ class RouteList {
   static const String familyProfile = '/family_profile';
   static const String profile = '/profile';
   static const String familySettings = '/family_settings';
+  static const String joinFamilyRequests = '/join_family_requests';
+  static const String changeLanguage = '/change_language';
 }

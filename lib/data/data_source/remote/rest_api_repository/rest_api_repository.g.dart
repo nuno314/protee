@@ -65,24 +65,26 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<bool?> joinFamily({required code}) async {
+  Future<BooleanResponse?> joinFamily({required code}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'code': code};
-    final _result = await _dio.fetch<bool>(_setStreamType<bool>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'family/join',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              'family/join',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -270,6 +272,7 @@ class _RestApiRepository implements RestApiRepository {
     phoneNumber,
     email,
     dob,
+    avatar,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -280,6 +283,7 @@ class _RestApiRepository implements RestApiRepository {
       'phoneNumber': phoneNumber,
       'email': email,
       'dob': dob,
+      'avt': avatar,
     };
     _data.removeWhere((k, v) => v == null);
     final _result =
@@ -327,6 +331,102 @@ class _RestApiRepository implements RestApiRepository {
     var value = _result.data!
         .map((dynamic i) => UserLocation.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<BooleanResponse?> removeMember({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'userId': id};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/remove',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BooleanResponse?> leaveFamily() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/leave',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BooleanResponse?> approveJoinRequest({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'requestId': id};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/approve',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BooleanResponse?> removeLocation({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'locationId': id};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'location/user-remove',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
     return value;
   }
 

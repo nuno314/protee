@@ -17,7 +17,13 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
     Navigator.pushNamed(context, RouteList.addMember);
   }
 
-  void _onTapRequests() {}
+  void _onTapRequests() {
+    Navigator.pushNamed(
+      context,
+      RouteList.joinFamilyRequests,
+      arguments: bloc.state.requests,
+    );
+  }
 
   void _onTapSettings() {
     Navigator.pushNamed(

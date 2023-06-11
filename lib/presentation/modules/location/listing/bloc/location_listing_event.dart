@@ -11,3 +11,9 @@ class UpdateCurrentEvent extends LocationListingEvent {
 class GetLocationsEvent extends LocationListingEvent {}
 
 class LoadMoreLocationsEvent extends LocationListingEvent {}
+
+class RemoveLocationEvent extends LocationListingEvent {
+  final UserLocation location;
+
+  RemoveLocationEvent(this.location);
+}

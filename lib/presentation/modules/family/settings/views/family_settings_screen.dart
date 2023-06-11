@@ -13,9 +13,11 @@ import '../bloc/family_settings_bloc.dart';
 part 'family_settings.action.dart';
 
 class FamilySettingsScreen extends StatefulWidget {
-  final Family family;
-  const FamilySettingsScreen({Key? key, required this.family})
-      : super(key: key);
+  final Family? family;
+  const FamilySettingsScreen({
+    Key? key,
+    this.family,
+  }) : super(key: key);
 
   @override
   State<FamilySettingsScreen> createState() => _FamilySettingsScreenState();
@@ -49,7 +51,7 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
         return ScreenForm(
           headerColor: const Color(0xFF7C84F8),
           titleColor: themeColor.white,
-          title: _family?.name ?? '--',
+          title: trans.familySettings,
         );
       },
     );

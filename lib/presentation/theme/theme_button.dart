@@ -11,14 +11,16 @@ class ThemeButton {
     required BuildContext context,
     required String title,
     Function()? onPressed,
+    Color? color,
     EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16),
     BoxConstraints constraints = const BoxConstraints(minHeight: 48.0),
     bool enable = true,
   }) =>
       RawMaterialButton(
         fillColor: enable
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.primary.withAlpha(55),
+            ? color ?? Theme.of(context).colorScheme.primary
+            : color?.withAlpha(55) ??
+                Theme.of(context).colorScheme.primary.withAlpha(55),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),

@@ -15,7 +15,7 @@ extension HomeHeaderUI on _HomePageScreenState {
                 height: 40,
               ),
               Text(
-                'Xin chào, ${state.user?.name ?? '--'}',
+                '${trans.welcome}, ${state.user?.name ?? '--'}!',
                 style: TextStyle(
                   color: themeColor.color005880,
                   fontSize: 20,

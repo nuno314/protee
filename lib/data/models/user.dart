@@ -7,7 +7,9 @@ part 'user.g.dart';
 
 enum FamilyRole {
   @JsonValue('parent')
-  parent('parent');
+  parent('parent'),
+  @JsonValue('children')
+  children('children');
 
   final String id;
 
@@ -69,6 +71,10 @@ class User {
       role: role ?? this.role,
     );
   }
+
+  bool get isParent => role == FamilyRole.parent;
+  bool get isChildren => role == FamilyRole.children;
+  bool get isNull => role == null;
 }
 
 @JsonSerializable()

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../common_widget/text_scale_fixed.dart';
 import '../modules/authentication/authentication_route.dart';
 import '../modules/family/family_route.dart';
+import '../modules/language/language_route.dart';
 import '../modules/location/location_route.dart';
 import '../modules/log_viewer/log_viewer_route.dart';
 import '../modules/main/main_route.dart';
@@ -20,6 +21,7 @@ class RouteGenerator {
         ...FamilyRoute.getAll(settings),
         ...LocationRoute.getAll(settings),
         ...ProfileRoute.getAll(settings),
+        ...LanguageRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

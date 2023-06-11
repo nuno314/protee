@@ -64,6 +64,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _buildHeader(state),
+                  // if (state.user?.isNull == false)
                   Expanded(
                     child: SmartRefresherWrapper(
                       color: const Color(0xFF7C84F8),
@@ -149,7 +150,6 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
             ),
           ),
           const SizedBox(width: 6),
-          // if (state.requests.isNotEmpty)
           InkWell(
             onTap: _onTapRequests,
             child: BoxColor(

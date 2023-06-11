@@ -4,6 +4,10 @@ abstract class ProfileEvent {}
 
 class UpdateProfileEvent extends ProfileEvent {
   final User user;
+  final File? avatar;
 
-  UpdateProfileEvent(this.user);
+  UpdateProfileEvent({
+    required this.user,
+    this.avatar,
+  });
 }

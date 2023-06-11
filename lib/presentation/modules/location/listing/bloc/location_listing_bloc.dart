@@ -20,6 +20,7 @@ class LocationListingBloc
       : super(LocationListingInitial(viewModel: const _ViewModel())) {
     on<UpdateCurrentEvent>(_onUpdateCurrentEvent);
     on<GetLocationsEvent>(_onGetLocationsEvent);
+    on<RemoveLocationEvent>(_onRemoveLocationEvent);
   }
 
   Future<void> _onGetLocationsEvent(
@@ -57,11 +58,22 @@ class LocationListingBloc
     Emitter<LocationListingState> emit,
   ) async {
     emit(
-      state.copyWith<LocattionUpdatedState>(
+      state.copyWith<LocationUpdatedState>(
         viewModel: state.viewModel.copyWith(
           currentLocation: event.location,
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onRemoveLocationEvent(
+    RemoveLocationEvent event,
+    Emitter<LocationListingState> emit,
+  ) async {
+    final res = await _interactor.removeLocation(event.location.id!);
+
+    if (res == true) {
+      emit(state.copyWith<RemoveLocationSuccessfully>());
+    }
   }
 }

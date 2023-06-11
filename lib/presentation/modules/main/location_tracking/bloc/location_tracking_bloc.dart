@@ -34,7 +34,6 @@ class LocationTrackingBloc
     ChangeCurentLocation event,
     Emitter<LocationTrackingState> emit,
   ) async {
-    print(event.location.distanceFrom(state.latLng));
     if (state.latLng == null ||
         event.location.distanceFrom(state.latLng!)! > 500) {
       emit(

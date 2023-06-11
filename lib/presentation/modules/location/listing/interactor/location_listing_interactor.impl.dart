@@ -9,4 +9,9 @@ class LocationListingInteractorImpl extends LocationListingInteractor {
   Future<List<UserLocation>> getData() {
     return _repository.getData();
   }
+
+  @override
+  Future<bool> removeLocation(String id) {
+    return _repository.removeLocation(id);
+  }
 }

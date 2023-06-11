@@ -41,7 +41,7 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen>
         return ScreenForm(
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
-          title: 'Thêm thành viên'.capitalizeFirstofEach(),
+          title: trans.inviteMember.capitalizeFirstofEach(),
           child: _buildListing(state),
         );
       },
@@ -54,9 +54,9 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Use the invitation code below:',
-            style: TextStyle(fontSize: 14),
+          Text(
+            trans.useInvitationCodeBelow,
+            style: const TextStyle(fontSize: 14),
           ),
           const SizedBox(height: 16),
           BoxColor(
@@ -81,8 +81,12 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen>
                 IconButton(
                   icon: const Icon(Icons.copy),
                   onPressed: () async {
-                    await Clipboard.setData(const ClipboardData(text: ''));
-                    showToast('Copied');
+                    await Clipboard.setData(
+                      ClipboardData(
+                        text: state.invitationCode,
+                      ),
+                    );
+                    showToast(trans.copied);
                   },
                 )
               ],

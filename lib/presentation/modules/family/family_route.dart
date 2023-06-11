@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/utils/data_checker.dart';
 import '../../../data/models/family.dart';
+import '../../../data/models/user.dart';
 import '../../route/route_list.dart';
 import 'family.dart';
 
@@ -20,8 +22,9 @@ class FamilyRoute {
           );
         },
         RouteList.familyProfile: (context) {
+          final user = asOrNull<User?>(settings.arguments);
           return BlocProvider(
-            create: (context) => FamilyProfileBloc(),
+            create: (context) => FamilyProfileBloc(user),
             child: const FamilyProfileScreen(),
           );
         },
@@ -31,6 +34,15 @@ class FamilyRoute {
             create: (context) => FamilySettingsBloc(family: family),
             child: FamilySettingsScreen(
               family: family,
+            ),
+          );
+        },
+        RouteList.joinFamilyRequests: (context) {
+          final args = asOrNull<List<JoinFamilyRequest>>(settings.arguments);
+          return BlocProvider(
+            create: (context) => JoinFamilyRequestsBloc(),
+            child:  JoinFamilyRequestsScreen(
+              requests: args,
             ),
           );
         },

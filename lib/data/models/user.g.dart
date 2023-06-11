@@ -30,6 +30,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
 
 const _$FamilyRoleEnumMap = {
   FamilyRole.parent: 'parent',
+  FamilyRole.children: 'children',
 };
 
 UserStatistic _$UserStatisticFromJson(Map<String, dynamic> json) =>

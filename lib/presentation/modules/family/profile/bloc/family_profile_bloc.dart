@@ -17,8 +17,8 @@ class FamilyProfileBloc
     FamilyProfileRepositoryImpl(),
   );
 
-  FamilyProfileBloc()
-      : super(FamilyProfileInitial(viewModel: const _ViewModel())) {
+  FamilyProfileBloc(User? user)
+      : super(FamilyProfileInitial(viewModel: _ViewModel(user: user))) {
     on<GetFamilyProfileEvent>(_onGetFamilyProfileEvent);
     on<RemoveMemberEvent>(_onRemoveMemberEvent);
   }

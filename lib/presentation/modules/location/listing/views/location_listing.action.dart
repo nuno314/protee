@@ -45,7 +45,7 @@ extension LocationListingAction on _LocationListingScreenState {
           context: context,
           message: trans.pleaseEnableGPS,
         );
-        return;
+        // return;
       }
       if (cubit.isValidPlace != true) {
         await cubit.refreshLocation();
@@ -85,7 +85,7 @@ extension LocationListingAction on _LocationListingScreenState {
     );
   }
 
-    Future<void> _onTapLocation(UserLocation location) async {
+  Future<void> _onTapLocation(UserLocation location) async {
     print(location.lat);
     print(location.long);
     await _animateCamera(

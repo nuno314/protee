@@ -94,9 +94,8 @@ extension AddLocationAction on _AddLocationScreenState {
 
   void _onTapPlace(GoogleMapPlace place) {
     search('');
-    print(place.name!);
 
-    _addressController.text = 'GooglePxxxlex';
+    _addressController.text = place.name;
     bloc.add(UpdatePlaceEvent(place));
   }
 

@@ -73,20 +73,18 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
   Widget _buildListing(LocationListingState state) {
     return Stack(
       children: [
-        Expanded(
-          child: GoogleMap(
-            initialCameraPosition: _kGooglePlex,
-            myLocationEnabled: true,
-            onMapCreated: _onMapCreated,
-            mapType: MapType.normal,
-            markers: markers.values.toSet(),
-            myLocationButtonEnabled: true,
-            zoomControlsEnabled: false,
-            mapToolbarEnabled: false,
-            compassEnabled: false,
-            tiltGesturesEnabled: false,
-            rotateGesturesEnabled: false,
-          ),
+        GoogleMap(
+          initialCameraPosition: _kGooglePlex,
+          myLocationEnabled: true,
+          onMapCreated: _onMapCreated,
+          mapType: MapType.normal,
+          markers: markers.values.toSet(),
+          myLocationButtonEnabled: true,
+          zoomControlsEnabled: false,
+          mapToolbarEnabled: false,
+          compassEnabled: false,
+          tiltGesturesEnabled: false,
+          rotateGesturesEnabled: false,
         ),
         Positioned(
           bottom: 20,

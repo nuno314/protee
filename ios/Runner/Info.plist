@@ -51,12 +51,18 @@
 	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(APP_DISPLAY_NAME) would like to use location service</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use camera for take a picture or scan code</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use the photo gallery to select photos for profile photo updates or business licenses</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(APP_DISPLAY_NAME) would like to use the photo gallery to select photos for profile photo</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>
-	<string>location</string>
-	<key>io.flutter.embedded_views_preview</key>
-	<string>YES</string>
+	<array>
+		<string>location</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

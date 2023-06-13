@@ -7,6 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
+import '../../../../../data/data_source/remote/app_api_service.dart';
+import '../../../../../di/di.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/cache_network_image_wrapper.dart';

@@ -7,7 +7,6 @@ import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
-import '../../../../route/route_list.dart';
 import '../../../../theme/theme_button.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/join_family_bloc.dart';
@@ -40,6 +39,8 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
       showErrorDialog(trans.invalidInvitationCode);
     } else if (error.message?.toLowerCase().contains('current') == true) {
       showErrorDialog(trans.waitingJoinFamily);
+    } else if (error.message?.toLowerCase().contains('waiting') == true) {
+      showErrorDialog(trans.waitingJoinFamily);
     }
   }
 
@@ -48,7 +49,7 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
     _themeData = context.theme;
     trans = translate(context);
     return ScreenForm(
-      title: 'Gia nhập gia đình',
+      title: trans.joinFamily.capitalizeFirstofEach(),
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,
       child: BlocConsumer<JoinFamilyBloc, JoinFamilyState>(
@@ -66,9 +67,9 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Enter invitation code:',
-            style: TextStyle(fontSize: 14),
+          Text(
+            trans.enterInvitationCode,
+            style: const TextStyle(fontSize: 14),
           ),
           const SizedBox(height: 16),
           InputContainer(

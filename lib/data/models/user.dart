@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
@@ -7,7 +8,9 @@ part 'user.g.dart';
 
 enum FamilyRole {
   @JsonValue('parent')
-  parent('parent');
+  parent('parent'),
+  @JsonValue('child')
+  child('child');
 
   final String id;
 
@@ -69,6 +72,21 @@ class User {
       role: role ?? this.role,
     );
   }
+
+  bool get isParent => role == FamilyRole.parent;
+  bool get isChildren => role == FamilyRole.child;
+  bool get isNull => role == null;
+
+  String roleLocalized(AppLocalizations trans) {
+    switch (role) {
+      case FamilyRole.parent:
+        return trans.parent;
+      case FamilyRole.child:
+        return trans.child;
+      default:
+        return '--';
+    }
+  }
 }
 
 @JsonSerializable()
@@ -86,4 +104,21 @@ class UserStatistic {
       _$UserStatisticFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserStatisticToJson(this);
+}
+
+@JsonSerializable()
+class UserFamily {
+  @JsonKey(name: 'userId', fromJson: asOrNull)
+  String? userId;
+  @JsonKey(name: 'user')
+  User? user;
+  UserFamily({
+    this.userId,
+    this.user,
+  });
+
+  factory UserFamily.fromJson(Map<String, dynamic> json) =>
+      _$UserFamilyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserFamilyToJson(this);
 }

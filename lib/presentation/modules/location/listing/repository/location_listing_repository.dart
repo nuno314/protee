@@ -6,4 +6,6 @@ part 'location_listing_repository.impl.dart';
 
 abstract class LocationListingRepository {
   Future<List<UserLocation>> getData();
+
+  Future<bool> removeLocation(String id);
 }

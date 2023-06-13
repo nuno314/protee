@@ -2,7 +2,18 @@ part of 'family_profile_screen.dart';
 
 extension FamilyProfileAction on _FamilyProfileScreenState {
   void _blocListener(BuildContext context, FamilyProfileState state) {
+    hideLoading();
     _controller.refreshCompleted();
+
+    if (state is RemoveMemberState) {
+      showNoticeDialog(
+          context: context, message: trans.removeMemberSuccessfully,);
+    } else if (state is LeaveFamilyState) {
+      showNoticeDialog(context: context, message: trans.leaveFamilySuccessfully)
+          .then((value) {
+        Navigator.pop(context);
+      });
+    }
   }
 
   void onRefresh() {
@@ -17,14 +28,25 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
     Navigator.pushNamed(context, RouteList.addMember);
   }
 
-  void _onTapRequests() {}
+  void _onTapRequests() {
+    Navigator.pushNamed(
+      context,
+      RouteList.joinFamilyRequests,
+      arguments: bloc.state.requests,
+    );
+  }
 
   void _onTapSettings() {
     Navigator.pushNamed(
       context,
       RouteList.familySettings,
       arguments: bloc.state.family,
-    );
+    ).then((value) {
+      if (value is bool && value == true) {
+        showLoading();
+        bloc.add(LeaveFamilyEvent());
+      }
+    });
   }
 
   Future<void> removeMember(CompletionHandler handler, User member) async {
@@ -33,6 +55,7 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
       message: trans.confirmRemoveMember,
       title: trans.inform,
       onConfirmed: () async {
+        showLoading();
         await handler(true);
         bloc.add(
           RemoveMemberEvent(member),

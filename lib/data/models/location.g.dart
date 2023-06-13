@@ -36,8 +36,10 @@ UserLocation _$UserLocationFromJson(Map<String, dynamic> json) => UserLocation(
       long: asOrNull(json['long']),
       lat: asOrNull(json['lat']),
       name: asOrNull(json['name']),
+      icon: asOrNull(json['icon']),
       description: asOrNull(json['description']),
       id: asOrNull(json['id']),
+      status: $enumDecodeNullable(_$UserLocationStatusEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$UserLocationToJson(UserLocation instance) =>
@@ -45,6 +47,13 @@ Map<String, dynamic> _$UserLocationToJson(UserLocation instance) =>
       'long': instance.long,
       'lat': instance.lat,
       'name': instance.name,
+      'icon': instance.icon,
       'description': instance.description,
       'id': instance.id,
+      'status': _$UserLocationStatusEnumMap[instance.status],
     };
+
+const _$UserLocationStatusEnumMap = {
+  UserLocationStatus.personal: 'personal',
+  UserLocationStatus.published: 'published',
+};

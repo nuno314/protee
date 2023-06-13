@@ -7,9 +7,11 @@ part 'family_profile_interactor.impl.dart';
 abstract class FamilyProfileInteractor {
   Future<Family?> getFamilyProfile();
 
-  Future<List<User>> getFamilyMembers();
+  Future<List<UserFamily>> getFamilyMembers();
 
   Future<List<JoinFamilyRequest>> getRequests();
 
-  Future<bool> removeMember(User member);
+  Future<bool> removeMember(String id);
+  
+  Future<bool> leaveFamily();
 }

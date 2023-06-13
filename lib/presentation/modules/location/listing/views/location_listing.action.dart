@@ -5,9 +5,17 @@ extension LocationListingAction on _LocationListingScreenState {
     hideLoading();
 
     _addMarkers(state.data);
-    if (state is LocattionUpdatedState) {
+    if (state is LocationUpdatedState) {
       showLoading();
       bloc.add(GetLocationsEvent());
+    } else if (state is RemoveLocationSuccessfully) {
+      showNoticeDialog(
+        context: context,
+        message: trans.removeLocationSuccessfully,
+      ).then((value) {
+        showLoading();
+        bloc.add(GetLocationsEvent());
+      });
     }
   }
 
@@ -58,6 +66,33 @@ extension LocationListingAction on _LocationListingScreenState {
             location.lat!,
             location.lng!,
           ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onDeleteLocation(UserLocation location) async {
+    await showNoticeConfirmDialog(
+      context: context,
+      message: trans.confirmRemoveLocation,
+      title: trans.inform,
+      onConfirmed: () {
+        showLoading();
+        bloc.add(
+          RemoveLocationEvent(location),
+        );
+      },
+    );
+  }
+
+    Future<void> _onTapLocation(UserLocation location) async {
+    print(location.lat);
+    print(location.long);
+    await _animateCamera(
+      Location.from(
+        latLng: LatLng(
+          location.lat!,
+          location.long!,
         ),
       ),
     );

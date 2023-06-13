@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
 import '../../../../../common/utils.dart';
@@ -64,6 +65,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _buildHeader(state),
+                  // if (state.user?.isNull == false)
                   Expanded(
                     child: SmartRefresherWrapper(
                       color: const Color(0xFF7C84F8),
@@ -129,10 +131,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
   }
 
   Widget _buildFamilyGeneralInfo(FamilyProfileState state) {
-    final members = [
-      User(),
-      User(),
-    ];
+    final members = state.members;
 
     final children = [
       Row(
@@ -149,23 +148,24 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
             ),
           ),
           const SizedBox(width: 6),
-          // if (state.requests.isNotEmpty)
-          InkWell(
-            onTap: _onTapRequests,
-            child: BoxColor(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-              color: const Color(0xff92fc92),
-              borderRadius: BorderRadius.circular(16),
-              child: Text(
-                '${state.requests.length} ${trans.joinRequest.toLowerCase()}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: themeColor.black,
-                  fontWeight: FontWeight.w600,
+          if (state.user?.isParent == true)
+            InkWell(
+              onTap: _onTapRequests,
+              child: BoxColor(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                color: const Color(0xff92fc92),
+                borderRadius: BorderRadius.circular(16),
+                child: Text(
+                  '${state.requests.length} ${trans.joinRequest.toLowerCase()}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: themeColor.black,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          )
+            )
         ],
       ),
       const SizedBox(
@@ -190,21 +190,24 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
   }
 
   Widget _buildMember(User member) {
+    final isParent = bloc.state.user?.isParent ?? false;
     return SwipeActionCell(
       backgroundColor: themeColor.transaprent,
-      trailingActions: <SwipeAction>[
-        SwipeAction(
-          icon: SmartImage(
-            image: Assets.svg.icTrash,
-          ),
-          backgroundRadius: 16,
-          widthSpace: 48,
-          onTap: (CompletionHandler handler) async {
-            await removeMember(handler, member);
-          },
-          color: const Color(0xffFDE8E6),
-        ),
-      ],
+      trailingActions: isParent
+          ? <SwipeAction>[
+              SwipeAction(
+                icon: SmartImage(
+                  image: Assets.svg.icTrash,
+                ),
+                backgroundRadius: 16,
+                widthSpace: 48,
+                onTap: (CompletionHandler handler) async {
+                  await removeMember(handler, member);
+                },
+                color: const Color(0xffFDE8E6),
+              ),
+            ]
+          : null,
       key: GlobalKey(),
       child: BoxColor(
         color: themeColor.white,
@@ -221,25 +224,43 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            Column(
-              children: [
-                Text(
-                  member.name ?? '--',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    member.name ?? '--',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  member.dob?.toLocalDddmmyyyy(context) ?? '--',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  const SizedBox(height: 4),
+                  Text(
+                    member.dob?.toLocalDddmmyyyy(context) ?? '--',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            Text(member.roleLocalized(trans)),
+            const SizedBox(width: 16),
+            if (isParent)
+              InkWell(
+                onTap: () => _onTapAdjustRole(member),
+                child: SvgPicture.asset(
+                  Assets.svg.icAdjustRole,
+                  width: 24,
+                  height: 24,
+                  color: themeColor.green,
+                ),
+              ),
+            const SizedBox(
+              width: 4,
+            )
           ],
         ),
       ),
@@ -257,4 +278,6 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
       ),
     );
   }
+
+  void _onTapAdjustRole(User member) {}
 }

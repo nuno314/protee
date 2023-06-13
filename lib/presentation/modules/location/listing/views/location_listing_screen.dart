@@ -8,11 +8,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/location.dart';
-import '../../../../../data/models/response.dart';
 import '../../../../base/base.dart';
 import '../../../../common_bloc/cubit/location_cubit.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../theme/theme_button.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/location_listing_bloc.dart';
 
@@ -60,7 +60,7 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
     return ScreenForm(
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,
-      title: 'Danh sách địa điểm'.capitalizeFirstofEach(),
+      title: trans.locationList.capitalizeFirstofEach(),
       child: BlocConsumer<LocationListingBloc, LocationListingState>(
         listener: _blocListener,
         builder: (context, state) {
@@ -122,6 +122,7 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
           color: themeColor.white,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               location.name ?? '--',
@@ -129,12 +130,14 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             ClipRRect(
               child: CachedNetworkImageWrapper.avatar(
-                url: '',
-                width: 120,
+                url: location.icon ?? '',
+                width: 30,
+                height: 30,
               ),
             ),
             const SizedBox(height: 16),
@@ -147,6 +150,14 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
                 ),
               ),
             ),
+            ThemeButton.primary(
+              onPressed: () => _onDeleteLocation(location),
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              context: context,
+              title: trans.delete,
+              color: themeColor.red,
+              constraints: const BoxConstraints(minHeight: 20.0),
+            ),
           ],
         ),
       ),
@@ -156,16 +167,5 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
   @override
   Future<void> afterFirstLayout(BuildContext context) async {
     await _locateMe();
-  }
-
-  Future<void> _onTapLocation(UserLocation location) async {
-    await _animateCamera(
-      Location.from(
-        latLng: LatLng(
-          location.lat!,
-          location.long!,
-        ),
-      ),
-    );
   }
 }

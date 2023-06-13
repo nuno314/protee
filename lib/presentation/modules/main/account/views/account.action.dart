@@ -4,7 +4,6 @@ extension AccountAction on _AccountScreenState {
   void _blocListener(BuildContext context, AccountState state) {}
 
   void _onTapProfile() {
-    print(bloc.state.user);
     Navigator.pushNamed(
       context,
       RouteList.profile,
@@ -16,7 +15,9 @@ extension AccountAction on _AccountScreenState {
     });
   }
 
-  void _onTapSettings() {}
+  void _onTapChangeLanguage() {
+    Navigator.pushNamed(context, RouteList.changeLanguage);
+  }
 
   void _onTapLogOut() {
     showNoticeConfirmDialog(

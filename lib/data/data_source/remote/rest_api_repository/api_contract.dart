@@ -11,6 +11,7 @@ class ApiContract {
   static const String locationUser = 'location/user';
   static const String location = 'location';
   static const String locationNearby = 'location/get-nearly';
+  static const String removeLocation = 'location/user-remove';
 
   // Family API
   static const String getFamilyProfile = 'family/profile';
@@ -19,7 +20,6 @@ class ApiContract {
   static const String joinFamily = 'family/join';
   static const String joinFamilyRequests = 'family/join-requests';
   static const String removeMember = 'family/remove';
-
-  static const String approveJoinFamily = 'family/approve';
+  static const String approveJoinRequest = 'family/approve';
   static const String leaveFamily = 'family/leave';
 }

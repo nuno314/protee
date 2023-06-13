@@ -7,7 +7,6 @@ extension SplashAction on _SplashScreenState {
 
   void _blocListener(_, SplashState state) {
     if (state is SplashFinishState) {
-      print('time to change screen');
       final nextScreen = state.nextScreen;
 
       _launchApp(nextScreen);

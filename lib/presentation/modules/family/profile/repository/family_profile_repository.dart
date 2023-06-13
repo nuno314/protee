@@ -8,9 +8,11 @@ part 'family_profile_repository.impl.dart';
 abstract class FamilyProfileRepository {
   Future<Family?> getFamilyProfile();
 
-  Future<List<User>> getFamilyMembers();
+  Future<List<UserFamily>> getFamilyMembers();
 
   Future<List<JoinFamilyRequest>> getRequests();
 
-  Future<bool> removeMember(User member);
+  Future<bool> removeMember(String id);
+
+  Future<bool> leaveFamily();
 }

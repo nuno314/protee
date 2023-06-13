@@ -5,6 +5,8 @@ class JoinFamilyRepositoryImpl extends JoinFamilyRepository {
 
   @override
   Future<bool> joinFamily(String code) {
-    return _restApi.joinFamily(code: code).then((value) => value ?? false);
+    return _restApi
+        .joinFamily(code: code)
+        .then((value) => value?.result ?? false);
   }
 }

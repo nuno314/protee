@@ -3,9 +3,8 @@ appName,Protee,Protee
 inform,Thông Báo,Inform
 ok,Ok,Ok
 cancel,Hủy,Cancel
-delete,Xóa,Xóa
+delete,Xóa,Remove
 error,Lỗi,Error
-warning,Chú Ý,Warning
 confirm,Xác Nhận,Confirm
 ignore,Bỏ Qua,Ignore
 noInternet,"Kết nối thất bại.
@@ -15,7 +14,7 @@ technicalIssues,"Oops! .Đã có sự cố xảy ra.
 Vui lòng kiểm tra lại kết nối hoặc thử lại sau","Oops! .There seems to be a technical problem.
 Please check your connection or try again later"
 serverMaintenance,Server đang bảo trì. Vui lòng thử lại sau.,Server is unavailable at this time. Please try again later.
-connectionTimeout,Kết nối quá hạn.,Connection timmed out.
+connectionTimeout,Kết nối quá hạn.,Connection timed out.
 loading,Đang tải,Loading
 requiredLoginMsg,Vui lòng đang nhập để sử dụng tính năng này,Please login to use this feature
 sessionExpired,Phiên bản quá hạn. Vui lòng đăng nhập lại!,Your session is expired. Please log in again!
@@ -88,3 +87,48 @@ updateProfileSuccessfully,Cập nhật thông tin thành công,Update profile su
 notification,Thông báo,Notification
 noNotification,Không có thông báo,No notification
 loginFailed,Đăng nhập thất bại,Login failed
+confirmRemoveLocation,Bạn có muốn xóa địa điểm này?,Do you want to remove this location?
+locationList,Danh sách địa điểm,Location list
+inviteMember,Mời thành viên,Invite member
+addLocation,Thêm địa điểm,Add location
+account,Tài khoản,Account
+leaveFamily,Rời gia đình,Leave family
+confirmRemoveJoinRequest,Bạn có muốn từ chối yêu cầu này?,Do you want to decline this request?
+approve,Chấp thuận,Approve
+familyProfile,Thông tin gia đình,Family profile
+removeLocationSuccessfully,Xóa địa điểm thành công,Remove location successfully
+familySettings,Cài đặt gia đình,Family settings
+sendJoinRequestSuccessfully,Gửi yêu cầu tham gia thành công,Send join request successfully
+confirmApproveRequest,Cho phép gia nhập gia đình?,Do you want to approve this request?
+changeAvatar,Đổi ảnh đại diện,Change avatar
+settings,Cài đặt,Settings
+changeLanguage,Đổi ngôn ngữ,Change language
+vietnamese,Tiếng Việt,Vietnamese
+english,Tiếng Anh,English
+confirmChangeLanguage,Bạn có muốn đổi ngôn ngữ?,Do you want to change language?
+logout,Đăng xuất,Log out
+member,Thành viên,Members
+location,Địa điểm,Location
+locations,Địa điểm,Locations
+warning,Cảnh báo,Warning
+yourWallet,Ví của bạn,Your wallet
+useInvitationCodeBelow,Sử dụng mã mời dưới đây:,Use the invitation code below:
+enterInvitationCode,Nhập mã mời,Enter invitation code
+locationName,Tên địa điểm,Location name
+address,Vị trí,Address
+update,Cập nhật,Update
+welcome,Xin chào,Welcome
+warnings,Cảnh báo,Warnings
+category,Danh mục,Category
+safeArea,Bạn đang ở trong khu vực an toàn,You are in the safe zone
+thereIs,Có,There is
+thereAre,Có,There are
+unsafeAreaNearby,khu vực không an toàn gần bạn,unsafe zone near you
+unsafeAreasNearby,khu vực không an toàn gần bạn,unsafe zones near you
+approveRequestSuccessfully,Duyệt yêu cầu thành công,Approve request successfully
+confirmLeaveFamily,Bạn có muốn rời khỏi gia đình?,Do you want to leave family?
+removeMemberSuccessfully,Xóa thành viên thành công,Remove member successfully
+leaveFamilySuccessfully,Rời gia đình thành công,Leave family successfully
+notInFamily,"Bạn đang chưa có gia đình. Tạo mới ngay?","You don't have a family. Create new now?"
+parent,Phụ huynh,Parent
+child,Trẻ em,Child

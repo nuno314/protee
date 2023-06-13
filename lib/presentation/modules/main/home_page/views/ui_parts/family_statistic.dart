@@ -12,7 +12,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
           children: [
             Expanded(
               child: _buildStatisticItem(
-                title: 'Thành viên',
+                title: trans.member,
                 number: 3,
                 color: themeColor.color33B64F,
                 isSelected: value == 0,
@@ -21,7 +21,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             const SizedBox(width: 15),
             Expanded(
               child: _buildStatisticItem(
-                title: 'Địa điểm',
+                title: trans.locations,
                 number: 420,
                 color: themeColor.colorFF960C,
                 isSelected: value == 1,
@@ -30,7 +30,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             const SizedBox(width: 15),
             Expanded(
               child: _buildStatisticItem(
-                title: 'Cảnh báo',
+                title: trans.warnings,
                 number: 12,
                 color: themeColor.colorFA3D0C,
                 isSelected: value == 2,

@@ -79,6 +79,7 @@ class AppAuthService implements AuthService {
       phoneNumber: user.phoneNumber,
       dob: user.dob?.toIso8601String(),
       email: user.email,
+      avatar: user.avatar,
     );
 
     _localDataManager.notifyUserChanged(res);

@@ -41,7 +41,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
-          title: 'Tài khoản',
+          title: trans.account.capitalizeFirstofEach(),
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           showBackButton: false,
@@ -94,20 +94,20 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       children: [
         _settingItem(
           iconPath: Assets.svg.icPerson,
-          title: 'Tài khoản',
+          title: trans.account,
           itemBorder: ItemBorder.top,
           divider: ItemDivider.line,
           callback: _onTapProfile,
         ),
         _settingItem(
-          iconPath: Assets.svg.icSettings,
-          title: 'Cài đặt',
+          iconPath: Assets.svg.icGlobal,
+          title: trans.changeLanguage,
           divider: ItemDivider.line,
-          callback: _onTapSettings,
+          callback: _onTapChangeLanguage,
         ),
         _settingItem(
           iconPath: Assets.svg.icLogout,
-          title: 'Đăng xuất',
+          title: trans.logout,
           itemBorder: ItemBorder.bottom,
           callback: _onTapLogOut,
         ),

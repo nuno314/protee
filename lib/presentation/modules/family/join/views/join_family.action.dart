@@ -6,10 +6,7 @@ extension JoinFamilyAction on _JoinFamilyScreenState {
     if (state is JoinFamilySuccessfullyState) {
       showNoticeDialog(context: context, message: trans.joinFamilySuccessfully)
           .then(
-        (value) => Navigator.pushNamed(
-          context,
-          RouteList.familyProfile,
-        ),
+        (value) => Navigator.pop(context),
       );
     }
   }

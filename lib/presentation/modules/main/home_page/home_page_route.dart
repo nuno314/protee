@@ -6,7 +6,6 @@ import 'views/home_page_screen.dart';
 
 class HomePageRoute {
   static Map<String, WidgetBuilder> getAll(RouteSettings settings) => {
-        //TODO: Update route name
         '': (context) {
           return BlocProvider(
             create: (context) => HomePageBloc(),

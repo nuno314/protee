@@ -38,14 +38,26 @@ extension ProfileAction on _ProfileScreenState {
     showLoading();
     bloc.add(
       UpdateProfileEvent(
-        _user!.copyWith(
+        user: _user!.copyWith(
           name: _nameController.text,
           dob: _pickBirthday,
           phoneNumber: _phoneNumberController.text.isNotNullOrEmpty
               ? _phoneNumberController.text
               : null,
         ),
+        avatar: avatarValue.value,
       ),
     );
+  }
+
+  Future<void> _showImagePickerActionDialog() async {
+    final file = await ImagePicker(
+      context,
+      trans.changeAvatar,
+      crop: true,
+    ).show();
+    if (file != null) {
+      avatarValue.value = file;
+    }
   }
 }

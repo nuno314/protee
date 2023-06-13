@@ -44,8 +44,14 @@ class LocationListingInitial extends LocationListingState {
   }) : super(viewModel);
 }
 
-class LocattionUpdatedState extends LocationListingState {
-  LocattionUpdatedState({
+class LocationUpdatedState extends LocationListingState {
+  LocationUpdatedState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class RemoveLocationSuccessfully extends LocationListingState {
+  RemoveLocationSuccessfully({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -58,7 +64,10 @@ final _factories = <
   LocationListingInitial: (viewModel) => LocationListingInitial(
         viewModel: viewModel,
       ),
-  LocattionUpdatedState: (viewModel) => LocattionUpdatedState(
+  LocationUpdatedState: (viewModel) => LocationUpdatedState(
+        viewModel: viewModel,
+      ),
+  RemoveLocationSuccessfully: (viewModel) => RemoveLocationSuccessfully(
         viewModel: viewModel,
       ),
 };

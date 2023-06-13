@@ -181,3 +181,16 @@ class AuthResponse {
 
   Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }
+
+@JsonSerializable()
+class BooleanResponse {
+  @JsonKey(name: 'result', fromJson: asOrNull)
+  final bool? result;
+
+  BooleanResponse({this.result});
+
+  factory BooleanResponse.fromJson(Map<String, dynamic> json) =>
+      _$BooleanResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BooleanResponseToJson(this);
+}

@@ -1,12 +1,12 @@
 part of 'profile_bloc.dart';
 
 class _ViewModel {
-  final User? user;
+  final UserFamily? user;
   const _ViewModel({
     this.user,
   });
 
-  _ViewModel copyWith({User? user}) {
+  _ViewModel copyWith({UserFamily? user}) {
     return _ViewModel(user: user ?? this.user);
   }
 }
@@ -24,7 +24,7 @@ abstract class ProfileState {
     );
   }
 
-  User? get user => viewModel.user;
+  UserFamily? get user => viewModel.user;
 }
 
 class ProfileInitial extends ProfileState {

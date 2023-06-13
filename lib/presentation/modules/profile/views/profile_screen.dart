@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,6 +33,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   final _phoneNumberController = InputContainerController();
   final _dobController = InputContainerController();
   DateTime? _pickBirthday;
+  final avatarValue = ValueNotifier<File?>(null);
 
   User? _user;
 
@@ -110,33 +113,48 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                           ),
                           Positioned(
                             top: device.height / 13 - 50,
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: CachedNetworkImageWrapper.avatar(
-                                    url: _user?.avatar ?? '',
-                                    width: 100,
-                                    height: 100,
+                            child: InkWell(
+                              onTap: _showImagePickerActionDialog,
+                              child: Stack(
+                                alignment: AlignmentDirectional.bottomEnd,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(44),
+                                    child: ValueListenableBuilder<File?>(
+                                      valueListenable: avatarValue,
+                                      builder: (context, avatarFile, _) {
+                                        if (avatarFile != null) {
+                                          return Image.file(
+                                            avatarFile,
+                                            width: 88,
+                                            height: 88,
+                                            fit: BoxFit.cover,
+                                          );
+                                        }
+                                        return CachedNetworkImageWrapper.avatar(
+                                          url: widget.user?.avatar ?? '',
+                                          width: 88,
+                                          height: 88,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  _user?.name ?? '--',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: themeColor.primaryColor,
-                                    fontWeight: FontWeight.w600,
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: themeColor.primaryColorLight,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.camera_alt_rounded,
+                                      color: themeColor.cardBackground,
+                                      size: 14,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  _user?.phoneNumber ?? '--',
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                )
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -147,7 +165,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 FooterWidget(
                   child: ThemeButton.primary(
                     context: context,
-                    title: 'Cập nhật',
+                    title: trans.update,
                     onPressed: _onTapUpdate,
                   ),
                 ),

@@ -9,7 +9,7 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   }
 
   @override
-  Future<List<User>> getFamilyMembers() {
+  Future<List<UserFamily>> getFamilyMembers() {
     return _restApi.getFamilyMembers().then((value) => value ?? []);
   }
 
@@ -19,8 +19,14 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   }
 
   @override
-  Future<bool> removeMember(User member) {
-    // return _restApi.removeMember();
-    return Future.value(true);
+  Future<bool> removeMember(String id) {
+    return _restApi
+        .removeMember(id: id)
+        .then((value) => value?.result ?? false);
+  }
+
+  @override
+  Future<bool> leaveFamily() {
+    return _restApi.leaveFamily().then((value) => value?.result??false);
   }
 }

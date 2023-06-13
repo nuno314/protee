@@ -20,6 +20,26 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapFamilyProfile() {
-    Navigator.pushNamed(context, RouteList.familyProfile);
+    if (bloc.state.user?.isNull == true) {
+      showNoticeConfirmDialog(
+        context: context,
+        message: trans.notInFamily,
+        title: trans.inform,
+        onConfirmed: () {
+          Navigator.pushNamed(
+            context,
+            RouteList.familyProfile,
+            arguments:
+                injector.get<AppApiService>().localDataManager.currentUser,
+          );
+        },
+      );
+    } else {
+      Navigator.pushNamed(
+        context,
+        RouteList.familyProfile,
+        arguments: injector.get<AppApiService>().localDataManager.currentUser,
+      );
+    }
   }
 }

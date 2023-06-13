@@ -11,7 +11,7 @@ class FamilyProfileInteractorImpl extends FamilyProfileInteractor {
   }
 
   @override
-  Future<List<User>> getFamilyMembers() {
+  Future<List<UserFamily>> getFamilyMembers() {
     return _repository.getFamilyMembers();
   }
 
@@ -21,7 +21,12 @@ class FamilyProfileInteractorImpl extends FamilyProfileInteractor {
   }
 
   @override
-  Future<bool> removeMember(User member) {
-    return _repository.removeMember(member);
+  Future<bool> removeMember(String id) {
+    return _repository.removeMember(id);
+  }
+
+  @override
+  Future<bool> leaveFamily() {
+    return _repository.leaveFamily();
   }
 }

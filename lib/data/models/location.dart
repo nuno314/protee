@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -93,16 +94,22 @@ class UserLocation {
   final double? lat;
   @JsonKey(name: 'name', fromJson: asOrNull)
   final String? name;
+  @JsonKey(name: 'icon', fromJson: asOrNull)
+  final String? icon;
   @JsonKey(name: 'description', fromJson: asOrNull)
   final String? description;
   @JsonKey(name: 'id', fromJson: asOrNull)
   final String? id;
+  @JsonKey(name: 'status', unknownEnumValue: null)
+  final UserLocationStatus? status;
   UserLocation({
     this.long,
     this.lat,
     this.name,
+    this.icon,
     this.description,
     this.id,
+    this.status,
   });
 
   double? distanceFrom(Location? other) {
@@ -123,4 +130,15 @@ class UserLocation {
       _$UserLocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserLocationToJson(this);
+}
+
+enum UserLocationStatus {
+  @JsonValue('personal')
+  personal('personal'),
+  @JsonValue('published')
+  published('published');
+
+  final String id;
+
+  const UserLocationStatus(this.id);
 }

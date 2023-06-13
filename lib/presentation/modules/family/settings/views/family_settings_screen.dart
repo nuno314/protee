@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/family.dart';
+import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
@@ -52,7 +54,58 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
           headerColor: const Color(0xFF7C84F8),
           titleColor: themeColor.white,
           title: trans.familySettings,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: _onTapLeaveFamily,
+                  child: BoxColor(
+                    color: themeColor.white,
+                    borderRadius: BorderRadius.circular(16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          Assets.svg.icLeave,
+                          width: 24,
+                          height: 24,
+                          color: themeColor.red,
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Text(
+                            trans.leaveFamily,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: themeColor.gray8C,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         );
+      },
+    );
+  }
+
+  void _onTapLeaveFamily() {
+    showNoticeConfirmDialog(
+      context: context,
+      message: trans.confirmLeaveFamily,
+      title: trans.inform,
+      onConfirmed: () {
+        Navigator.pop(context, true);
       },
     );
   }

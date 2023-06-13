@@ -36,7 +36,7 @@ abstract class RestApiRepository {
   Future<Family?> getFamilyProfile();
 
   @GET(ApiContract.getFamilyMembers)
-  Future<List<User>?> getFamilyMembers();
+  Future<List<UserFamily>?> getFamilyMembers();
 
   @POST(ApiContract.refreshToken)
   Future<AuthResponse> refreshToken(
@@ -77,7 +77,7 @@ abstract class RestApiRepository {
 
   @POST(ApiContract.removeMember)
   Future<BooleanResponse?> removeMember({
-    @Field('userId') required String id,
+    @Field('memberId') required String id,
   });
 
   @POST(ApiContract.leaveFamily)

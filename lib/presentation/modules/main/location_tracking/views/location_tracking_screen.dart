@@ -81,23 +81,29 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           showBackButton: false,
-          child: Animarker(
-            mapId: _controller.future.then<int>((value) => value.mapId),
-            curve: Curves.bounceInOut,
-            duration: const Duration(milliseconds: 500),
-            markers: markers.values.toSet(),
-            child: GoogleMap(
-              initialCameraPosition: _kGooglePlex,
-              myLocationEnabled: true,
-              onMapCreated: _onMapCreated,
-              mapType: MapType.normal,
-              myLocationButtonEnabled: true,
-              zoomControlsEnabled: false,
-              mapToolbarEnabled: false,
-              compassEnabled: false,
-              tiltGesturesEnabled: false,
-              rotateGesturesEnabled: false,
-            ),
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Animarker(
+                mapId: _controller.future.then<int>((value) => value.mapId),
+                curve: Curves.bounceInOut,
+                duration: const Duration(milliseconds: 100),
+                markers: markers.values.toSet(),
+                child: GoogleMap(
+                  initialCameraPosition: _kGooglePlex,
+                  myLocationEnabled: true,
+                  onMapCreated: _onMapCreated,
+                  mapType: MapType.normal,
+                  myLocationButtonEnabled: true,
+                  zoomControlsEnabled: false,
+                  mapToolbarEnabled: false,
+                  compassEnabled: false,
+                  tiltGesturesEnabled: false,
+                  rotateGesturesEnabled: false,
+                ),
+              ),
+              _buildWarnings(state),
+            ],
           ),
         );
       },
@@ -112,5 +118,48 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
   void _onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(_mapStyle);
     _controller.complete(controller);
+  }
+
+  Widget _buildWarnings(LocationTrackingState state) {
+    final warnings = state.warningPlaces;
+    final hasWarning = warnings.isNotEmpty;
+
+    return BoxColor(
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+      color: hasWarning ? themeColor.red : themeColor.green,
+      borderRadius: BorderRadius.circular(16),
+      child: hasWarning
+          ? RichText(
+              text: TextSpan(
+                text: warnings.length > 1 ? trans.thereAre : trans.thereIs,
+                style: TextStyle(
+                  color: themeColor.white,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' ${warnings.length} ',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: themeColor.white,
+                    ),
+                  ),
+                  TextSpan(
+                    text: warnings.length > 1
+                        ? trans.unsafeAreasNearby
+                        : trans.unsafeAreaNearby,
+                    style: TextStyle(
+                      color: themeColor.white,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Text(
+              trans.safeArea,
+              style: TextStyle(color: themeColor.white),
+            ),
+    );
   }
 }

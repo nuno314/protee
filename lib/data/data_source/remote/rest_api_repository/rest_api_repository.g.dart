@@ -112,13 +112,13 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<List<User>?> getFamilyMembers() async {
+  Future<List<UserFamily>?> getFamilyMembers() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<UserFamily>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -131,7 +131,7 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data
-        ?.map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+        ?.map((dynamic i) => UserFamily.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
@@ -339,7 +339,7 @@ class _RestApiRepository implements RestApiRepository {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'userId': id};
+    final _data = {'memberId': id};
     final _result = await _dio
         .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
       method: 'POST',

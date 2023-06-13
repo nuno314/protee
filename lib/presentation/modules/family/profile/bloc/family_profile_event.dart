@@ -9,3 +9,5 @@ class RemoveMemberEvent extends FamilyProfileEvent {
 
   RemoveMemberEvent(this.member);
 }
+
+class LeaveFamilyEvent extends FamilyProfileEvent {}

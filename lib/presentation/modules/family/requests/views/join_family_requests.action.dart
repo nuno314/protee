@@ -4,13 +4,22 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
   void _blocListener(BuildContext context, JoinFamilyRequestsState state) {
     hideLoading();
     _requests = state.requests;
+    if (state is RequestApprovedState) {
+      showNoticeDialog(
+        context: context,
+        message: trans.approveRequestSuccessfully,
+      );
+    }
   }
 
   void onRefresh() {
     bloc.add(GetJoinRequestsEvent());
   }
 
-  Future<void> declineRequest(CompletionHandler handler, User member) async {
+  Future<void> declineRequest(
+    CompletionHandler handler,
+    User member,
+  ) async {
     await showNoticeConfirmDialog(
       context: context,
       message: trans.confirmRemoveJoinRequest,
@@ -30,10 +39,8 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
       message: trans.confirmApproveRequest,
       title: trans.inform,
       onConfirmed: () {
-        // bloc.add(ApproveRequestEvent(request));
-        // bloc.add(
-        //   // RemoveMemberEvent(member),
-        // );
+        showLoading();
+        bloc.add(ApprovalRequestEvent(request.id!));
       },
     );
   }

@@ -10,4 +10,8 @@ class JoinFamilyRequestsInteractorImpl extends JoinFamilyRequestsInteractor {
     return _repository.getData();
   }
 
+  @override
+  Future<bool> approveRequest(String id) {
+    return _repository.approveRequest(id);
+  }
 }

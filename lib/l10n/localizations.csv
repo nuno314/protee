@@ -120,3 +120,15 @@ update,Cập nhật,Update
 welcome,Xin chào,Welcome
 warnings,Cảnh báo,Warnings
 category,Danh mục,Category
+safeArea,Bạn đang ở trong khu vực an toàn,You are in the safe zone
+thereIs,Có,There is
+thereAre,Có,There are
+unsafeAreaNearby,khu vực không an toàn gần bạn,unsafe zone near you
+unsafeAreasNearby,khu vực không an toàn gần bạn,unsafe zones near you
+approveRequestSuccessfully,Duyệt yêu cầu thành công,Approve request successfully
+confirmLeaveFamily,Bạn có muốn rời khỏi gia đình?,Do you want to leave family?
+removeMemberSuccessfully,Xóa thành viên thành công,Remove member successfully
+leaveFamilySuccessfully,Rời gia đình thành công,Leave family successfully
+notInFamily,"Bạn đang chưa có gia đình. Tạo mới ngay?","You don't have a family. Create new now?"
+parent,Phụ huynh,Parent
+child,Trẻ em,Child

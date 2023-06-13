@@ -19,6 +19,7 @@ class JoinFamilyRequestsBloc
   JoinFamilyRequestsBloc()
       : super(JoinFamilyRequestsInitial(viewModel: const _ViewModel())) {
     on<GetJoinRequestsEvent>(_onGetJoinRequestsEvent);
+    on<ApprovalRequestEvent>(_onApprovalRequestEvent);
   }
 
   Future<void> _onGetJoinRequestsEvent(
@@ -33,5 +34,23 @@ class JoinFamilyRequestsBloc
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onApprovalRequestEvent(
+    ApprovalRequestEvent event,
+    Emitter<JoinFamilyRequestsState> emit,
+  ) async {
+    final res = await _interactor.approveRequest(event.id);
+
+    if (res) {
+      final request = [...state.requests]..removeWhere(
+          (element) => element.id == event.id,
+        );
+      emit(
+        state.copyWith<RequestApprovedState>(
+          viewModel: state.viewModel.copyWith(requests: request),
+        ),
+      );
+    }
   }
 }

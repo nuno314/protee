@@ -41,7 +41,7 @@ class FamilyRoute {
           final args = asOrNull<List<JoinFamilyRequest>>(settings.arguments);
           return BlocProvider(
             create: (context) => JoinFamilyRequestsBloc(),
-            child:  JoinFamilyRequestsScreen(
+            child: JoinFamilyRequestsScreen(
               requests: args,
             ),
           );

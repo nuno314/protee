@@ -135,8 +135,9 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
             const SizedBox(height: 16),
             ClipRRect(
               child: CachedNetworkImageWrapper.avatar(
-                url: '',
-                width: 120,
+                url: location.icon ?? '',
+                width: 30,
+                height: 30,
               ),
             ),
             const SizedBox(height: 16),
@@ -166,16 +167,5 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
   @override
   Future<void> afterFirstLayout(BuildContext context) async {
     await _locateMe();
-  }
-
-  Future<void> _onTapLocation(UserLocation location) async {
-    await _animateCamera(
-      Location.from(
-        latLng: LatLng(
-          location.lat!,
-          location.long!,
-        ),
-      ),
-    );
   }
 }

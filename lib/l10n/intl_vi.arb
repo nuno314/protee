@@ -112,5 +112,17 @@
   "update": "Cập nhật",
   "welcome": "Xin chào",
   "warnings": "Cảnh báo",
-  "category": "Danh mục"
+  "category": "Danh mục",
+  "safeArea": "Bạn đang ở trong khu vực an toàn",
+  "thereIs": "Có",
+  "thereAre": "Có",
+  "unsafeAreaNearby": "khu vực không an toàn gần bạn",
+  "unsafeAreasNearby": "khu vực không an toàn gần bạn",
+  "approveRequestSuccessfully": "Duyệt yêu cầu thành công",
+  "confirmLeaveFamily": "Bạn có muốn rời khỏi gia đình?",
+  "removeMemberSuccessfully": "Xóa thành viên thành công",
+  "leaveFamilySuccessfully": "Rời gia đình thành công",
+  "notInFamily": "Bạn đang chưa có gia đình. Tạo mới ngay?",
+  "parent": "Phụ huynh",
+  "child": "Trẻ em"
 }

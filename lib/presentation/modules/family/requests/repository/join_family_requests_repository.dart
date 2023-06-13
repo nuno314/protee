@@ -6,4 +6,6 @@ part 'join_family_requests_repository.impl.dart';
 
 abstract class JoinFamilyRequestsRepository {
   Future<List<JoinFamilyRequest>> getData();
+  
+  Future<bool> approveRequest(String id);
 }

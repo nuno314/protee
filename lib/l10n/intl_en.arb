@@ -112,5 +112,17 @@
   "update": "Update",
   "welcome": "Welcome",
   "warnings": "Warnings",
-  "category": "Category"
+  "category": "Category",
+  "safeArea": "You are in the safe zone",
+  "thereIs": "There is",
+  "thereAre": "There are",
+  "unsafeAreaNearby": "unsafe zone near you",
+  "unsafeAreasNearby": "unsafe zones near you",
+  "approveRequestSuccessfully": "Approve request successfully",
+  "confirmLeaveFamily": "Do you want to leave family?",
+  "removeMemberSuccessfully": "Remove member successfully",
+  "leaveFamilySuccessfully": "Leave family successfully",
+  "notInFamily": "You don't have a family. Create new now?",
+  "parent": "Parent",
+  "child": "Child"
 }

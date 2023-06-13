@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'family_profile_bloc.dart';
 
 class _ViewModel {
   final User? user;
   final Family? family;
-  final List<User> members;
+  final List<UserFamily> members;
   final List<JoinFamilyRequest> requests;
   const _ViewModel({
     this.user,
@@ -16,7 +15,7 @@ class _ViewModel {
   _ViewModel copyWith({
     User? user,
     Family? family,
-    List<User>? members,
+    List<UserFamily>? members,
     List<JoinFamilyRequest>? requests,
   }) {
     return _ViewModel(
@@ -43,12 +42,27 @@ abstract class FamilyProfileState {
 
   User? get user => viewModel.user;
   Family? get family => viewModel.family;
-  List<User> get members => viewModel.members;
+  List<User> get members => viewModel.members
+      .where((element) => element.user != null)
+      .map((e) => e.user!)
+      .toList();
   List<JoinFamilyRequest> get requests => viewModel.requests;
 }
 
 class FamilyProfileInitial extends FamilyProfileState {
   FamilyProfileInitial({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class RemoveMemberState extends FamilyProfileState {
+  RemoveMemberState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class LeaveFamilyState extends FamilyProfileState {
+  LeaveFamilyState({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -59,6 +73,12 @@ final _factories = <
   _ViewModel viewModel,
 )>{
   FamilyProfileInitial: (viewModel) => FamilyProfileInitial(
+        viewModel: viewModel,
+      ),
+  RemoveMemberState: (viewModel) => RemoveMemberState(
+        viewModel: viewModel,
+      ),
+  LeaveFamilyState: (viewModel) => LeaveFamilyState(
         viewModel: viewModel,
       ),
 };

@@ -84,4 +84,17 @@ extension LocationListingAction on _LocationListingScreenState {
       },
     );
   }
+
+    Future<void> _onTapLocation(UserLocation location) async {
+    print(location.lat);
+    print(location.long);
+    await _animateCamera(
+      Location.from(
+        latLng: LatLng(
+          location.lat!,
+          location.long!,
+        ),
+      ),
+    );
+  }
 }

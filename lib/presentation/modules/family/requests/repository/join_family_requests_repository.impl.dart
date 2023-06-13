@@ -6,4 +6,11 @@ class JoinFamilyRequestsRepositoryImpl extends JoinFamilyRequestsRepository {
   Future<List<JoinFamilyRequest>> getData() {
     return _restApi.getJoinFamilyRequests();
   }
+
+  @override
+  Future<bool> approveRequest(String id) {
+    return _restApi
+        .approveJoinRequest(id: id)
+        .then((value) => value?.result ?? false);
+  }
 }

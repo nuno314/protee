@@ -26,12 +26,15 @@ class Family {
 
 @JsonSerializable()
 class JoinFamilyRequest {
+  @JsonKey(name: 'id', fromJson: asOrNull)
+  String? id;
   @JsonKey(name: 'createdBy', fromJson: asOrNull)
   String? createdBy;
   @JsonKey(name: 'user')
   User? user;
 
   JoinFamilyRequest({
+    this.id,
     this.createdBy,
     this.user,
   });

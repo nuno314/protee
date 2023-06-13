@@ -147,8 +147,9 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                                       color: themeColor.primaryColorLight,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.camera_alt_rounded,
+                                      color: themeColor.cardBackground,
                                       size: 14,
                                     ),
                                   ),

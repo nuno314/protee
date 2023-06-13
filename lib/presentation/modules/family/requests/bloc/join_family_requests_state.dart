@@ -43,12 +43,21 @@ class JoinFamilyRequestsInitial extends JoinFamilyRequestsState {
   }) : super(viewModel);
 }
 
+class RequestApprovedState extends JoinFamilyRequestsState {
+  RequestApprovedState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   JoinFamilyRequestsInitial: (viewModel) => JoinFamilyRequestsInitial(
+        viewModel: viewModel,
+      ),
+  RequestApprovedState: (viewModel) => RequestApprovedState(
         viewModel: viewModel,
       ),
 };

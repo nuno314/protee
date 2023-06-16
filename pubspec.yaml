@@ -87,6 +87,9 @@ dependencies:
   # The easiest way to add facebook login to your flutter app.
   flutter_facebook_auth: ^5.0.8
 
+  # Dartlang port of socket.io-client for web, flutter, dartvm to use
+  socket_io_client: ^2.0.2
+
   #Hive
   hive: ^2.0.4
   hive_flutter: ^1.1.0

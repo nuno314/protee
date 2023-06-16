@@ -2,7 +2,7 @@ part of 'home_page_bloc.dart';
 
 class _ViewModel {
   final User? user;
-  final UserStatistic? statistic;
+  final FamilyStatistic? statistic;
   const _ViewModel({
     this.user,
     this.statistic,
@@ -10,7 +10,7 @@ class _ViewModel {
 
   _ViewModel copyWith({
     User? user,
-    UserStatistic? statistic,
+    FamilyStatistic? statistic,
   }) {
     return _ViewModel(
       user: user ?? this.user,
@@ -33,7 +33,11 @@ abstract class HomePageState {
   }
 
   User? get user => viewModel.user;
-  UserStatistic? get statistic => viewModel.statistic;
+  FamilyStatistic? get statistic => viewModel.statistic;
+  int get members => viewModel.statistic?.numberMembers ?? 0;
+  int get locations => viewModel.statistic?.numberLocations ?? 0;
+  int get warnings => viewModel.statistic?.numberWarningTimes ?? 0;
+
 }
 
 class HomePageInitial extends HomePageState {

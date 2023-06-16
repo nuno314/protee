@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
 import 'location.dart';
+import 'message.dart';
 import 'place_prediction.dart';
 import 'user.dart';
 
@@ -193,4 +194,22 @@ class BooleanResponse {
       _$BooleanResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BooleanResponseToJson(this);
+}
+
+@JsonSerializable()
+class MessageResponse {
+  @JsonKey(name: 'data')
+  final List<Message>? data;
+  @JsonKey(name: 'total', fromJson: asOrNull)
+  final int? total;
+
+  MessageResponse({
+    this.data,
+    this.total,
+  });
+
+   factory MessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$MessageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MessageResponseToJson(this);
 }

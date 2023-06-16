@@ -30,11 +30,11 @@ extension FeaturesUI on _HomePageScreenState {
         title: trans.locationList,
         onTap: onTapLocationList,
       ),
-      // HighlightFeatureItem(
-      //   icon: Assets.svg.icWallet,
-      //   title: trans.yourWallet,
-      //   onTap: () {},
-      // ),
+      HighlightFeatureItem(
+        icon: Assets.svg.icWallet,
+        title: trans.message,
+        onTap: onTapMessage,
+      ),
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -100,3 +100,4 @@ extension FeaturesUI on _HomePageScreenState {
     );
   }
 }
+

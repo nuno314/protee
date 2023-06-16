@@ -5,7 +5,7 @@ abstract class FamilyProfileEvent {}
 class GetFamilyProfileEvent extends FamilyProfileEvent {}
 
 class RemoveMemberEvent extends FamilyProfileEvent {
-  final User member;
+  final UserFamily member;
 
   RemoveMemberEvent(this.member);
 }

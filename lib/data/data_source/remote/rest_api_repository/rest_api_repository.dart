@@ -87,8 +87,23 @@ abstract class RestApiRepository {
   Future<BooleanResponse?> approveJoinRequest({
     @Field('requestId') required String id,
   });
+
   @POST(ApiContract.removeLocation)
   Future<BooleanResponse?> removeLocation({
     @Field('locationId') required String id,
   });
+
+  @GET(ApiContract.messages)
+  Future<MessageResponse?> getMessages({
+    @Query('page') required int page,
+    @Query('take') required int take,
+  });
+
+  @POST(ApiContract.sendMessage)
+  Future<dynamic> sendMessage({
+    @Field('content') required String message,
+  });
+
+   @GET(ApiContract.basicInformation)
+  Future<FamilyStatistic?> getBasicInformation();
 }

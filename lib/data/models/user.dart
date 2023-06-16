@@ -108,12 +108,15 @@ class UserStatistic {
 
 @JsonSerializable()
 class UserFamily {
-  @JsonKey(name: 'userId', fromJson: asOrNull)
-  String? userId;
+  @JsonKey(name: 'id', fromJson: asOrNull)
+  String? id;
+  @JsonKey(name: 'role', unknownEnumValue: null)
+  FamilyRole? role;
   @JsonKey(name: 'user')
   User? user;
   UserFamily({
-    this.userId,
+    this.id,
+    this.role,
     this.user,
   });
 
@@ -121,4 +124,15 @@ class UserFamily {
       _$UserFamilyFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserFamilyToJson(this);
+
+  String roleLocalized(AppLocalizations trans) {
+    switch (role) {
+      case FamilyRole.parent:
+        return trans.parent;
+      case FamilyRole.child:
+        return trans.child;
+      default:
+        return '--';
+    }
+  }
 }

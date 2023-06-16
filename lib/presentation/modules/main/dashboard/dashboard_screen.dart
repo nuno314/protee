@@ -113,7 +113,6 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                     child: const HomePageScreen(),
                   ),
                 ),
-                Container(),
                 KeepAliveWidget(
                   child: BlocProvider(
                     create: (context) => LocationTrackingBloc(),
@@ -147,14 +146,6 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                       ),
                       selectedIcon: _buildBottomBarIcon(
                         asset: Assets.svg.icHomeFilled,
-                      ),
-                    ),
-                    BottomBarItemData(
-                      icon: _buildBottomBarIcon(
-                        asset: Assets.svg.icMess,
-                      ),
-                      selectedIcon: _buildBottomBarIcon(
-                        asset: Assets.svg.icMessFilled,
                       ),
                     ),
                     BottomBarItemData(

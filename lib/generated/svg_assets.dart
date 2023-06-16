@@ -19,6 +19,7 @@ class SvgAssets {
   final String icFamilyInfo = 'assets/images/svg/ic_family_info.svg';
   final String icGlobal = 'assets/images/svg/ic_global.svg';
   final String icGoogle = 'assets/images/svg/ic_google.svg';
+  final String icGroup = 'assets/images/svg/ic_group.svg';
   final String icHome = 'assets/images/svg/ic_home.svg';
   final String icHomeFilled = 'assets/images/svg/ic_home_filled.svg';
   final String icJoinFamily = 'assets/images/svg/ic_join_family.svg';

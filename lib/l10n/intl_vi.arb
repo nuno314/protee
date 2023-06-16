@@ -124,5 +124,8 @@
   "leaveFamilySuccessfully": "Rời gia đình thành công",
   "notInFamily": "Bạn đang chưa có gia đình. Tạo mới ngay?",
   "parent": "Phụ huynh",
-  "child": "Trẻ em"
+  "child": "Trẻ em",
+  "message": "Tin nhắn",
+  "newMessage": "Tin nhắn mới",
+  "online": "Đang hoạt động"
 }

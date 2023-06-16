@@ -46,7 +46,8 @@ Map<String, dynamic> _$UserStatisticToJson(UserStatistic instance) =>
     };
 
 UserFamily _$UserFamilyFromJson(Map<String, dynamic> json) => UserFamily(
-      userId: asOrNull(json['userId']),
+      id: asOrNull(json['id']),
+      role: $enumDecodeNullable(_$FamilyRoleEnumMap, json['role']),
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
@@ -54,6 +55,7 @@ UserFamily _$UserFamilyFromJson(Map<String, dynamic> json) => UserFamily(
 
 Map<String, dynamic> _$UserFamilyToJson(UserFamily instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
+      'id': instance.id,
+      'role': _$FamilyRoleEnumMap[instance.role],
       'user': instance.user,
     };

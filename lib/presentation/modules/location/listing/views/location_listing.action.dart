@@ -22,6 +22,9 @@ extension LocationListingAction on _LocationListingScreenState {
   void _addMarkers(List<UserLocation> locations) {
     final _markers = <MarkerId, Marker>{};
     for (final location in locations) {
+      if (location.lat == null || location.long == null) {
+        continue;
+      }
       final marker = Marker(
         markerId: MarkerId(location.id!),
         position: LatLng(location.lat!, location.long!),

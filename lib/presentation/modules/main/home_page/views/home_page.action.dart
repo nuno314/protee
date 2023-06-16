@@ -1,7 +1,12 @@
 part of 'home_page_screen.dart';
 
 extension HomePageAction on _HomePageScreenState {
-  void _blocListener(BuildContext context, HomePageState state) {}
+  void _blocListener(BuildContext context, HomePageState state) {
+    hideLoading();
+    _refreshController
+      ..refreshCompleted()
+      ..loadComplete();
+  }
 
   void onTapAddMember() {
     Navigator.pushNamed(context, RouteList.addMember);
@@ -19,6 +24,14 @@ extension HomePageAction on _HomePageScreenState {
     Navigator.pushNamed(context, RouteList.locationListing);
   }
 
+  void onTapMessage() {
+    Navigator.pushNamed(
+      context,
+      RouteList.messenger,
+      arguments: bloc.state.user!,
+    );
+  }
+
   void onTapFamilyProfile() {
     if (bloc.state.user?.isNull == true) {
       showNoticeConfirmDialog(
@@ -28,9 +41,7 @@ extension HomePageAction on _HomePageScreenState {
         onConfirmed: () {
           Navigator.pushNamed(
             context,
-            RouteList.familyProfile,
-            arguments:
-                injector.get<AppApiService>().localDataManager.currentUser,
+            RouteList.addMember,
           );
         },
       );

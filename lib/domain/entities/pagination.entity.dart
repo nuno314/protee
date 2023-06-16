@@ -2,25 +2,17 @@ import '../../common/constants.dart';
 
 class Pagination {
   int limit;
-  int offset;
+  int page;
   int total;
 
   Pagination({
     this.limit = PaginationConstant.lowLimit,
-    this.offset = 0,
+    this.page = 0,
     this.total = 0,
   });
 
-  int get nextOffset {
-    if (total == 0) {
-      // Incase haven't loaded yet
-      return offset;
-    }
-    return offset + limit;
-  }
-
   bool get canNext {
-    return nextOffset == total && total != 0;
+    return total == limit * page;
   }
 
   int get currentPage => total ~/ limit;
@@ -35,6 +27,6 @@ class Pagination {
 
   @override
   String toString() {
-    return '{"limit": $limit, "offset": $offset, "total": $total}';
+    return '{"limit": $limit, "page": $page, "total": $total}';
   }
 }

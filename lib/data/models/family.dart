@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
@@ -43,4 +44,25 @@ class JoinFamilyRequest {
       _$JoinFamilyRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$JoinFamilyRequestToJson(this);
+}
+
+@JsonSerializable()
+class FamilyStatistic {
+  @JsonKey(name: 'numberMembers', fromJson: asOrNull)
+  int? numberMembers;
+  @JsonKey(name: 'numberLocations', fromJson: asOrNull)
+  int? numberLocations;
+  @JsonKey(name: 'numberWarningTimes', fromJson: asOrNull)
+  int? numberWarningTimes;
+
+  FamilyStatistic({
+    this.numberMembers,
+    this.numberLocations,
+    this.numberWarningTimes,
+  });
+
+  factory FamilyStatistic.fromJson(Map<String, dynamic> json) =>
+      _$FamilyStatisticFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FamilyStatisticToJson(this);
 }

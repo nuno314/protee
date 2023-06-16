@@ -49,7 +49,7 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
     });
   }
 
-  Future<void> removeMember(CompletionHandler handler, User member) async {
+  Future<void> removeMember(CompletionHandler handler, UserFamily member) async {
     await showNoticeConfirmDialog(
       context: context,
       message: trans.confirmRemoveMember,

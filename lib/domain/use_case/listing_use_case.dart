@@ -34,12 +34,12 @@ class ListingUseCase<T, P> {
 
   Future<List<T>> _getData([P? param]) async {
     final response = await _getPaginationData(
-      _pagination.nextOffset,
+      _pagination.page,
       _pagination.limit,
       param,
     );
     _pagination = Pagination(
-      offset: _pagination.nextOffset,
+      page: _pagination.nextPage,
       total: _pagination.total + response.length,
     );
     _data.addAll(response);

@@ -42,10 +42,7 @@ abstract class FamilyProfileState {
 
   User? get user => viewModel.user;
   Family? get family => viewModel.family;
-  List<User> get members => viewModel.members
-      .where((element) => element.user != null)
-      .map((e) => e.user!)
-      .toList();
+  List<UserFamily> get members => viewModel.members;
   List<JoinFamilyRequest> get requests => viewModel.requests;
 }
 

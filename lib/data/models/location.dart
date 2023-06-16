@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
+import 'user.dart';
 
 part 'location.g.dart';
 
@@ -102,6 +103,10 @@ class UserLocation {
   final String? id;
   @JsonKey(name: 'status', unknownEnumValue: null)
   final UserLocationStatus? status;
+  @JsonKey(name: 'user')
+  final User? user;
+   @JsonKey(name: 'createdAt', fromJson: asOrNull)
+  final DateTime? createdAt;
   UserLocation({
     this.long,
     this.lat,
@@ -110,6 +115,8 @@ class UserLocation {
     this.description,
     this.id,
     this.status,
+    this.user,
+    this.createdAt,
   });
 
   double? distanceFrom(Location? other) {

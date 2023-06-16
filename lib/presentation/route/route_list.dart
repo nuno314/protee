@@ -15,4 +15,6 @@ class RouteList {
   static const String familySettings = '/family_settings';
   static const String joinFamilyRequests = '/join_family_requests';
   static const String changeLanguage = '/change_language';
+  static const String messenger = '/messenger';
+  static const String messengerDetail = '/messenger_detail';
 }

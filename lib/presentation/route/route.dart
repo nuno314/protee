@@ -7,6 +7,7 @@ import '../modules/language/language_route.dart';
 import '../modules/location/location_route.dart';
 import '../modules/log_viewer/log_viewer_route.dart';
 import '../modules/main/main_route.dart';
+import '../modules/message/message_route.dart';
 import '../modules/profile/profile_route.dart';
 import '../modules/webview/webview_route.dart';
 import '../modules/welcome/welcome_route.dart';
@@ -22,6 +23,7 @@ class RouteGenerator {
         ...LocationRoute.getAll(settings),
         ...ProfileRoute.getAll(settings),
         ...LanguageRoute.getAll(settings),
+        ...MessageRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

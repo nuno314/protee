@@ -57,10 +57,10 @@ class FamilyProfileBloc
     final user = state.viewModel.members
         .firstWhereOrNull((element) => element.user!.id == event.member.id);
     if (user != null) {
-      final res = await _interactor.removeMember(user.userId!);
+      final res = await _interactor.removeMember(user.id!);
       if (res) {
         final members = [...state.viewModel.members]
-          ..removeWhere((element) => element.userId == user.userId);
+          ..removeWhere((element) => element.id == user.id);
         emit(
           state.copyWith<RemoveMemberState>(
             viewModel: state.viewModel.copyWith(

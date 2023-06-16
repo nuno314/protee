@@ -5,6 +5,7 @@ import 'package:dio/dio.dart' as dio_p;
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 import '../../../common/client_info.dart';
 import '../../../common/config.dart';
@@ -32,7 +33,6 @@ class AppApiService {
   ApiServiceDelegate? apiServiceDelegate;
 
   final baseGoogleMapUrl = 'https://maps.googleapis.com/maps/api/';
-
   AppApiService() {
     _config();
   }
@@ -47,6 +47,7 @@ class AppApiService {
     _setupDioLocationRepository();
 
     _createLocationRepository();
+
   }
 
   Map<String, String> _getDefaultHeader() {
@@ -168,6 +169,7 @@ class AppApiService {
     final token = await injector.get<AuthService>().refreshToken();
     return token.isNotNullOrEmpty ? '$token' : null;
   }
+
 }
 
 mixin ApiServiceDelegate {

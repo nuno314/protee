@@ -7,3 +7,5 @@ class UpdateAccountEvent extends HomePageEvent {
 
   UpdateAccountEvent(this.user);
 }
+
+class GetFamilyStatisticEvent extends HomePageEvent {}

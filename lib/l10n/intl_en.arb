@@ -124,5 +124,8 @@
   "leaveFamilySuccessfully": "Leave family successfully",
   "notInFamily": "You don't have a family. Create new now?",
   "parent": "Parent",
-  "child": "Child"
+  "child": "Child",
+  "message": "Message",
+  "newMessage": "New message",
+  "online": "Online"
 }

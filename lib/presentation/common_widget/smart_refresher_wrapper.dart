@@ -19,6 +19,7 @@ class SmartRefresherWrapper extends StatelessWidget {
     this.enablePullDown = true,
     this.enablePullUp = false,
     this.color,
+    this.reverse,
   });
 
   final RefreshController controller;
@@ -29,6 +30,7 @@ class SmartRefresherWrapper extends StatelessWidget {
   final Widget? child;
   final ScrollController? scrollController;
   final Color? color;
+  final bool? reverse;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class SmartRefresherWrapper extends StatelessWidget {
           );
         },
       ),
+      reverse: reverse,
       child: child,
     );
   }

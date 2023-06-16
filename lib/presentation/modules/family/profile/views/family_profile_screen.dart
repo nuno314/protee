@@ -189,7 +189,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     );
   }
 
-  Widget _buildMember(User member) {
+  Widget _buildMember(UserFamily member) {
     final isParent = bloc.state.user?.isParent ?? false;
     return SwipeActionCell(
       backgroundColor: themeColor.transaprent,
@@ -218,18 +218,18 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: CachedNetworkImageWrapper.avatar(
-                url: member.avatar ?? '',
+                url: member.user?.avatar ?? '',
                 width: 80,
                 height: 80,
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    member.name ?? '--',
+                    member.user?.name ?? '--',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -237,10 +237,9 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    member.dob?.toLocalDddmmyyyy(context) ?? '--',
+                    member.user?.dob?.toLocalddmmyyyy() ?? '--',
                     style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -279,5 +278,5 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     );
   }
 
-  void _onTapAdjustRole(User member) {}
+  void _onTapAdjustRole(UserFamily member) {}
 }

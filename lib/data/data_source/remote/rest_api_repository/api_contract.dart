@@ -4,6 +4,9 @@ class ApiContract {
   static const String refreshToken = 'auth/user/login-by-refresh-token';
   static const String logout = 'logout';
 
+  // Analysis
+  static const String basicInformation = 'analytics/family/basic-information';
+  
   // Profile
   static const String profile = 'users/profile';
 
@@ -22,4 +25,8 @@ class ApiContract {
   static const String removeMember = 'family/remove';
   static const String approveJoinRequest = 'family/approve';
   static const String leaveFamily = 'family/leave';
+
+  // Message
+  static const String messages = 'message/messages';
+  static const String sendMessage = 'message';
 }

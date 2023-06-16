@@ -16,8 +16,6 @@ class DashboardCubit extends Cubit<DashboardState> {
   void navigateTo(int idx) {
     if (idx == DashboardPage.home.index) {
       emit(DashboardHome());
-    } else if (idx == DashboardPage.message.index) {
-      emit(DashboardMessage());
     } else if (idx == DashboardPage.location.index) {
       emit(DashboardLocation());
     } else if (idx == DashboardPage.notification.index) {
@@ -35,7 +33,6 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   List<DashboardState> get dashboardStates => [
         DashboardHome(),
-        DashboardMessage(),
         DashboardLocation(),
         DashboardNotification(),
         DashboardAccount(),

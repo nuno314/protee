@@ -13,7 +13,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             Expanded(
               child: _buildStatisticItem(
                 title: trans.member,
-                number: 3,
+                number: state.members,
                 color: themeColor.color33B64F,
                 isSelected: value == 0,
               ),
@@ -22,7 +22,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             Expanded(
               child: _buildStatisticItem(
                 title: trans.locations,
-                number: 420,
+                number: state.locations,
                 color: themeColor.colorFF960C,
                 isSelected: value == 1,
               ),
@@ -31,7 +31,7 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             Expanded(
               child: _buildStatisticItem(
                 title: trans.warnings,
-                number: 12,
+                number: state.warnings,
                 color: themeColor.colorFA3D0C,
                 isSelected: value == 2,
               ),

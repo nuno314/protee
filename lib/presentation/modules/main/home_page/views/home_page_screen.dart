@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/data_source/remote/app_api_service.dart';
@@ -12,6 +11,7 @@ import '../../../../../di/di.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/cache_network_image_wrapper.dart';
+import '../../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../../extentions/extention.dart';
 import '../../../../route/route_list.dart';
 import '../../../../theme/shadow.dart';
@@ -35,18 +35,7 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends StateBase<HomePageScreen> {
   late Timer _timer;
   int idx = 0;
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  CameraPosition? _kGooglePlex;
-
-  static const CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
-
+  final _refreshController = RefreshController(initialRefresh: true);
   final _idxNotifier = ValueNotifier<int>(0);
 
   @override
@@ -94,14 +83,22 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
   }
 
   Widget _buildBody(HomePageState state) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildHeader(state),
-          _buildFamilyStatistic(state),
-          _buildHomePageFeatures(state),
-        ],
+    return SmartRefresherWrapper(
+      controller: _refreshController,
+      onRefresh: _onRefresh,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildHeader(state),
+            _buildFamilyStatistic(state),
+            _buildHomePageFeatures(state),
+          ],
+        ),
       ),
     );
+  }
+
+  void _onRefresh() {
+    bloc.add(GetFamilyStatisticEvent());
   }
 }

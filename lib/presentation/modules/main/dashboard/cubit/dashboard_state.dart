@@ -15,12 +15,6 @@ class DashboardHome extends DashboardState {
   String get route => 'home';
 }
 
-class DashboardMessage extends DashboardState {
-  DashboardMessage() : super(DashboardPage.message.index);
-
-  @override
-  String get route => 'message_list';
-}
 
 class DashboardLocation extends DashboardState {
   DashboardLocation() : super(DashboardPage.location.index);

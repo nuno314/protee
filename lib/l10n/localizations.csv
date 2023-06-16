@@ -132,3 +132,6 @@ leaveFamilySuccessfully,Rời gia đình thành công,Leave family successfully
 notInFamily,"Bạn đang chưa có gia đình. Tạo mới ngay?","You don't have a family. Create new now?"
 parent,Phụ huynh,Parent
 child,Trẻ em,Child
+message,Tin nhắn,Message
+newMessage,Tin nhắn mới,New message
+online,Đang hoạt động,Online

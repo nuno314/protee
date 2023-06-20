@@ -1,7 +1,5 @@
 // Add member
 export 'add_member/bloc/add_member_bloc.dart';
-export 'add_member/interactor/add_member_interactor.dart';
-export 'add_member/repository/add_member_repository.dart';
 export 'add_member/views/add_member_screen.dart';
 
 // Join family

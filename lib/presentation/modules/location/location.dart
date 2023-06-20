@@ -3,5 +3,8 @@ export 'add/interactor/add_location_interactor.dart';
 export 'add/repository/add_location_repository.dart';
 export 'add/views/add_location_screen.dart';
 
+//
 export 'listing/bloc/location_listing_bloc.dart';
+export 'listing/interactor/location_listing_interactor.dart';
+export 'listing/repository/location_listing_repository.dart';
 export 'listing/views/location_listing_screen.dart';

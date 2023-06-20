@@ -3,18 +3,22 @@ part of 'home_page_bloc.dart';
 class _ViewModel {
   final User? user;
   final FamilyStatistic? statistic;
+  final List<UserFamily> familyMembers;
   const _ViewModel({
     this.user,
     this.statistic,
+    this.familyMembers = const [],
   });
 
   _ViewModel copyWith({
     User? user,
     FamilyStatistic? statistic,
+    List<UserFamily>? familyMembers,
   }) {
     return _ViewModel(
       user: user ?? this.user,
       statistic: statistic ?? this.statistic,
+      familyMembers: familyMembers ?? this.familyMembers,
     );
   }
 }
@@ -34,10 +38,13 @@ abstract class HomePageState {
 
   User? get user => viewModel.user;
   FamilyStatistic? get statistic => viewModel.statistic;
-  int get members => viewModel.statistic?.numberMembers ?? 0;
-  int get locations => viewModel.statistic?.numberLocations ?? 0;
-  int get warnings => viewModel.statistic?.numberWarningTimes ?? 0;
-
+  int get membersStatistic => viewModel.statistic?.numberMembers ?? 0;
+  int get locationsStatistic => viewModel.statistic?.numberLocations ?? 0;
+  int get warningsStatistic => viewModel.statistic?.numberWarningTimes ?? 0;
+  List<User> get members => viewModel.familyMembers
+      .where((member) => member.user != null)
+      .map((member) => member.user!)
+      .toList();
 }
 
 class HomePageInitial extends HomePageState {

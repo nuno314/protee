@@ -13,27 +13,30 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
             Expanded(
               child: _buildStatisticItem(
                 title: trans.member,
-                number: state.members,
+                number: state.membersStatistic,
                 color: themeColor.color33B64F,
                 isSelected: value == 0,
+                onTap: onTapMemberStatistic,
               ),
             ),
             const SizedBox(width: 15),
             Expanded(
               child: _buildStatisticItem(
                 title: trans.locations,
-                number: state.locations,
+                number: state.locationsStatistic,
                 color: themeColor.colorFF960C,
                 isSelected: value == 1,
+                onTap: onTapLocationStatistic,
               ),
             ),
             const SizedBox(width: 15),
             Expanded(
               child: _buildStatisticItem(
                 title: trans.warnings,
-                number: state.warnings,
+                number: state.warningsStatistic,
                 color: themeColor.colorFA3D0C,
                 isSelected: value == 2,
+                onTap: onTapWarningStatistic,
               ),
             ),
           ],
@@ -47,50 +50,54 @@ extension HomeFamilyStatisticUI on _HomePageScreenState {
     required int number,
     bool isSelected = false,
     Color? color,
+    void Function()? onTap,
   }) {
     final selectedColor =
         isSelected ? themeColor.color34C5D0 : themeColor.white;
     final defaultColor = isSelected ? themeColor.white : color!;
 
-    return AnimatedContainer(
-      height: isSelected ? 140 : 87,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutQuad,
-      decoration: BoxDecoration(
-        boxShadow: isSelected
-            ? [
-                const BoxShadow(
-                  color: Color.fromRGBO(0, 150, 178, 0.4),
-                  offset: Offset(0, 4),
-                  blurRadius: 16,
-                )
-              ]
-            : boxShadowlightest,
-        color: selectedColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: EdgeInsets.fromLTRB(12, isSelected ? 28 : 8, 8, 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            number.toString(),
-            style: TextStyle(
-              color: defaultColor,
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
+    return InkWell(
+      onTap: onTap,
+      child: AnimatedContainer(
+        height: isSelected ? 140 : 87,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOutQuad,
+        decoration: BoxDecoration(
+          boxShadow: isSelected
+              ? [
+                  const BoxShadow(
+                    color: Color.fromRGBO(0, 150, 178, 0.4),
+                    offset: Offset(0, 4),
+                    blurRadius: 16,
+                  )
+                ]
+              : boxShadowlightest,
+          color: selectedColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: EdgeInsets.fromLTRB(12, isSelected ? 28 : 8, 8, 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              number.toString(),
+              style: TextStyle(
+                color: defaultColor,
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: TextStyle(
-              color: defaultColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: TextStyle(
+                color: defaultColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

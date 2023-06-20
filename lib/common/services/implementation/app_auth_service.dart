@@ -47,7 +47,7 @@ class AppAuthService implements AuthService {
     );
 
     _localDataManager.notifyUserChanged(result?.user);
-    print(result?.accessToken);
+
     await _localDataManager.setAccessToken(result?.accessToken);
 
     await _localDataManager.setRefreshToken(result?.refreshToken);

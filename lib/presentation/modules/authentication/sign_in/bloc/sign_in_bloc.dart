@@ -73,13 +73,24 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
     FacebookSignInEvent event,
     Emitter<SignInState> emit,
   ) async {
-    final res = await FacebookAuth.instance.login();
-    if (res.accessToken == null) {
+    final loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    if (loginResult.accessToken?.token == null) {
+      return;
+    }
+    final facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    final res = await FirebaseAuth.instance
+        .signInWithCredential(facebookAuthCredential);
+    if (res.credential?.accessToken == null) {
       emit(state.copyWith<LoginFailed>());
       return;
     }
 
-    await _interactor.logInByFacebook(res.accessToken!.token);
+    await _interactor.logInByFacebook(res.credential!.accessToken!);
     emit(
       state.copyWith<LoginSuccess>(),
     );

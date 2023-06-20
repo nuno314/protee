@@ -27,6 +27,11 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
 
   @override
   Future<bool> leaveFamily() {
-    return _restApi.leaveFamily().then((value) => value?.result??false);
+    return _restApi.leaveFamily().then((value) => value?.result ?? false);
   }
+
+  // @override
+  // Future<User?> updateToParent() {
+  //   return _restApi.updateToParent();
+  // }
 }

@@ -11,3 +11,9 @@ class SendMessageEvent extends MessageEvent {
 
   SendMessageEvent(this.message);
 }
+
+class MessageUpcomingEvent extends MessageEvent {
+  final Message message;
+
+  MessageUpcomingEvent(this.message);
+}

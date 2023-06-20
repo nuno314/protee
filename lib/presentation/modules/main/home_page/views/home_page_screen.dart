@@ -16,6 +16,7 @@ import '../../../../extentions/extention.dart';
 import '../../../../route/route_list.dart';
 import '../../../../theme/shadow.dart';
 import '../../../../theme/theme_color.dart';
+import '../../../location/listing/bloc/location_listing_bloc.dart';
 import '../bloc/home_page_bloc.dart';
 import 'ui_parts/background.dart';
 
@@ -96,9 +97,5 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
         ),
       ),
     );
-  }
-
-  void _onRefresh() {
-    bloc.add(GetFamilyStatisticEvent());
   }
 }

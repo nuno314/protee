@@ -75,6 +75,57 @@ class ThemeButton {
         ),
       );
 
+  static Widget outline({
+    Key? key,
+    required BuildContext context,
+    required String title,
+    void Function()? onPressed,
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16),
+    BoxConstraints constraints = const BoxConstraints(minHeight: 48.0),
+    bool enable = true,
+    Color bgBtnColor = Colors.white,
+    Color? textColor,
+    BorderRadiusGeometry? borderRadius,
+    Color? borderColor,
+    Widget? prefixIcon,
+  }) =>
+      RawMaterialButton(
+        key: key,
+        fillColor: enable ? bgBtnColor : Colors.grey[400],
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius ?? BorderRadius.circular(8),
+          side: BorderSide(
+            color: borderColor ?? themeColor.primaryColor,
+            width: 1,
+          ),
+        ),
+        onPressed: enable ? onPressed : null,
+        elevation: 0,
+        padding: padding,
+        constraints: constraints,
+        child: RichText(
+          text: TextSpan(
+            style: getTextStyle(context)!.copyWith(
+              color: enable ? Colors.white : Colors.grey,
+            ),
+            children: [
+              if (prefixIcon != null)
+                WidgetSpan(
+                  child: prefixIcon,
+                  alignment: PlaceholderAlignment.middle,
+                ),
+              TextSpan(
+                text: title,
+                style: getTextStyle(context)!.copyWith(
+                  color: textColor ?? themeColor.primaryColor,
+                ),
+              )
+            ],
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+
   static Widget notRecommend({
     required BuildContext context,
     String title = '',

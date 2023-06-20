@@ -351,4 +351,18 @@ extension LatLngUtils on LatLng? {
       other.longitude,
     );
   }
+
+  String get encode {
+    if (this == null) {
+      return '';
+    }
+    return Uri.encodeComponent('${this!.latitude},${this!.longitude}');
+  }
+
+  String get comma {
+    if (this == null) {
+      return '';
+    }
+    return '${this!.latitude},${this!.longitude}';
+  }
 }

@@ -17,4 +17,6 @@ class RouteList {
   static const String changeLanguage = '/change_language';
   static const String messenger = '/messenger';
   static const String messengerDetail = '/messenger_detail';
+  static const String locationFilter = '/location_filter';
+  static const String searchRoute = '/search_route';
 }

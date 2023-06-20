@@ -32,17 +32,22 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
     on<LoadMoreMessagesEvent>(_onLoadMoreMessagesEvent);
 
     on<SendMessageEvent>(_onSendMessageEvent);
+    on<MessageUpcomingEvent>(_onMessageUpcomingEvent);
 
-    // _socket = io(baseSocketUrl, {
-    //   'accessToken': _localDataManager.token!,
-    //   'familyId': state.user!.familyId!,
-    // });
-    // _socket
-    //   ..connect()
-    //   ..on('message', print)
-    //   ..on('join', print);
-    // add(GetMessageEvent());
-    // add(SendMessageEvent('Hello world'));
+    _socket = io(
+      baseSocketUrl,
+      OptionBuilder().setTransports(['websocket']).setQuery({
+        'accessToken': _localDataManager.token!,
+        'familyId': user.familyId!,
+      }).build(),
+    );
+
+    _socket.on(
+      'message',
+      (data) {
+        add(MessageUpcomingEvent(Message.fromJson(data)));
+      },
+    );
   }
 
   Future<void> _onGetMessagesEvent(
@@ -99,6 +104,22 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
         ),
       ),
     );
-    final res = await _interactor.sendMessage(event.message);
+    await _interactor.sendMessage(event.message);
+  }
+
+  FutureOr<void> _onMessageUpcomingEvent(
+    MessageUpcomingEvent event,
+    Emitter<MessageState> emit,
+  ) {
+    emit(
+      state.copyWith<MessageInitial>(
+        viewModel: state.viewModel.copyWith(
+          messages: [
+            event.message,
+            ...state.messages.reversed.toList(),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -6,7 +6,7 @@ class ApiContract {
 
   // Analysis
   static const String basicInformation = 'analytics/family/basic-information';
-  
+
   // Profile
   static const String profile = 'users/profile';
 
@@ -15,6 +15,8 @@ class ApiContract {
   static const String location = 'location';
   static const String locationNearby = 'location/get-nearly';
   static const String removeLocation = 'location/user-remove';
+  static const String locationHistory = 'location/user/location-history';
+  static const String lastLocation = 'location/user/last-location/{userId}';
 
   // Family API
   static const String getFamilyProfile = 'family/profile';

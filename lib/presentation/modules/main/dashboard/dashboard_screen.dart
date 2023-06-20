@@ -113,11 +113,9 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                     child: const HomePageScreen(),
                   ),
                 ),
-                KeepAliveWidget(
-                  child: BlocProvider(
-                    create: (context) => LocationTrackingBloc(),
-                    child: const LocationTrackingScreen(),
-                  ),
+                BlocProvider(
+                  create: (context) => LocationTrackingBloc(_user),
+                  child: const LocationTrackingScreen(),
                 ),
                 KeepAliveWidget(
                   child: BlocProvider(

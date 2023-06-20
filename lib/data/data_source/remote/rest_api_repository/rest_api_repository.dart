@@ -25,7 +25,7 @@ abstract class RestApiRepository {
 
   // Family
   @GET(ApiContract.getInviteCode)
-  Future<String?> getInviteCode();
+  Future<CodeResponse?> getInviteCode();
 
   @POST(ApiContract.joinFamily)
   Future<BooleanResponse?> joinFamily({
@@ -104,6 +104,20 @@ abstract class RestApiRepository {
     @Field('content') required String message,
   });
 
-   @GET(ApiContract.basicInformation)
+  @GET(ApiContract.basicInformation)
   Future<FamilyStatistic?> getBasicInformation();
+
+  @GET(ApiContract.locationHistory)
+  Future<LocationResponse> getLocationHistory({
+    @Query('userId') required String userId,
+    @Query('fromDate') String? from,
+    @Query('toDate') String? to,
+    @Query('page') required int page,
+    @Query('take') required int take,
+  });
+
+  @GET(ApiContract.lastLocation)
+  Future<ChildLastLocation?> getLastLocation(
+    @Path('userId') String userId,
+  );
 }

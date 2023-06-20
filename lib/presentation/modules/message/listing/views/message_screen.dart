@@ -60,18 +60,18 @@ class _MessageScreenState extends StateBase<MessageScreen> {
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           bgColor: themeColor.white,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: InkWell(
-                onTap: _onTapChatInfo,
-                child: SvgPicture.asset(
-                  Assets.svg.icGroup,
-                  color: themeColor.white,
-                ),
-              ),
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          //     child: InkWell(
+          //       onTap: _onTapChatInfo,
+          //       child: SvgPicture.asset(
+          //         Assets.svg.icGroup,
+          //         color: themeColor.white,
+          //       ),
+          //     ),
+          //   ),
+          // ],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -110,13 +110,23 @@ class _MessageScreenState extends StateBase<MessageScreen> {
                   nextMessage = messages.elementAt(index + 1);
                 }
 
+                Message? prevMessage;
+                if (index == 0) {
+                  prevMessage = null;
+                } else {
+                  prevMessage = messages.elementAt(index - 1);
+                }
+
                 var item = [
                   _buildMessage(
                     message,
                     showAvatar: message.user?.id != nextMessage?.user?.id,
                   ),
                 ];
-                if (index == 0) {
+                if (prevMessage == null ||
+                    prevMessage.createdAt!
+                        .add(const Duration(minutes: 30))
+                        .isBefore(message.createdAt!)) {
                   item = [
                     Text(
                       message.createdAt?.toLocalHHnnddmmyyyy() ?? '--',

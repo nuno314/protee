@@ -2,8 +2,8 @@ part of 'add_location_bloc.dart';
 
 class _ViewModel {
   final List<PlacePrediction> predictions;
-  final GoogleMapPlace? place;
   final List<GoogleMapPlace> places;
+  final GoogleMapPlace? place;
   const _ViewModel({
     this.predictions = const [],
     this.place,

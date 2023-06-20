@@ -8,4 +8,8 @@ class UpdateAccountEvent extends HomePageEvent {
   UpdateAccountEvent(this.user);
 }
 
+class InitHomePageEvent extends HomePageEvent {}
+
 class GetFamilyStatisticEvent extends HomePageEvent {}
+
+class GetFamilyMembersEvent extends HomePageEvent {}

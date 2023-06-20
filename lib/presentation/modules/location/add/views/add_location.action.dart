@@ -95,12 +95,16 @@ extension AddLocationAction on _AddLocationScreenState {
   void _onTapPlace(GoogleMapPlace place) {
     search('');
 
-    _addressController.text = place.name;
+    _addressController.text = place.formattedAddress;
+    if (_nameController.text.isNullOrEmpty) {
+      _nameController.text = place.name;
+    }
     bloc.add(UpdatePlaceEvent(place));
   }
 
   void _onTapPrediction(PlacePrediction prediction) {
     search('');
+
     _addressController.text = prediction.description!;
     bloc.add(GetLocationByPlaceIdEvent(prediction));
   }

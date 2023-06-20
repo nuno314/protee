@@ -1,20 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show NetworkAssetBundle, Uint8List, rootBundle;
 import 'package:flutter_animarker/flutter_map_marker_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../../../common/services/location_plugin_service.dart';
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/location.dart';
+import '../../../../../data/models/user.dart';
 import '../../../../../di/di.dart';
+import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/location_tracking_bloc.dart';
 
@@ -39,7 +43,10 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
       Completer<GoogleMapController>();
   TextTheme get textTheme => _themeData.textTheme;
 
+  Map<MarkerId, Marker> warningMarkers = <MarkerId, Marker>{};
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  List<Polyline> polyline = [];
+  List<LatLng> routeCoords = [];
 
   final _locationService = injector.get<LocationPluginService>();
 
@@ -58,13 +65,18 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
     rootBundle.loadString('assets/map/style.json').then((string) {
       _mapStyle = string;
     });
+
     _location.onCurrentLocationChange((locationData) {
       if (mounted) {
-        bloc.add(
-          ChangeCurentLocation(
-            LatLng(locationData.latitude!, locationData.longitude!),
-          ),
-        );
+        bloc.let((bloc) {
+          if (bloc.state.isParent == false) {
+            bloc.add(
+              ChangeCurentLocation(
+                LatLng(locationData.latitude!, locationData.longitude!),
+              ),
+            );
+          }
+        });
       }
     });
   }
@@ -81,6 +93,20 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           showBackButton: false,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 20, 8),
+              child: InkWell(
+                onTap: _onTapSearch,
+                child: SvgPicture.asset(
+                  Assets.svg.icSearch,
+                  color: themeColor.white,
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+            ),
+          ],
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
             children: [
@@ -88,7 +114,7 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
                 mapId: _controller.future.then<int>((value) => value.mapId),
                 curve: Curves.bounceInOut,
                 duration: const Duration(milliseconds: 100),
-                markers: markers.values.toSet(),
+                markers: warningMarkers.values.toSet(),
                 child: GoogleMap(
                   initialCameraPosition: _kGooglePlex,
                   myLocationEnabled: true,
@@ -100,9 +126,11 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
                   compassEnabled: false,
                   tiltGesturesEnabled: false,
                   rotateGesturesEnabled: false,
+                  markers: markers.values.toSet(),
+                  polylines: polyline.toSet(),
                 ),
               ),
-              _buildWarnings(state),
+              state.isParent ? const SizedBox() : _buildWarnings(state),
             ],
           ),
         );
@@ -160,6 +188,24 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
               trans.safeArea,
               style: TextStyle(color: themeColor.white),
             ),
+    );
+  }
+
+  Widget _buildChild(
+    User child,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: themeColor.green, width: 3),
+        shape: BoxShape.circle,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: CachedNetworkImageWrapper.avatar(
+          url: child.avatar ?? '',
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

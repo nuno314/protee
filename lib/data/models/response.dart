@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../common/utils/data_checker.dart';
 import 'location.dart';
 import 'message.dart';
 import 'place_prediction.dart';
+import 'route.dart';
 import 'user.dart';
 
 part 'response.g.dart';
@@ -22,6 +24,8 @@ class GoogleMapAPIReponse {
   final GoogleMapPlace? result;
   @JsonKey(name: 'candidates')
   final List<GoogleMapPlace>? places;
+  @JsonKey(name: 'routes')
+  final List<GoogleRoute>? routes;
 
   GoogleMapAPIReponse({
     this.nextPageToken,
@@ -30,6 +34,7 @@ class GoogleMapAPIReponse {
     this.predictions,
     this.result,
     this.places,
+    this.routes,
   });
 
   factory GoogleMapAPIReponse.fromJson(Map<String, dynamic> json) =>
@@ -208,8 +213,50 @@ class MessageResponse {
     this.total,
   });
 
-   factory MessageResponse.fromJson(Map<String, dynamic> json) =>
+  factory MessageResponse.fromJson(Map<String, dynamic> json) =>
       _$MessageResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessageResponseToJson(this);
+}
+
+@JsonSerializable()
+class LocationResponse {
+  @JsonKey(name: 'data')
+  final List<LocationHistory>? data;
+  @JsonKey(name: 'total', fromJson: asOrNull)
+  final int? total;
+  @JsonKey(name: 'page', fromJson: asOrNull)
+  final int? page;
+  @JsonKey(name: 'take', fromJson: asOrNull)
+  final int? take;
+
+  LocationResponse({
+    this.data,
+    this.total,
+    this.page,
+    this.take,
+  });
+
+  factory LocationResponse.fromJson(Map<String, dynamic> json) =>
+      _$LocationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationResponseToJson(this);
+}
+
+@JsonSerializable()
+class CodeResponse {
+  @JsonKey(name: 'code', fromJson: asOrNull)
+  final String? code;
+  @JsonKey(name: 'user')
+  final User? user;
+
+  CodeResponse({
+    this.code,
+    this.user,
+  });
+
+  factory CodeResponse.fromJson(Map<String, dynamic> json) =>
+      _$CodeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CodeResponseToJson(this);
 }

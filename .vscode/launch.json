@@ -22,26 +22,5 @@
                 "dev",
             ],
         },
-        {
-            "name": "Prod Debug",
-            "request": "launch",
-            "type": "dart",
-            "program": "${workspaceRoot}/lib/main.dart",
-            "args": [
-                "--flavor",
-                "prod",
-            ],
-        },
-        {
-            "name": "Prod Release",
-            "request": "launch",
-            "type": "dart",
-            "program": "${workspaceRoot}/lib/main.dart",
-            "args": [
-                "--release",
-                "--flavor",
-                "prod",
-            ],
-        }
     ]
 }

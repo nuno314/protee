@@ -8,6 +8,10 @@ extension HomePageAction on _HomePageScreenState {
       ..loadComplete();
   }
 
+  void _onRefresh() {
+    bloc.add(InitHomePageEvent());
+  }
+
   void onTapAddMember() {
     Navigator.pushNamed(context, RouteList.addMember);
   }
@@ -21,6 +25,22 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapLocationList() {
+    Navigator.pushNamed(
+      context,
+      RouteList.locationListing,
+      arguments: LocationListingArgs(children: bloc.state.members),
+    );
+  }
+
+  void onTapMemberStatistic() {
+    Navigator.pushNamed(context, RouteList.familyProfile);
+  }
+
+  void onTapLocationStatistic() {
+    Navigator.pushNamed(context, RouteList.locationListing);
+  }
+
+  void onTapWarningStatistic() {
     Navigator.pushNamed(context, RouteList.locationListing);
   }
 

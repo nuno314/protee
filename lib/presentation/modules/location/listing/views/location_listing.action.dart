@@ -16,8 +16,16 @@ extension LocationListingAction on _LocationListingScreenState {
         showLoading();
         bloc.add(GetLocationsEvent());
       });
+    } else if (state is FilterUpdatedState) {
+      _historyRC.requestRefresh();
     }
   }
+
+  void _onRefreshHistories() {
+    bloc.add(GetLocationHistoryEvent());
+  }
+
+  void _onLoadingHistories() {}
 
   void _addMarkers(List<UserLocation> locations) {
     final _markers = <MarkerId, Marker>{};
@@ -89,8 +97,6 @@ extension LocationListingAction on _LocationListingScreenState {
   }
 
   Future<void> _onTapLocation(UserLocation location) async {
-    print(location.lat);
-    print(location.long);
     await _animateCamera(
       Location.from(
         latLng: LatLng(
@@ -99,5 +105,28 @@ extension LocationListingAction on _LocationListingScreenState {
         ),
       ),
     );
+  }
+
+  void _openFilter() {
+    Navigator.pushNamed(
+      context,
+      RouteList.locationFilter,
+      arguments: bloc.state.filter,
+    ).then((value) {
+      if (value is LocationFilter) {
+        bloc.add(UpdateFilterEvent(value));
+      }
+    });
+  }
+
+  void _onTabChange(int value) {
+    _pageController.jumpToPage(value);
+    _showFilter.value = value == 1;
+  }
+
+  void _onTapLocationHistory(LocationHistory item) {
+    _tabController?.animateTo(0);
+    _onTabChange(0);
+    _onTapLocation(item.location!);
   }
 }

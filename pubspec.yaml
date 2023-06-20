@@ -111,6 +111,9 @@ dependencies:
 
   # Marker Geo-Animation solution for Google Maps.
   flutter_animarker: ^3.2.0
+
+  # Highly customizable, feature-packed calendar widget for Flutter.
+  table_calendar: ^3.0.7
   
 dev_dependencies:
   flutter_test:

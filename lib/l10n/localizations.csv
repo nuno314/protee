@@ -135,3 +135,20 @@ child,Trẻ em,Child
 message,Tin nhắn,Message
 newMessage,Tin nhắn mới,New message
 online,Đang hoạt động,Online
+list,Danh sách,List
+history,Lịch sử,Histories
+filter,Bộ lọc,Filter
+selectDate,Chọn ngày,Select date
+month,Tháng,Month
+fromDate,Từ ngày,From date
+toDate,Tới ngày,To date
+startTime,Ngày bắt đầu,Start date
+endTime,Ngày kết thúc,End date
+suggestedBy,Được khuyến cáo bởi,Suggested by
+selectChild,Chọn con,Select child
+reset,Đặt lại,Reset
+apply,Áp dụng,Apply
+emptyHistory,Không có lịch sử,Empty history
+routeSearch,Tìm kiếm lộ trình,Search route
+enterDestination,Nhập điểm đến,Enter destination
+destination,Điểm đến,Destination

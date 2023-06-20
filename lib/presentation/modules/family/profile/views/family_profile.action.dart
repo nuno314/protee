@@ -7,7 +7,9 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
 
     if (state is RemoveMemberState) {
       showNoticeDialog(
-          context: context, message: trans.removeMemberSuccessfully,);
+        context: context,
+        message: trans.removeMemberSuccessfully,
+      );
     } else if (state is LeaveFamilyState) {
       showNoticeDialog(context: context, message: trans.leaveFamilySuccessfully)
           .then((value) {
@@ -49,7 +51,10 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
     });
   }
 
-  Future<void> removeMember(CompletionHandler handler, UserFamily member) async {
+  Future<void> removeMember(
+    CompletionHandler handler,
+    UserFamily member,
+  ) async {
     await showNoticeConfirmDialog(
       context: context,
       message: trans.confirmRemoveMember,

@@ -7,7 +7,7 @@ class Pagination {
 
   Pagination({
     this.limit = PaginationConstant.lowLimit,
-    this.page = 0,
+    this.page = 1,
     this.total = 0,
   });
 

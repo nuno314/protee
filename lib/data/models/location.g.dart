@@ -63,3 +63,47 @@ const _$UserLocationStatusEnumMap = {
   UserLocationStatus.personal: 'personal',
   UserLocationStatus.published: 'published',
 };
+
+LocationHistory _$LocationHistoryFromJson(Map<String, dynamic> json) =>
+    LocationHistory(
+      id: asOrNull(json['id']),
+      distance: asOrNull(json['distance']),
+      createdAt: asOrNull(json['createdAt']),
+      locationId: asOrNull(json['locationId']),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? null
+          : UserLocation.fromJson(json['location'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LocationHistoryToJson(LocationHistory instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'distance': instance.distance,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'locationId': instance.locationId,
+      'user': instance.user,
+      'location': instance.location,
+    };
+
+ChildLastLocation _$ChildLastLocationFromJson(Map<String, dynamic> json) =>
+    ChildLastLocation(
+      id: asOrNull(json['id']),
+      createdAt: asOrNull(json['createdAt']),
+      currentLat: asOrNull(json['currentLat']),
+      currentLong: asOrNull(json['currentLong']),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ChildLastLocationToJson(ChildLastLocation instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'currentLat': instance.currentLat,
+      'currentLong': instance.currentLong,
+      'user': instance.user,
+    };

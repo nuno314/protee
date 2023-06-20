@@ -17,3 +17,13 @@ class RemoveLocationEvent extends LocationListingEvent {
 
   RemoveLocationEvent(this.location);
 }
+
+class GetLocationHistoryEvent extends LocationListingEvent {}
+
+class LoadMoreLocationHistoryEvent extends LocationListingEvent {}
+
+class UpdateFilterEvent extends LocationListingEvent {
+  final LocationFilter filter;
+
+  UpdateFilterEvent(this.filter);
+}

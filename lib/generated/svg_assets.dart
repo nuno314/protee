@@ -13,10 +13,14 @@ class SvgAssets {
   final String icApple = 'assets/images/svg/ic_apple.svg';
   final String icCalendar = 'assets/images/svg/ic_calendar.svg';
   final String icChevronLeft = 'assets/images/svg/ic_chevron_left.svg';
+  final String icClock = 'assets/images/svg/ic_clock.svg';
+  final String icEmptyLocationHistory =
+      'assets/images/svg/ic_empty_location_history.svg';
   final String icEmptyNotification =
       'assets/images/svg/ic_empty_notification.svg';
   final String icFacebook = 'assets/images/svg/ic_facebook.svg';
   final String icFamilyInfo = 'assets/images/svg/ic_family_info.svg';
+  final String icFilter = 'assets/images/svg/ic_filter.svg';
   final String icGlobal = 'assets/images/svg/ic_global.svg';
   final String icGoogle = 'assets/images/svg/ic_google.svg';
   final String icGroup = 'assets/images/svg/ic_group.svg';
@@ -25,6 +29,7 @@ class SvgAssets {
   final String icJoinFamily = 'assets/images/svg/ic_join_family.svg';
   final String icLeave = 'assets/images/svg/ic_leave.svg';
   final String icLocationFilled = 'assets/images/svg/ic_location_filled.svg';
+  final String icLocationHistory = 'assets/images/svg/ic_location_history.svg';
   final String icLocationList = 'assets/images/svg/ic_location_list.svg';
   final String icLogo = 'assets/images/svg/ic_logo.svg';
   final String icLogout = 'assets/images/svg/ic_logout.svg';
@@ -36,6 +41,7 @@ class SvgAssets {
   final String icNoti = 'assets/images/svg/ic_noti.svg';
   final String icNotiFilled = 'assets/images/svg/ic_noti_filled.svg';
   final String icPerson = 'assets/images/svg/ic_person.svg';
+  final String icSearch = 'assets/images/svg/ic_search.svg';
   final String icSend = 'assets/images/svg/ic_send.svg';
   final String icSettings = 'assets/images/svg/ic_settings.svg';
   final String icTrash = 'assets/images/svg/ic_trash.svg';

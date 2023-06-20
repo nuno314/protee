@@ -105,7 +105,7 @@ class UserLocation {
   final UserLocationStatus? status;
   @JsonKey(name: 'user')
   final User? user;
-   @JsonKey(name: 'createdAt', fromJson: asOrNull)
+  @JsonKey(name: 'createdAt', fromJson: asOrNull)
   final DateTime? createdAt;
   UserLocation({
     this.long,
@@ -148,4 +148,60 @@ enum UserLocationStatus {
   final String id;
 
   const UserLocationStatus(this.id);
+}
+
+@JsonSerializable()
+class LocationHistory {
+  @JsonKey(name: 'id', fromJson: asOrNull)
+  final String? id;
+  @JsonKey(name: 'distance', fromJson: asOrNull)
+  final int? distance;
+  @JsonKey(name: 'createdAt', fromJson: asOrNull)
+  final DateTime? createdAt;
+  @JsonKey(name: 'locationId', fromJson: asOrNull)
+  final String? locationId;
+  @JsonKey(name: 'user')
+  final User? user;
+  @JsonKey(name: 'location')
+  final UserLocation? location;
+  LocationHistory({
+    this.id,
+    this.distance,
+    this.createdAt,
+    this.locationId,
+    this.user,
+    this.location,
+  });
+
+  factory LocationHistory.fromJson(Map<String, dynamic> json) =>
+      _$LocationHistoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationHistoryToJson(this);
+}
+
+@JsonSerializable()
+class ChildLastLocation {
+  @JsonKey(name: 'id', fromJson: asOrNull)
+  final String? id;
+  @JsonKey(name: 'createdAt', fromJson: asOrNull)
+  final DateTime? createdAt;
+  @JsonKey(name: 'currentLat', fromJson: asOrNull)
+  final String? currentLat;
+  @JsonKey(name: 'currentLong', fromJson: asOrNull)
+  final String? currentLong;
+  @JsonKey(name: 'user')
+  final User? user;
+
+  ChildLastLocation({
+    this.id,
+    this.createdAt,
+    this.currentLat,
+    this.currentLong,
+    this.user,
+  });
+
+  factory ChildLastLocation.fromJson(Map<String, dynamic> json) =>
+      _$ChildLastLocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChildLastLocationToJson(this);
 }

@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show NetworkAssetBundle, Uint8List, rootBundle;
+import 'package:flutter/services.dart'
+    show ByteData, NetworkAssetBundle, Uint8List, rootBundle;
 import 'package:flutter_animarker/flutter_map_marker_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image/image.dart' as IMG;
 import 'package:location/location.dart';
 
 import '../../../../../common/services/location_plugin_service.dart';
@@ -50,6 +52,8 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
 
   final _locationService = injector.get<LocationPluginService>();
 
+  late Timer _timer;
+
   @override
   late AppLocalizations trans;
   final CameraPosition _kGooglePlex = const CameraPosition(
@@ -66,17 +70,17 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
       _mapStyle = string;
     });
 
-    _location.onCurrentLocationChange((locationData) {
+    _timer = Timer.periodic(const Duration(seconds: 30), (timer) async {
       if (mounted) {
-        bloc.let((bloc) {
-          if (bloc.state.isParent == false) {
+        if (bloc.state.isParent != true) {
+          _location.onCurrentLocationChange((location) {
             bloc.add(
               ChangeCurentLocation(
-                LatLng(locationData.latitude!, locationData.longitude!),
+                LatLng(location.latitude!, location.longitude!),
               ),
             );
-          }
-        });
+          });
+        }
       }
     });
   }

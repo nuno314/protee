@@ -60,8 +60,7 @@ class LocationTrackingBloc
     ChangeCurentLocation event,
     Emitter<LocationTrackingState> emit,
   ) async {
-    if (state.latLng == null ||
-        event.location.distanceFrom(state.latLng!)! > 500) {
+    if (state.user?.isParent != true) {
       emit(
         state.copyWith<CurrentLocationChangedState>(
           viewModel: state.viewModel.copyWith(latLng: event.location),

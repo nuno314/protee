@@ -143,5 +143,6 @@
   "emptyHistory": "Empty history",
   "routeSearch": "Search route",
   "enterDestination": "Enter destination",
-  "destination": "Destination"
+  "destination": "Destination",
+  "latestPosition": "Latest position"
 }

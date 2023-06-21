@@ -181,7 +181,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(height: device.height / 6 + 10),
+        SizedBox(height: device.height / 10),
         InputContainer(
           controller: _nameController,
           title: trans.fullName,

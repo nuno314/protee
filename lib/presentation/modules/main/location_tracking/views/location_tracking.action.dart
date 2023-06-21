@@ -21,6 +21,11 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
     while (res == null) {
       res = await _locationService.getCurrentLocation();
     }
+    bloc.add(
+      ChangeCurentLocation(
+        LatLng(res.latitude!, res.longitude!),
+      ),
+    );
     await _animateCamera(LatLng(res.latitude!, res.longitude!));
   }
 
@@ -121,18 +126,20 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
   }
 
   Future<void> _addLastLocation(List<ChildLastLocation?> locations) async {
-    int cnt = 0;
+    var cnt = 0;
     final _markers = <MarkerId, Marker>{};
-    locations.forEach((location) async {
+    for (final location in locations) {
       if (location == null) {
-        return;
+        continue;
       }
       final avatar = location.user!.avatar!;
       final bytes = (await NetworkAssetBundle(Uri.parse(avatar)).load(avatar))
           .buffer
           .asUint8List();
+      final smallimg = resizeImage(bytes, 150, 150) ?? bytes;
 
       final marker = Marker(
+        onTap: () async => _onTapChild(location),
         markerId: MarkerId(location.user!.name!),
         position: LatLng(
           double.parse(location.currentLat!),
@@ -141,11 +148,11 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
         infoWindow: InfoWindow(
           title: location.user!.name!,
         ),
-        icon: BitmapDescriptor.fromBytes(bytes, size: Size(50, 50)),
+        icon: BitmapDescriptor.fromBytes(smallimg),
       );
       _markers.addAll({MarkerId(location.user!.name!): marker});
       cnt++;
-    });
+    }
     if (cnt > 1) {
       await _zoomCameraOut(
         locations
@@ -170,5 +177,46 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
     setState(() {
       markers = _markers;
     });
+  }
+
+  Uint8List? resizeImage(Uint8List data, int? width, int? height) {
+    final img = IMG.decodeImage(data);
+    final resized = IMG.copyResize(img!, width: width, height: height);
+    return Uint8List.fromList(IMG.encodePng(resized));
+  }
+
+  Future<void> _onTapChild(ChildLastLocation location) async {
+    final user = location.user;
+    await showModal(
+      context,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(1000),
+              child: CachedNetworkImageWrapper.avatar(
+                url: user?.avatar ?? '',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Text(
+              user?.name ?? '--',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              location.createdAt?.toLocalHHnnddmmyyWithCommas() ?? '--',
+            ),
+          ],
+        ),
+      ),
+      title: trans.latestPosition,
+    );
   }
 }

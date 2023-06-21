@@ -65,18 +65,6 @@ class _MessageScreenState extends StateBase<MessageScreen> {
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           bgColor: themeColor.white,
-          // actions: [
-          //   Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          //     child: InkWell(
-          //       onTap: _onTapChatInfo,
-          //       child: SvgPicture.asset(
-          //         Assets.svg.icGroup,
-          //         color: themeColor.white,
-          //       ),
-          //     ),
-          //   ),
-          // ],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -133,10 +121,10 @@ class _MessageScreenState extends StateBase<MessageScreen> {
                         (message.user?.id != prev.user?.id),
                   ),
                 ];
-                if (prev == null ||
-                    prev.createdAt!
-                        .add(const Duration(minutes: 30))
-                        .isBefore(message.createdAt!)) {
+                if (next == null ||
+                    message.createdAt!
+                        .subtract(const Duration(minutes: 30))
+                        .isAfter(next.createdAt!)) {
                   item = [
                     Text(
                       message.createdAt?.toLocalHHnnddmmyyyy() ?? '--',

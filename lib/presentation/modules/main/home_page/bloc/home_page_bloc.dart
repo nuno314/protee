@@ -52,6 +52,12 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
     InitHomePageEvent event,
     Emitter<HomePageState> emit,
   ) async {
+    if (state.user?.isNull == true) {
+      emit(
+        state.copyWith<HomePageInitial>(),
+      );
+      return;
+    }
     final res = await Future.wait(
       [
         _restApi.getBasicInformation(),
@@ -59,6 +65,7 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
       ],
       eagerError: true,
     );
+
     emit(
       state.copyWith<HomePageInitial>(
         viewModel: state.viewModel.copyWith(

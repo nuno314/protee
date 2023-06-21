@@ -143,5 +143,6 @@
   "emptyHistory": "Không có lịch sử",
   "routeSearch": "Tìm kiếm lộ trình",
   "enterDestination": "Nhập điểm đến",
-  "destination": "Điểm đến"
+  "destination": "Điểm đến",
+  "latestPosition": "Vị trí gần đây"
 }

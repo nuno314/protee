@@ -12,12 +12,12 @@ class Pagination {
   });
 
   bool get canNext {
-    return total == limit * page;
+    return total == limit * (page - 1);
   }
 
   int get currentPage => total ~/ limit;
 
-  int get nextPage => currentPage + 1;
+  int get nextPage => page + 1;
 
   int get size => limit;
 

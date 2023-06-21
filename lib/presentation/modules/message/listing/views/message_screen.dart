@@ -11,7 +11,6 @@ import '../../../../common_widget/export.dart';
 import '../../../../common_widget/footer_widget.dart';
 import '../../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../../extentions/extention.dart';
-import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/message_bloc.dart';
 
@@ -46,6 +45,12 @@ class _MessageScreenState extends StateBase<MessageScreen> {
       ..loadComplete();
 
     super.hideLoading();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _onRefresh();
   }
 
   @override
@@ -90,8 +95,10 @@ class _MessageScreenState extends StateBase<MessageScreen> {
     final messages = state.messages;
 
     return SmartRefresherWrapper(
+      reverse: true,
       controller: _refreshController,
       onRefresh: _onRefresh,
+      enablePullDown: false,
       onLoading: _onLoading,
       enablePullUp: state.canLoadMore,
       child: messages.isEmpty
@@ -103,28 +110,31 @@ class _MessageScreenState extends StateBase<MessageScreen> {
               itemBuilder: (context, index) {
                 final message = messages.elementAt(index);
 
-                Message? nextMessage;
+                Message? next;
                 if (index == messages.length - 1) {
-                  nextMessage = null;
+                  next = null;
                 } else {
-                  nextMessage = messages.elementAt(index + 1);
+                  next = messages.elementAt(index + 1);
                 }
 
-                Message? prevMessage;
+                Message? prev;
                 if (index == 0) {
-                  prevMessage = null;
+                  prev = null;
                 } else {
-                  prevMessage = messages.elementAt(index - 1);
+                  prev = messages.elementAt(index - 1);
                 }
-
                 var item = [
                   _buildMessage(
                     message,
-                    showAvatar: message.user?.id != nextMessage?.user?.id,
+                    showAvatar: prev == null ||
+                        (prev.createdAt!
+                            .add(const Duration(minutes: 30))
+                            .isBefore(message.createdAt!)) ||
+                        (message.user?.id != prev.user?.id),
                   ),
                 ];
-                if (prevMessage == null ||
-                    prevMessage.createdAt!
+                if (prev == null ||
+                    prev.createdAt!
                         .add(const Duration(minutes: 30))
                         .isBefore(message.createdAt!)) {
                   item = [

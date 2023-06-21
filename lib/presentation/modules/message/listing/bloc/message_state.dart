@@ -39,7 +39,7 @@ abstract class MessageState {
 
   User? get user => viewModel.user;
   bool get canLoadMore => viewModel.canLoadMore ?? false;
-  List<Message> get messages => viewModel.messages.reversed.toList();
+  List<Message> get messages => viewModel.messages;
 }
 
 class MessageInitial extends MessageState {

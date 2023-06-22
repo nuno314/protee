@@ -75,8 +75,6 @@ class LocalDataManager extends AppPreferenceData {
 
   @override
   Future<bool?> clearData() async {
-    await _authChangedController.close();
-
     return _preferencesHelper.clearData();
   }
 

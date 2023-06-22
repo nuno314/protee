@@ -144,5 +144,6 @@
   "routeSearch": "Search route",
   "enterDestination": "Enter destination",
   "destination": "Destination",
-  "latestPosition": "Latest position"
+  "latestPosition": "Latest position",
+  "yourChildEnterWarningLocation": "Your child has entered the warning area"
 }

@@ -144,5 +144,6 @@
   "routeSearch": "Tìm kiếm lộ trình",
   "enterDestination": "Nhập điểm đến",
   "destination": "Điểm đến",
-  "latestPosition": "Vị trí gần đây"
+  "latestPosition": "Vị trí gần đây",
+  "yourChildEnterWarningLocation": "Con của bạn đã vào khu vực cảnh báo"
 }

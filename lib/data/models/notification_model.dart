@@ -1,27 +1,26 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../common/utils.dart';
+import 'location.dart';
+import 'user.dart';
 
 part 'notification_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class NotificationModel {
   @JsonKey(name: 'id')
   String? id;
-  @JsonKey(name: 'subject_type', fromJson: asOrNull)
-  String? subjectType;
-  @JsonKey(name: 'subject_id', fromJson: asOrNull)
-  String? subjectId;
-  @JsonKey(name: 'send_after', fromJson: asOrNull)
-  DateTime? sendAfter;
-  @JsonKey(name: 'read', fromJson: asOrNull)
-  bool? read;
+  @JsonKey(name: 'user')
+  User? user;
+  @JsonKey(name: 'dangerousLocations')
+  List<UserLocation>? dangerousLocations;
+  @JsonKey(name: 'currentLocation')
+  ChildLastLocation? currentLocation;
 
   NotificationModel({
     this.id,
-    this.subjectType,
-    this.sendAfter,
-    this.read,
+    this.user,
+    this.dangerousLocations,
+    this.currentLocation,
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>

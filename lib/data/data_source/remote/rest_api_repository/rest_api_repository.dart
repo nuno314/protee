@@ -117,7 +117,7 @@ abstract class RestApiRepository {
   });
 
   @GET(ApiContract.lastLocation)
-  Future<ChildLastLocation?> getLastLocation(
+  Future<LatestLocationResponse?> getLastLocation(
     @Path('userId') String userId,
   );
 }

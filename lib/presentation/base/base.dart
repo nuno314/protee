@@ -10,10 +10,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 import '../../common/client_info.dart';
 import '../../common/constants.dart';
 import '../../common/services/auth_service.dart';
+import '../../common/services/implementation/app_auth_service.dart';
 import '../../common/services/permission_service.dart';
 import '../../common/utils.dart';
 import '../../data/data_source/local/local_data_manager.dart';

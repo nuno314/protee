@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../common/utils/extensions.dart';
 import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../../data/models/location.dart';
+import '../../../../../data/models/response.dart';
 import '../../../../../data/models/user.dart';
 import '../../../../../di/di.dart';
 import '../../../../base/base.dart';
@@ -14,6 +15,13 @@ import '../repository/location_tracking_repository.dart';
 
 part 'location_tracking_event.dart';
 part 'location_tracking_state.dart';
+
+class RoutesInfo {
+  final List<List<LatLng>> routes;
+  final Viewport? bounds;
+
+  const RoutesInfo({this.routes = const [], this.bounds});
+}
 
 class LocationTrackingBloc
     extends AppBlocBase<LocationTrackingEvent, LocationTrackingState> {
@@ -126,7 +134,10 @@ class LocationTrackingBloc
       );
       emit(
         state.copyWith<GetRouteState>(
-          viewModel: state.viewModel.copyWith(routes: res),
+          viewModel: state.viewModel.copyWith(
+            routes: res.routes,
+            bounds: res.bounds,
+          ),
         ),
       );
     }

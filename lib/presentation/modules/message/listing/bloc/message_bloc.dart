@@ -21,8 +21,6 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
 
   final baseSocketUrl = 'ws://protee-be.herokuapp.com/';
 
-  final _socketResponse = StreamController<String>();
-  Stream<String> get getResponse => _socketResponse.stream;
   late final Socket _socket;
   final _localDataManager = injector.get<AuthService>();
 
@@ -78,12 +76,6 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
         ),
       ),
     );
-  }
-
-  @override
-  Future<void> close() {
-    _socketResponse.close();
-    return super.close();
   }
 
   FutureOr<void> _onSendMessageEvent(

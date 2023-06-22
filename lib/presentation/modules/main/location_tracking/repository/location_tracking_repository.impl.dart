@@ -53,6 +53,6 @@ class LocationTrackingRepositoryImpl extends LocationTrackingRepository {
 
   @override
   Future<ChildLastLocation?> getChildLastLocation(String id) {
-    return _restApi.getLastLocation(id);
+    return _restApi.getLastLocation(id).then((value) => value?.result);
   }
 }

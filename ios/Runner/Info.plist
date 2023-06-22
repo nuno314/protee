@@ -21,6 +21,8 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
+	<key>GIDClientID</key>
+	<string>836852153204-od4ppbll0kcd72atsllpt9dn1e4ttqri.apps.googleusercontent.com</string>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -28,7 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb542676418049537</string>
-				<string>com.googleusercontent.apps.836852153204-qhuv13dcs5l6rug5bpeovr5cd229d969</string>
+				<string>com.googleusercontent.apps.836852153204-od4ppbll0kcd72atsllpt9dn1e4ttqri</string>
 			</array>
 		</dict>
 	</array>

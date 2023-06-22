@@ -11,5 +11,4 @@ export 'utils/log_utils.dart';
 export 'utils/mime_type.dart';
 export 'utils/number_format_utils.dart';
 export 'utils/phone_number_utils.dart';
-export 'utils/rive_utils.dart';
 export 'utils/string_utils.dart';

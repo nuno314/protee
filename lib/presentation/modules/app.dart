@@ -12,9 +12,7 @@ import 'package:vibration/vibration.dart';
 import '../../common/components/navigation/navigation_observer.dart';
 import '../../common/config.dart';
 import '../../common/constants/locale/app_locale.dart';
-import '../../common/utils/data_checker.dart';
-import '../../common/utils/date_utils.dart';
-import '../../common/utils/log_utils.dart';
+import '../../common/utils.dart';
 import '../../data/data_source/local/local_data_manager.dart';
 import '../../data/data_source/remote/app_api_service.dart';
 import '../../data/models/notification_model.dart';
@@ -109,9 +107,9 @@ class _MyAppState extends State<App> {
   void _setUpSocket(SocketArgs args) {
     final user = args.user;
 
-    // if (user == null || user.isParent != true || user.familyId.isNullOrEmpty) {
-    //   return;
-    // }
+    if (user == null || user.isParent != true || user.familyId.isNullOrEmpty) {
+      return;
+    }
 
     _socket = io(
       'ws://protee-be.herokuapp.com/',

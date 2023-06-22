@@ -6,6 +6,16 @@ import '../../../presentation/theme/theme_data.dart';
 import '../../models/user.dart';
 import 'preferences_helper/preferences_helper.dart';
 
+class SocketArgs {
+  final String? accessToken;
+  final String? familyId;
+
+  SocketArgs({
+    this.accessToken,
+    this.familyId,
+  });
+}
+
 class LocalDataManager extends AppPreferenceData {
   late final PreferencesHelper _preferencesHelper = injector.get();
 
@@ -26,7 +36,18 @@ class LocalDataManager extends AppPreferenceData {
     return _currentUser;
   }
 
-  void notifyUserChanged(User? user) {
+  final _authChangedController = StreamController<SocketArgs>.broadcast();
+
+  Stream<SocketArgs> get onAuthChanged => _authChangedController.stream;
+
+  void notifyUserChanged(User? user, {String? accessToken}) {
+    _authChangedController.add(
+      SocketArgs(
+        accessToken: accessToken ?? this.accessToken,
+        familyId: user?.familyId ?? _currentUser?.familyId,
+      ),
+    );
+
     LogUtils.d('_notifyUserChanged: ${user?.name}');
     _userChangedController.add(user);
     _currentUser = user;
@@ -53,7 +74,9 @@ class LocalDataManager extends AppPreferenceData {
   }
 
   @override
-  Future<bool?> clearData() {
+  Future<bool?> clearData() async {
+    await _authChangedController.close();
+
     return _preferencesHelper.clearData();
   }
 

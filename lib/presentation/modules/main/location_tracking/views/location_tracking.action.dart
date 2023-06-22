@@ -2,12 +2,23 @@ part of 'location_tracking_screen.dart';
 
 extension LocationTrackingAction on _LocationTrackingScreenState {
   void _blocListener(BuildContext context, LocationTrackingState state) {
-    hideLoading();
+    // hideLoading();
     _addWarningMarkers(state.warningPlaces);
     _addMarkers(state.places);
     if (state is CurrentLocationChangedState) {
       bloc.add(GetWarningLocationNearbyEvent());
     } else if (state is GetRouteState) {
+      if (state.bounds != null) {
+        final southwest = LatLng(
+          state.bounds!.southwest!.lat!,
+          state.bounds!.southwest!.lng!,
+        );
+        final northeast = LatLng(
+          state.bounds!.northeast!.lat!,
+          state.bounds!.northeast!.lng!,
+        );
+        _zoomOut(southwest, northeast);
+      }
       state.routes.forEach(computePath);
     } else if (state is ChildrenInitialState) {
       bloc.add(GetChildrenLastLocationEvent());
@@ -17,6 +28,7 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
   }
 
   Future<void> _locateMe() async {
+    showLoading();
     LocationData? res;
     while (res == null) {
       res = await _locationService.getCurrentLocation();
@@ -27,6 +39,7 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
       ),
     );
     await _animateCamera(LatLng(res.latitude!, res.longitude!));
+    hideLoading();
   }
 
   Future<void> _animateCamera(LatLng location) async {
@@ -87,8 +100,6 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
   }
 
   Future<void> computePath(List<LatLng> routes) async {
-    await _zoomCameraOut(routes);
-
     // ignore: invalid_use_of_protected_member
     setState(() {
       polyline = [
@@ -121,6 +132,13 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
 
     final bounds = LatLngBounds(southwest: southwest, northeast: northEast);
     final updatedCamera = CameraUpdate.newLatLngBounds(bounds, 50);
+    final controller = await _controller.future;
+    await controller.animateCamera(updatedCamera);
+  }
+
+  Future<void> _zoomOut(LatLng southwest, LatLng northeast) async {
+    final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
+    final updatedCamera = CameraUpdate.newLatLngBounds(bounds, 80);
     final controller = await _controller.future;
     await controller.animateCamera(updatedCamera);
   }

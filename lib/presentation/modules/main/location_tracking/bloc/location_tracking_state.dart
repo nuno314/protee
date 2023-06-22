@@ -9,6 +9,7 @@ class _ViewModel {
   final LatLng? latLng;
   final List<User> children;
   final List<ChildLastLocation?> lastLocations;
+  final Viewport? bounds;
 
   const _ViewModel({
     this.user,
@@ -18,6 +19,7 @@ class _ViewModel {
     this.latLng,
     this.children = const [],
     this.lastLocations = const [],
+    this.bounds,
   });
 
   _ViewModel copyWith({
@@ -28,6 +30,7 @@ class _ViewModel {
     LatLng? latLng,
     List<User>? children,
     List<ChildLastLocation?>? lastLocations,
+    Viewport? bounds,
   }) {
     return _ViewModel(
       user: user ?? this.user,
@@ -37,6 +40,7 @@ class _ViewModel {
       latLng: latLng ?? this.latLng,
       children: children ?? this.children,
       lastLocations: lastLocations ?? this.lastLocations,
+      bounds: bounds ?? this.bounds,
     );
   }
 }
@@ -62,6 +66,7 @@ abstract class LocationTrackingState {
   List<User> get children => viewModel.children;
   List<ChildLastLocation?> get lastLocations => viewModel.lastLocations;
   bool get isParent => viewModel.user?.isParent ?? false;
+  Viewport? get bounds => viewModel.bounds;
 }
 
 class LocationTrackingInitial extends LocationTrackingState {

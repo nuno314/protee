@@ -115,6 +115,9 @@ dependencies:
   # Highly customizable, feature-packed calendar widget for Flutter.
   table_calendar: ^3.0.7
 
+  # A plugin for handling Vibration API on iOS, Android, and web.
+  vibration: ^1.8.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -16,18 +16,18 @@ class LocationTrackingInteractorImpl extends LocationTrackingInteractor {
   }
 
   @override
-  Future<List<List<LatLng>>> getDirections(
+  Future<RoutesInfo> getDirections(
     String origin,
     String destination,
     List<UserLocation> warnings,
   ) async {
     final res = await _repository.getDirections(origin, destination);
     if (res == null) {
-      return [];
+      return const RoutesInfo();
     }
 
     final list = <List<LatLng>>[];
-
+    var bound = res.first.bounds;
     for (final route in res) {
       final coordList = route.legs!
           .map((e) => e.steps)
@@ -38,8 +38,12 @@ class LocationTrackingInteractorImpl extends LocationTrackingInteractor {
           .map((e) => LatLng(e!.lat!, e.lng!))
           .toList();
       list.add(coordList);
+      bound = bound?.bigger(route.bounds);
     }
-    return list;
+    return RoutesInfo(
+      routes: list,
+      bounds: bound,
+    );
   }
 
   @override

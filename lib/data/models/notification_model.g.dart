@@ -9,16 +9,22 @@ part of 'notification_model.dart';
 NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
     NotificationModel(
       id: json['id'] as String?,
-      subjectType: asOrNull(json['subject_type']),
-      sendAfter: asOrNull(json['send_after']),
-      read: asOrNull(json['read']),
-    )..subjectId = asOrNull(json['subject_id']);
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      dangerousLocations: (json['dangerousLocations'] as List<dynamic>?)
+          ?.map((e) => UserLocation.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : ChildLastLocation.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'subject_type': instance.subjectType,
-      'subject_id': instance.subjectId,
-      'send_after': instance.sendAfter?.toIso8601String(),
-      'read': instance.read,
+      'user': instance.user,
+      'dangerousLocations': instance.dangerousLocations,
+      'currentLocation': instance.currentLocation,
     };

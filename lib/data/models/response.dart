@@ -131,6 +131,17 @@ class Viewport {
       _$ViewportFromJson(json);
 
   Map<String, dynamic> toJson() => _$ViewportToJson(this);
+
+  Viewport bigger(Viewport? other) {
+    if (other == null) {
+      return this;
+    }
+
+    return (southwest!.distanceFrom(northeast)! >
+            other.southwest!.distanceFrom(other.northeast)!)
+        ? this
+        : other;
+  }
 }
 
 @JsonSerializable()
@@ -259,4 +270,17 @@ class CodeResponse {
       _$CodeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CodeResponseToJson(this);
+}
+
+@JsonSerializable()
+class LatestLocationResponse {
+  @JsonKey(name: 'result')
+  final ChildLastLocation? result;
+
+  LatestLocationResponse({this.result});
+
+  factory LatestLocationResponse.fromJson(Map<String, dynamic> json) =>
+      _$LatestLocationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LatestLocationResponseToJson(this);
 }

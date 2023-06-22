@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:rive/rive.dart';
 
 import '../constants/locale/app_locale.dart';
 import '../constants/locale/date_locale.dart';
@@ -316,25 +315,6 @@ extension FileSize on int? {
 
   double get bytesToKb {
     return (this ?? 0) / 1024;
-  }
-}
-
-class RiveAssets {
-  final String artboard;
-  final String stateMachineName;
-  final String src;
-
-  SMIBool? input;
-
-  RiveAssets({
-    this.src = '/assets/image/icons.riv',
-    required this.artboard,
-    this.stateMachineName = 'State Machine 1',
-    this.input,
-  });
-
-  set setInput(SMIBool status) {
-    input = status;
   }
 }
 

@@ -74,7 +74,6 @@ dependencies:
   badges: ^3.0.2
   webview_flutter: ^3.0.4
   pull_to_refresh: ^2.0.0
-  rive: ^0.10.3
   modal_bottom_sheet: ^2.1.2
   pull_to_refresh_flutter3: ^2.0.1
   

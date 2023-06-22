@@ -22,27 +22,4 @@ extension DashboardAction on _DashboardScreenState {
       state.index,
     );
   }
-
-  void _updateOnesignal() {
-    final onesignal = injector.get<OneSignalNotificationService>();
-    // ..setTags({'role': Config.instance.appConfig.platformRole});
-    if (_cubit.isLoggedIn) {
-      // onesignal.onNotificationOpened(
-      //   (n) => AppNotificationRoute.onOpened(context, n),
-      // );
-      // final userRepo = injector.get<UserRepository>();
-      // (userRepo.currentUser == null
-      //         ? userRepo.onUserChanged.first
-      //         : Future.value(userRepo.currentUser))
-      //     .then((user) {
-      //   if (user?.id != null) {
-      //     onesignal.setUserId(user!.id!);
-      //   }
-      // });
-    } else {
-      onesignal.removeUserId();
-    }
-  }
-
-  void _emitCurrentLocation() {}
 }

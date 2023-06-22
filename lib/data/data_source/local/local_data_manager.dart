@@ -8,11 +8,11 @@ import 'preferences_helper/preferences_helper.dart';
 
 class SocketArgs {
   final String? accessToken;
-  final String? familyId;
+  final User? user;
 
   SocketArgs({
     this.accessToken,
-    this.familyId,
+    this.user,
   });
 }
 
@@ -44,7 +44,7 @@ class LocalDataManager extends AppPreferenceData {
     _authChangedController.add(
       SocketArgs(
         accessToken: accessToken ?? this.accessToken,
-        familyId: user?.familyId ?? _currentUser?.familyId,
+        user: user ?? _currentUser,
       ),
     );
 

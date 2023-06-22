@@ -44,6 +44,7 @@ UserLocation _$UserLocationFromJson(Map<String, dynamic> json) => UserLocation(
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       createdAt: asOrNull(json['createdAt']),
+      distance: asOrNull(json['distance']),
     );
 
 Map<String, dynamic> _$UserLocationToJson(UserLocation instance) =>
@@ -57,6 +58,7 @@ Map<String, dynamic> _$UserLocationToJson(UserLocation instance) =>
       'status': _$UserLocationStatusEnumMap[instance.status],
       'user': instance.user,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'distance': instance.distance,
     };
 
 const _$UserLocationStatusEnumMap = {

@@ -1,11 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
+import '../../../../../common/services/auth_service.dart';
+import '../../../../../common/utils/data_checker.dart';
 import '../../../../../common/utils/extensions.dart';
 import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../../data/models/location.dart';
+import '../../../../../data/models/notification_model.dart';
 import '../../../../../data/models/response.dart';
 import '../../../../../data/models/user.dart';
 import '../../../../../di/di.dart';
@@ -29,6 +34,10 @@ class LocationTrackingBloc
     LocationTrackingRepositoryImpl(),
   );
 
+  final baseSocketUrl = 'ws://protee-be.herokuapp.com/';
+  var _socket;
+  final _localDataManager = injector.get<AuthService>();
+
   late StreamSubscription _profileSubscription;
 
   LocationTrackingBloc(User? user)
@@ -47,11 +56,14 @@ class LocationTrackingBloc
     on<GetChildrenEvent>(_onGetChildrenEvent);
 
     on<GetDirectionsEvent>(_onGetDirectionsEvent);
+    on<SetUpSocketEvent>(_onSetUpSocketEvent);
+    on<NotificationIncomingEvent>(_onNotificationIncomingEvent);
 
     if (user?.isParent == false || state.isParent == false) {
       add(GetPlacesEvent());
     } else {
       add(GetChildrenEvent());
+      add(SetUpSocketEvent(user));
     }
 
     _profileSubscription =
@@ -60,6 +72,7 @@ class LocationTrackingBloc
         add(
           UpdateUserEvent(user),
         );
+        add(SetUpSocketEvent(user));
       },
     );
   }
@@ -188,5 +201,57 @@ class LocationTrackingBloc
   Future<void> close() {
     _profileSubscription.cancel();
     return super.close();
+  }
+
+  FutureOr<void> _onSetUpSocketEvent(
+    SetUpSocketEvent event,
+    Emitter<LocationTrackingState> emit,
+  ) async {
+    if (event.user?.isParent != true) {
+      return;
+    }
+    _socket = io(
+      baseSocketUrl,
+      OptionBuilder().setTransports(['websocket']).setQuery({
+        'accessToken': _localDataManager.token!,
+        'familyId': event.user!.familyId!,
+      }).build(),
+    );
+
+    _socket.on(
+      'notification',
+      (data) {
+        final res = asOrNull(NotificationModel.fromJson(data));
+        if (res == null) {
+          return;
+        }
+        add(NotificationIncomingEvent(res));
+      },
+    );
+  }
+
+  FutureOr<void> _onNotificationIncomingEvent(
+    NotificationIncomingEvent event,
+    Emitter<LocationTrackingState> emit,
+  ) async {
+    final location = event.noti.currentLocation!;
+    final list = [...state.lastLocations];
+    var target = list.firstWhereOrNull(
+      (element) => element?.user?.id == location.user?.id,
+    );
+
+    if (target != null) {
+      target = location;
+    } else {
+      list.add(location);
+    }
+
+    emit(
+      state.copyWith<ChildrenLastLocationState>(
+        viewModel: state.viewModel.copyWith(
+          lastLocations: list,
+        ),
+      ),
+    );
   }
 }

@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../common/services/onesignal_notification_service.dart';
 import '../data/data_source/local/local_data_manager.dart';
 import '../data/data_source/local/preferences_helper/preferences_helper.dart';
 import 'di.config.dart';
@@ -26,9 +25,6 @@ Future<dynamic> configureDependencies() async {
       await LocalDataManager.init(),
     )
     ..registerSingleton<AppPreferenceData>(localDataManager)
-    ..registerSingleton<OneSignalNotificationService>(
-      await OneSignalNotificationService.create(),
-    )
     ..registerSingleton<GoogleSignIn>(
       GoogleSignIn.standard(
         scopes: <String>[

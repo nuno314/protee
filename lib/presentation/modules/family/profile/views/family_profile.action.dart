@@ -60,11 +60,11 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
       message: trans.confirmRemoveMember,
       title: trans.inform,
       onConfirmed: () async {
-        showLoading();
-        await handler(true);
         bloc.add(
           RemoveMemberEvent(member),
         );
+        showLoading();
+        await handler(true);
       },
     );
   }

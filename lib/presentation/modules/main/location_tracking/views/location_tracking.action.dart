@@ -131,7 +131,8 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
         : routes.first;
 
     final bounds = LatLngBounds(southwest: southwest, northeast: northEast);
-    final updatedCamera = CameraUpdate.newLatLngBounds(bounds, 50);
+    final updatedCamera = CameraUpdate.newLatLngBounds(bounds, 100);
+
     final controller = await _controller.future;
     await controller.animateCamera(updatedCamera);
   }

@@ -29,3 +29,15 @@ class GetDirectionsEvent extends LocationTrackingEvent {
 class GetChildrenLastLocationEvent extends LocationTrackingEvent {}
 
 class GetChildrenEvent extends LocationTrackingEvent {}
+
+class SetUpSocketEvent extends LocationTrackingEvent {
+  final User? user;
+
+  SetUpSocketEvent(this.user);
+}
+
+class NotificationIncomingEvent extends LocationTrackingEvent {
+  final NotificationModel noti;
+
+  NotificationIncomingEvent(this.noti);
+}

@@ -5,7 +5,6 @@ import 'package:flutter/services.dart'
     show ByteData, NetworkAssetBundle, Uint8List, rootBundle;
 import 'package:flutter_animarker/flutter_map_marker_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -59,8 +58,10 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
   late AppLocalizations trans;
   final CameraPosition _kGooglePlex = const CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 14.0,
   );
+
+  late double zoomValue = 14.0;
 
   String? _mapStyle;
 
@@ -94,23 +95,25 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
-          title: trans.notification,
+          title: (state.isParent ? trans.latestPosition : trans.map)
+              .capitalizeFirstofEach(),
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           showBackButton: false,
           actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 20, 8),
-              child: InkWell(
-                onTap: _onTapSearch,
-                child: SvgPicture.asset(
-                  Assets.svg.icSearch,
-                  color: themeColor.white,
-                  width: 24,
-                  height: 24,
+            if (state.isParent != true)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 20, 8),
+                child: InkWell(
+                  onTap: _onTapSearch,
+                  child: SvgPicture.asset(
+                    Assets.svg.icSearch,
+                    color: themeColor.white,
+                    width: 24,
+                    height: 24,
+                  ),
                 ),
               ),
-            ),
           ],
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
@@ -121,7 +124,10 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
                 duration: const Duration(milliseconds: 100),
                 markers: warningMarkers.values.toSet(),
                 child: GoogleMap(
-                  initialCameraPosition: _kGooglePlex,
+                  initialCameraPosition: CameraPosition(
+                    target: const LatLng(37.42796133580664, -122.085749655962),
+                    zoom: zoomValue,
+                  ),
                   myLocationEnabled: true,
                   onMapCreated: _onMapCreated,
                   mapType: MapType.normal,

@@ -145,5 +145,7 @@
   "enterDestination": "Enter destination",
   "destination": "Destination",
   "latestPosition": "Latest position",
-  "yourChildEnterWarningLocation": "Your child has entered the warning area"
+  "yourChildEnterWarningLocation": "Your child has entered the warning area",
+  "distance": "Distance",
+  "map": "Map"
 }

@@ -107,6 +107,9 @@ class UserLocation {
   final User? user;
   @JsonKey(name: 'createdAt', fromJson: asOrNull)
   final DateTime? createdAt;
+  @JsonKey(name: 'distance', fromJson: asOrNull)
+  final double? distance;
+
   UserLocation({
     this.long,
     this.lat,
@@ -117,6 +120,7 @@ class UserLocation {
     this.status,
     this.user,
     this.createdAt,
+    this.distance,
   });
 
   double? distanceFrom(Location? other) {

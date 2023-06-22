@@ -145,5 +145,7 @@
   "enterDestination": "Nhập điểm đến",
   "destination": "Điểm đến",
   "latestPosition": "Vị trí gần đây",
-  "yourChildEnterWarningLocation": "Con của bạn đã vào khu vực cảnh báo"
+  "yourChildEnterWarningLocation": "Con của bạn đã vào khu vực cảnh báo",
+  "distance": "Khoảng cách",
+  "map": "Bản đồ"
 }

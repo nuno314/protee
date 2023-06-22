@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../common/utils/extensions.dart';
 import 'location.dart';
 import 'user.dart';
 
@@ -27,4 +28,13 @@ class NotificationModel {
       _$NotificationModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
+
+  String get name =>
+      dangerousLocations
+          ?.where((element) => element.name.isNotNullOrEmpty)
+          .map((e) => e.name!)
+          .join(', ') ??
+      '--';
+
+  double? get distance => dangerousLocations?.firstOrNull?.distance;
 }

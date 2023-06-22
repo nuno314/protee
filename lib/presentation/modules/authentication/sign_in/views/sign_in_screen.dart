@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -90,23 +88,11 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           const SizedBox(
             height: 64,
           ),
-          if (Platform.isIOS)
-            _buildLoginButton(
-              icon: Assets.svg.icApple,
-              title: trans.appleLogin,
-              color: themeColor.black,
-            ),
           _buildLoginButton(
             icon: Assets.svg.icGoogle,
             title: trans.googleLogin,
             color: themeColor.red,
             onTap: onLoginWithGoogle,
-          ),
-          _buildLoginButton(
-            icon: Assets.svg.icFacebook,
-            title: trans.facebookLogin,
-            color: themeColor.color3b5998,
-            onTap: onLoginWithFacebook,
           ),
         ],
       ),

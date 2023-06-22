@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../common/services/onesignal_notification_service.dart';
 import '../../../../common/utils.dart';
 import '../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../di/di.dart';
@@ -47,7 +46,6 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
     _cubit
       ..navigateTo(DashboardPage.home.index)
       ..markLaunched();
-    _updateOnesignal();
   }
 
   @override

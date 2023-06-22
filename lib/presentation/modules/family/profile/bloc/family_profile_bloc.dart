@@ -54,8 +54,9 @@ class FamilyProfileBloc
     RemoveMemberEvent event,
     Emitter<FamilyProfileState> emit,
   ) async {
-    final user = state.viewModel.members
-        .firstWhereOrNull((element) => element.user!.id == event.member.id);
+    final user = state.viewModel.members.firstWhereOrNull(
+      (element) => element.user!.id == event.member.user!.id,
+    );
     if (user != null) {
       final res = await _interactor.removeMember(user.id!);
       if (res) {

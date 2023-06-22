@@ -20,9 +20,9 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
 	<key>GIDClientID</key>
 	<string>836852153204-od4ppbll0kcd72atsllpt9dn1e4ttqri.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>

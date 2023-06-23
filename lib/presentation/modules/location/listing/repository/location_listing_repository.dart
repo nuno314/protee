@@ -1,8 +1,8 @@
+import '../../../../../common/utils.dart';
 import '../../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../../data/models/location.dart';
 import '../../../../../di/di.dart';
 import '../../../../../domain/entities/location_filter.entity.dart';
-import '../../../../../common/utils.dart';
 
 part 'location_listing_repository.impl.dart';
 

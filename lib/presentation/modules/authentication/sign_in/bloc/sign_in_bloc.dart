@@ -57,7 +57,7 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
       // ...
     }
     final token = await user?.getIdToken() ?? '';
-    final res = await _interactor.logInByGoogle(
+    await _interactor.logInByGoogle(
       token,
     );
     emit(

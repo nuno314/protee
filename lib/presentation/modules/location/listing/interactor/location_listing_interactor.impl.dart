@@ -16,11 +16,8 @@ class LocationListingInteractorImpl extends LocationListingInteractor {
   }
 
   late final _listingUsecase = ListingUseCase<LocationHistory, dynamic>(
-    (offset, limit, [param]) => _repository.getLocationHistory(
-      offset,
-      limit,
-      param!
-    ),
+    (offset, limit, [param]) =>
+        _repository.getLocationHistory(offset, limit, param!),
   );
 
   @override

@@ -8,17 +8,12 @@ import '../../../../data/models/place_prediction.dart';
 import '../../../../data/models/response.dart';
 import '../../../../di/di.dart';
 import '../../../base/base.dart';
-import '../interactor/search_direction_interactor.dart';
-import '../repository/search_direction_repository.dart';
 
 part 'search_direction_event.dart';
 part 'search_direction_state.dart';
 
 class SearchDirectionBloc
     extends AppBlocBase<SearchDirectionEvent, SearchDirectionState> {
-  late final _interactor = SearchDirectionInteractorImpl(
-    SearchDirectionRepositoryImpl(),
-  );
 
   final _locationRepo = injector.get<AppApiService>().locationRepository;
 

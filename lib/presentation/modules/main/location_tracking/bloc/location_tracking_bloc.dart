@@ -35,7 +35,7 @@ class LocationTrackingBloc
   );
 
   final baseSocketUrl = 'ws://protee-be.herokuapp.com/';
-  var _socket;
+  late Socket _socket;
   final _localDataManager = injector.get<AuthService>();
 
   late StreamSubscription _profileSubscription;

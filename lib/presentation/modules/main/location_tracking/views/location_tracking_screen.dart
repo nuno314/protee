@@ -2,19 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'
-    show ByteData, NetworkAssetBundle, Uint8List, rootBundle;
+    show NetworkAssetBundle, Uint8List, rootBundle;
 import 'package:flutter_animarker/flutter_map_marker_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image/image.dart' as IMG;
+import 'package:image/image.dart' as image;
 import 'package:location/location.dart';
 
 import '../../../../../common/services/location_plugin_service.dart';
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/location.dart';
-import '../../../../../data/models/user.dart';
 import '../../../../../di/di.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
@@ -52,14 +51,8 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
 
   final _locationService = injector.get<LocationPluginService>();
 
-  late Timer _timer;
-
   @override
   late AppLocalizations trans;
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.0,
-  );
 
   late double zoomValue = 14.0;
 
@@ -72,7 +65,7 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
       _mapStyle = string;
     });
 
-    _timer = Timer.periodic(const Duration(seconds: 30), (timer) async {
+    Timer.periodic(const Duration(seconds: 30), (timer) async {
       if (mounted) {
         if (bloc.state.isParent != true) {
           _location.onCurrentLocationChange((location) {
@@ -199,24 +192,6 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
               trans.safeArea,
               style: TextStyle(color: themeColor.white),
             ),
-    );
-  }
-
-  Widget _buildChild(
-    User child,
-  ) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: themeColor.green, width: 3),
-        shape: BoxShape.circle,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
-        child: CachedNetworkImageWrapper.avatar(
-          url: child.avatar ?? '',
-          fit: BoxFit.cover,
-        ),
-      ),
     );
   }
 }

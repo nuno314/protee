@@ -134,6 +134,7 @@ class Viewport {
 
   Viewport bigger(Viewport? other) {
     if (other == null) {
+      // ignore: avoid_returning_this
       return this;
     }
 

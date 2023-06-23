@@ -1,3 +1,4 @@
+// ignore_for_file: invalid_use_of_protected_member
 part of 'location_tracking_screen.dart';
 
 extension LocationTrackingAction on _LocationTrackingScreenState {
@@ -65,7 +66,6 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
       );
       _markers[MarkerId(location.id!)] = marker;
     }
-    // ignore: invalid_use_of_protected_member
     setState(() {
       warningMarkers = _markers;
     });
@@ -81,7 +81,6 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
       );
       _markers[MarkerId(location.id!)] = marker;
     }
-    // ignore: invalid_use_of_protected_member
     setState(() {
       markers = _markers;
     });
@@ -100,7 +99,6 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
   }
 
   Future<void> computePath(List<LatLng> routes) async {
-    // ignore: invalid_use_of_protected_member
     setState(() {
       polyline = [
         Polyline(
@@ -199,9 +197,9 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
   }
 
   Uint8List? resizeImage(Uint8List data, int? width, int? height) {
-    final img = IMG.decodeImage(data);
-    final resized = IMG.copyResize(img!, width: width, height: height);
-    return Uint8List.fromList(IMG.encodePng(resized));
+    final img = image.decodeImage(data);
+    final resized = image.copyResize(img!, width: width, height: height);
+    return Uint8List.fromList(image.encodePng(resized));
   }
 
   Future<void> _onTapChild(ChildLastLocation location) async {

@@ -42,7 +42,6 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
     Navigator.pushNamed(
       context,
       RouteList.familySettings,
-      arguments: bloc.state.family,
     ).then((value) {
       if (value is bool && value == true) {
         showLoading();

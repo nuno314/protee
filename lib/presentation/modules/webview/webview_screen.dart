@@ -118,7 +118,7 @@ class _WebviewScreenState extends StateBase<WebviewScreen> {
     }
     if (widget.args?.url?.startsWith('http://') == false &&
         widget.args?.url?.startsWith('https://') == false) {
-      return 'http://$url';
+      return 'http://$this';
     } else {
       return widget.args?.url;
     }

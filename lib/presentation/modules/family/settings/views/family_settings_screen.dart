@@ -33,15 +33,8 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  Family? _family;
   @override
   late AppLocalizations trans;
-
-  @override
-  void initState() {
-    super.initState();
-    _family = widget.family;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +57,9 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
                     color: themeColor.white,
                     borderRadius: BorderRadius.circular(16),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                     child: Row(
                       children: [
                         SvgPicture.asset(
@@ -95,17 +90,6 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
             ),
           ),
         );
-      },
-    );
-  }
-
-  void _onTapLeaveFamily() {
-    showNoticeConfirmDialog(
-      context: context,
-      message: trans.confirmLeaveFamily,
-      title: trans.inform,
-      onConfirmed: () {
-        Navigator.pop(context, true);
       },
     );
   }

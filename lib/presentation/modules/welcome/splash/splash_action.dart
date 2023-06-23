@@ -19,7 +19,7 @@ extension SplashAction on _SplashScreenState {
       if (Platform.isAndroid) deviceInfo.androidInfo,
       if (Platform.isIOS) deviceInfo.iosInfo,
       PackageInfo.fromPlatform()
-    ]).catchError((error, stackTrace) {});
+    ]);
 
     if (result.isNotEmpty) {
       if (Platform.isAndroid) {

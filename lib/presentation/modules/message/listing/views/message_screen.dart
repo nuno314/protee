@@ -23,7 +23,8 @@ class MessageScreen extends StatefulWidget {
   State<MessageScreen> createState() => _MessageScreenState();
 }
 
-class _MessageScreenState extends StateBase<MessageScreen> {
+class _MessageScreenState extends StateBase<MessageScreen>
+    with AfterLayoutMixin {
   final _refreshController = RefreshController(initialRefresh: true);
   final _icChat = InputContainerController();
   final ScrollController _controller = ScrollController();
@@ -45,12 +46,6 @@ class _MessageScreenState extends StateBase<MessageScreen> {
       ..loadComplete();
 
     super.hideLoading();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _onRefresh();
   }
 
   @override
@@ -218,5 +213,11 @@ class _MessageScreenState extends StateBase<MessageScreen> {
         )
       ],
     );
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    showLoading();
+    _onRefresh();
   }
 }

@@ -91,7 +91,7 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
               content: event.message,
               createdAt: DateTime.now(),
             ),
-            ...state.messages.reversed.toList(),
+            ...state.messages.toList(),
           ],
         ),
       ),
@@ -103,15 +103,17 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
     MessageUpcomingEvent event,
     Emitter<MessageState> emit,
   ) {
-    emit(
-      state.copyWith<MessageInitial>(
-        viewModel: state.viewModel.copyWith(
-          messages: [
-            event.message,
-            ...state.messages.reversed.toList(),
-          ],
+    if (event.message.user?.id != state.user?.id) {
+      emit(
+        state.copyWith<MessageInitial>(
+          viewModel: state.viewModel.copyWith(
+            messages: [
+              event.message,
+              ...state.messages,
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

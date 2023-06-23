@@ -4,27 +4,28 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_lambdas
+// ignore_for_file: lines_longer_than_80_chars
+// coverage:ignore-file
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:protee/common/services/auth_service.dart' as _i5;
-import 'package:protee/common/services/implementation/app_auth_service.dart'
-    as _i6;
-import 'package:protee/common/services/implementation/app_location_service.dart'
-    as _i10;
-import 'package:protee/common/services/implementation/firebase_upload_service.dart'
-    as _i15;
-import 'package:protee/common/services/implementation/location_plugin_service.dart'
-    as _i8;
-import 'package:protee/common/services/location_plugin_service.dart' as _i7;
-import 'package:protee/common/services/location_service.dart' as _i9;
-import 'package:protee/common/services/upload_service.dart' as _i14;
-import 'package:protee/data/data_source/local/preferences_helper/preferences_helper.dart'
+
+import '../common/services/auth_service.dart' as _i5;
+import '../common/services/implementation/app_auth_service.dart' as _i6;
+import '../common/services/implementation/app_location_service.dart' as _i10;
+import '../common/services/implementation/firebase_upload_service.dart' as _i15;
+import '../common/services/implementation/location_plugin_service.dart' as _i8;
+import '../common/services/location_plugin_service.dart' as _i7;
+import '../common/services/location_service.dart' as _i9;
+import '../common/services/upload_service.dart' as _i14;
+import '../data/data_source/local/preferences_helper/preferences_helper.dart'
     as _i11;
-import 'package:protee/data/data_source/remote/app_api_service.dart' as _i3;
-import 'package:protee/presentation/common_bloc/app_data_bloc.dart' as _i4;
-import 'package:protee/presentation/theme/theme_color.dart' as _i12;
-import 'package:protee/presentation/theme/theme_dialog.dart' as _i13;
+import '../data/data_source/remote/app_api_service.dart' as _i3;
+import '../presentation/common_bloc/app_data_bloc.dart' as _i4;
+import '../presentation/theme/theme_color.dart' as _i12;
+import '../presentation/theme/theme_dialog.dart' as _i13;
 
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars

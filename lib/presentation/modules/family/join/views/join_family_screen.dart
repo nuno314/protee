@@ -38,8 +38,10 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
     if (error.message?.toLowerCase().contains('invalid') == true) {
       showErrorDialog(trans.invalidInvitationCode);
     } else if (error.message?.toLowerCase().contains('current') == true) {
-      showErrorDialog(trans.waitingJoinFamily);
+      showErrorDialog(trans.waitForApproval);
     } else if (error.message?.toLowerCase().contains('waiting') == true) {
+      showErrorDialog(trans.waitingJoinFamily);
+    } else if (error.message?.toLowerCase().contains('joined') == true) {
       showErrorDialog(trans.waitingJoinFamily);
     }
   }

@@ -20,7 +20,10 @@ class Message {
     this.content,
     this.createdAt,
     this.user,
+    this.isSending = false,
   });
+
+  bool isSending;
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);

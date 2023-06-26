@@ -68,13 +68,14 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
     Timer.periodic(const Duration(seconds: 30), (timer) async {
       if (mounted) {
         if (bloc.state.isParent != true) {
-          _location.onCurrentLocationChange((location) {
+          final location = await _location.getCurrentLocation();
+          if (location != null) {
             bloc.add(
               ChangeCurentLocation(
                 LatLng(location.latitude!, location.longitude!),
               ),
             );
-          });
+          }
         }
       }
     });

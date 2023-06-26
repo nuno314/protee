@@ -38,9 +38,6 @@ class SplashBloc extends AppBlocBase<SplashEvent, SplashState> {
   Future<void> _configServices() async {
     await getClientInfo();
     await _authService.init();
-    if (_authService.isSignedIn) {
-      await _authService.refreshToken();
-    }
   }
 
   Future<void> getClientInfo() async {

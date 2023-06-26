@@ -147,5 +147,8 @@
   "latestPosition": "Latest position",
   "yourChildEnterWarningLocation": "Your child has entered the warning area",
   "distance": "Distance",
-  "map": "Map"
+  "map": "Map",
+  "youAlreadyInFamily": "You already joined a family",
+  "waitForApproval": "Please wait for approval",
+  "sending": "Sending"
 }

@@ -147,5 +147,8 @@
   "latestPosition": "Vị trí gần đây",
   "yourChildEnterWarningLocation": "Con của bạn đã vào khu vực cảnh báo",
   "distance": "Khoảng cách",
-  "map": "Bản đồ"
+  "map": "Bản đồ",
+  "youAlreadyInFamily": "Bạn đã gia nhập một gia đình rồi",
+  "waitForApproval": "Vui lòng chờ đợi để được duyệt",
+  "sending": "Đang gửi"
 }

@@ -179,38 +179,59 @@ class _MessageScreenState extends StateBase<MessageScreen>
 
   Widget _buildMessage(Message message, {bool showAvatar = false}) {
     final isSender = message.user?.id == bloc.state.user?.id;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        (!isSender && showAvatar)
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImageWrapper.avatar(
-                  url: message.user?.avatar ?? '',
-                  width: 30,
-                  height: 30,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            (!isSender && showAvatar)
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CachedNetworkImageWrapper.avatar(
+                      url: message.user?.avatar ?? '',
+                      width: 30,
+                      height: 30,
+                    ),
+                  )
+                : const SizedBox(width: 30),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Align(
+                alignment:
+                    isSender ? Alignment.centerRight : Alignment.centerLeft,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 6,
+                    horizontal: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSender
+                        ? themeColor.primaryColor.withOpacity(0.2)
+                        : themeColor.greyDC.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    message.content!,
+                    style: const TextStyle(),
+                  ),
                 ),
-              )
-            : const SizedBox(width: 30),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Align(
-            alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-              decoration: BoxDecoration(
-                color: isSender
-                    ? themeColor.primaryColor.withOpacity(0.2)
-                    : themeColor.greyDC.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                message.content!,
-                style: const TextStyle(),
               ),
             ),
+          ],
+        ),
+        if (message.isSending) ...[
+          const SizedBox(height: 4),
+          Text(
+            trans.sending,
+            style: TextStyle(
+              fontSize: 12,
+              color: themeColor.gray8C,
+            ),
+            textAlign: TextAlign.right,
           ),
-        )
+        ],
       ],
     );
   }

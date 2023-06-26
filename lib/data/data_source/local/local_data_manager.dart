@@ -36,17 +36,7 @@ class LocalDataManager extends AppPreferenceData {
     return _currentUser;
   }
 
-  final _authChangedController = StreamController<SocketArgs>.broadcast();
-
-  Stream<SocketArgs> get onAuthChanged => _authChangedController.stream;
-
   void notifyUserChanged(User? user, {String? accessToken}) {
-    _authChangedController.add(
-      SocketArgs(
-        accessToken: accessToken ?? this.accessToken,
-        user: user ?? _currentUser,
-      ),
-    );
 
     LogUtils.d('_notifyUserChanged: ${user?.name}');
     _userChangedController.add(user);

@@ -82,6 +82,23 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
     SendMessageEvent event,
     Emitter<MessageState> emit,
   ) async {
+    final messages = state.messages;
+    emit(
+      state.copyWith<MessageInitial>(
+        viewModel: state.viewModel.copyWith(
+          messages: [
+            Message(
+              user: state.user,
+              content: event.message,
+              createdAt: DateTime.now(),
+              isSending: true,
+            ),
+            ...messages.toList(),
+          ],
+        ),
+      ),
+    );
+    await _interactor.sendMessage(event.message);
     emit(
       state.copyWith<MessageInitial>(
         viewModel: state.viewModel.copyWith(
@@ -91,12 +108,11 @@ class MessageBloc extends AppBlocBase<MessageEvent, MessageState> {
               content: event.message,
               createdAt: DateTime.now(),
             ),
-            ...state.messages.toList(),
+            ...messages.toList(),
           ],
         ),
       ),
     );
-    await _interactor.sendMessage(event.message);
   }
 
   FutureOr<void> _onMessageUpcomingEvent(

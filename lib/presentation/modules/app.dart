@@ -13,9 +13,9 @@ import '../../common/components/navigation/navigation_observer.dart';
 import '../../common/config.dart';
 import '../../common/constants/locale/app_locale.dart';
 import '../../common/utils.dart';
-import '../../data/data_source/local/local_data_manager.dart';
 import '../../data/data_source/remote/app_api_service.dart';
 import '../../data/models/notification_model.dart';
+import '../../data/models/user.dart';
 import '../../di/di.dart';
 import '../../domain/entities/app_data.dart';
 import '../common_bloc/app_data_bloc.dart';
@@ -39,10 +39,12 @@ class App extends StatefulWidget {
 
 class _MyAppState extends State<App> {
   late StreamSubscription _socketSubscription;
-  late Socket _socket;
+  final _localDataManager = injector.get<AppApiService>().localDataManager;
+  Socket? _socket;
 
   @override
   void initState() {
+    super.initState();
     if (Config.instance.appConfig.isDevBuild) {
       ShakeDetector.autoStart(
         onPhoneShake: () {
@@ -56,12 +58,9 @@ class _MyAppState extends State<App> {
       );
     }
 
-    super.initState();
-
-    _socketSubscription =
-        injector.get<AppApiService>().localDataManager.onAuthChanged.listen(
-              _setUpSocket,
-            );
+    _socketSubscription = _localDataManager.onUserChanged.listen(
+      _setUpSocket,
+    );
   }
 
   @override
@@ -104,22 +103,26 @@ class _MyAppState extends State<App> {
     );
   }
 
-  void _setUpSocket(SocketArgs args) {
-    final user = args.user;
+  void _setUpSocket(User? user) {
+    final token = _localDataManager.accessToken;
 
-    if (user == null || user.isParent != true || user.familyId.isNullOrEmpty) {
+    if (token.isNullOrEmpty || user?.familyId.isNullOrEmpty == true) {
       return;
+    }
+
+    if (_socket?.connected == true) {
+      _socket?.destroy();
+      _socket = null;
     }
 
     _socket = io(
       'ws://protee-be.herokuapp.com/',
       OptionBuilder().setTransports(['websocket']).setQuery({
-        'accessToken': args.accessToken,
-        'familyId': args.user!.familyId,
+        'accessToken': _localDataManager.accessToken,
+        'familyId': user!.familyId,
       }).build(),
     );
-
-    _socket
+    _socket!
       ..on(
         'join',
         (data) {
@@ -130,6 +133,7 @@ class _MyAppState extends State<App> {
   }
 
   Future<void> onWarning(Map<String, dynamic> data) async {
+    LogUtils.d(data);
     final context = navigatorKey.currentState!.context,
         trans = translate(context);
 
@@ -242,7 +246,6 @@ class _MyAppState extends State<App> {
 
   @override
   void dispose() {
-    _socket.dispose();
     _socketSubscription.cancel();
     super.dispose();
   }

@@ -67,6 +67,7 @@ class AppAuthService implements AuthService {
   @override
   Future<void> signOut() async {
     LogUtils.i('$runtimeType signOut');
+    _localDataManager.notifyUserChanged(null);
     await _localDataManager.setAccessToken(null);
     await _localDataManager.setRefreshToken(null);
     return _firebaseAuth.signOut();

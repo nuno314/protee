@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../common/utils.dart';
-import '../../../../../data/models/family.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
@@ -15,10 +14,8 @@ import '../bloc/family_settings_bloc.dart';
 part 'family_settings.action.dart';
 
 class FamilySettingsScreen extends StatefulWidget {
-  final Family? family;
   const FamilySettingsScreen({
     Key? key,
-    this.family,
   }) : super(key: key);
 
   @override

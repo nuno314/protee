@@ -29,12 +29,9 @@ class FamilyRoute {
           );
         },
         RouteList.familySettings: (context) {
-          final family = settings.arguments as Family;
           return BlocProvider(
             create: (context) => FamilySettingsBloc(),
-            child: FamilySettingsScreen(
-              family: family,
-            ),
+            child: const FamilySettingsScreen(),
           );
         },
         RouteList.joinFamilyRequests: (context) {

@@ -64,6 +64,12 @@ class LeaveFamilyState extends FamilyProfileState {
   }) : super(viewModel);
 }
 
+class AdjustRoleState extends FamilyProfileState {
+  AdjustRoleState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -76,6 +82,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   LeaveFamilyState: (viewModel) => LeaveFamilyState(
+        viewModel: viewModel,
+      ),
+  AdjustRoleState: (viewModel) => AdjustRoleState(
         viewModel: viewModel,
       ),
 };

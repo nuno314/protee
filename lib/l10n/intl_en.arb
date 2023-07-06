@@ -70,7 +70,7 @@
   "locationDoesExist": "Location does exist",
   "addLocationSuccessfully": "Add location successfully",
   "joinFamily": "Join family",
-  "joinFamilySuccessfully": "Join family successfully",
+  "joinFamilySuccessfully": "Submit request to join the family successfully",
   "pleaseEnterInvitationCode": "Please enter invitation code",
   "enterInvitationCode": "Enter invitation code",
   "invalidInvitationCode": "Invalid invitation code",
@@ -150,5 +150,11 @@
   "map": "Map",
   "youAlreadyInFamily": "You already joined a family",
   "waitForApproval": "Please wait for approval",
-  "sending": "Sending"
+  "sending": "Sending",
+  "rejectRequestSuccessfully": "Rejected request successfully",
+  "sendRequestNote": "Note: when you send a request to another family, you'll have to leave your current family.",
+  "joinedWarning": "You were in a family. Please leave before submitting another join request.",
+  "downgradeToChildConfirm": "Do you want to adjust roles to children?",
+  "upgradeToParentConfirm": "Do you want to adjust roles to parent?",
+  "adjustSuccessfully": "Adjusted successfully"
 }

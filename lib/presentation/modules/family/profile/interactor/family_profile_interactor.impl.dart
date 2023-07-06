@@ -26,7 +26,17 @@ class FamilyProfileInteractorImpl extends FamilyProfileInteractor {
   }
 
   @override
-  Future<bool> leaveFamily() {
+  Future<User?> leaveFamily() {
     return _repository.leaveFamily();
+  }
+
+  @override
+  Future<UserFamily?> updateChild(String id) {
+    return _repository.updateChild(id);
+  }
+
+  @override
+  Future<UserFamily?> updateParent(String id) {
+    return _repository.updateParent(id);
   }
 }

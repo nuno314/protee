@@ -52,7 +52,7 @@ class SubmitScreenForm extends StatelessWidget {
             )
           : null,
       body: GestureDetector(
-        onTap: () => CommonFunction.hideKeyBoard(context),
+        onTap: () => CommonFunction().hideKeyBoard(context),
         child: SafeArea(
           bottom: false,
           child: Column(

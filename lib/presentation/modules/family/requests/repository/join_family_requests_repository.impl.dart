@@ -13,4 +13,11 @@ class JoinFamilyRequestsRepositoryImpl extends JoinFamilyRequestsRepository {
         .approveJoinRequest(id: id)
         .then((value) => value?.result ?? false);
   }
+
+  @override
+  Future<bool> rejectRequest(String id) {
+    return _restApi
+        .rejectJoinRequest(id: id)
+        .then((value) => value?.result ?? false);
+  }
 }

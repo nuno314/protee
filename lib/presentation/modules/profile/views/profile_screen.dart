@@ -52,6 +52,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     super.initState();
     _user = widget.user;
     _nameController.text = _user?.name;
+    _phoneNumberController.text = _user?.phoneNumber;
     _dobController.text = _user?.dob?.toLocalddmmyyyy();
   }
 

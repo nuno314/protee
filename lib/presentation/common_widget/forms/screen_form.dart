@@ -60,7 +60,7 @@ class _ScreenFormState extends State<ScreenForm> {
       backgroundColor: widget.bgColor,
       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       body: GestureDetector(
-        onTap: () => CommonFunction.hideKeyBoard(context),
+        onTap: () => CommonFunction().hideKeyBoard(context),
         child: main,
       ),
     );

@@ -146,7 +146,9 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
     var cnt = 0;
     final _markers = <MarkerId, Marker>{};
     for (final location in locations) {
-      if (location == null) {
+      if (location == null ||
+          location.currentLat == null ||
+          location.currentLong == null) {
         continue;
       }
       final avatar = location.user!.avatar!;
@@ -183,13 +185,15 @@ extension LocationTrackingAction on _LocationTrackingScreenState {
             .toList(),
       );
     } else {
-      final child = locations.firstWhere((element) => element != null);
-      await _animateCamera(
-        LatLng(
-          double.parse(child!.currentLat!),
-          double.parse(child.currentLong!),
-        ),
-      );
+      final child = locations.firstWhereOrNull((element) => element != null);
+      if (child != null) {
+        await _animateCamera(
+          LatLng(
+            double.parse(child.currentLat!),
+            double.parse(child.currentLong!),
+          ),
+        );
+      }
     }
     setState(() {
       markers = _markers;

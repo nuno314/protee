@@ -63,7 +63,7 @@ extension AddLocationAction on _AddLocationScreenState {
         CameraPosition(
           zoom: 14,
           target: LatLng(
-            location.lat!,
+            location.lat! - 0.0075,
             location.lng!,
           ),
         ),

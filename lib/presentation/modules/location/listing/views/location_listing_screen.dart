@@ -192,7 +192,8 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
   }
 
   Widget _buildLocation(UserLocation location) {
-    final canDelete = location.status != UserLocationStatus.published;
+    final canDelete = location.status != UserLocationStatus.published &&
+        (bloc.state.isParent || bloc.state.user!.id == location.user!.id);
     final createdByServer = location.user == null;
     return InkWell(
       onTap: () => _onTapLocation(location),

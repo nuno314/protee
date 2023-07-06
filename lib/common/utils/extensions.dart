@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
+import '../../data/models/notification_model.dart';
+import '../../generated/assets.dart';
 import '../constants/locale/app_locale.dart';
 import '../constants/locale/date_locale.dart';
 import '../constants/locale/datetime/en.dart';
@@ -344,5 +346,27 @@ extension LatLngUtils on LatLng? {
       return '';
     }
     return '${this!.latitude},${this!.longitude}';
+  }
+}
+
+extension NotificationExtension on NotificationType? {
+  String? get icon {
+    switch (this) {
+      case NotificationType.addLocation:
+        return Assets.svg.icNotiLocation;
+      case NotificationType.joinRequest:
+        return Assets.svg.icNotiJoinRequest;
+      case NotificationType.leaveFamily:
+        return Assets.svg.icNotiLeave;
+      case NotificationType.approvedJoinFamily:
+        return Assets.svg.icApproved;
+      case NotificationType.removedFromFamily:
+        return Assets.svg.icRemoved;
+      case NotificationType.upgradeToParent:
+      case NotificationType.downgradeToChild:
+        return Assets.svg.icNotiAdjust;
+      default:
+        return null;
+    }
   }
 }

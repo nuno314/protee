@@ -59,8 +59,9 @@ class LocationTrackingBloc
     on<SetUpSocketEvent>(_onSetUpSocketEvent);
     on<NotificationIncomingEvent>(_onNotificationIncomingEvent);
 
-    if (user?.isParent == false || state.isParent == false) {
+    if (user?.isParent != true || state.isParent != true) {
       add(GetPlacesEvent());
+      add(GetWarningLocationNearbyEvent());
     } else {
       add(GetChildrenEvent());
       add(SetUpSocketEvent(user));

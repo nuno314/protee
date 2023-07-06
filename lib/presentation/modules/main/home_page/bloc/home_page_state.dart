@@ -53,12 +53,21 @@ class HomePageInitial extends HomePageState {
   }) : super(viewModel);
 }
 
+class UserUpdatedState extends HomePageState {
+  UserUpdatedState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   HomePageInitial: (viewModel) => HomePageInitial(
+        viewModel: viewModel,
+      ),
+  UserUpdatedState: (viewModel) => UserUpdatedState(
         viewModel: viewModel,
       ),
 };

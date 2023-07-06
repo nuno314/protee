@@ -129,20 +129,21 @@ class _MyAppState extends State<App> {
           LogUtils.d('setUpSocket $data');
         },
       )
-      ..on('warning', (data) async => onWarning(data));
+      ..on('warning', (data) async => onWarning(user, data));
   }
 
-  Future<void> onWarning(Map<String, dynamic> data) async {
+  Future<void> onWarning(User? me, Map<String, dynamic> data) async {
     LogUtils.d(data);
     final context = navigatorKey.currentState!.context,
         trans = translate(context);
 
     final NotificationModel? warning =
         asOrNull(NotificationModel.fromJson(data));
-    if (warning == null) {
+
+    final user = warning?.user;
+    if (user == null || (me?.isChildren == true && me?.id == user.id)) {
       return;
     }
-    final user = warning.user;
     if (await Vibration.hasCustomVibrationsSupport() ?? false) {
       await Vibration.vibrate(duration: 1000);
     } else {
@@ -155,6 +156,7 @@ class _MyAppState extends State<App> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               trans.yourChildEnterWarningLocation,
@@ -163,6 +165,7 @@ class _MyAppState extends State<App> {
                 fontWeight: FontWeight.w600,
                 color: themeColor.red,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
             RichText(
@@ -174,7 +177,7 @@ class _MyAppState extends State<App> {
                 ),
                 children: [
                   TextSpan(
-                    text: '${warning.distance?.toStringAsFixed(0) ?? '--'}m',
+                    text: '${warning?.distance?.toStringAsFixed(0) ?? '--'}m',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -183,6 +186,7 @@ class _MyAppState extends State<App> {
                   ),
                 ],
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             Row(
@@ -195,17 +199,19 @@ class _MyAppState extends State<App> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: CachedNetworkImageWrapper.avatar(
-                          url: user!.avatar ?? '',
+                          url: user.avatar ?? '',
                           width: 50,
                           height: 50,
                           fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(width: 16),
-                      Text(
-                        user.name ?? '--',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          user.name ?? '--',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -216,12 +222,12 @@ class _MyAppState extends State<App> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        warning.name,
+                        warning?.name ?? '',
                         textAlign: TextAlign.right,
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        warning.currentLocation?.createdAt
+                        warning?.currentLocation?.createdAt
                                 ?.toLocalHHnnddmmyyyy() ??
                             '--',
                         style: TextStyle(

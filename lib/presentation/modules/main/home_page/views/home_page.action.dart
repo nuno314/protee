@@ -6,6 +6,28 @@ extension HomePageAction on _HomePageScreenState {
     _refreshController
       ..refreshCompleted()
       ..loadComplete();
+
+    if (state is UserUpdatedState) {
+      if (state.user?.isNull == true) {
+        showNoticeConfirmDialog(
+          context: context,
+          message: trans.notInFamily,
+          title: trans.inform,
+          onConfirmed: () {
+            Navigator.pushNamed(
+              context,
+              RouteList.addMember,
+            );
+          },
+        );
+      } else {
+        Navigator.pushNamed(
+          context,
+          RouteList.familyProfile,
+          arguments: state.user,
+        );
+      }
+    }
   }
 
   void _onRefresh() {
@@ -28,7 +50,11 @@ extension HomePageAction on _HomePageScreenState {
     Navigator.pushNamed(
       context,
       RouteList.locationListing,
-      arguments: LocationListingArgs(children: bloc.state.members),
+      arguments: LocationListingArgs(
+        children: bloc.state.members
+            .where((element) => element.isChildren == true)
+            .toList(),
+      ),
     );
   }
 
@@ -53,24 +79,7 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapFamilyProfile() {
-    if (bloc.state.user?.isNull == true) {
-      showNoticeConfirmDialog(
-        context: context,
-        message: trans.notInFamily,
-        title: trans.inform,
-        onConfirmed: () {
-          Navigator.pushNamed(
-            context,
-            RouteList.addMember,
-          );
-        },
-      );
-    } else {
-      Navigator.pushNamed(
-        context,
-        RouteList.familyProfile,
-        arguments: injector.get<AppApiService>().localDataManager.currentUser,
-      );
-    }
+    showLoading();
+    bloc.add(GetMeEvent());
   }
 }

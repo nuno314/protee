@@ -14,7 +14,9 @@ abstract class FamilyProfileRepository {
 
   Future<bool> removeMember(String id);
 
-  Future<bool> leaveFamily();
+  Future<User?> leaveFamily();
 
-  // Future<User?> updateToParent();
+  Future<UserFamily?> updateChild(String id);
+  
+  Future<UserFamily?> updateParent(String id);
 }

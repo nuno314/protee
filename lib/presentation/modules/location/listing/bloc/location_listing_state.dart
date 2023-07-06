@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'location_listing_bloc.dart';
 
 class _ViewModel {
@@ -19,19 +20,17 @@ class _ViewModel {
 
   _ViewModel copyWith({
     User? user,
-    List<User>? children,
-    User? child,
     List<UserLocation>? data,
-    bool? canLoadMoreHistory,
     Location? currentLocation,
     LocationFilter? filter,
+    bool? canLoadMoreHistory,
     List<LocationHistory>? locationHistories,
   }) {
     return _ViewModel(
       user: user ?? this.user,
       data: data ?? this.data,
-      filter: filter ?? this.filter,
       currentLocation: currentLocation ?? this.currentLocation,
+      filter: filter ?? this.filter,
       canLoadMoreHistory: canLoadMoreHistory ?? this.canLoadMoreHistory,
       locationHistories: locationHistories ?? this.locationHistories,
     );
@@ -52,10 +51,11 @@ abstract class LocationListingState {
   }
 
   List<UserLocation> get data => viewModel.data;
+  User? get user => viewModel.user;
   Location? get currentLocation => viewModel.currentLocation;
   LocationFilter get filter => viewModel.filter;
   bool get canLoadMoreHistory => viewModel.canLoadMoreHistory ?? false;
-  bool get isParent => viewModel.user?.isParent ?? false;
+  bool get isParent => user?.isParent ?? false;
   List<LocationHistory> get locationHistories => viewModel.locationHistories;
 }
 

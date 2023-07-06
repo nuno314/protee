@@ -7,4 +7,6 @@ abstract class JoinFamilyRequestsInteractor {
   Future<List<JoinFamilyRequest>> getData();
 
   Future<bool> approveRequest(String id);
+
+  Future<bool> rejectRequest(String id);
 }

@@ -361,13 +361,13 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<BooleanResponse?> leaveFamily() async {
+  Future<User?> leaveFamily() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>?>(_setStreamType<User>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -379,8 +379,7 @@ class _RestApiRepository implements RestApiRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value =
-        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
+    final value = _result.data == null ? null : User.fromJson(_result.data!);
     return value;
   }
 
@@ -399,6 +398,30 @@ class _RestApiRepository implements RestApiRepository {
             .compose(
               _dio.options,
               'family/approve',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : BooleanResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BooleanResponse?> rejectJoinRequest({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'requestId': id};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<BooleanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -566,6 +589,135 @@ class _RestApiRepository implements RestApiRepository {
     final value = _result.data == null
         ? null
         : LatestLocationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<NotificationResponse?> getNotification({
+    required page,
+    required take,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'take': take,
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>?>(
+        _setStreamType<NotificationResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'notifications',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data == null
+        ? null
+        : NotificationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<NotificationModel?> readNotification(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<NotificationModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'notifications/read/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : NotificationModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<bool?> readAllNotifications() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<bool>(_setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'notifications/mark-all-as-read',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<UserFamily?> updateChild({id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {'memberId': id};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<UserFamily>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/update-child',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : UserFamily.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserFamily?> updateParent({id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {'memberId': id};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>?>(_setStreamType<UserFamily>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'family/update-parent',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        _result.data == null ? null : UserFamily.fromJson(_result.data!);
     return value;
   }
 

@@ -167,3 +167,4 @@ upgradeToParentConfirm,Bạn có muốn điều chỉnh vai trò thành cha
 adjustSuccessfully,Điều chỉnh thành công,Adjusted successfully
 permissionChanged,"Quyền hạn đã bị thay đổi, vui lòng thử lại sau.","Permissions have been changed, please try again later."
 leaveFamilyFailed,"Rời gia đình thất bại. Vui lòng chuyển quyền cho một người khác trước khi rời gia đình.","Leaving the family failed. Please transfer permissions to someone else before leaving the family."
+youEnterWarningLocation,Bạn đã vào khu vực cảnh báo,You have entered the warning area

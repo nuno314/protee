@@ -29,7 +29,9 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   @override
   Future<User?> leaveFamily() async {
     final user = await _restApi.leaveFamily();
-    _local.notifyUserChanged(user);
+    if (user?.id.isNotNullOrEmpty == true) {
+      _local.notifyUserChanged(user);
+    }
     return user;
   }
 

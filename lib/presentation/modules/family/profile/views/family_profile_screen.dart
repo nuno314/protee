@@ -41,9 +41,19 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
   late AppLocalizations trans;
 
   @override
-  void onError(ErrorData error) {
+  void onLogicError(String? message) {
     _controller.refreshCompleted();
-    super.onError(error);
+    if (message?.toLowerCase().contains('permission') == true ||
+        message?.toLowerCase().contains('only') == true) {
+      showErrorDialog(
+        trans.permissionChanged,
+        onClose: () {
+          Navigator.pop(context);
+        },
+      );
+    } else {
+      super.onLogicError(message);
+    }
   }
 
   @override
@@ -277,5 +287,4 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
       ),
     );
   }
-
 }

@@ -159,7 +159,9 @@ class _MyAppState extends State<App> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              trans.yourChildEnterWarningLocation,
+              me?.isChildren == true
+                  ? trans.youEnterWarningLocation
+                  : trans.yourChildEnterWarningLocation,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

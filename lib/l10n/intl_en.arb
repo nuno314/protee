@@ -158,5 +158,6 @@
   "upgradeToParentConfirm": "Do you want to adjust roles to parent?",
   "adjustSuccessfully": "Adjusted successfully",
   "permissionChanged": "Permissions have been changed, please try again later.",
-  "leaveFamilyFailed": ""
+  "leaveFamilyFailed": "Leaving the family failed. Please transfer permissions to someone else before leaving the family.",
+  "youEnterWarningLocation": "You have entered the warning area"
 }

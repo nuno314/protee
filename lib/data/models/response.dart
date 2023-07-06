@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../common/utils/data_checker.dart';
 import 'location.dart';
 import 'message.dart';
+import 'notification_model.dart';
 import 'place_prediction.dart';
 import 'route.dart';
 import 'user.dart';
@@ -284,4 +285,18 @@ class LatestLocationResponse {
       _$LatestLocationResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$LatestLocationResponseToJson(this);
+}
+
+
+@JsonSerializable()
+class NotificationResponse {
+  @JsonKey(name: 'data')
+  final List<NotificationModel>? data;
+
+  NotificationResponse({this.data});
+
+  factory NotificationResponse.fromJson(Map<String, dynamic> json) =>
+      _$NotificationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationResponseToJson(this);
 }

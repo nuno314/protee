@@ -111,7 +111,7 @@ Future<dynamic> showNoticeConfirmWithReasonDialog({
       return GestureDetector(
         onTap: () {
           if (_icReasonCtr.value.focusNode.hasFocus) {
-            CommonFunction.hideKeyBoard(context);
+            CommonFunction().hideKeyBoard(context);
           } else if (barrierDismissible) {
             Navigator.of(context, rootNavigator: useRootNavigator).pop(
               _icReasonCtr.text,

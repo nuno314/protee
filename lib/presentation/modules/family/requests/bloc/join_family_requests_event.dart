@@ -4,8 +4,14 @@ abstract class JoinFamilyRequestsEvent {}
 
 class GetJoinRequestsEvent extends JoinFamilyRequestsEvent {}
 
-class ApprovalRequestEvent extends JoinFamilyRequestsEvent {
+class ApproveRequestEvent extends JoinFamilyRequestsEvent {
   final String id;
 
-  ApprovalRequestEvent(this.id);
+  ApproveRequestEvent(this.id);
+}
+
+class RejectRequestEvent extends JoinFamilyRequestsEvent {
+  final String id;
+
+  RejectRequestEvent(this.id);
 }

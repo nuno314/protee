@@ -11,3 +11,15 @@ class RemoveMemberEvent extends FamilyProfileEvent {
 }
 
 class LeaveFamilyEvent extends FamilyProfileEvent {}
+
+class UpdateUpToParentEvent extends FamilyProfileEvent {
+ final String id;
+
+  UpdateUpToParentEvent(this.id);
+}
+
+class UpdateDownToChildEvent extends FamilyProfileEvent {
+ final String id;
+
+  UpdateDownToChildEvent(this.id);
+}

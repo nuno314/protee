@@ -25,7 +25,9 @@ extension LocationListingAction on _LocationListingScreenState {
     bloc.add(GetLocationHistoryEvent());
   }
 
-  void _onLoadingHistories() {}
+  void _onLoadingHistories() {
+    bloc.add(LoadMoreLocationHistoryEvent());
+  }
 
   void _addMarkers(List<UserLocation> locations) {
     final _markers = <MarkerId, Marker>{};
@@ -74,7 +76,7 @@ extension LocationListingAction on _LocationListingScreenState {
         CameraPosition(
           zoom: 14,
           target: LatLng(
-            location.lat!,
+            location.lat! - 0.005,
             location.lng!,
           ),
         ),
@@ -97,6 +99,7 @@ extension LocationListingAction on _LocationListingScreenState {
   }
 
   Future<void> _onTapLocation(UserLocation location) async {
+    _addMarkers([location]);
     await _animateCamera(
       Location.from(
         latLng: LatLng(

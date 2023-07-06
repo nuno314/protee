@@ -41,6 +41,8 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
       showErrorDialog(trans.waitForApproval);
     } else if (error.message?.toLowerCase().contains('waiting') == true) {
       showErrorDialog(trans.waitingJoinFamily);
+    } else if (error.message?.toLowerCase().contains('other') == true) {
+      showErrorDialog(trans.joinedWarning);
     } else if (error.message?.toLowerCase().contains('joined') == true) {
       showErrorDialog(trans.waitingJoinFamily);
     }
@@ -78,6 +80,14 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
             controller: _codeController,
             textStyle: textTheme.bodyLarge?.copyWith(
               fontSize: 16,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            trans.sendRequestNote,
+            style: TextStyle(
+              color: themeColor.gray8C,
+              fontStyle: FontStyle.italic,
             ),
           ),
           const Spacer(),

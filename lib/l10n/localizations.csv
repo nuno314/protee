@@ -76,7 +76,7 @@ pleaseSelectDOB,Vui lòng chọn ngày sinh,Please select date of birth
 locationDoesExist,Địa điểm đã tồn tại,Location does exist
 addLocationSuccessfully,Thêm địa điểm thành công,Add location successfully
 joinFamily,Gia nhập gia đình,Join family
-joinFamilySuccessfully,Gia nhập gia đình thành công,Join family successfully
+joinFamilySuccessfully,Gửi yêu cầu gia nhập gia đình thành công,Submit request to join the family successfully
 pleaseEnterInvitationCode,Vui lòng nhập mã mời,Please enter invitation code
 enterInvitationCode,Nhập mã mời,Enter invitation code
 invalidInvitationCode,Mã mời không hợp lệ,Invalid invitation code
@@ -159,3 +159,9 @@ map,Bản đồ,Map
 youAlreadyInFamily,Bạn đã gia nhập một gia đình rồi,You already joined a family
 waitForApproval,Vui lòng chờ đợi để được duyệt,Please wait for approval
 sending,Đang gửi,Sending
+rejectRequestSuccessfully,Từ chối yêu cầu thành công,Rejected request successfully
+sendRequestNote,"Lưu ý: khi gửi yêu cầu đến gia đình khác, bạn sẽ phải rời khỏi gia đình hiện tại của mình.","Note: when you send a request to another family, you'll have to leave your current family."
+joinedWarning,"Bạn đã ở trong một gia đình. Vui lòng rời khỏi trước khi gửi yêu cầu gia nhập khác.","You were in a family. Please leave before submitting another join request."
+downgradeToChildConfirm,Bạn có muốn điều chỉnh vai trò thành con cái?,Do you want to adjust roles to children?
+upgradeToParentConfirm,Bạn có muốn điều chỉnh vai trò thành cha mẹ?,Do you want to adjust roles to parent?
+adjustSuccessfully,Điều chỉnh thành công,Adjusted successfully

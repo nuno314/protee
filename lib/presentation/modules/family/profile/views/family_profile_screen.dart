@@ -278,5 +278,4 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     );
   }
 
-  void _onTapAdjustRole(UserFamily member) {}
 }

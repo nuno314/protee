@@ -5,7 +5,6 @@ import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
 import '../../../../../common/utils.dart';
 import '../../../../../data/models/family.dart';
-import '../../../../../data/models/user.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
@@ -31,7 +30,8 @@ class JoinFamilyRequestsScreen extends StatefulWidget {
 
 class _JoinFamilyRequestsScreenState
     extends StateBase<JoinFamilyRequestsScreen> {
-  final _refreshController = RefreshController();
+  late final _refreshController =
+      RefreshController(initialRefresh: widget.requests == null);
 
   @override
   JoinFamilyRequestsBloc get bloc => BlocProvider.of(context);
@@ -113,7 +113,7 @@ class _JoinFamilyRequestsScreenState
           backgroundRadius: 16,
           widthSpace: 48,
           onTap: (CompletionHandler handler) async {
-            await declineRequest(handler, _user);
+            await declineRequest(handler, request);
           },
           color: const Color(0xffFDE8E6),
         ),
@@ -164,7 +164,7 @@ class _JoinFamilyRequestsScreenState
               child: IconButton(
                 icon: const Icon(Icons.check),
                 color: themeColor.green,
-                onPressed:() => _onTapApproveRequest(request),
+                onPressed: () => _onTapApproveRequest(request),
               ),
             ),
           ],
@@ -172,6 +172,4 @@ class _JoinFamilyRequestsScreenState
       ),
     );
   }
-
- 
 }

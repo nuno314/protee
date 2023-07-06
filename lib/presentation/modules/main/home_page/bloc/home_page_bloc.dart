@@ -15,14 +15,15 @@ part 'home_page_state.dart';
 class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
   late StreamSubscription _profileSubscription;
   final _restApi = injector.get<AppApiService>().client;
+  final _local = injector.get<AppApiService>().localDataManager;
 
   HomePageBloc({User? user})
       : super(HomePageInitial(viewModel: _ViewModel(user: user))) {
     on<UpdateAccountEvent>(_onUpdateAccountEvent);
     on<InitHomePageEvent>(_onInitHomePageEvent);
+    on<GetMeEvent>(_onGetMeEvent);
 
-    _profileSubscription =
-        injector.get<AppApiService>().localDataManager.onUserChanged.listen(
+    _profileSubscription = _local.onUserChanged.listen(
       (user) {
         add(
           UpdateAccountEvent(user),
@@ -71,6 +72,21 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
         viewModel: state.viewModel.copyWith(
           statistic: asOrNull(res[0]),
           familyMembers: asOrNull(res[1]),
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onGetMeEvent(
+    GetMeEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    final user = await _restApi.getUserProfile();
+    _local.notifyUserChanged(user);
+    emit(
+      state.copyWith<UserUpdatedState>(
+        viewModel: state.viewModel.copyWith(
+          user: user,
         ),
       ),
     );

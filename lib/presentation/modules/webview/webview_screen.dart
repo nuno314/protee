@@ -128,7 +128,7 @@ class _WebviewScreenState extends StateBase<WebviewScreen> {
     if (url == null) {
       _controller?.loadUrl(
         Uri.dataFromString(
-          CommonFunction.wrapStyleHtmlContent(widget.args?.html ?? ''),
+          CommonFunction().wrapStyleHtmlContent(widget.args?.html ?? ''),
           mimeType: 'text/html',
           encoding: Encoding.getByName('utf-8'),
         ).toString(),

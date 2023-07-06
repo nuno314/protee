@@ -12,6 +12,10 @@ abstract class FamilyProfileInteractor {
   Future<List<JoinFamilyRequest>> getRequests();
 
   Future<bool> removeMember(String id);
-  
-  Future<bool> leaveFamily();
+
+  Future<User?> leaveFamily();
+
+  Future<UserFamily?> updateChild(String id);
+
+  Future<UserFamily?> updateParent(String id);
 }

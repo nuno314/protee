@@ -24,6 +24,8 @@ class FamilyProfileBloc
     on<GetFamilyProfileEvent>(_onGetFamilyProfileEvent);
     on<RemoveMemberEvent>(_onRemoveMemberEvent);
     on<LeaveFamilyEvent>(_onLeaveFamilyEvent);
+    on<UpdateUpToParentEvent>(_onUpdateUpToParentEvent);
+    on<UpdateDownToChildEvent>(_onUpdateDownToChildEvent);
   }
 
   Future<void> _onGetFamilyProfileEvent(
@@ -78,8 +80,50 @@ class FamilyProfileBloc
     Emitter<FamilyProfileState> emit,
   ) async {
     final res = await _interactor.leaveFamily();
-    if (res) {
-      emit(state.copyWith<LeaveFamilyState>());
+    if (res != null) {
+      emit(
+        state.copyWith<LeaveFamilyState>(),
+      );
     }
+  }
+
+  FutureOr<void> _onUpdateUpToParentEvent(
+    UpdateUpToParentEvent event,
+    Emitter<FamilyProfileState> emit,
+  ) async {
+    final res = await _interactor.updateParent(event.id);
+    final members = [...state.members];
+    for (var member in members) {
+      if (member.id == res?.id) {
+        member = res!;
+      }
+    }
+    emit(
+      state.copyWith<AdjustRoleState>(
+        viewModel: state.viewModel.copyWith(
+          members: members,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onUpdateDownToChildEvent(
+    UpdateDownToChildEvent event,
+    Emitter<FamilyProfileState> emit,
+  ) async {
+    final res = await _interactor.updateChild(event.id);
+    final members = [...state.members];
+    for (var member in members) {
+      if (member.id == res?.id) {
+        member = res!;
+      }
+    }
+    emit(
+      state.copyWith<AdjustRoleState>(
+        viewModel: state.viewModel.copyWith(
+          members: members,
+        ),
+      ),
+    );
   }
 }

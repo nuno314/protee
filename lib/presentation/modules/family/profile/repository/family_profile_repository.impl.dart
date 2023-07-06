@@ -2,6 +2,7 @@ part of 'family_profile_repository.dart';
 
 class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   final _restApi = injector.get<AppApiService>().client;
+  final _local = injector.get<AppApiService>().localDataManager;
 
   @override
   Future<Family?> getFamilyProfile() {
@@ -26,8 +27,20 @@ class FamilyProfileRepositoryImpl extends FamilyProfileRepository {
   }
 
   @override
-  Future<bool> leaveFamily() {
-    return _restApi.leaveFamily().then((value) => value?.result ?? false);
+  Future<User?> leaveFamily() async {
+    final user = await _restApi.leaveFamily();
+    _local.notifyUserChanged(user);
+    return user;
+  }
+
+  @override
+  Future<UserFamily?> updateChild(String id) {
+    return _restApi.updateChild(id: id);
+  }
+
+  @override
+  Future<UserFamily?> updateParent(String id) {
+    return _restApi.updateParent(id: id);
   }
 
   // @override

@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../../models/family.dart';
 import '../../../models/location.dart';
+import '../../../models/notification_model.dart';
 import '../../../models/response.dart';
 import '../../../models/user.dart';
 import 'api_contract.dart';
@@ -81,10 +82,15 @@ abstract class RestApiRepository {
   });
 
   @POST(ApiContract.leaveFamily)
-  Future<BooleanResponse?> leaveFamily();
+  Future<User?> leaveFamily();
 
   @POST(ApiContract.approveJoinRequest)
   Future<BooleanResponse?> approveJoinRequest({
+    @Field('requestId') required String id,
+  });
+
+  @POST(ApiContract.rejectJoinRequest)
+  Future<BooleanResponse?> rejectJoinRequest({
     @Field('requestId') required String id,
   });
 
@@ -120,4 +126,28 @@ abstract class RestApiRepository {
   Future<LatestLocationResponse?> getLastLocation(
     @Path('userId') String userId,
   );
+
+  @GET(ApiContract.notification)
+  Future<NotificationResponse?> getNotification({
+    @Query('page') required int page,
+    @Query('take') required int take,
+  });
+
+  @POST(ApiContract.readNotification)
+  Future<NotificationModel?> readNotification(
+    @Path('id') String id,
+  );
+
+  @POST(ApiContract.readAllNotification)
+  Future<bool?> readAllNotifications();
+
+  @PUT(ApiContract.updateChild)
+  Future<UserFamily?> updateChild({
+    @Field('memberId') String? id,
+  });
+
+  @PUT(ApiContract.updateParent)
+  Future<UserFamily?> updateParent({
+    @Field('memberId') String? id,
+  });
 }

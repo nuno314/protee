@@ -9,6 +9,13 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
         context: context,
         message: trans.approveRequestSuccessfully,
       );
+      _refreshController.requestRefresh();
+    } else if (state is RequestRejectedState) {
+      showNoticeDialog(
+        context: context,
+        message: trans.rejectRequestSuccessfully,
+      );
+      _refreshController.requestRefresh();
     }
   }
 
@@ -18,7 +25,7 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
 
   Future<void> declineRequest(
     CompletionHandler handler,
-    User member,
+    JoinFamilyRequest request,
   ) async {
     await showNoticeConfirmDialog(
       context: context,
@@ -26,9 +33,9 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
       title: trans.inform,
       onConfirmed: () async {
         await handler(true);
-        // bloc.add(
-        //   // RemoveMemberEvent(member),
-        // );
+        bloc.add(
+          RejectRequestEvent(request.id!),
+        );
       },
     );
   }
@@ -40,7 +47,7 @@ extension JoinFamilyRequestsAction on _JoinFamilyRequestsScreenState {
       title: trans.inform,
       onConfirmed: () {
         showLoading();
-        bloc.add(ApprovalRequestEvent(request.id!));
+        bloc.add(ApproveRequestEvent(request.id!));
       },
     );
   }

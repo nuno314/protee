@@ -26,9 +26,19 @@ class ApiContract {
   static const String joinFamilyRequests = 'family/join-requests';
   static const String removeMember = 'family/remove';
   static const String approveJoinRequest = 'family/approve';
+  static const String rejectJoinRequest = 'family/reject';
+
   static const String leaveFamily = 'family/leave';
+  static const String updateChild = 'family/update-child';
+  static const String updateParent = 'family/update-parent';
 
   // Message
   static const String messages = 'message/messages';
   static const String sendMessage = 'message';
+
+  // Notification
+  static const String notification = 'notifications';
+  static const String readNotification = 'notifications/read/{id}';
+
+  static const String readAllNotification = 'notifications/mark-all-as-read';
 }

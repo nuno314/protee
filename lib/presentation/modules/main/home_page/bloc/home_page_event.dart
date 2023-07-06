@@ -2,6 +2,7 @@ part of 'home_page_bloc.dart';
 
 abstract class HomePageEvent {}
 
+class GetMeEvent extends HomePageEvent {}
 class UpdateAccountEvent extends HomePageEvent {
   final User? user;
 

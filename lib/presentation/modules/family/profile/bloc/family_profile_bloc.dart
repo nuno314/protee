@@ -80,9 +80,13 @@ class FamilyProfileBloc
     Emitter<FamilyProfileState> emit,
   ) async {
     final res = await _interactor.leaveFamily();
-    if (res != null) {
+    if (res?.id.isNotNullOrEmpty == true) {
       emit(
         state.copyWith<LeaveFamilyState>(),
+      );
+    } else {
+      emit(
+        state.copyWith<LeaveFamilyFailed>(),
       );
     }
   }
@@ -112,8 +116,10 @@ class FamilyProfileBloc
     Emitter<FamilyProfileState> emit,
   ) async {
     final res = await _interactor.updateChild(event.id);
+    print(res?.id);
     final members = [...state.members];
     for (var member in members) {
+      print(member.id);
       if (member.id == res?.id) {
         member = res!;
       }

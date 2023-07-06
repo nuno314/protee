@@ -15,7 +15,9 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
           .then((value) {
         Navigator.pop(context);
       });
-    } else if (state is AdjustRoleState) {
+    } else if (state is LeaveFamilyFailed) {
+      showNoticeDialog(context: context, message: trans.leaveFamilyFailed);
+    } else if (state is LeaveFamilyState) {
       showNoticeDialog(context: context, message: trans.adjustSuccessfully);
     }
   }

@@ -156,5 +156,7 @@
   "joinedWarning": "Bạn đã ở trong một gia đình. Vui lòng rời khỏi trước khi gửi yêu cầu gia nhập khác.",
   "downgradeToChildConfirm": "Bạn có muốn điều chỉnh vai trò thành con cái?",
   "upgradeToParentConfirm": "Bạn có muốn điều chỉnh vai trò thành cha mẹ?",
-  "adjustSuccessfully": "Điều chỉnh thành công"
+  "adjustSuccessfully": "Điều chỉnh thành công",
+  "permissionChanged": "Quyền hạn đã bị thay đổi, vui lòng thử lại sau.",
+  "leaveFamilyFailed": "Rời gia đình thất bại. Vui lòng chuyển quyền cho một người khác trước khi rời gia đình."
 }

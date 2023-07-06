@@ -141,7 +141,7 @@ class _MyAppState extends State<App> {
         asOrNull(NotificationModel.fromJson(data));
 
     final user = warning?.user;
-    if (user == null || (me?.isChildren == true && me?.id == user.id)) {
+    if (user == null || (me?.isChildren == true && me?.id != user.id)) {
       return;
     }
     if (await Vibration.hasCustomVibrationsSupport() ?? false) {

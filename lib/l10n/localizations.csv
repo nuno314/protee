@@ -165,3 +165,5 @@ joinedWarning,"Bạn đã ở trong một gia đình. Vui lòng rời kho�
 downgradeToChildConfirm,Bạn có muốn điều chỉnh vai trò thành con cái?,Do you want to adjust roles to children?
 upgradeToParentConfirm,Bạn có muốn điều chỉnh vai trò thành cha mẹ?,Do you want to adjust roles to parent?
 adjustSuccessfully,Điều chỉnh thành công,Adjusted successfully
+permissionChanged,"Quyền hạn đã bị thay đổi, vui lòng thử lại sau.","Permissions have been changed, please try again later."
+leaveFamilyFailed,"Rời gia đình thất bại. Vui lòng chuyển quyền cho một người khác trước khi rời gia đình.","Leaving the family failed. Please transfer permissions to someone else before leaving the family."

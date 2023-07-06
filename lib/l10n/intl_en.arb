@@ -156,5 +156,7 @@
   "joinedWarning": "You were in a family. Please leave before submitting another join request.",
   "downgradeToChildConfirm": "Do you want to adjust roles to children?",
   "upgradeToParentConfirm": "Do you want to adjust roles to parent?",
-  "adjustSuccessfully": "Adjusted successfully"
+  "adjustSuccessfully": "Adjusted successfully",
+  "permissionChanged": "Permissions have been changed, please try again later.",
+  "leaveFamilyFailed": ""
 }

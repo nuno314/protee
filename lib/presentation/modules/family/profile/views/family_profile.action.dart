@@ -34,6 +34,7 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
   }
 
   void _onBack() {
+    hideLoading();
     Navigator.pop(context);
   }
 

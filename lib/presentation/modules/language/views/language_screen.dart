@@ -38,6 +38,10 @@ class _LanguageScreenState extends StateBase<LanguageScreen> {
     return ScreenForm(
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,
+      onBack: () {
+        hideLoading();
+        Navigator.pop(context);
+      },
       title: trans.changeLanguage.capitalizeFirstofEach(),
       child: BlocConsumer<LanguageBloc, LanguageState>(
         listener: _blocListener,

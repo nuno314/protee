@@ -41,6 +41,10 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
+          onBack: () {
+            hideLoading();
+            Navigator.pop(context);
+          },
           title: trans.account.capitalizeFirstofEach(),
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,

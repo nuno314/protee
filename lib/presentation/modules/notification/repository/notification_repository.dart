@@ -1,5 +1,4 @@
 import '../../../../../data/data_source/remote/app_api_service.dart';
-import '../../../../../data/models/message.dart';
 import '../../../../../di/di.dart';
 import '../../../../data/models/notification_model.dart';
 

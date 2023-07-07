@@ -34,6 +34,8 @@ class LocationListingBloc
     LocationListingRepositoryImpl(),
   );
 
+  final _restApi = injector.get<AppApiService>().client;
+
   LocationListingBloc(LocationListingArgs args)
       : super(
           LocationListingInitial(
@@ -53,6 +55,12 @@ class LocationListingBloc
     on<GetLocationHistoryEvent>(_onGetLocationHistoryEvent);
     on<LoadMoreLocationHistoryEvent>(_onLoadMoreLocationHistoryEvent);
     on<UpdateFilterEvent>(_onUpdateFilterEvent);
+    on<GetChildrenEvent>(_onGetChildrenEvent);
+
+    if (injector.get<AppApiService>().localDataManager.currentUser?.isParent ==
+        true) {
+      add(GetChildrenEvent());
+    }
   }
 
   Future<void> _onGetLocationsEvent(
@@ -157,6 +165,28 @@ class LocationListingBloc
     emit(
       state.copyWith<FilterUpdatedState>(
         viewModel: state.viewModel.copyWith(filter: event.filter),
+      ),
+    );
+  }
+
+  FutureOr<void> _onGetChildrenEvent(
+    GetChildrenEvent event,
+    Emitter<LocationListingState> emit,
+  ) async {
+    final res = await _restApi.getFamilyMembers();
+    final children = res
+            ?.where((element) => element.user != null)
+            .map((e) => e.user!)
+            .toList() ??
+        [];
+    emit(
+      state.copyWith<MemberUpdatedState>(
+        viewModel: state.viewModel.copyWith(
+          filter: state.viewModel.filter.copyWith(
+            children: children,
+            child: children.firstOrNull,
+          ),
+        ),
       ),
     );
   }

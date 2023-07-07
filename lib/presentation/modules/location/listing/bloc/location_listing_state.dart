@@ -83,6 +83,12 @@ class RemoveLocationSuccessfully extends LocationListingState {
   }) : super(viewModel);
 }
 
+class MemberUpdatedState extends LocationListingState {
+  MemberUpdatedState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -98,6 +104,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   FilterUpdatedState: (viewModel) => FilterUpdatedState(
+        viewModel: viewModel,
+      ),
+  MemberUpdatedState: (viewModel) => MemberUpdatedState(
         viewModel: viewModel,
       ),
 };

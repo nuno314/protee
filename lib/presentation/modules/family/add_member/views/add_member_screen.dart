@@ -42,6 +42,10 @@ class _AddMemberScreenState extends StateBase<AddMemberScreen>
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,
           title: trans.inviteMember.capitalizeFirstofEach(),
+          onBack: () {
+            hideLoading();
+            Navigator.pop(context);
+          },
           child: _buildListing(state),
         );
       },

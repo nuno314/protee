@@ -57,12 +57,6 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    showLoading();
-  }
-
-  @override
   Widget build(BuildContext context) {
     _themeData = context.theme;
     trans = translate(context);
@@ -70,6 +64,9 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     return BlocConsumer<FamilyProfileBloc, FamilyProfileState>(
       listener: _blocListener,
       builder: (context, state) {
+        if (state.user == null) {
+          showLoading();
+        }
         return Scaffold(
           body: Stack(
             children: [
@@ -81,7 +78,6 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _buildHeader(state),
-                  // if (state.user?.isNull == false)
                   Expanded(
                     child: SmartRefresherWrapper(
                       color: const Color(0xFF7C84F8),
@@ -131,6 +127,7 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
                 fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           IconButton(

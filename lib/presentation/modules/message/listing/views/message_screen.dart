@@ -56,6 +56,10 @@ class _MessageScreenState extends StateBase<MessageScreen>
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
+          onBack: () {
+            hideLoading();
+            Navigator.pop(context);
+          },
           title: trans.message,
           headerColor: themeColor.primaryColor,
           titleColor: themeColor.white,

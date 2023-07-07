@@ -7,33 +7,35 @@ extension HomeHeaderUI on _HomePageScreenState {
       padding: const EdgeInsets.fromLTRB(16, 61, 16, 0),
       child: Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(
-                Assets.svg.icLogo,
-                color: themeColor.white,
-                height: 40,
-              ),
-              Text(
-                '${trans.welcome}, ${user?.name ?? '--'}!',
-                style: TextStyle(
-                  color: themeColor.color005880,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  Assets.svg.icLogo,
+                  color: themeColor.white,
+                  height: 40,
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                user?.roleLocalized(trans) ?? '',
-                style: TextStyle(
-                  color: themeColor.color005880,
-                  fontSize: 14,
+                Text(
+                  '${trans.welcome}, ${user?.name ?? '--'}!',
+                  style: TextStyle(
+                    color: themeColor.color005880,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 4),
+                Text(
+                  user?.roleLocalized(trans) ?? '',
+                  style: TextStyle(
+                    color: themeColor.color005880,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
+          const SizedBox(width: 16),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),

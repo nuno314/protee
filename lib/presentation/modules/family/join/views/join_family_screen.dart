@@ -60,6 +60,10 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
       title: trans.joinFamily.capitalizeFirstofEach(),
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,
+      onBack: () {
+        hideLoading();
+        Navigator.pop(context);
+      },
       child: BlocConsumer<JoinFamilyBloc, JoinFamilyState>(
         listener: _blocListener,
         builder: (context, state) {
@@ -67,6 +71,12 @@ class _JoinFamilyScreenState extends StateBase<JoinFamilyScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _errorController.close();
+    super.dispose();
   }
 
   Widget _buildListing(JoinFamilyState state) {

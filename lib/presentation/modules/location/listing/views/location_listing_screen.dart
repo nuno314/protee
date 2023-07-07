@@ -43,7 +43,7 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
   TabController? get _tabController =>
       tabBarKey.currentContext?.let(DefaultTabController.of);
 
-  final _historyRC = RefreshController(initialRefresh: true);
+  final _historyRC = RefreshController();
 
   @override
   LocationListingBloc get bloc => BlocProvider.of(context);
@@ -88,6 +88,10 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
     return ScreenForm(
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,
+      onBack: () {
+        hideLoading();
+        Navigator.pop(context);
+      },
       title: trans.locationList.capitalizeFirstofEach(),
       actions: [
         ValueListenableBuilder<bool>(

@@ -20,13 +20,7 @@ extension HomePageAction on _HomePageScreenState {
             );
           },
         );
-      } else {
-        Navigator.pushNamed(
-          context,
-          RouteList.familyProfile,
-          arguments: state.user,
-        );
-      }
+      } else {}
     }
   }
 
@@ -110,7 +104,9 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapFamilyProfile() {
-    showLoading();
-    bloc.add(GetMeEvent());
+    Navigator.pushNamed(
+      context,
+      RouteList.familyProfile,
+    );
   }
 }

@@ -44,6 +44,10 @@ class _FamilySettingsScreenState extends StateBase<FamilySettingsScreen> {
           headerColor: const Color(0xFF7C84F8),
           titleColor: themeColor.white,
           title: trans.familySettings,
+          onBack: () {
+            hideLoading();
+            Navigator.pop(context);
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
             child: Column(

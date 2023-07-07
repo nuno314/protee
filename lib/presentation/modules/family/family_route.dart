@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/utils/data_checker.dart';
 import '../../../data/models/family.dart';
-import '../../../data/models/user.dart';
 import '../../route/route_list.dart';
 import 'family.dart';
 

@@ -91,6 +91,10 @@ class _LocationTrackingScreenState extends StateBase<LocationTrackingScreen>
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
+          onBack: () {
+            hideLoading();
+            Navigator.pop(context);
+          },
           title: (state.isParent ? trans.latestPosition : trans.map)
               .capitalizeFirstofEach(),
           headerColor: themeColor.primaryColor,

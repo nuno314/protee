@@ -16,7 +16,7 @@ extension LocationListingAction on _LocationListingScreenState {
         showLoading();
         bloc.add(GetLocationsEvent());
       });
-    } else if (state is FilterUpdatedState) {
+    } else if (state is FilterUpdatedState || state is MemberUpdatedState) {
       _historyRC.requestRefresh();
     }
   }

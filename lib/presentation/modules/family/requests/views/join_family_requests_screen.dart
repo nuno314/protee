@@ -67,6 +67,10 @@ class _JoinFamilyRequestsScreenState
       headerColor: const Color(0xFF7C84F8),
       titleColor: themeColor.white,
       title: trans.joinRequest,
+      onBack: () {
+        hideLoading();
+        Navigator.pop(context);
+      },
       child: BlocConsumer<JoinFamilyRequestsBloc, JoinFamilyRequestsState>(
         listener: _blocListener,
         builder: (context, state) {

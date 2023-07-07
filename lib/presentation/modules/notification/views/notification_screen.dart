@@ -13,6 +13,7 @@ import '../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../extentions/extention.dart';
 import '../../../route/route_list.dart';
 import '../../../theme/theme_color.dart';
+import '../../location/listing/bloc/location_listing_bloc.dart';
 import '../bloc/notification_bloc.dart';
 
 part 'notification.action.dart';
@@ -52,12 +53,11 @@ class _NotificationScreenState extends StateBase<NotificationScreen> {
             InkWell(
               onTap: _markAllNoti,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.fromLTRB(12, 10, 16, 0),
                 child: SvgPicture.asset(
                   Assets.svg.icMarkNotiRead,
-                  width: 24,
-                  height: 24,
+                  width: 30,
+                  height: 30,
                   color: themeColor.white,
                 ),
               ),
@@ -82,7 +82,7 @@ class _NotificationScreenState extends StateBase<NotificationScreen> {
               emptyMessage: trans.noNotification,
             )
           : ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
               itemBuilder: (context, index) =>
                   _buildNotificationItem(notifications.elementAt(index)),
               separatorBuilder: (context, index) => const SizedBox(height: 16),
@@ -147,7 +147,11 @@ class _NotificationScreenState extends StateBase<NotificationScreen> {
     }
     switch (type) {
       case NotificationType.addLocation:
-        Navigator.pushNamed(context, RouteList.locationListing);
+        Navigator.pushNamed(
+          context,
+          RouteList.locationListing,
+          arguments: const LocationListingArgs(),
+        );
         break;
       case NotificationType.joinRequest:
         Navigator.pushNamed(context, RouteList.joinFamilyRequests);

@@ -5,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shake/shake.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../common/components/navigation/navigation_observer.dart';
-import '../../common/config.dart';
 import '../../common/constants/locale/app_locale.dart';
 import '../../common/utils.dart';
 import '../../data/data_source/remote/app_api_service.dart';
@@ -24,7 +22,6 @@ import '../common_widget/cache_network_image_wrapper.dart';
 import '../common_widget/text_scale_fixed.dart';
 import '../extentions/extention.dart';
 import '../route/route.dart';
-import '../route/route_list.dart';
 import '../theme/theme_color.dart';
 import '../theme/theme_data.dart';
 import 'welcome/splash/bloc/splash_bloc.dart';
@@ -45,18 +42,18 @@ class _MyAppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    if (Config.instance.appConfig.isDevBuild) {
-      ShakeDetector.autoStart(
-        onPhoneShake: () {
-          if (!myNavigatorObserver.constaintRoute(RouteList.logViewer)) {
-            Navigator.pushNamed(
-              navigatorKey.currentState!.context,
-              RouteList.logViewer,
-            );
-          }
-        },
-      );
-    }
+    // if (Config.instance.appConfig.isDevBuild) {
+    //   ShakeDetector.autoStart(
+    //     onPhoneShake: () {
+    //       if (!myNavigatorObserver.constaintRoute(RouteList.logViewer)) {
+    //         Navigator.pushNamed(
+    //           navigatorKey.currentState!.context,
+    //           RouteList.logViewer,
+    //         );
+    //       }
+    //     },
+    //   );
+    // }
 
     _socketSubscription = _localDataManager.onUserChanged.listen(
       _setUpSocket,

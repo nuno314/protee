@@ -55,6 +55,10 @@ class _MessageDetailScreenState extends StateBase<MessageDetailScreen> {
     _themeData = context.theme;
     trans = translate(context);
     return ScreenForm(
+      onBack: () {
+        hideLoading();
+        Navigator.pop(context);
+      },
       title: trans.member,
       headerColor: themeColor.primaryColor,
       titleColor: themeColor.white,

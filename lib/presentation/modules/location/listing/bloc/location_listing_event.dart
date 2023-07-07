@@ -27,3 +27,6 @@ class UpdateFilterEvent extends LocationListingEvent {
 
   UpdateFilterEvent(this.filter);
 }
+
+class GetChildrenEvent extends LocationListingEvent {}
+

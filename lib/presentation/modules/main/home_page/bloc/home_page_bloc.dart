@@ -53,7 +53,12 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
     InitHomePageEvent event,
     Emitter<HomePageState> emit,
   ) async {
-    if (state.user?.isNull == true) {
+    final user = await _restApi.getUserProfile();
+    if (user?.role != state.user?.role ||
+        user?.familyId != state.user?.familyId) {
+      _local.notifyUserChanged(user);
+    }
+    if (user?.isNull == true) {
       emit(
         state.copyWith<HomePageInitial>(),
       );
@@ -72,6 +77,7 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
         viewModel: state.viewModel.copyWith(
           statistic: asOrNull(res[0]),
           familyMembers: asOrNull(res[1]),
+          user: user,
         ),
       ),
     );

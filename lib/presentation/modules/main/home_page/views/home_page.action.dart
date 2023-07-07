@@ -63,19 +63,50 @@ extension HomePageAction on _HomePageScreenState {
   }
 
   void onTapLocationStatistic() {
-    Navigator.pushNamed(context, RouteList.locationListing);
+    Navigator.pushNamed(
+      context,
+      RouteList.locationListing,
+      arguments: LocationListingArgs(
+        children: bloc.state.members
+            .where((element) => element.isChildren == true)
+            .toList(),
+      ),
+    );
   }
 
   void onTapWarningStatistic() {
-    Navigator.pushNamed(context, RouteList.locationListing);
+    Navigator.pushNamed(
+      context,
+      RouteList.locationListing,
+      arguments: LocationListingArgs(
+        tabIdx: bloc.state.user?.isParent == true ? 1 : 0,
+        children: bloc.state.members
+            .where((element) => element.isChildren == true)
+            .toList(),
+      ),
+    );
   }
 
   void onTapMessage() {
-    Navigator.pushNamed(
-      context,
-      RouteList.messenger,
-      arguments: bloc.state.user!,
-    );
+    if (bloc.state.user?.familyId.isNullOrEmpty == true) {
+      showNoticeConfirmDialog(
+        context: context,
+        message: trans.notInFamily,
+        title: trans.inform,
+        onConfirmed: () {
+          Navigator.pushNamed(
+            context,
+            RouteList.addMember,
+          );
+        },
+      );
+    } else {
+      Navigator.pushNamed(
+        context,
+        RouteList.messenger,
+        arguments: bloc.state.user!,
+      );
+    }
   }
 
   void onTapFamilyProfile() {

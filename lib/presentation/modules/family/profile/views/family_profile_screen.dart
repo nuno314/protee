@@ -28,7 +28,7 @@ class FamilyProfileScreen extends StatefulWidget {
 }
 
 class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
-  final _controller = RefreshController(initialRefresh: true);
+  final _controller = RefreshController();
 
   @override
   FamilyProfileBloc get bloc => BlocProvider.of(context);
@@ -54,6 +54,12 @@ class _FamilyProfileScreenState extends StateBase<FamilyProfileScreen> {
     } else {
       super.onLogicError(message);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    showLoading();
   }
 
   @override

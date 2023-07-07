@@ -23,3 +23,5 @@ class UpdateDownToChildEvent extends FamilyProfileEvent {
 
   UpdateDownToChildEvent(this.id);
 }
+
+class GetUserEvent extends FamilyProfileEvent {}

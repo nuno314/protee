@@ -76,6 +76,12 @@ class AdjustRoleState extends FamilyProfileState {
   }) : super(viewModel);
 }
 
+class UserInitialState extends FamilyProfileState {
+  UserInitialState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -94,6 +100,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   AdjustRoleState: (viewModel) => AdjustRoleState(
+        viewModel: viewModel,
+      ),
+  UserInitialState: (viewModel) => UserInitialState(
         viewModel: viewModel,
       ),
 };

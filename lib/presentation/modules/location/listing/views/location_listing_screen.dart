@@ -25,7 +25,11 @@ import '../bloc/location_listing_bloc.dart';
 part 'location_listing.action.dart';
 
 class LocationListingScreen extends StatefulWidget {
-  const LocationListingScreen({Key? key}) : super(key: key);
+  final int? tabIdx;
+  const LocationListingScreen({
+    Key? key,
+    this.tabIdx,
+  }) : super(key: key);
 
   @override
   State<LocationListingScreen> createState() => _LocationListingScreenState();
@@ -287,6 +291,10 @@ class _LocationListingScreenState extends StateBase<LocationListingScreen>
 
   @override
   Future<void> afterFirstLayout(BuildContext context) async {
+    if (widget.tabIdx != null) {
+      _onTabChange(widget.tabIdx!);
+      _tabController?.animateTo(widget.tabIdx!);
+    }
     await _locateMe();
   }
 

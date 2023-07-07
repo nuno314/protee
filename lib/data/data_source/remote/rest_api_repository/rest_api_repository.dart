@@ -139,7 +139,7 @@ abstract class RestApiRepository {
   );
 
   @POST(ApiContract.readAllNotification)
-  Future<bool?> readAllNotifications();
+  Future<BooleanResponse?> readAllNotifications();
 
   @PUT(ApiContract.updateChild)
   Future<UserFamily?> updateChild({

@@ -62,6 +62,7 @@ class _SearchDirectionScreenState extends StateBase<SearchDirectionScreen> {
             child: Column(
               children: [
                 InputContainer(
+                  fillColor: themeColor.white,
                   title: trans.destination,
                   hint: trans.enterDestination,
                   onTextChanged: (value) => _debouncer.value = value,

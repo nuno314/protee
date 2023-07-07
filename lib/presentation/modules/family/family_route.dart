@@ -22,9 +22,8 @@ class FamilyRoute {
           );
         },
         RouteList.familyProfile: (context) {
-          final user = asOrNull<User?>(settings.arguments);
           return BlocProvider(
-            create: (context) => FamilyProfileBloc(user),
+            create: (context) => FamilyProfileBloc(),
             child: const FamilyProfileScreen(),
           );
         },

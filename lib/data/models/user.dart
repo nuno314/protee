@@ -84,7 +84,7 @@ class User {
       case FamilyRole.child:
         return trans.child;
       default:
-        return '--';
+        return trans.noFamily;
     }
   }
 }
@@ -132,7 +132,7 @@ class UserFamily {
       case FamilyRole.child:
         return trans.child;
       default:
-        return '--';
+        return trans.noFamily;
     }
   }
 }

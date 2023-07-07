@@ -17,6 +17,8 @@ class NotificationRepositoryImpl extends NotificationRepository {
 
   @override
   Future<bool> readAllNoti() {
-    return _restApi.readAllNotifications().then((value) => value ?? false);
+    return _restApi
+        .readAllNotifications()
+        .then((value) => value?.result ?? false);
   }
 }

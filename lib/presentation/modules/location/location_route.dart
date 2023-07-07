@@ -20,7 +20,9 @@ class LocationRoute {
             create: (context) => LocationListingBloc(
               args ?? const LocationListingArgs(),
             ),
-            child: const LocationListingScreen(),
+            child: LocationListingScreen(
+              tabIdx: args?.tabIdx,
+            ),
           );
         },
         RouteList.locationFilter: (context) {

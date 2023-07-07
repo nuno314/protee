@@ -11,13 +11,8 @@ extension JoinFamilyAction on _JoinFamilyScreenState {
     }
   }
 
-  void _onTapJoinFamily() {
-    if (_codeController.text.isNullOrEmpty) {
-      _codeController.setError(trans.pleaseEnterInvitationCode);
-      return;
-    }
-
+  void _onTapJoinFamily(String code) {
     showLoading();
-    bloc.add(JoinFamilyByCodeEvent(_codeController.text));
+    bloc.add(JoinFamilyByCodeEvent(code));
   }
 }

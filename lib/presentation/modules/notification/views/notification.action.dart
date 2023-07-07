@@ -2,6 +2,7 @@ part of 'notification_screen.dart';
 
 extension NotificationAction on _NotificationScreenState {
   void _blocListener(BuildContext context, NotificationState state) {
+    hideLoading();
     _refreshController
       ..refreshCompleted()
       ..loadComplete();
@@ -16,6 +17,7 @@ extension NotificationAction on _NotificationScreenState {
   }
 
   void _markAllNoti() {
+    showLoading();
     bloc.add(MarkAllNotificationEvent());
   }
 }

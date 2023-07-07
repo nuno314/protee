@@ -173,7 +173,7 @@ class _LocationHistoryFilterScreenState
               onPressed: () {
                 Navigator.pop(
                   context,
-                  widget.filter,
+                  widget.filter.copyWith(dateRange: const DateRange()),
                 );
               },
             ),

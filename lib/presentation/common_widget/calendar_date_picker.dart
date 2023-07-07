@@ -118,7 +118,7 @@ class _DateInputCalendarPickerState extends State<DateInputCalendarPicker> {
               asOrNull<OutlineInputBorder>(idTheme.border)?.borderRadius,
           padding: context.theme.inputDecorationTheme.contentPadding ??
               const EdgeInsets.all(12),
-          bgColor: Colors.transparent,
+          bgColor: themeColor.white,
           child: Row(
             children: [
               Expanded(

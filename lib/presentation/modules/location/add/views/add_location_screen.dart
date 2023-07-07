@@ -211,14 +211,14 @@ class _AddLocationScreenState extends StateBase<AddLocationScreen>
               const SizedBox(height: 16),
               InputContainer(
                 controller: _nameController,
-                title: 'Tên địa điểm',
+                title: trans.placeName,
                 fillColor: themeColor.white,
                 required: true,
               ),
               const SizedBox(height: 16),
               InputContainer(
                 controller: _addressController,
-                title: 'Vị trí',
+                title: trans.address,
                 fillColor: themeColor.white,
                 required: true,
                 onTextChanged: (value) => _debouncer.value = value,

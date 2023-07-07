@@ -159,5 +159,7 @@
   "adjustSuccessfully": "Điều chỉnh thành công",
   "permissionChanged": "Quyền hạn đã bị thay đổi, vui lòng thử lại sau.",
   "leaveFamilyFailed": "Rời gia đình thất bại. Vui lòng chuyển quyền cho một người khác trước khi rời gia đình.",
-  "youEnterWarningLocation": "Bạn đã vào khu vực cảnh báo"
+  "youEnterWarningLocation": "Bạn đã vào khu vực cảnh báo",
+  "noFamily": "Chưa có gia đình",
+  "placeName": "Tên địa điểm"
 }

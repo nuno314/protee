@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 
 import '../../../../data/data_source/remote/app_api_service.dart';
-import '../../../../data/data_source/remote/rest_api_repository/rest_api_repository.dart';
 import '../../../../data/models/notification_model.dart';
 import '../../../../di/di.dart';
 import '../../../base/base.dart';
@@ -23,6 +22,7 @@ class NotificationBloc
     on<GetNotificationEvent>(_onGetNotificationEvent);
     on<LoadMoreNotificationEvent>(_onLoadMoreNotificationEvent);
     on<ReadNotificationEvent>(_onReadNotificationEvent);
+    on<MarkAllNotificationEvent>(_onMarkAllNotificationEvent);
   }
 
   Future<void> _onGetNotificationEvent(
@@ -78,5 +78,13 @@ class NotificationBloc
     Emitter<NotificationState> emit,
   ) async {
     final res = await _interactor.readAllNoti();
+    if (res) {
+      for (final element in state.notifications) {
+        element.isRead = true;
+      }
+    }
+    emit(
+      state.copyWith<NotificationInitial>(),
+    );
   }
 }

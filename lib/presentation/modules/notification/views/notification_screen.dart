@@ -158,7 +158,6 @@ class _NotificationScreenState extends StateBase<NotificationScreen> {
       case NotificationType.downgradeToChild:
       case NotificationType.approvedJoinFamily:
         Navigator.pushNamed(context, RouteList.familyProfile);
-
         break;
       case NotificationType.removedFromFamily:
         break;

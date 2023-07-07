@@ -19,6 +19,13 @@ extension FamilyProfileAction on _FamilyProfileScreenState {
       showNoticeDialog(context: context, message: trans.leaveFamilyFailed);
     } else if (state is LeaveFamilyState) {
       showNoticeDialog(context: context, message: trans.adjustSuccessfully);
+    } else if (state is UserInitialState) {
+      if (state.user?.isNull == true) {
+        showNoticeDialog(context: context, message: trans.notInFamily)
+            .then((value) => Navigator.pop(context));
+      } else {
+        _controller.requestRefresh();
+      }
     }
   }
 

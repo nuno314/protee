@@ -159,5 +159,7 @@
   "adjustSuccessfully": "Adjusted successfully",
   "permissionChanged": "Permissions have been changed, please try again later.",
   "leaveFamilyFailed": "Leaving the family failed. Please transfer permissions to someone else before leaving the family.",
-  "youEnterWarningLocation": "You have entered the warning area"
+  "youEnterWarningLocation": "You have entered the warning area",
+  "noFamily": "No family",
+  "placeName": "Place name"
 }

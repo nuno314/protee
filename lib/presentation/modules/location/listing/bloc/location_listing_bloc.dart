@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +19,12 @@ part 'location_listing_state.dart';
 class LocationListingArgs {
   final List<User> children;
   final User? child;
+  final int? tabIdx;
 
   const LocationListingArgs({
     this.children = const [],
     this.child,
+    this.tabIdx,
   });
 }
 
